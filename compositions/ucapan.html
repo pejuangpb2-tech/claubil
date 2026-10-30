@@ -1,0 +1,103 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+    }
+    #ucapan-shade {
+      position: absolute;
+      left: 310px;
+      top: 0;
+      width: 1300px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(36, 26, 74, 0.5) 0%, rgba(36, 26, 74, 0) 68%);
+    }
+    #ucapan-box {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 78px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #ucapan-title {
+      font-family: "Playfair Display";
+      font-weight: 700;
+      font-size: 88px;
+      line-height: 1.12;
+      color: #fff3da;
+      white-space: nowrap;
+      text-shadow: 0 4px 22px rgba(30, 18, 60, 0.45);
+    }
+    #ucapan-title span {
+      display: inline-block;
+    }
+    #ucapan-l2 {
+      color: #f6c453;
+    }
+    #ucapan-rule {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-top: 10px;
+    }
+    .ucapan-line {
+      width: 170px;
+      height: 3px;
+      background: #f6c453;
+    }
+    #ucapan-sub {
+      font-family: "Poppins";
+      font-weight: 400;
+      font-size: 40px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #ffe8b6;
+      margin-top: 12px;
+      text-shadow: 0 3px 16px rgba(30, 18, 60, 0.5);
+    }
+  </style>
+  <div
+    id="root"
+    data-composition-id="ucapan"
+    data-width="1920"
+    data-height="1080"
+    data-composition-variables='[{"id":"ucapan","type":"string","label":"Ucapan","default":"Selamat Hari Raya"},{"id":"perayaan","type":"string","label":"Perayaan","default":"Aidilfitri"},{"id":"maaf","type":"string","label":"Baris kedua","default":"Maaf Zahir & Batin"}]'
+  >
+    <div id="ucapan-shade" class="clip" data-start="0" data-duration="5" data-track-index="0"></div>
+    <div id="ucapan-box" class="clip" data-start="0" data-duration="5" data-track-index="1">
+      <h1 id="ucapan-title"><span id="ucapan-l1" data-var-text="ucapan">Selamat Hari Raya</span> <span id="ucapan-l2" data-var-text="perayaan">Aidilfitri</span></h1>
+      <div id="ucapan-rule">
+        <div id="ucapan-ll" class="ucapan-line"></div>
+        <svg id="ucapan-moon" width="44" height="44" viewBox="0 0 44 44">
+          <path d="M28 4 A18 18 0 1 0 40 32 A14 14 0 1 1 28 4 Z" fill="#f6c453" />
+          <path d="M34 10 L35.6 14.4 L40 16 L35.6 17.6 L34 22 L32.4 17.6 L28 16 L32.4 14.4 Z" fill="#fff3da" />
+        </svg>
+        <div id="ucapan-lr" class="ucapan-line"></div>
+      </div>
+      <p id="ucapan-sub" data-var-text="maaf">Maaf Zahir &amp; Batin</p>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#ucapan-shade", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.inOut" }, 0);
+    tl.fromTo("#ucapan-l1", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 0.2);
+    tl.fromTo(
+      "#ucapan-l2",
+      { opacity: 0, scale: 1.18, filter: "blur(6px)" },
+      { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.5, ease: "expo.out" },
+      0.5,
+    );
+    tl.fromTo("#ucapan-ll", { scaleX: 0, transformOrigin: "100% 50%" }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 0.9);
+    tl.fromTo("#ucapan-lr", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 0.9);
+    tl.fromTo("#ucapan-moon", { opacity: 0, rotation: -40, scale: 0.6 }, { opacity: 1, rotation: 0, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, 0.95);
+    tl.fromTo(
+      "#ucapan-sub",
+      { opacity: 0, y: 14, filter: "blur(6px)" },
+      { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "expo.out" },
+      1.15,
+    );
+    window.__timelines["ucapan"] = tl;
+  </script>
+</template>
