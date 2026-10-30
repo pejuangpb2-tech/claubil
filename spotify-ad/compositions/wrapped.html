@@ -1,0 +1,71 @@
+<template>
+  <style>
+    @font-face { font-family: "Inter Display"; font-weight: 900; src: url("assets/fonts/InterDisplay-Black.otf"); }
+    @font-face { font-family: "Inter Display"; font-weight: 800; src: url("assets/fonts/InterDisplay-ExtraBold.otf"); }
+    @font-face { font-family: "Inter Text"; font-weight: 600; src: url("assets/fonts/Inter-SemiBold.otf"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #040806; font-family: "Inter Text", sans-serif; }
+    #wr-bg { position: absolute; inset: 0; background: radial-gradient(700px 600px at 28% 70%, #0d2c1a 0%, rgba(13, 44, 26, 0) 70%); }
+    #wr-stage { position: absolute; inset: 0; }
+    #wr-bars { position: absolute; left: 236px; top: 300px; width: 560px; height: 560px; display: flex; align-items: flex-end; gap: 14px; }
+    .bar { flex: 1; border-radius: 10px 10px 4px 4px; background: linear-gradient(to top, #0f7a39 0%, #1ed760 55%, #c8f560 100%);
+      box-shadow: 0 0 24px rgba(30, 215, 96, 0.45); transform-origin: 50% 100%; }
+    #wr-base { position: absolute; left: 236px; top: 872px; width: 560px; height: 4px; border-radius: 2px; background: #1ed760;
+      box-shadow: 0 0 16px rgba(30, 215, 96, 0.9); transform-origin: 0 50%; }
+    #wr-copy { position: absolute; left: 930px; top: 290px; width: 800px; }
+    #wr-label { font-size: 30px; font-weight: 600; letter-spacing: 0.08em; color: #1ed760; }
+    #wr-num { margin-top: 18px; font: 900 220px/0.92 "Inter Display", sans-serif; letter-spacing: -0.05em; color: #effff5;
+      font-variant-numeric: tabular-nums; }
+    #wr-unit { margin-top: 18px; font: 800 54px/1.1 "Inter Display", sans-serif; color: #9fb5a8; letter-spacing: -0.02em; }
+    #wr-chips { margin-top: 44px; display: flex; gap: 18px; flex-wrap: wrap; }
+    .chip { padding: 14px 24px; border-radius: 10px; border: 2px solid #1e5a35; background: #0c1d13; font-size: 30px; color: #effff5; }
+    .chip b { color: #1ed760; font-weight: 600; }
+  </style>
+  <div id="root" data-composition-id="wrapped" data-width="1920" data-height="1080" data-layout-allow-overflow>
+    <div id="wr-bg"></div>
+    <div id="wr-stage">
+      <div id="wr-bars">
+        <div class="bar" style="height: 46%"></div><div class="bar" style="height: 70%"></div><div class="bar" style="height: 58%"></div>
+        <div class="bar" style="height: 88%"></div><div class="bar" style="height: 64%"></div><div class="bar" style="height: 100%"></div>
+        <div class="bar" style="height: 80%"></div><div class="bar" style="height: 52%"></div><div class="bar" style="height: 92%"></div>
+        <div class="bar" style="height: 60%"></div><div class="bar" style="height: 40%"></div>
+      </div>
+      <div id="wr-base"></div>
+      <div id="wr-copy">
+        <div id="wr-label">YOUR 2026 WRAPPED</div>
+        <div id="wr-num">0</div>
+        <div id="wr-unit">minutes of music this year</div>
+        <div id="wr-chips">
+          <div class="chip" id="wr-chip1">Top genre <b>Indie Pop</b></div>
+          <div class="chip" id="wr-chip2">#1 artist <b>Nova Lane</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // Arrives from the right, still smeared from the whip
+      tl.fromTo("#wr-stage", { x: 700, filter: "blur(18px)" }, { x: 0, filter: "blur(0px)", duration: 0.42, ease: "expo.out" }, 0);
+      // Bars rise, then keep the beat
+      tl.fromTo("#wr-base", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "expo.out" }, 0.08);
+      tl.fromTo(".bar", { scaleY: 0 }, { scaleY: 1, duration: 0.5, ease: "back.out(1.5)", stagger: 0.035 }, 0.15);
+      const lows = [0.55, 0.72, 0.5, 0.78, 0.6, 0.7, 0.52, 0.8, 0.62, 0.74, 0.58];
+      document.querySelectorAll("#wr-bars .bar").forEach((b, i) => {
+        tl.fromTo(b, { scaleY: 1 }, { scaleY: lows[i], duration: 0.22 + (i % 3) * 0.04, ease: "sine.inOut", repeat: 5, yoyo: true, immediateRender: false }, 0.9 + i * 0.02);
+      });
+      // The minutes count up and land
+      tl.fromTo("#wr-label", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.15, ease: "power4.out" }, 0.25);
+      const n = { v: 0 }, num = document.querySelector("#wr-num");
+      tl.fromTo(n, { v: 0 }, { v: 48213, duration: 1.35, ease: "power3.out",
+        onUpdate: () => { num.textContent = Math.round(n.v).toLocaleString("en-US"); } }, 0.28);
+      tl.fromTo("#wr-num", { scale: 1 }, { scale: 1.06, duration: 0.1, ease: "power2.out", transformOrigin: "0% 50%" }, 1.63);
+      tl.to("#wr-num", { scale: 1, duration: 0.25, ease: "power2.out" }, 1.73);
+      tl.fromTo("#wr-unit", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out" }, 0.45);
+      tl.fromTo(["#wr-chip1", "#wr-chip2"], { opacity: 0, scale: 0.7 },
+        { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(1.7)", stagger: 0.12, transformOrigin: "0% 50%" }, 1.38);
+      // Blur swap out
+      tl.fromTo("#wr-stage", { opacity: 1 }, { opacity: 0, filter: "blur(8px)", duration: 0.2, ease: "power2.in", immediateRender: false }, 3.0);
+      window.__timelines["wrapped"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,32 @@
+<template>
+  <style>
+    @font-face { font-family: "Inter Display"; font-weight: 900; src: url("assets/fonts/InterDisplay-Black.otf"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #040806; }
+    #tg-green { position: absolute; inset: 0; background: #1ed760; }
+    .tg-line { position: absolute; left: 0; right: 0; text-align: center; font: 900 220px/1 "Inter Display", sans-serif;
+      letter-spacing: -0.05em; color: #04140a; }
+    #tg-1 { top: 288px; }
+    #tg-2 { top: 548px; }
+  </style>
+  <div id="root" data-composition-id="tagline" data-width="1920" data-height="1080"
+    data-composition-variables='[{"id":"tagline1","type":"string","label":"Line 1","default":"One app."},{"id":"tagline2","type":"string","label":"Line 2","default":"Every song."}]'>
+    <div id="tg-green">
+      <div class="tg-line" id="tg-1" data-var-text="tagline1">One app.</div>
+      <div class="tg-line" id="tg-2" data-var-text="tagline2">Every song.</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#tg-1", { opacity: 0, filter: "blur(10px)", scale: 1.04 },
+        { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.2, ease: "power4.out" }, 0.1);
+      tl.fromTo("#tg-2", { opacity: 0, filter: "blur(10px)", scale: 1.04 },
+        { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.2, ease: "power4.out" }, 0.75);
+      // Words leave, the green irises down to the mark's circle
+      tl.fromTo(["#tg-1", "#tg-2"], { opacity: 1 }, { opacity: 0, filter: "blur(8px)", duration: 0.18, ease: "power2.in", immediateRender: false }, 1.68);
+      tl.fromTo("#tg-green", { clipPath: "circle(1200px at 960px 540px)" },
+        { clipPath: "circle(100px at 960px 540px)", duration: 0.45, ease: "power3.in" }, 1.72);
+      window.__timelines["tagline"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,79 @@
+<template>
+  <style>
+    @font-face { font-family: "Inter Display"; font-weight: 900; src: url("assets/fonts/InterDisplay-Black.otf"); }
+    @font-face { font-family: "Inter Display"; font-weight: 800; src: url("assets/fonts/InterDisplay-ExtraBold.otf"); }
+    @font-face { font-family: "Inter Text"; font-weight: 600; src: url("assets/fonts/Inter-SemiBold.otf"); }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #040806; font-family: "Inter Text", sans-serif; }
+    #dc-bg { position: absolute; inset: 0; background: radial-gradient(1000px 520px at 50% 64%, #0b2416 0%, rgba(11, 36, 22, 0) 72%); }
+    #dc-stage { position: absolute; inset: 0; }
+    .thread { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible;
+      filter: drop-shadow(0 0 8px rgba(30, 215, 96, 0.9)) drop-shadow(0 0 26px rgba(30, 215, 96, 0.55)); }
+    #dc-title { position: absolute; left: 0; right: 0; top: 116px; text-align: center; font: 900 120px/1 "Inter Display", sans-serif;
+      letter-spacing: -0.04em; color: #effff5; }
+    #dc-title .w { display: inline-block; }
+    #dc-title .g { color: #1ed760; }
+    #dc-sub { position: absolute; left: 0; right: 0; top: 268px; text-align: center; font-size: 38px; color: #9fb5a8; }
+    .cover { position: absolute; top: 460px; width: 380px; height: 380px; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8); }
+    .cover .name { position: absolute; left: 26px; bottom: 22px; right: 26px; font: 900 44px/1.02 "Inter Display", sans-serif; letter-spacing: -0.02em; }
+    .cover .disc { position: absolute; border-radius: 50%; }
+    #dc-front { left: 770px; z-index: 5; background: linear-gradient(180deg, #ffc145 0%, #ff7a2f 48%, #d81e3a 100%); }
+    #dc-front .sun { position: absolute; left: 100px; top: 125px; width: 188px; height: 188px; border-radius: 50%; background: #fff2c2; }
+    #dc-front .stripe { position: absolute; left: 0; right: 0; height: 15px; background: #2a0a12; }
+    #dc-badge { position: absolute; left: 22px; top: 22px; padding: 8px 16px; border-radius: 8px; background: #04140a;
+      color: #1ed760; font-size: 28px; font-weight: 600; }
+    #dc-a { left: 770px; z-index: 4; background: #0e6e6e; }
+    #dc-b { left: 770px; z-index: 4; background: #e8115b; }
+    #dc-c { left: 770px; z-index: 3; background: #1e3264; }
+    #dc-d { left: 770px; z-index: 3; background: #f59b23; }
+  </style>
+  <div id="root" data-composition-id="discover" data-width="1920" data-height="1080" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="dc-bg"></div>
+    <div id="dc-stage">
+      <svg class="thread" viewBox="0 0 1920 1080">
+        <path id="dc-tg" d="M -80 930 C 380 1010 620 820 960 900 S 1520 1010 2000 860" pathLength="1" fill="none" stroke="#1ed760"
+          stroke-width="12" stroke-linecap="round" stroke-dasharray="0.35 2" stroke-dashoffset="0.35" />
+        <path id="dc-tc" d="M -80 930 C 380 1010 620 820 960 900 S 1520 1010 2000 860" pathLength="1" fill="none" stroke="#dfffe9"
+          stroke-width="4" stroke-linecap="round" stroke-dasharray="0.35 2" stroke-dashoffset="0.35" />
+      </svg>
+      <div class="cover" id="dc-c"><div class="disc" style="left: 150px; top: 40px; width: 220px; height: 220px; background: #9cf0e1"></div><div class="name" style="color: #effff5">Chill<br>Vibes</div></div>
+      <div class="cover" id="dc-d"><div class="disc" style="left: -40px; top: -40px; width: 240px; height: 240px; background: #04140a"></div><div class="name" style="color: #04140a">Top<br>Hits</div></div>
+      <div class="cover" id="dc-a"><div class="disc" style="left: 170px; top: 30px; width: 180px; height: 180px; background: #c8f560"></div><div class="name" style="color: #effff5">Release<br>Radar</div></div>
+      <div class="cover" id="dc-b"><div class="disc" style="left: 40px; top: 50px; width: 150px; height: 150px; background: #ffd0e0"></div><div class="name" style="color: #effff5">Daily<br>Mix 1</div></div>
+      <div class="cover" id="dc-front">
+        <div class="sun"></div>
+        <div class="stripe" style="top: 246px"></div>
+        <div class="stripe" style="top: 280px; height: 19px"></div>
+        <div class="stripe" style="top: 316px; height: 25px"></div>
+        <div class="stripe" style="top: 355px; height: 42px"></div>
+        <div id="dc-badge">Made for you</div>
+      </div>
+      <div id="dc-title"><span class="w">Discover</span> <span class="w g">Weekly</span></div>
+      <div id="dc-sub">Fresh music picked for you, every Monday.</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // The album art shrinks back into the front cover
+      tl.fromTo("#dc-front", { scale: 6.13, y: -110, borderRadius: 0 },
+        { scale: 1, y: 0, borderRadius: 16, duration: 0.62, ease: "expo.out" }, 0);
+      // Covers fan out from behind it
+      const fan = [["#dc-a", -330, 0.84], ["#dc-b", 330, 0.84], ["#dc-c", -640, 0.68], ["#dc-d", 640, 0.68]];
+      fan.forEach(([id, x, s], i) => {
+        tl.fromTo(id, { x: 0, scale: 0.6, opacity: 0 }, { x, scale: s, opacity: 1, duration: 0.55, ease: "expo.out" }, 0.34 + i * 0.06);
+      });
+      tl.fromTo("#dc-badge", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.6)" }, 0.75);
+      // Title per word, then the line under it
+      tl.fromTo("#dc-title .w", { opacity: 0, filter: "blur(6px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.14, ease: "power4.out", stagger: 0.067 }, 0.55);
+      tl.fromTo("#dc-sub", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out" }, 0.8);
+      // The thread weaves under the row
+      tl.fromTo(["#dc-tg", "#dc-tc"], { attr: { "stroke-dashoffset": 0.35 } },
+        { attr: { "stroke-dashoffset": -1.05 }, duration: 1.4, ease: "power1.inOut" }, 0.7);
+      // Whip left
+      tl.fromTo("#dc-stage", { x: 0, filter: "blur(0px)" }, { x: -1500, filter: "blur(18px)", duration: 0.45, ease: "power3.in" }, 2.75);
+      window.__timelines["discover"] = tl;
+    })();
+  </script>
+</template>
