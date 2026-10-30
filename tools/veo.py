@@ -2,7 +2,7 @@
 """Generate a video clip with Google Veo through the Gemini API.
 
 Usage:
-    python3 tools/veo.py prompts/shot1.txt assets/shot1.mp4
+    python3 tools/veo.py veo/prompts/shot1.txt assets/shot1.mp4
 
 Reads the API key from GEMINI_API_KEY (or GOOGLE_API_KEY). Picks the newest Veo
 model the key can use, submits the prompt, waits for the job and downloads the MP4.
