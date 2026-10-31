@@ -1,0 +1,74 @@
+<template>
+  <style>
+    #s8-root { position: absolute; inset: 0; }
+    #s8-panel { left: 560px; top: 120px; width: 800px; height: 720px; }
+    #s8-ribbon { position: absolute; left: 610px; top: 56px; width: 700px; height: 140px; }
+    #s8-rt { position: absolute; left: 610px; top: 62px; width: 700px; height: 96px; line-height: 92px; text-align: center; font-weight: 800; font-size: 44px; color: #fff; }
+    #s8-t1 { position: absolute; left: 560px; top: 210px; width: 800px; text-align: center; font-weight: 800; font-size: 160px; line-height: 1; color: var(--pink); }
+    #s8-t2 { position: absolute; left: 560px; top: 372px; width: 800px; text-align: center; font-weight: 800; font-size: 104px; line-height: 1; color: var(--navy); }
+    #s8-root .bigstar { position: absolute; top: 510px; width: 170px; height: 170px; }
+    #s8-root .slbl { position: absolute; top: 690px; width: 230px; text-align: center; font-weight: 700; font-size: 40px; }
+    #s8-btn { left: 610px; top: 890px; width: 700px; height: 120px; border-radius: 44px; background: linear-gradient(180deg, #f9a2b7, #ef6f92); border: 7px solid #fff; color: #fff; font-weight: 800; font-size: 58px; line-height: 102px; text-align: center; box-shadow: var(--clay); }
+    #s8-girl { left: 70px; bottom: 0; height: 720px; }
+    #s8-boy { left: 1420px; bottom: 0; height: 720px; }
+    #s8-root .spark { position: absolute; left: 935px; top: 440px; width: 50px; height: 50px; }
+    #s8-bush1 { left: 330px; bottom: -18px; width: 340px; }
+    #s8-bush2 { left: 1330px; bottom: -6px; width: 570px; }
+  </style>
+  <div id="s8-root" data-composition-id="s8" data-width="1920" data-height="1080" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="s8-panel" class="panel"></div>
+    <svg id="s8-ribbon" viewBox="0 0 700 140">
+      <path d="M0 36 L90 36 L90 124 L0 124 L36 80 Z" fill="#d6406c" />
+      <path d="M700 36 L610 36 L610 124 L700 124 L664 80 Z" fill="#d6406c" />
+      <path d="M60 14 Q350 -14 640 14 L640 104 Q350 76 60 104 Z" fill="#e2557f" stroke="#fff" stroke-width="6" />
+    </svg>
+    <div id="s8-rt">Misi Kata Ganti Nama Diri</div>
+    <div id="s8-t1">Tahniah!</div>
+    <div id="s8-t2">Misi Selesai!</div>
+    <svg id="s8-st1" class="bigstar" style="left: 665px" viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" fill="#ffd23f" stroke="#f0a51c" stroke-width="5" stroke-linejoin="round" /></svg>
+    <svg id="s8-st2" class="bigstar" style="left: 875px; top: 490px" viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" fill="#ffd23f" stroke="#f0a51c" stroke-width="5" stroke-linejoin="round" /></svg>
+    <svg id="s8-st3" class="bigstar" style="left: 1085px" viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" fill="#ffd23f" stroke="#f0a51c" stroke-width="5" stroke-linejoin="round" /></svg>
+    <div id="s8-l1" class="slbl" style="left: 635px; color: var(--p1)">Pertama</div>
+    <div id="s8-l2" class="slbl" style="left: 845px; color: var(--p2)">Kedua</div>
+    <div id="s8-l3" class="slbl" style="left: 1055px; color: var(--p3)">Ketiga</div>
+    <img id="s8-girl" class="char" src="assets/art/girl-book.png" alt="" />
+    <img id="s8-boy" class="char" src="assets/art/boy-owl.png" alt="" />
+    <img id="s8-bush1" class="char" src="assets/art/bush.svg" alt="" />
+    <img id="s8-bush2" class="char" src="assets/art/bush.svg" alt="" />
+    <div id="s8-btn" class="abs">Gunakan setiap hari!</div>
+    <svg id="s8-k1" class="spark" viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" fill="#ef6f92" /></svg>
+    <svg id="s8-k2" class="spark" viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" fill="#8f6fd1" /></svg>
+    <svg id="s8-k3" class="spark" viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" fill="#4fa862" /></svg>
+    <svg id="s8-k4" class="spark" viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" fill="#ffd23f" /></svg>
+    <svg id="s8-k5" class="spark" viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" fill="#3d82c4" /></svg>
+    <svg id="s8-k6" class="spark" viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" fill="#ef6f92" /></svg>
+    <svg id="s8-k7" class="spark" viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" fill="#ffd23f" /></svg>
+    <svg id="s8-k8" class="spark" viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" fill="#8f6fd1" /></svg>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s8-panel", { scale: 0.6, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 0.1);
+      tl.fromTo("#s8-ribbon, #s8-rt", { scaleX: 0, transformOrigin: "50% 50%" }, { scaleX: 1, duration: 0.45, ease: "back.out(1.6)" }, 0.35);
+      tl.fromTo("#s8-t1", { scale: 3, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.5, ease: "back.out(2)" }, 0.3);
+      tl.fromTo("#s8-t2", { y: -200, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "bounce.out" }, 0.9);
+      tl.fromTo("#s8-girl", { y: 760 }, { y: 0, duration: 0.6, ease: "back.out(1.4)" }, 0.3);
+      tl.fromTo("#s8-boy", { y: 760 }, { y: 0, duration: 0.6, ease: "back.out(1.4)" }, 0.45);
+      // a star burst from the centre on "Hebat!"
+      const burst = [[-560, -300], [520, -330], [-640, 80], [640, 60], [-360, -420], [380, -420], [-460, 330], [470, 320]];
+      burst.forEach(function (p, i) {
+        tl.fromTo("#s8-k" + (i + 1), { x: 0, y: 0, scale: 0, rotation: 0 }, { x: p[0], y: p[1], scale: 1.3, rotation: 180, duration: 0.9, ease: "power3.out" }, 0.35);
+        tl.to("#s8-k" + (i + 1), { opacity: 0, duration: 0.4 }, 1.3);
+      });
+      ["#s8-st1", "#s8-st2", "#s8-st3"].forEach(function (id, i) {
+        tl.fromTo(id, { scale: 0, rotation: -180, transformOrigin: "50% 50%" }, { scale: 1, rotation: 0, duration: 0.55, ease: "back.out(2.4)" }, 1.6 + i * 0.25);
+        tl.fromTo("#s8-l" + (i + 1), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 1.8 + i * 0.25);
+      });
+      tl.fromTo("#s8-btn", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.5, ease: "back.out(2.4)" }, 2.6);
+      tl.to("#s8-girl", { rotation: -3, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut", transformOrigin: "50% 100%" }, 3.0);
+      tl.to("#s8-boy", { rotation: 3, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut", transformOrigin: "50% 100%" }, 3.1);
+      tl.fromTo("#s8-bush1, #s8-bush2", { y: 200 }, { y: 0, duration: 0.5, ease: "back.out(1.6)", stagger: 0.1 }, 0.75);
+      window.__timelines["s8"] = tl;
+    })();
+  </script>
+</template>

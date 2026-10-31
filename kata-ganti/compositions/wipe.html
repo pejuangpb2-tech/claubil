@@ -1,0 +1,49 @@
+<template>
+  <style>
+    #wipe-root {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    #wipe-band {
+      position: absolute;
+      left: 0;
+      top: -40px;
+      width: 2600px;
+      height: 1160px;
+    }
+  </style>
+  <div id="wipe-root" data-composition-id="wipe" data-width="1920" data-height="1080" data-layout-allow-overflow>
+    <!-- a wall of cloud that sweeps across at every scene change -->
+    <svg id="wipe-band" viewBox="0 0 2600 1160">
+      <g fill="#ffffff">
+        <rect x="200" y="0" width="2200" height="1160" />
+        <circle cx="200" cy="80" r="150" /><circle cx="140" cy="300" r="170" /><circle cx="210" cy="530" r="160" />
+        <circle cx="130" cy="760" r="175" /><circle cx="200" cy="1000" r="170" />
+        <circle cx="2400" cy="120" r="160" /><circle cx="2470" cy="360" r="170" /><circle cx="2390" cy="600" r="165" />
+        <circle cx="2460" cy="840" r="175" /><circle cx="2400" cy="1080" r="160" />
+      </g>
+      <g fill="#ffd23f" stroke="#f0a51c" stroke-width="6" stroke-linejoin="round">
+        <path transform="translate(700 260) scale(1.4)" d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" />
+        <path transform="translate(1250 620) scale(1.9)" d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" />
+        <path transform="translate(1800 300) scale(1.2)" d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z" />
+      </g>
+    </svg>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // the band fully covers the frame for ~0.15 s centred on each cut
+      const cuts = [6.5, 14, 19, 28.5, 37, 46, 54.5];
+      cuts.forEach(function (c, i) {
+        tl.fromTo(
+          "#wipe-band",
+          { x: 1940 },
+          { x: -2620, duration: 1.0, ease: "none", immediateRender: i === 0 },
+          c - 0.5,
+        );
+      });
+      window.__timelines["wipe"] = tl;
+    })();
+  </script>
+</template>

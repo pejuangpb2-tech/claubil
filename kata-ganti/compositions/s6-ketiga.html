@@ -1,0 +1,51 @@
+<template>
+  <style>
+    #s6-root { position: absolute; inset: 0; }
+    #s6-card { position: absolute; left: 90px; top: 96px; width: 740px; height: 920px; background: var(--p3-soft); border: 9px solid var(--p3-edge); border-radius: 52px; box-shadow: var(--clay); overflow: hidden; }
+    #s6-badge { left: 385px; top: 40px; background: var(--p3); z-index: 2; }
+    #s6-role { position: absolute; left: 50px; top: 120px; width: 622px; height: 170px; background: #fff; border-radius: 40px; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 800; font-size: 60px; line-height: 1.05; color: var(--p3); z-index: 2; }
+    #s6-img { position: absolute; left: 31px; bottom: 168px; width: 660px; }
+    #s6-lbl { position: absolute; left: 30px; bottom: 28px; width: 662px; height: 140px; background: var(--cream); border-radius: 36px; line-height: 140px; text-align: center; font-weight: 800; font-size: 72px; color: var(--navy); }
+    #s6-ex { position: absolute; left: 960px; top: 112px; font-weight: 700; font-size: 58px; color: var(--navy); }
+    #s6-tip { left: 960px; top: 580px; width: 840px; height: 430px; border-color: var(--p3-edge); box-shadow: var(--clay); }
+    #s6-root .wp { position: absolute; height: 96px; line-height: 92px; border-radius: 30px; background: var(--p3); color: #fff; font-weight: 800; font-size: 60px; text-align: center; }
+    #s6-root .s6-q { position: absolute; left: 30px; top: 200px; width: 764px; height: 170px; background: var(--p3-soft); border-radius: 34px; font-weight: 600; font-size: 54px; line-height: 170px; text-align: center; color: var(--navy); white-space: nowrap; }
+  </style>
+  <div id="s6-root" data-composition-id="s6" data-width="1920" data-height="1080" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="s6-card">
+      <div id="s6-role">orang yang<br />diperkatakan</div>
+      <img id="s6-img" src="assets/art/card3-pair.png" alt="" />
+      <div id="s6-lbl">Orang Ketiga</div>
+    </div>
+    <div id="s6-badge" class="badge">3</div>
+    <div id="s6-ex">Contohnya:</div>
+    <div id="s6-w0" class="chip" style="left:960px;top:210px;width:400px;border-color:var(--p3-edge);color:var(--p3)">dia</div>
+    <div id="s6-w1" class="chip" style="left:1400px;top:210px;width:400px;border-color:var(--p3-edge);color:var(--p3)">mereka</div>
+    <div id="s6-w2" class="chip" style="left:960px;top:390px;width:400px;border-color:var(--p3-edge);color:var(--p3)">beliau</div>
+    <div id="s6-w3" class="chip" style="left:1400px;top:390px;width:400px;border-color:var(--p3-edge);color:var(--p3)">ia</div>
+    <div id="s6-tip" class="tip">
+      <div class="wp s6-ra" style="left:30px;top:40px;width:250px">beliau</div>
+      <div class="lbl s6-ra" style="left:306px;top:30px;font-size:46px;color:var(--navy);line-height:1.08">untuk orang yang<br /><b style="color:var(--p3)">dihormati</b></div>
+      <div class="s6-q s6-rb"><span style="color:var(--p3);font-weight:800">Beliau</span> guru besar sekolah kami.</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s6-card", { y: -1100 }, { y: 0, duration: 0.9, ease: "bounce.out" }, 0.1);
+      tl.fromTo("#s6-badge", { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2.5)" }, 0.7);
+      tl.fromTo("#s6-role", { scale: 0.4, opacity: 0, transformOrigin: "50% 100%" }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2)" }, 1.0);
+      tl.fromTo("#s6-img", { y: 420 }, { y: 0, duration: 0.6, ease: "back.out(1.5)" }, 1.2);
+      tl.fromTo("#s6-lbl", { y: 200 }, { y: 0, duration: 0.45, ease: "back.out(1.8)" }, 1.5);
+      tl.fromTo("#s6-ex", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }, 2.6);
+      tl.fromTo("#s6-w0", { scale: 0, rotation: 12 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.6)" }, 3.0);
+      tl.fromTo("#s6-w1", { scale: 0, rotation: -12 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.6)" }, 3.5);
+      tl.fromTo("#s6-w2", { scale: 0, rotation: 12 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.6)" }, 4.0);
+      tl.fromTo("#s6-w3", { scale: 0, rotation: -12 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.6)" }, 4.5);
+      tl.fromTo("#s6-tip", { scale: 0.3, opacity: 0, transformOrigin: "50% 0%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.8)" }, 5.4);
+      tl.fromTo(".s6-ra", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.35, stagger: 0.1, ease: "back.out(2)" }, 5.7);
+      tl.fromTo(".s6-rb", { scale: 0.4, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2)" }, 6.7);
+      window.__timelines["s6"] = tl;
+    })();
+  </script>
+</template>
