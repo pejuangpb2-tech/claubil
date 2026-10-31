@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Misi Berjaya – Misi Angkasa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1D0851; --card:#241A6B; --card-line:#4B3FA0; --screen:#130536;
+    --navy:#2D2B64; --purple:#634790; --pink:#D6337F; --pink-soft:#FF8FC0;
+    --teal:#3BFEC1; --ice:#9FF0FF; --coral:#F0A27A; --gold:#FFD447;
+    --text-2:#DCD5FF; --ok:#7CF5B4; --no:#FF8FC0; --radius:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  body{
+    font-family:"Nunito",system-ui,sans-serif;font-size:19px;line-height:1.55;color:#fff;
+    background-color:var(--bg);
+    background-image:
+      radial-gradient(ellipse 55% 20% at 10% 8%, rgba(43,34,144,.55), transparent 70%),
+      radial-gradient(ellipse 45% 18% at 92% 35%, rgba(30,26,119,.85), transparent 70%),
+      radial-gradient(ellipse 60% 20% at 20% 70%, rgba(30,26,119,.7), transparent 70%);
+    position:relative;min-height:100vh;
+  }
+  body::before{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      radial-gradient(1.6px 1.6px at 20px 30px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 120px 80px,#C9BCFF,transparent),
+      radial-gradient(1.8px 1.8px at 210px 160px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 60px 200px,#FF9CCB,transparent),
+      radial-gradient(1.4px 1.4px at 260px 40px,#9FF0FF,transparent);
+    background-size:290px 260px;opacity:.75;animation:twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{from{opacity:.35}to{opacity:.9}}
+  .wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:16px 16px 28px;display:grid;gap:22px}
+  h1,h2,h3{font-family:"Fredoka","Nunito",sans-serif;font-weight:600;line-height:1.2}
+
+  .dash{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-radius:var(--radius);
+    background:linear-gradient(180deg,#34307A 0%,var(--navy) 100%);
+    border:3px solid rgba(255,255,255,.9);box-shadow:0 8px 0 #120638,0 14px 30px rgba(5,0,25,.55);
+  }
+  .dash-lights{display:flex;gap:8px}
+  .dash-lights i{width:14px;height:14px;border-radius:50%;display:block;box-shadow:0 0 10px currentColor;animation:blink 2.4s infinite}
+  .dash-lights i:nth-child(1){background:var(--teal);color:var(--teal)}
+  .dash-lights i:nth-child(2){background:var(--pink-soft);color:var(--pink-soft);animation-delay:.8s}
+  .dash-lights i:nth-child(3){background:var(--gold);color:var(--gold);animation-delay:1.6s}
+  @keyframes blink{0%,70%,100%{opacity:1}80%{opacity:.35}}
+  .pill{display:inline-block;background:#fff;color:var(--purple);font:600 28px "Fredoka",sans-serif;padding:6px 18px;border-radius:999px;box-shadow:0 4px 0 #B9A8F0}
+  .sound-toggle{margin-left:auto;min-height:48px;min-width:48px;border-radius:999px;cursor:pointer;background:var(--screen);color:#fff;border:2px solid var(--card-line);font:700 18px "Nunito",sans-serif;padding:0 16px;display:inline-flex;align-items:center;gap:8px}
+  .sound-toggle:focus-visible,.btn:focus-visible,.feel:focus-visible,.name-input:focus-visible{outline:4px solid var(--teal);outline-offset:3px}
+
+  .card{position:relative;background:var(--card);border:2px solid var(--card-line);border-radius:var(--radius);padding:24px;box-shadow:0 10px 0 rgba(10,2,40,.55),0 18px 34px rgba(5,0,25,.45)}
+  .card-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .card-head .pill{font-size:26px}
+  .step{font:600 18px "Fredoka",sans-serif;color:var(--teal)}
+
+  .btn{-webkit-appearance:none;appearance:none;border:0;cursor:pointer;min-height:56px;padding:0 24px;border-radius:999px;font:600 22px "Fredoka",sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;-webkit-tap-highlight-color:transparent}
+  .btn:active{transform:translateY(3px)}
+  .btn-primary{background:var(--pink);color:#fff;box-shadow:0 6px 0 #8A1550}
+  .btn-light{background:#fff;color:var(--purple);box-shadow:0 5px 0 #B9A8F0}
+  .btn-gold{background:var(--gold);color:var(--navy);box-shadow:0 5px 0 #B98E10}
+  .btn-sm{min-height:48px;font-size:19px;padding:0 16px}
+  .speak{display:none}
+  .has-voice .speak{display:inline-flex}
+
+  /* ===== Bahagian 1: Tahniah ===== */
+  .hero{text-align:center;overflow:hidden}
+  .stage{position:relative;height:250px;max-width:640px;margin:0 auto 16px;border-radius:20px;overflow:hidden;border:3px solid rgba(255,255,255,.85);
+    background:radial-gradient(1.5px 1.5px at 12% 20%,#fff,transparent),radial-gradient(1.5px 1.5px at 30% 55%,#fff,transparent),
+      radial-gradient(2px 2px at 78% 25%,#fff,transparent),radial-gradient(1.5px 1.5px at 88% 50%,#9FF0FF,transparent),
+      radial-gradient(ellipse 70% 60% at 50% 0%,#2B2290,transparent 70%),#130536}
+  .stage .ground{position:absolute;left:-10%;right:-10%;bottom:-70px;height:120px;border-radius:50%;background:#7CF5B4;border-top:5px solid #3A1F6E}
+  .stage .crater{position:absolute;bottom:14px;border-radius:50%;background:#2FA36B}
+  .stage .flag{position:absolute;bottom:38px;right:16%;width:40px;height:66px}
+  .stage .rocket{position:absolute;bottom:40px;left:50%;width:80px;height:133px;margin-left:-40px;transform:translateY(-330px)}
+  .stage .rocket.land{animation:land 2.6s cubic-bezier(.2,.7,.3,1) forwards}
+  .stage .rocket.landed{transform:none}
+  @keyframes land{0%{transform:translateY(-330px)}80%{transform:translateY(6px)}100%{transform:translateY(0)}}
+  .stage .rocket .flame{transform-origin:30px 90px;animation:flame .12s linear infinite alternate}
+  .stage .rocket.landed .flame{opacity:0;animation:none}
+  @keyframes flame{from{transform:scaleY(.8)}to{transform:scaleY(1.2)}}
+  .stage .dust{position:absolute;bottom:30px;left:50%;width:240px;height:60px;margin-left:-120px;opacity:0;pointer-events:none;
+    background:radial-gradient(circle at 22% 60%,rgba(233,227,255,.9) 0 20px,transparent 21px),radial-gradient(circle at 50% 50%,rgba(233,227,255,.95) 0 26px,transparent 27px),radial-gradient(circle at 78% 60%,rgba(233,227,255,.9) 0 20px,transparent 21px)}
+  .stage .dust.puff{animation:puff 1.6s ease-out forwards}
+  @keyframes puff{0%{opacity:0;transform:scale(.4)}25%{opacity:1}100%{opacity:0;transform:scale(1.6)}}
+  .hero h1{font-size:34px;margin-bottom:12px}
+  .hero h1 .trophy{display:inline-block;animation:bob 2s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(-6px)}}
+  .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+  /* ===== Bahagian 2: Rumusan ===== */
+  .sum{list-style:none;display:grid;gap:12px;margin-bottom:18px}
+  .sum li{display:flex;gap:14px;align-items:flex-start;background:rgba(19,5,54,.55);border:2px solid rgba(155,123,255,.3);border-radius:18px;padding:12px 16px;font-size:20px}
+  .sum .ico{flex:0 0 46px;height:46px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-size:24px}
+  .sum b{color:var(--teal)}
+  .sum .ksn{color:var(--pink-soft);font-weight:800}
+  .badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .badge{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--purple);border-radius:999px;padding:6px 14px 6px 8px;font:600 21px "Fredoka",sans-serif;box-shadow:0 4px 0 #B9A8F0}
+  .badge i{font-style:normal;width:30px;height:30px;border-radius:50%;background:var(--gold);display:grid;place-items:center;font-size:16px}
+  .badges-lbl{text-align:center;font:600 21px "Fredoka",sans-serif;color:var(--gold);margin-bottom:10px}
+
+  /* ===== Bahagian 3: Sijil ===== */
+  .form{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:8px}
+  .form label{display:block;font:600 21px "Fredoka",sans-serif;margin-bottom:6px;color:var(--gold)}
+  .field{flex:1 1 260px}
+  .name-input{width:100%;min-height:56px;border-radius:16px;border:3px solid #fff;background:#fff;color:var(--navy);font:600 24px "Fredoka",sans-serif;padding:0 16px}
+  .name-input::placeholder{color:#8A82B8}
+  .form-msg{min-height:28px;font-weight:800;color:var(--no);font-size:19px}
+  .cert-wrap{display:none;margin-top:12px}
+  .cert-wrap.show{display:block;animation:rise .5s ease-out}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .cert{
+    position:relative;background:#FFFDF5;color:var(--navy);border-radius:22px;padding:30px 28px;text-align:center;
+    border:10px solid var(--purple);box-shadow:inset 0 0 0 4px var(--gold),0 8px 0 rgba(10,2,40,.5);overflow:hidden;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  .cert::before,.cert::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;background:rgba(155,123,255,.12)}
+  .cert::before{top:-60px;left:-60px} .cert::after{bottom:-60px;right:-60px}
+  .cert .c-top{display:flex;justify-content:center;align-items:center;gap:14px;margin-bottom:6px}
+  .cert .c-top svg{width:54px;height:90px}
+  .cert .c-title{font:700 36px/1.15 "Fredoka",sans-serif;color:var(--purple)}
+  .cert .c-sub{font-size:19px;color:#5A5287;font-weight:700;margin:4px 0 14px}
+  .cert .c-name{display:inline-block;font:700 40px/1.2 "Fredoka",sans-serif;color:var(--pink);border-bottom:4px dashed var(--gold);padding:0 16px 4px;margin-bottom:12px;word-break:break-word}
+  .cert .c-text{font-size:21px;font-weight:700;line-height:1.45;max-width:560px;margin:0 auto 18px}
+  .cert .c-text b{color:var(--purple)}
+  .cert .c-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .cert .c-date{font-size:19px;font-weight:800;text-align:left}
+  .cert .c-date span{display:block;font-size:18px;color:#5A5287;font-weight:700}
+  .cert .seal{width:110px;height:110px}
+  .cert-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center}
+  .cert-note{font-size:18px;color:var(--text-2)}
+
+  /* ===== Bahagian 4: Refleksi ===== */
+  .q-big{font:600 26px/1.3 "Fredoka",sans-serif;margin-bottom:14px}
+  .feels{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .feel{
+    border:4px solid #fff;border-radius:22px;background:#fff;color:var(--navy);cursor:pointer;min-height:120px;padding:12px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-shadow:0 6px 0 #B9A8F0;
+    font:600 21px/1.25 "Fredoka",sans-serif;-webkit-tap-highlight-color:transparent;transition:transform .12s;
+  }
+  .feel .em{font-size:52px;line-height:1}
+  .feel:hover{transform:translateY(-2px)}
+  .feel[aria-pressed="true"]{background:var(--gold);border-color:#fff;box-shadow:0 6px 0 #B98E10,0 0 0 5px rgba(255,212,71,.35)}
+  .reply{display:none;margin-top:16px;border-radius:18px;padding:16px 18px;background:#3A2F86;border:3px solid var(--gold);font-size:21px;font-weight:700}
+  .reply.show{display:block;animation:rise .4s ease-out}
+  .reply .big{display:block;font:600 24px "Fredoka",sans-serif;color:var(--gold);margin-bottom:4px}
+
+  /* ===== Bahagian 5: Penutup ===== */
+  .bye{text-align:center;background:var(--gold);color:var(--navy);border-radius:var(--radius);padding:22px 20px;box-shadow:0 8px 0 #B98E10;font:600 28px/1.35 "Fredoka",sans-serif}
+  .bye .rk{display:inline-block;animation:fly 3s ease-in-out infinite}
+  @keyframes fly{50%{transform:translate(6px,-8px) rotate(8deg)}}
+
+  .confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5;border-radius:var(--radius)}
+  .confetti span{position:absolute;top:-30px;animation:fall 3s ease-in forwards}
+  @keyframes fall{to{transform:translateY(560px) rotate(330deg);opacity:0}}
+
+  @media (max-width:700px){
+    .feels{grid-template-columns:1fr}
+    .feel{flex-direction:row;min-height:72px;justify-content:flex-start;padding:10px 16px;gap:14px;text-align:left}
+    .feel .em{font-size:40px}
+  }
+  @media (max-width:420px){
+    .card{padding:16px}
+    .pill{font-size:22px}
+    .card-head .pill{font-size:22px}
+    .hero h1{font-size:27px}
+    .stage{height:220px}
+    .sum li{font-size:19px}
+    .cert{padding:22px 14px;border-width:8px}
+    .cert .c-title{font-size:27px}
+    .cert .c-name{font-size:30px}
+    .cert .c-text{font-size:19px}
+    .cert .seal{width:86px;height:86px}
+    .cert .c-top svg{width:40px;height:66px}
+    .q-big{font-size:22px}
+    .bye{font-size:23px}
+    .form .btn,.cert-actions .btn{width:100%}
+    .sound-label{display:none}
+    .sound-toggle{padding:0 12px}
+  }
+  @media (prefers-reduced-motion: reduce){ *,*::before,*::after{animation:none!important;transition:none!important} }
+
+  /* ===== Cetak: hanya sijil ===== */
+  @page{size:A4 landscape;margin:12mm}
+  @media print{
+    html,body{background:#fff!important;min-height:0!important}
+    body::before{display:none}
+    .wrap{display:block;padding:0;max-width:none}
+    .wrap > *:not(#certSec){display:none!important}
+    #certSec{background:none;border:0;box-shadow:none;padding:0}
+    #certSec .card-head,#certSec .form,#certSec .form-msg,#certSec .cert-actions{display:none!important}
+    .cert-wrap{display:block!important;margin:0;animation:none!important}
+    #cert{box-shadow:inset 0 0 0 4px #FFD447;page-break-inside:avoid;break-inside:avoid}
+    #cert{padding:44px 40px;min-height:165mm;display:flex;flex-direction:column;justify-content:center}
+    #cert .c-title{font-size:46px} #cert .c-top svg{width:70px;height:116px}
+    #cert .c-sub{font-size:22px} #cert .c-name{font-size:56px} #cert .c-text{font-size:26px;max-width:none}
+    #cert .c-date span{font-size:20px!important} #cert .seal{width:140px;height:140px}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="s-rocket" viewBox="0 0 60 100">
+    <g stroke="#3A1F6E" stroke-width="3" stroke-linejoin="round">
+      <path d="M14 58 L3 80 L3 88 L17 80Z" fill="#EC4C9A"/>
+      <path d="M46 58 L57 80 L57 88 L43 80Z" fill="#EC4C9A"/>
+      <rect x="21" y="81" width="18" height="9" rx="2" fill="#634790"/>
+      <path d="M30 4 C46 20 48 50 45 82 L15 82 C12 50 14 20 30 4Z" fill="#fff"/>
+      <path d="M30 4 C37 11 41 19 44 28 L16 28 C19 19 23 11 30 4Z" fill="#EC4C9A"/>
+      <circle cx="30" cy="44" r="9" fill="#3BFEC1"/>
+    </g>
+    <circle cx="27" cy="41" r="2.5" fill="#fff"/>
+  </symbol>
+</svg>
+
+<main class="wrap">
+  <header class="dash">
+    <div class="dash-lights" aria-hidden="true"><i></i><i></i><i></i></div>
+    <h1 class="pill" style="font-size:28px">Misi Berjaya 🏆</h1>
+    <button class="sound-toggle" id="soundBtn" type="button" aria-pressed="true" aria-label="Kesan bunyi hidup. Tekan untuk senyap.">
+      <span aria-hidden="true" id="soundIcon">🔊</span><span class="sound-label">Bunyi</span>
+    </button>
+  </header>
+
+  <!-- ===== Bahagian 1: Tahniah ===== -->
+  <section class="card hero" aria-labelledby="t1">
+    <div class="confetti" id="confetti1" aria-hidden="true"></div>
+    <div class="stage" id="stage">
+      <div class="ground"></div>
+      <span class="crater" style="left:18%;width:60px;height:14px"></span>
+      <span class="crater" style="left:62%;width:40px;height:10px"></span>
+      <svg class="flag" viewBox="0 0 30 50" aria-hidden="true">
+        <path d="M4 3 L27 10 L4 19Z" fill="#EC4C9A" stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M4 2 V48" stroke="#3A1F6E" stroke-width="5" stroke-linecap="round"/><path d="M4 2 V48" stroke="#E9E3FF" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="dust" id="dust"></div>
+      <svg class="rocket" id="rocket" viewBox="0 0 60 115" role="img" aria-label="Roket mendarat di planet">
+        <g class="flame"><path d="M20 89 Q30 116 40 89Z" fill="#FFD447"/><path d="M25 89 Q30 104 35 89Z" fill="#FF8A3D"/></g>
+        <use href="#s-rocket" x="0" y="0" width="60" height="100"/>
+      </svg>
+    </div>
+    <span class="step">Bahagian 1</span>
+    <h1 id="t1">Tahniah, angkasawan cilik! Kamu telah berjaya menamatkan Ekspedisi Kata Arah! <span class="trophy">🏆</span></h1>
+    <div class="hero-actions">
+      <button class="btn btn-light speak" type="button" data-say="Tahniah, angkasawan cilik! Kamu telah berjaya menamatkan Ekspedisi Kata Arah!"><span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span></button>
+      <button class="btn btn-light" id="replayBtn" type="button">🔁 Lihat roket mendarat</button>
+    </div>
+  </section>
+
+  <!-- ===== Bahagian 2: Rumusan ===== -->
+  <section class="card" aria-labelledby="t2">
+    <div class="card-head"><span class="step">Bahagian 2</span><h2 class="pill" id="t2">📒 Apa yang kamu pelajari hari ini</h2></div>
+    <ul class="sum">
+      <li><span class="ico" aria-hidden="true">💡</span><div><b>Kata arah</b> ialah perkataan yang menunjukkan kedudukan atau arah sesuatu benda.</div></li>
+      <li><span class="ico" aria-hidden="true">🪐</span><div>Kamu sudah mengenali <b>12 kata arah</b>.</div></li>
+      <li><span class="ico" aria-hidden="true">✏️</span><div><span class="ksn">di</span>, <span class="ksn">ke</span> dan <span class="ksn">dari</span> ditulis <b>terpisah</b> daripada kata arah. Contoh: di atas, ke dalam, dari luar.</div></li>
+    </ul>
+    <div style="margin-bottom:16px">
+      <button class="btn btn-light btn-sm speak" type="button"
+        data-say="Apa yang kamu pelajari hari ini. Satu. Kata arah ialah perkataan yang menunjukkan kedudukan atau arah sesuatu benda. Dua. Kamu sudah mengenali dua belas kata arah. Tiga. Di, ke dan dari ditulis terpisah daripada kata arah. Contoh: di atas, ke dalam, dari luar.">
+        <span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span></button>
+    </div>
+    <p class="badges-lbl">🎖️ Lencana 12 kata arah kamu</p>
+    <div class="badges" id="badges"></div>
+  </section>
+
+  <!-- ===== Bahagian 3: Sijil ===== -->
+  <section class="card" id="certSec" aria-labelledby="t3">
+    <div class="card-head"><span class="step">Bahagian 3</span><h2 class="pill" id="t3">📜 Sijil Angkasawan</h2></div>
+    <div class="form">
+      <div class="field">
+        <label for="nameInput">Tulis nama kamu</label>
+        <input class="name-input" id="nameInput" type="text" maxlength="40" autocomplete="off" placeholder="Contoh: Aina Sofea">
+      </div>
+      <button class="btn btn-primary" id="makeBtn" type="button">✨ Jana Sijil</button>
+    </div>
+    <p class="form-msg" id="formMsg" role="status"></p>
+
+    <div class="cert-wrap" id="certWrap">
+      <div class="cert" id="cert">
+        <div class="c-top">
+          <svg viewBox="0 0 60 100" aria-hidden="true"><use href="#s-rocket" x="0" y="0" width="60" height="100"/></svg>
+          <div class="c-title">Sijil Angkasawan<br>Kata Arah</div>
+          <svg viewBox="0 0 60 100" aria-hidden="true" style="transform:scaleX(-1)"><use href="#s-rocket" x="0" y="0" width="60" height="100"/></svg>
+        </div>
+        <p class="c-sub">Dengan bangganya diberikan kepada</p>
+        <div class="c-name" id="certName">Nama</div>
+        <p class="c-text">yang telah berjaya menamatkan<br><b>Misi Angkasa: Ekspedisi Kata Arah</b></p>
+        <div class="c-foot">
+          <div class="c-date"><span>Tarikh</span><span id="certDate" style="font-size:20px;color:#2D2B64;font-weight:800"></span></div>
+          <svg class="seal" viewBox="0 0 120 120" role="img" aria-label="Lencana bintang emas">
+            <g fill="#FFD447" stroke="#3A1F6E" stroke-width="3">
+              <path d="M60 4 L70 18 L87 13 L89 30 L105 37 L97 52 L106 67 L90 74 L88 91 L71 87 L60 101 L49 87 L32 91 L30 74 L14 67 L23 52 L15 37 L31 30 L33 13 L50 18Z"/>
+            </g>
+            <circle cx="60" cy="52" r="30" fill="#634790" stroke="#3A1F6E" stroke-width="3"/>
+            <path d="M60 31 L65.6 43.4 L79 44.9 L69 54 L71.8 67.3 L60 60.6 L48.2 67.3 L51 54 L41 44.9 L54.4 43.4Z" fill="#FFD447"/>
+            <path d="M40 98 L34 118 L46 112 L52 120 L56 102Z M80 98 L86 118 L74 112 L68 120 L64 102Z" fill="#D6337F" stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="cert-actions">
+        <button class="btn btn-gold" id="printBtn" type="button">🖨️ Cetak Sijil</button>
+        <span class="cert-note">Jika butang cetak tidak berfungsi, tangkap layar sijil ini. 📸</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Bahagian 4: Refleksi ===== -->
+  <section class="card" aria-labelledby="t4">
+    <div class="card-head"><span class="step">Bahagian 4</span><h2 class="pill" id="t4">💭 Refleksi</h2></div>
+    <div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap;margin-bottom:6px">
+      <p class="q-big" style="flex:1 1 280px">Bagaimana perasaan kamu tentang kata arah sekarang?</p>
+      <button class="btn btn-light btn-sm speak" type="button" data-say="Bagaimana perasaan kamu tentang kata arah sekarang? Saya faham. Saya faham sedikit. Saya perlu ulang."><span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span></button>
+    </div>
+    <div class="feels" role="group" aria-label="Pilih perasaan kamu">
+      <button class="feel" type="button" data-f="0" aria-pressed="false"><span class="em" aria-hidden="true">😄</span>Saya faham!</button>
+      <button class="feel" type="button" data-f="1" aria-pressed="false"><span class="em" aria-hidden="true">🙂</span>Saya faham sedikit</button>
+      <button class="feel" type="button" data-f="2" aria-pressed="false"><span class="em" aria-hidden="true">🤔</span>Saya perlu ulang</button>
+    </div>
+    <div class="reply" id="reply" role="status"></div>
+  </section>
+
+  <!-- ===== Bahagian 5: Penutup ===== -->
+  <section class="bye" aria-label="Penutup">
+    Terima kasih kerana menyertai misi ini!<br>Jumpa lagi di misi akan datang <span class="rk" aria-hidden="true">🚀</span>
+  </section>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var el = function(id){ return document.getElementById(id); };
+
+  /* ---------- Bunyi ---------- */
+  var soundOn = true, ctx = null;
+  function audio(){
+    if(!soundOn) return null;
+    try{
+      if(!ctx){ var AC = window.AudioContext || window.webkitAudioContext; if(!AC) return null; ctx = new AC(); }
+      if(ctx.state === "suspended") ctx.resume();
+      return ctx;
+    }catch(e){ return null; }
+  }
+  function beep(freq, dur, type, vol, delay){
+    var a = audio(); if(!a) return;
+    try{
+      var o = a.createOscillator(), g = a.createGain(), t = a.currentTime + (delay || 0);
+      o.type = type || "sine"; o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol || 0.15, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.05);
+    }catch(e){}
+  }
+  function sWin(){ [523,659,784,1047,1319].forEach(function(n,i){ beep(n, .3, "triangle", .14, i*.12); }); }
+  function sPick(){ beep(700, .12, "triangle", .12); }
+  var soundBtn = el("soundBtn");
+  soundBtn.addEventListener("click", function(){
+    soundOn = !soundOn;
+    el("soundIcon").textContent = soundOn ? "🔊" : "🔇";
+    soundBtn.setAttribute("aria-pressed", soundOn ? "true" : "false");
+    soundBtn.setAttribute("aria-label", soundOn ? "Kesan bunyi hidup. Tekan untuk senyap." : "Kesan bunyi senyap. Tekan untuk hidupkan.");
+    if(soundOn) beep(880, .15);
+  });
+
+  /* ---------- Dengar ---------- */
+  var synth = ("speechSynthesis" in window) ? window.speechSynthesis : null;
+  var voice = null, activeBtn = null;
+  function pickVoice(){
+    if(!synth) return;
+    var vs = [];
+    try{ vs = synth.getVoices() || []; }catch(e){}
+    function find(re){ for(var i=0;i<vs.length;i++){ if(re.test(vs[i].lang)) return vs[i]; } return null; }
+    voice = find(/^ms[-_]MY/i) || find(/^ms\b/i) || find(/^id[-_]ID/i) || find(/^id\b/i) || find(/^in[-_]ID/i);
+    root.classList.toggle("has-voice", !!voice);
+  }
+  if(synth){
+    pickVoice();
+    try{ synth.addEventListener ? synth.addEventListener("voiceschanged", pickVoice) : (synth.onvoiceschanged = pickVoice); }catch(e){}
+    [300, 1000, 2500].forEach(function(ms){ setTimeout(pickVoice, ms); });
+  }
+  function resetSpeakBtn(){
+    if(activeBtn){ activeBtn.querySelector(".lbl").textContent = "Dengar"; activeBtn.querySelector("[aria-hidden]").textContent = "🔊"; activeBtn = null; }
+  }
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest ? e.target.closest(".speak") : null;
+    if(!btn || !synth || !voice) return;
+    var wasActive = (btn === activeBtn);
+    try{ synth.cancel(); }catch(err){}
+    resetSpeakBtn();
+    if(wasActive) return;
+    activeBtn = btn;
+    btn.querySelector(".lbl").textContent = "Berhenti";
+    btn.querySelector("[aria-hidden]").textContent = "⏹";
+    try{
+      var u = new SpeechSynthesisUtterance(btn.getAttribute("data-say"));
+      u.lang = voice.lang; u.rate = 0.9; u.pitch = 1.05;
+      try{ u.voice = voice; }catch(vErr){}
+      u.onend = u.onerror = function(){ if(activeBtn === btn) resetSpeakBtn(); };
+      synth.speak(u);
+    }catch(err){ resetSpeakBtn(); }
+  });
+
+  /* ---------- Konfeti ---------- */
+  function burst(box, n){
+    if(reduceMotion || !box) return;
+    box.innerHTML = "";
+    var icons = ["⭐","✨","🌟","🎉","🏆","⭐"];
+    for(var i=0;i<(n||28);i++){
+      var s = document.createElement("span");
+      s.textContent = icons[i % icons.length];
+      s.style.left = ((i * 37) % 94 + 3) + "%";
+      s.style.animationDelay = ((i % 8) * 0.12) + "s";
+      s.style.fontSize = (18 + (i % 4) * 6) + "px";
+      box.appendChild(s);
+    }
+  }
+
+  /* ---------- Bahagian 1: roket mendarat ---------- */
+  var rocket = el("rocket"), dust = el("dust"), landTimer = null;
+  function landRocket(){
+    clearTimeout(landTimer);
+    rocket.classList.remove("land", "landed"); dust.classList.remove("puff");
+    if(reduceMotion){ rocket.classList.add("landed"); return; }
+    void rocket.getBoundingClientRect();
+    rocket.classList.add("land");
+    landTimer = setTimeout(function(){
+      rocket.classList.remove("land"); rocket.classList.add("landed");
+      dust.classList.add("puff");
+      burst(el("confetti1"), 26); sWin();
+    }, 2300);
+  }
+  el("replayBtn").addEventListener("click", landRocket);
+  /* Mula apabila bahagian ini kelihatan */
+  var started = false;
+  function startOnce(){ if(!started){ started = true; landRocket(); } }
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ startOnce(); io.disconnect(); } });
+    }, { threshold: 0.4 });
+    io.observe(el("stage"));
+    setTimeout(startOnce, 4000);   /* sandaran */
+  } else { startOnce(); }
+
+  /* ---------- Bahagian 2: lencana ---------- */
+  var words = ["atas","bawah","dalam","luar","hadapan","belakang","tepi","sisi","tengah","antara","kiri","kanan"];
+  el("badges").innerHTML = words.map(function(w){ return '<span class="badge"><i aria-hidden="true">⭐</i>' + w + '</span>'; }).join("");
+
+  /* ---------- Bahagian 3: sijil ---------- */
+  var bulan = ["Januari","Februari","Mac","April","Mei","Jun","Julai","Ogos","September","Oktober","November","Disember"];
+  function tarikhMelayu(d){ return d.getDate() + " " + bulan[d.getMonth()] + " " + d.getFullYear(); }
+  el("makeBtn").addEventListener("click", function(){
+    var name = el("nameInput").value.replace(/\s+/g, " ").trim();
+    if(!name){
+      el("formMsg").textContent = "Tulis nama kamu dahulu, ya! ✏️";
+      el("nameInput").focus();
+      return;
+    }
+    el("formMsg").textContent = "";
+    el("certName").textContent = name;          /* textContent: selamat daripada kod */
+    el("certDate").textContent = tarikhMelayu(new Date());
+    el("certWrap").classList.add("show");
+    sWin();
+    try{ el("cert").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" }); }catch(e){}
+  });
+  el("nameInput").addEventListener("keydown", function(e){ if(e.key === "Enter"){ el("makeBtn").click(); } });
+  el("printBtn").addEventListener("click", function(){
+    try{ window.print(); }catch(e){}
+  });
+
+  /* ---------- Bahagian 4: refleksi ---------- */
+  var replies = [
+    { t:"Hebat! ⭐", m:"Kamu sudah menjadi pakar kata arah. Teruskan menggunakan kata arah dalam ayat kamu setiap hari!" },
+    { t:"Bagus! 🚀", m:"Kamu semakin faham. Cuba main semula Zon Cabaran supaya kamu lebih yakin." },
+    { t:"Tidak mengapa! 🪐", m:"Setiap angkasawan perlu berlatih. Kembali ke PLANET ILMU dan STESEN PENERANGAN untuk mengulang kaji, ya. Kamu pasti boleh!" }
+  ];
+  document.querySelector(".feels").addEventListener("click", function(e){
+    var b = e.target.closest(".feel"); if(!b) return;
+    document.querySelectorAll(".feel").forEach(function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    var r = replies[+b.getAttribute("data-f")], box = el("reply");
+    box.innerHTML = '<span class="big">' + r.t + '</span>' + r.m;
+    box.classList.remove("show"); void box.offsetWidth; box.classList.add("show");
+    sPick();
+  });
+})();
+</script>
+</body>
+</html>
