@@ -1,0 +1,72 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #rm-all { position: absolute; inset: 0; }
+    #rm-head { opacity: 0; }
+    #rm-list { position: absolute; left: 200px; right: 200px; top: 280px; display: grid; gap: 26px; }
+    .rm-row { display: flex; align-items: center; gap: 30px; opacity: 0; }
+    .rm-n { flex: 0 0 96px; height: 96px; border-radius: 50%; border: 6px solid var(--ink); display: grid; place-items: center; font: 900 54px var(--font); color: var(--ink); }
+    .rm-row .sentence { position: static; text-align: left; font-size: 56px; left: auto; right: auto; }
+    #rm-jom { opacity: 0; }
+    #rm-word { position: absolute; left: 0; right: 0; top: 330px; text-align: center; }
+    .rm-cw { position: absolute; left: 0; right: 0; font: 900 210px/1 var(--font); color: var(--yellow); text-shadow: 0 12px 0 #0F0B2E; opacity: 0; }
+    #rm-badges { position: absolute; left: 200px; right: 200px; top: 640px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+    .rm-b { font: 900 40px var(--font); color: var(--cream); background: rgba(21,15,58,.85); border: 4px solid rgba(244,239,234,.3); border-radius: 22px; padding: 12px 0; text-align: center; opacity: 0; }
+    #rm-wafiy { position: absolute; left: 60px; top: 640px; width: 190px; height: 256px; opacity: 0; }
+    #rm-gogo { position: absolute; left: 1690px; top: 690px; width: 180px; height: 190px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="rumusan" data-width="1920" data-height="1080">
+    <div id="rm-all">
+      <div class="warp" id="rm-warp"></div>
+      <div class="head" id="rm-head">📝 Mari kita rumuskan</div>
+      <div id="rm-list">
+        <div class="rm-row" id="rm-r1"><div class="rm-n pc1">1</div><div class="sentence" id="rm-s1"></div></div>
+        <div class="rm-row" id="rm-r2"><div class="rm-n pc2">2</div><div class="sentence" id="rm-s2"></div></div>
+        <div class="rm-row" id="rm-r3"><div class="rm-n pc3">3</div><div class="sentence" id="rm-s3"></div></div>
+        <div class="rm-row" id="rm-r4"><div class="rm-n pc4">4</div><div class="sentence" id="rm-s4"></div></div>
+      </div>
+      <div class="head" id="rm-jom">🎵 Jom sebut bersama!</div>
+      <div id="rm-word"></div>
+      <div id="rm-badges"></div>
+      <div id="rm-wafiy"><div id="rm-wafiy-in" style="width:100%;height:100%"></div></div>
+      <div id="rm-gogo"><div id="rm-gogo-in" style="width:100%;height:100%"></div></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const KA = window.KA;
+      KA.put("#rm-warp", KA.svgWarp(76));
+      KA.put("#rm-wafiy-in", KA.svgWafiy("rmw"));
+      KA.put("#rm-gogo-in", KA.svgGogo("rmg"));
+      const tl = gsap.timeline({ paused: true });
+      const D = KA.secDur("rumusan"), T = (id) => KA.t(id);
+      KA.warp(tl, "#rm-warp", 0);
+      KA.blurIn(tl, "#rm-head", T("63_rumusan") - 0.1);
+      ["64_poin1", "65_poin2", "66_poin3", "67_poin4"].forEach((id, i) => {
+        const sp = KA.sentence(document.getElementById(`rm-s${i + 1}`), id, 1);
+        tl.fromTo(`#rm-r${i + 1}`, { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, T(id) - 0.15);
+        KA.karaoke(tl, sp, id, 1);
+      });
+      const tJ = T("68_chant_ajak");
+      KA.out(tl, ["#rm-head", "#rm-list"], tJ - 0.5, 0.3);
+      KA.blurIn(tl, "#rm-jom", tJ - 0.1);
+      /* chant mengikut rentak muzik */
+      const ch = KA.chant(), word = document.getElementById("rm-word"), bd = document.getElementById("rm-badges");
+      ch.forEach((c, i) => {
+        const e = document.createElement("div"); e.className = "rm-cw"; e.id = "rm-cw" + i; e.textContent = c.w.toUpperCase(); word.appendChild(e);
+        const b = document.createElement("div"); b.className = "rm-b"; b.id = "rm-b" + i; b.textContent = c.w.toLowerCase(); bd.appendChild(b);
+      });
+      tl.set(".rm-b", { opacity: 0.35 }, tJ + 0.2);
+      KA.pop(tl, ["#rm-wafiy", "#rm-gogo"], tJ, 0.5);
+      ch.forEach((c, i) => {
+        tl.fromTo("#rm-cw" + i, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.18, ease: "back.out(2.5)" }, c.t - 0.04);
+        tl.to("#rm-cw" + i, { opacity: 0, duration: 0.12 }, (ch[i + 1] ? ch[i + 1].t : c.t + 0.9) - 0.1);
+        tl.to("#rm-b" + i, { opacity: 1, backgroundColor: "#FDD13F", color: "#1A1442", duration: 0.12 }, c.t);
+      });
+      const t0 = ch.length ? ch[0].t : tJ + 2;
+      tl.fromTo(["#rm-wafiy-in", "#rm-gogo-in"], { y: 0 }, { y: -30, duration: 0.31, repeat: 2 * ch.length + 1, yoyo: true, ease: "sine.out" }, t0 - 0.05);
+      tl.to("#rm-all", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.45);
+      window.__timelines["rumusan"] = tl;
+    })();
+  </script>
+</template>

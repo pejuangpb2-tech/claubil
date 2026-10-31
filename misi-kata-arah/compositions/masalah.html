@@ -1,0 +1,66 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #ms-all { position: absolute; inset: 0; }
+    #ms-port { position: absolute; left: 150px; top: 130px; width: 820px; height: 720px; border-radius: 360px 360px 60px 60px; background: radial-gradient(ellipse at 50% 30%, #2B2290 0%, #150F3A 80%); border: 14px solid #9B8CFF; box-shadow: inset 0 0 0 8px var(--ink), 0 0 0 8px var(--ink); overflow: hidden; }
+    #ms-wafiy { position: absolute; left: 290px; top: 230px; width: 450px; height: 608px; }
+    #ms-dash { position: absolute; left: 100px; top: 700px; width: 920px; height: 150px; border-radius: 40px; background: #7A6BE0; border: 8px solid var(--ink); }
+    .ms-btn { position: absolute; top: 742px; width: 52px; height: 52px; border-radius: 50%; border: 6px solid var(--ink); }
+    #ms-radio { position: absolute; left: 1180px; top: 300px; width: 580px; height: 425px; }
+    #ms-screen { position: absolute; left: 1232px; top: 404px; width: 252px; height: 210px; overflow: hidden; border-radius: 30px; }
+    #ms-gogo { position: absolute; left: 36px; top: 26px; width: 180px; height: 190px; opacity: 0; }
+    #ms-light { position: absolute; left: 1660px; top: 288px; width: 34px; height: 34px; border-radius: 50%; background: #FE585F; border: 5px solid var(--ink); }
+    #ms-waves { position: absolute; left: 1500px; top: 200px; width: 320px; height: 220px; opacity: 0; }
+    .ms-q { position: absolute; font: 900 110px var(--font); color: var(--yellow); text-shadow: 0 7px 0 #0F0B2E; opacity: 0; }
+    #ms-goal { position: absolute; left: 1120px; top: 150px; width: 700px; text-align: center; font: 900 46px var(--font); color: var(--ink); background: var(--yellow); border: 6px solid var(--ink); border-radius: 999px; padding: 12px 20px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="masalah" data-width="1920" data-height="1080">
+    <div id="ms-all">
+      <div id="ms-port"></div>
+      <div id="ms-wafiy"><div id="ms-wafiy-in" style="width:100%;height:100%"></div></div>
+      <div id="ms-dash"></div>
+      <div class="ms-btn" style="left:200px;background:#FE585F"></div><div class="ms-btn" style="left:280px;background:#FDD13F"></div><div class="ms-btn" style="left:800px;background:#3EBFD2"></div><div class="ms-btn" style="left:880px;background:#35D0BA"></div>
+      <svg id="ms-radio" viewBox="0 0 300 220"><use href="#a-radio" width="300" height="220" /></svg>
+      <div id="ms-screen"><div id="ms-gogo"><div id="ms-gogo-in" style="width:100%;height:100%"></div></div></div>
+      <div id="ms-light"></div>
+      <svg id="ms-waves" viewBox="0 0 320 220"><g fill="none" stroke="#FDD13F" stroke-width="12" stroke-linecap="round"><path d="M40 170 Q90 110 40 50" /><path d="M110 200 Q190 110 110 20" opacity=".7" /><path d="M180 220 Q290 110 180 0" opacity=".45" /></g></svg>
+      <div class="ms-q" id="ms-q1" style="left:1190px;top:150px">?</div>
+      <div class="ms-q" id="ms-q2" style="left:1310px;top:110px">?</div>
+      <div id="ms-goal">🎯 Misi: belajar kata arah!</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const KA = window.KA;
+      KA.put("#ms-wafiy-in", KA.svgWafiy("msw"));
+      KA.put("#ms-gogo-in", KA.svgGogo("msg"));
+      const tl = gsap.timeline({ paused: true });
+      const D = KA.secDur("masalah");
+      const t4 = KA.t("04_gogo_tolong"), g = (i) => KA.w("04_gogo_tolong", i);
+      const t5 = KA.t("05_wafiy_jangan_risau"), wv = (i) => KA.w("05_wafiy_jangan_risau", i);
+      /* masuk: kokpit muncul */
+      tl.fromTo("#ms-all", { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" }, 0);
+      KA.float(tl, "#ms-wafiy-in", 0, D, 6, 3);
+      KA.blink(tl, "#msw-eyes", 0, D, "100 102");
+      /* radio berbunyi bip-bip */
+      tl.fromTo("#ms-light", { opacity: 1 }, { opacity: 0.25, duration: 0.16, repeat: 7, yoyo: true, ease: "none" }, t4 - 1.45);
+      tl.fromTo("#ms-radio", { rotation: -1.5 }, { rotation: 1.5, duration: 0.06, repeat: 9, yoyo: true, ease: "none", transformOrigin: "50% 90%" }, t4 - 1.4);
+      /* Gogo muncul di skrin radio; gelombang suara semasa dia bercakap */
+      tl.fromTo("#ms-gogo", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.8)" }, t4 - 0.3);
+      tl.fromTo("#ms-waves", { opacity: 0.2 }, { opacity: 1, duration: 0.25, repeat: Math.floor(KA.line("04_gogo_tolong").dur / 0.25), yoyo: true, ease: "none" }, t4);
+      tl.to("#ms-waves", { opacity: 0, duration: 0.2 }, KA.end("04_gogo_tolong"));
+      KA.wave(tl, "#msg-arm", t4, 2.4, "38 112");
+      /* "di… di…" tanda soal; "alamak" Gogo menggeleng */
+      KA.pop(tl, "#ms-q1", g(4) - 0.05, 0.4);
+      KA.pop(tl, "#ms-q2", g(5) - 0.05, 0.4);
+      tl.fromTo("#ms-gogo-in", { rotation: -10 }, { rotation: 10, duration: 0.12, repeat: 5, yoyo: true, ease: "sine.inOut", transformOrigin: "50% 80%" }, g(6));
+      tl.to(["#ms-q1", "#ms-q2"], { opacity: 0, duration: 0.3 }, t5 + 2);
+      /* Wafiy menjawab: melambai, sasaran misi muncul */
+      KA.wave(tl, "#msw-arm", t5, 2.2, "136 158");
+      tl.fromTo("#ms-wafiy", { scale: 1 }, { scale: 1.04, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut", transformOrigin: "50% 100%" }, t5);
+      KA.pop(tl, "#ms-goal", wv(3) - 0.1, 0.55);
+      tl.to("#ms-all", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.45);
+      window.__timelines["masalah"] = tl;
+    })();
+  </script>
+</template>

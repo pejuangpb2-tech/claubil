@@ -4,3 +4,4 @@ renders/
 node_modules/
 audio/campuran.wav
 audio/music/bgm.wav
+__pycache__/

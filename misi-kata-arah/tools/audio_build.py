@@ -290,6 +290,15 @@ def build_music(length):
 
 
 # ---------------------------------------------------------------- SUSUN
+def sfx_time(o, start, words):
+    """Ofset SFX: nombor (saat dari permulaan baris) atau "w<n>[+/-s]" (pada perkataan ke-n)."""
+    if isinstance(o, (int, float)):
+        return start + o
+    import re
+    m = re.fullmatch(r"w(\d+)([+-][\d.]+)?", o)
+    i, d = int(m.group(1)), float(m.group(2) or 0)
+    return words[min(i, len(words) - 1)]["t"] + d if words else start + d
+
 def main():
     regen = "--regen" in sys.argv
     for d in ("vo", "music", "sfx"):
@@ -323,10 +332,11 @@ def main():
             start = round(t, 3)
             dur = len(x) / SR
             words = [{"w": w["w"], "t": round(start + w["t"], 3), "d": w["d"]} for w in timing.get(vid, {}).get("words", [])]
-            cues["lines"].append({"id": vid, "section": sec, "spk": spk, "text": text, "start": start, "dur": round(dur, 3), "words": words, "sfx": [[s, round(start + o, 3)] for s, o in sfx]})
+            sfx_abs = [[s, round(sfx_time(o, start, words), 3)] for s, o in sfx]
+            cues["lines"].append({"id": vid, "section": sec, "spk": spk, "text": text, "start": start, "dur": round(dur, 3), "words": words, "sfx": sfx_abs})
             placed_vo.append((start, x))
-            for s, o in sfx:
-                placed_sfx.append((s, start + o))
+            for s, at in sfx_abs:
+                placed_sfx.append((s, at))
             t = start + dur + POST
         if sec == "rumusan":
             # chant pada grid rentak: mulakan pada bar seterusnya

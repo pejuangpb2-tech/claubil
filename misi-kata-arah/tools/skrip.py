@@ -3,7 +3,8 @@
 Setiap baris: (id, penutur, teks, jeda_sebelum_s, sfx)
   penutur : N = pencerita (Osman), W = Wafiy (angkasawan), G = Gogo
   jeda_sebelum_s : masa visual sebelum suara bermula (objek bergerak, kad stesen)
-  sfx     : senarai (nama, ofset_s dari permulaan baris; negatif = sebelum suara)
+  sfx     : senarai (nama, ofset) — ofset nombor = saat dari permulaan baris (negatif = sebelum suara),
+            atau "w<n>[+/-s]" = pada perkataan ke-n (bermula 0) dalam baris itu
 Fail suara: audio/vo/<id>.wav. Ganti fail itu dengan rakaman sendiri (nama sama),
 kemudian jalankan semula tools/audio_build.py: pemasaan akan dilaras automatik.
 """
@@ -37,7 +38,7 @@ LINES = [
         ("06_s1_tajuk", "N", "Stesen satu. Apa itu kata arah?", 1.6, [("whoosh2", -1.5)]),
         ("07_definisi", "N", "Kata arah ialah perkataan yang menunjukkan arah atau kedudukan sesuatu benda.", 0.8, [("pop2", 0.3)]),
         ("08_kedudukan", "N", "Di mana kata arah dalam ayat? Kata arah datang selepas di, ke atau dari, dan sebelum nama benda atau tempat.", 1.0, []),
-        ("09_di_atas_meja", "N", "Contohnya, di atas meja. Di ialah kata sendi nama, atas ialah kata arah, dan meja ialah nama benda.", 0.6, [("klik", 0.4), ("klik", 1.0), ("klik", 1.6)]),
+        ("09_di_atas_meja", "N", "Contohnya, di atas meja. Di ialah kata sendi nama, atas ialah kata arah, dan meja ialah nama benda.", 0.6, [("klik", "w1"), ("klik", "w2+0.15"), ("klik", "w3+0.2")]),
         ("10_kata_tugas", "N", "Kata arah ialah sejenis kata tugas.", 0.6, [("pop1", 0.0)]),
     ]),
     # ---------------- STESEN 2 ----------------
@@ -64,7 +65,7 @@ LINES = [
     ("s3", [
         ("28_s3_tajuk", "N", "Stesen tiga. Kegunaan kata arah.", 1.6, [("whoosh2", -1.5)]),
         ("29_guna_kedudukan", "N", "Pertama, kata arah memberitahu kedudukan benda. Di mana? Satelit berada di sebelah kanan bulan.", 0.9, [("pop1", 0.0)]),
-        ("30_guna_hala_tuju", "N", "Kedua, kata arah menunjukkan hala tuju. Ke mana? Roket terbang ke atas.", 0.9, [("pop2", 0.0), ("whoosh3", 3.4)]),
+        ("30_guna_hala_tuju", "N", "Kedua, kata arah menunjukkan hala tuju. Ke mana? Roket terbang ke atas.", 0.9, [("pop2", 0.0), ("whoosh3", "w9-0.2")]),
         ("31_guna_asal", "N", "Ketiga, kata arah memberitahu tempat asal. Dari mana? Gogo keluar dari dalam roket.", 0.9, [("pop1", 0.0)]),
         ("32_harian", "N", "Kata arah juga kita gunakan setiap hari.", 1.0, [("whoosh1", -0.9)]),
         ("33_kasut", "N", "Kasut disusun di atas rak kasut.", 0.8, [("pop2", 0.0)]),
@@ -77,12 +78,12 @@ LINES = [
         ("37_s4_tajuk", "N", "Stesen empat. Cara menggunakan kata arah.", 1.6, [("whoosh3", -1.5)]),
         ("38_peraturan1", "N", "Peraturan pertama. Kata arah yang sama membawa makna berbeza apabila digunakan dengan di, ke dan dari.", 0.8, [("pop1", 0.0)]),
         ("39_di", "N", "Di menunjukkan kedudukan. Gogo berdiri di atas batu.", 0.8, [("pop2", 0.0)]),
-        ("40_ke", "N", "Ke menunjukkan hala tuju. Gogo melompat ke atas batu.", 0.8, [("pop1", 0.0), ("whoosh1", 2.4)]),
-        ("41_dari", "N", "Dari menunjukkan tempat asal. Gogo turun dari atas batu.", 0.8, [("pop2", 0.0), ("whoosh2", 2.6)]),
+        ("40_ke", "N", "Ke menunjukkan hala tuju. Gogo melompat ke atas batu.", 0.8, [("pop1", 0.0), ("whoosh1", "w5-0.1")]),
+        ("41_dari", "N", "Dari menunjukkan tempat asal. Gogo turun dari atas batu.", 0.8, [("pop2", 0.0), ("whoosh2", "w5-0.1")]),
         ("42_daripada", "N", "Ingat, gunakan dari untuk tempat. Jangan gunakan daripada bersama kata arah.", 0.8, []),
-        ("43_peraturan2", "N", "Peraturan kedua. Di, ke dan dari ditulis terpisah daripada kata arah.", 1.0, [("laser", 1.6)]),
-        ("44_ejaan_betul", "N", "Lihat ejaan yang betul: di atas, ke dalam, dan dari luar. Ada jarak di antara perkataan itu.", 0.6, [("pop1", 0.2), ("pop2", 1.6), ("pop1", 2.8)]),
-        ("45_tip_rapat", "N", "Tetapi, di yang melekat pada perbuatan ditulis rapat, seperti diletakkan dan dimakan.", 0.8, [("klik", 0.2)]),
+        ("43_peraturan2", "N", "Peraturan kedua. Di, ke dan dari ditulis terpisah daripada kata arah.", 1.0, [("laser", "w7-0.1")]),
+        ("44_ejaan_betul", "N", "Lihat ejaan yang betul: di atas, ke dalam, dan dari luar. Ada jarak di antara perkataan itu.", 0.6, [("pop1", "w4"), ("pop2", "w6"), ("pop1", "w9")]),
+        ("45_tip_rapat", "N", "Tetapi, di yang melekat pada perbuatan ditulis rapat, seperti diletakkan dan dimakan.", 0.8, [("klik", "w5")]),
         ("46_peraturan3", "N", "Peraturan ketiga. Letakkan nama benda atau tempat selepas kata arah.", 1.0, [("pop2", 0.0)]),
         ("47_gogo_bola", "G", "Bola itu berada di bawah… di bawah apa?", 0.6, []),
         ("48_bola_meja", "N", "Bola itu berada di bawah meja. Barulah ayat itu jelas dan lengkap.", 0.5, [("pop1", 0.0)]),
@@ -92,16 +93,16 @@ LINES = [
     # ---------------- STESEN 5 ----------------
     ("s5", [
         ("51_s5_tajuk", "N", "Stesen lima. Cara membina ayat.", 1.6, [("whoosh1", -1.5)]),
-        ("52_formula", "N", "Inilah formula ayat kita. Siapa atau apa, buat apa, di, ke atau dari, kata arah, dan nama benda atau tempat.", 0.8, [("klik", 0.6), ("klik", 2.4), ("klik", 3.4), ("klik", 5.6), ("klik", 6.6)]),
+        ("52_formula", "N", "Inilah formula ayat kita. Siapa atau apa, buat apa, di, ke atau dari, kata arah, dan nama benda atau tempat.", 0.8, [("klik", "w4"), ("klik", "w7"), ("klik", "w9"), ("klik", "w13"), ("klik", "w16")]),
         ("53_contoh1", "N", "Wafiy duduk di dalam roket.", 1.6, [("klik", -1.4), ("klik", -1.1), ("klik", -0.8), ("klik", -0.5), ("klik", -0.2)]),
         ("54_contoh2", "N", "Gogo melompat ke atas batu.", 1.6, [("klik", -1.4), ("klik", -1.1), ("klik", -0.8), ("klik", -0.5), ("klik", -0.2)]),
         ("55_contoh3", "N", "Komet datang dari belakang planet.", 1.6, [("klik", -1.4), ("klik", -1.1), ("klik", -0.8), ("klik", -0.5), ("klik", -0.2)]),
         ("56_lihat_cara", "N", "Sekarang, lihat cara saya membina ayat berdasarkan gambar.", 1.0, []),
-        ("57_think_aloud", "N", "Apa dalam gambar? Satelit. Apa yang ia buat? Berputar. Di mana? Di sisi bulan.", 0.8, [("klik", 1.3), ("klik", 3.6), ("klik", 5.6)]),
+        ("57_think_aloud", "N", "Apa dalam gambar? Satelit. Apa yang ia buat? Berputar. Di mana? Di sisi bulan.", 0.8, [("klik", "w3"), ("klik", "w8"), ("klik", "w11")]),
         ("58_ayat_lengkap", "N", "Ayat lengkapnya: Satelit berputar di sisi bulan.", 0.4, [("pop1", 0.0)]),
-        ("59_tip_ayat", "N", "Tip ayat hebat! Mulakan dengan huruf besar. Pilih kata arah yang tepat. Akhiri dengan noktah.", 1.0, [("pop2", 1.4), ("pop1", 3.4), ("pop2", 5.4)]),
-        ("60_gogo_tahu", "G", "Wafiy! Sekarang saya tahu! Saya bersembunyi di belakang batu besar!", 1.4, [("radio", -1.2), ("klik", 2.6), ("klik", 2.9), ("klik", 3.2), ("klik", 3.5), ("klik", 3.8)]),
-        ("61_wafiy_datang", "W", "Saya nampak kamu, Gogo! Saya datang!", 0.5, [("whoosh2", 2.0)]),
+        ("59_tip_ayat", "N", "Tip ayat hebat! Mulakan dengan huruf besar. Pilih kata arah yang tepat. Akhiri dengan noktah.", 1.0, [("pop2", "w3"), ("pop1", "w7"), ("pop2", "w12")]),
+        ("60_gogo_tahu", "G", "Wafiy! Sekarang saya tahu! Saya bersembunyi di belakang batu besar!", 1.4, [("radio", -1.2), ("klik", "w4"), ("klik", "w5"), ("klik", "w6"), ("klik", "w7"), ("klik", "w8")]),
+        ("61_wafiy_datang", "W", "Saya nampak kamu, Gogo! Saya datang!", 0.5, [("whoosh2", "w5-0.2")]),
         ("62_gogo_terima_kasih", "G", "Terima kasih, Wafiy!", 1.8, [("fanfare", -0.6)]),
     ]),
     # ---------------- RUMUSAN ----------------
