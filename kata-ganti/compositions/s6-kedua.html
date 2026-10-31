@@ -1,0 +1,52 @@
+<template>
+  <style>
+    #s6-root { position: absolute; inset: 0; }
+    #s6-team { left: 1050px; top: 70px; width: 300px; height: 76px; background: var(--p2); color: #fff; font-size: 44px; line-height: 76px; box-shadow: var(--clay); }
+    #s6-title { position: absolute; left: 1050px; top: 150px; font-weight: 800; font-size: 120px; line-height: 1; color: var(--navy); white-space: nowrap; }
+    #s6-role { left: 1050px; top: 290px; padding: 0 36px; height: 80px; background: var(--p2-soft); border: 6px solid var(--p2-edge); color: var(--p2); font-size: 48px; line-height: 68px; }
+    #s6-img { position: absolute; bottom: 0; left: 1100px; width: 820px; }
+    #s6-bub { left: 1240px; top: 430px; font-size: 50px; line-height: 1.1; padding: 26px 34px; }
+    #s6-bub b { color: var(--p2); font-weight: 800; }
+    #s6-ex { position: absolute; left: 90px; top: 100px; font-weight: 700; font-size: 58px; color: var(--navy); }
+    #s6-tip { left: 90px; top: 580px; width: 800px; height: 420px; border-color: var(--p2-edge); box-shadow: var(--clay); }
+    #s6-root .wp { position: absolute; height: 96px; line-height: 92px; border-radius: 30px; background: var(--p2); color: #fff; font-weight: 800; font-size: 60px; text-align: center; }
+    #s6-root .ex2 { position: absolute; left: 30px; top: 210px; width: 724px; height: 160px; background: var(--p2-soft); border-radius: 34px; font-weight: 600; font-size: 52px; line-height: 160px; text-align: center; color: var(--navy); white-space: nowrap; }
+    #s6-root .ex2 b { color: var(--p2); font-weight: 800; }
+  </style>
+  <div id="s6-root" data-composition-id="s6" data-width="1920" data-height="1080" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="s6-team" class="pill">PASUKAN 2</div>
+    <div id="s6-title">Orang Kedua</div>
+    <div id="s6-role" class="pill">orang yang diajak bercakap</div>
+    <img id="s6-img" class="char" src="assets/art/card2-pair-flip.png" alt="" />
+    <div id="s6-bub" class="bubble"><b>Awak</b> suka melukis?</div>
+    <div id="s6-ex">Contohnya:</div>
+    <div id="s6-w0" class="chip" style="left:90px;top:190px;width:380px;border-color:var(--p2-edge);color:var(--p2)">kamu</div>
+    <div id="s6-w1" class="chip" style="left:510px;top:190px;width:380px;border-color:var(--p2-edge);color:var(--p2)">awak</div>
+    <div id="s6-w2" class="chip" style="left:90px;top:370px;width:380px;border-color:var(--p2-edge);color:var(--p2)">anda</div>
+    <div id="s6-w3" class="chip" style="left:510px;top:370px;width:380px;border-color:var(--p2-edge);color:var(--p2)">kalian</div>
+    <div id="s6-tip" class="tip">
+      <div class="wp s6-ra" style="left:30px;top:50px;width:250px">kalian</div>
+      <div class="lbl s6-ra" style="left:310px;top:50px;font-size:52px;line-height:96px;color:var(--navy)">untuk <b style="color:var(--p2)">ramai</b> orang</div>
+      <div class="ex2 s6-rb"><b>Kalian</b> sudah bersedia?</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s6-team", { scale: 0, rotation: -20 }, { scale: 1, rotation: -3, duration: 0.45, ease: "back.out(3)" }, 0.15);
+      tl.fromTo("#s6-title", { x: 300, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "back.out(1.6)" }, 0.35);
+      tl.fromTo("#s6-role", { scale: 0.4, opacity: 0, transformOrigin: "0% 50%" }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2)" }, 1.1);
+      tl.fromTo("#s6-img", { y: 700 }, { y: 0, duration: 0.65, ease: "back.out(1.4)" }, 0.5);
+      tl.fromTo("#s6-bub", { scale: 0, transformOrigin: "100% 100%" }, { scale: 1, duration: 0.45, ease: "back.out(2.6)" }, 1.8);
+      tl.fromTo("#s6-ex", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }, 4.1499999999999995);
+      tl.fromTo("#s6-w0", { scale: 0, rotation: 12 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.6)" }, 4.55);
+      tl.fromTo("#s6-w1", { scale: 0, rotation: -12 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.6)" }, 5.15);
+      tl.fromTo("#s6-w2", { scale: 0, rotation: 12 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.6)" }, 5.7);
+      tl.fromTo("#s6-w3", { scale: 0, rotation: -12 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.6)" }, 6.25);
+      tl.fromTo("#s6-tip", { scale: 0.3, opacity: 0, transformOrigin: "50% 0%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.8)" }, 6.35);
+      tl.fromTo(".s6-ra", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.35, stagger: 0.1, ease: "back.out(2)" }, 6.5);
+      tl.fromTo(".s6-rb", { opacity: 0, scale: 0.5, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: "back.out(2)" }, 6.75);
+      window.__timelines["s6"] = tl;
+    })();
+  </script>
+</template>

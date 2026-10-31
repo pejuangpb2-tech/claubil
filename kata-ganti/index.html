@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      /* Baloo 2: the kids/education pairing recommended by ui-ux-pro-max, close to the site's titles */
+      @font-face {
+        font-family: "Baloo 2";
+        src: url("assets/fonts/baloo-2-latin-500-normal.woff2") format("woff2");
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: "Baloo 2";
+        src: url("assets/fonts/baloo-2-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: "Baloo 2";
+        src: url("assets/fonts/baloo-2-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Baloo 2";
+        src: url("assets/fonts/baloo-2-latin-800-normal.woff2") format("woff2");
+        font-weight: 800;
+      }
+      /* Palette taken from the "Misi Kata Ganti Nama Diri" website */
+      :root {
+        --navy: #1f2f66;
+        --pink: #e04a76;
+        --pink-dark: #d6406c;
+        --cream: #fff6e3;
+        --cream-edge: #f3cf9c;
+        --ink: #3b2418;
+        --p1: #8f6fd1;
+        --p1-soft: #ece3fa;
+        --p1-edge: #c3aef0;
+        --p2: #d6527a;
+        --p2-soft: #fde1e6;
+        --p2-edge: #f5b1bf;
+        --p3: #3a8f4f;
+        --p3-soft: #e0f2dd;
+        --p3-edge: #a8d9a0;
+        --lilac: #ddd0f3;
+        --yellow: #ffe27a;
+        --star: #ffd23f;
+        --font: "Baloo 2", sans-serif;
+        /* claymorphism (ui-ux-pro-max): chunky edge + soft drop + inner highlight */
+        --clay: 0 14px 0 rgba(150, 100, 60, 0.18), 0 26px 40px rgba(60, 90, 140, 0.18), inset 0 -10px 0 rgba(0, 0, 0, 0.05), inset 0 8px 0 rgba(255, 255, 255, 0.7);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #a9dcf7;
+        font-family: var(--font);
+        color: var(--navy);
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      /* Shared pieces used by every scene */
+      .abs {
+        position: absolute;
+      }
+      .panel {
+        position: absolute;
+        background: var(--cream);
+        border: 8px solid var(--cream-edge);
+        border-radius: 48px;
+        box-shadow: var(--clay);
+      }
+      .pill {
+        position: absolute;
+        border-radius: 999px;
+        font-weight: 600;
+        text-align: center;
+        white-space: nowrap;
+      }
+      .chip {
+        position: absolute;
+        width: 320px;
+        height: 150px;
+        background: #fff;
+        border: 8px solid;
+        border-radius: 40px;
+        font-weight: 600;
+        font-size: 84px;
+        line-height: 132px;
+        text-align: center;
+        color: var(--navy);
+        box-shadow: var(--clay);
+      }
+      .badge {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 8px solid #fff;
+        color: #fff;
+        font-weight: 700;
+        font-size: 96px;
+        line-height: 134px;
+        text-align: center;
+        box-shadow: 0 8px 0 rgba(0, 0, 0, 0.12);
+      }
+      .bubble {
+        position: absolute;
+        background: #fff;
+        border: 7px solid var(--ink);
+        border-radius: 44px;
+        font-weight: 600;
+        color: var(--navy);
+        text-align: center;
+        white-space: nowrap;
+      }
+      .char {
+        position: absolute;
+        display: block;
+      }
+      .tag {
+        position: absolute;
+        background: var(--navy);
+        color: #fff;
+        border-radius: 22px;
+        font-weight: 600;
+        font-size: 44px;
+        padding: 6px 28px;
+        white-space: nowrap;
+      }
+      .head {
+        position: absolute;
+        width: 112px;
+        height: 112px;
+        overflow: hidden;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 0 0 5px #fff;
+      }
+      .head img {
+        position: absolute;
+        width: 160px;
+        left: -24px;
+        top: -22px;
+      }
+      .tip {
+        position: absolute;
+        background: #fff;
+        border: 8px dashed;
+        border-radius: 40px;
+      }
+      .tip .lbl {
+        position: absolute;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="60"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="bg" data-composition-id="bg" data-composition-src="compositions/bg.html"
+        data-start="0" data-duration="60" data-track-index="0" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 0"></div>
+
+      <div id="s1" data-composition-id="s1" data-composition-src="compositions/s1-tajuk.html"
+        data-start="0" data-duration="5.82" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s2" data-composition-id="s2" data-composition-src="compositions/s2-maksud.html"
+        data-start="5.82" data-duration="9.84" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s3" data-composition-id="s3" data-composition-src="compositions/s3-pasukan.html"
+        data-start="15.66" data-duration="5.27" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s4" data-composition-id="s4" data-composition-src="compositions/s4-pertama.html"
+        data-start="20.93" data-duration="7.84" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s5" data-composition-id="s5" data-composition-src="compositions/s5-kami-kita.html"
+        data-start="28.77" data-duration="5.78" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s6" data-composition-id="s6" data-composition-src="compositions/s6-kedua.html"
+        data-start="34.55" data-duration="8.17" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s7" data-composition-id="s7" data-composition-src="compositions/s7-ketiga.html"
+        data-start="42.72" data-duration="8.23" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s8" data-composition-id="s8" data-composition-src="compositions/s8-tamat.html"
+        data-start="50.95" data-duration="9.05" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+
+      <audio id="vo-s1" src="assets/voice/s1.mp3" data-start="0.4" data-duration="5.42" data-track-index="3" data-volume="1"></audio>
+      <audio id="vo-s2" src="assets/voice/s2.mp3" data-start="6.22" data-duration="9.84" data-track-index="3" data-volume="1"></audio>
+      <audio id="vo-s3" src="assets/voice/s3.mp3" data-start="16.06" data-duration="4.87" data-track-index="3" data-volume="1"></audio>
+      <audio id="vo-s4" src="assets/voice/s4.mp3" data-start="21.33" data-duration="6.84" data-track-index="3" data-volume="1"></audio>
+      <audio id="vo-s5" src="assets/voice/s5.mp3" data-start="29.17" data-duration="5.38" data-track-index="3" data-volume="1"></audio>
+      <audio id="vo-s6" src="assets/voice/s6.mp3" data-start="34.95" data-duration="7.27" data-track-index="3" data-volume="1"></audio>
+      <audio id="vo-s7" src="assets/voice/s7.mp3" data-start="43.12" data-duration="7.13" data-track-index="3" data-volume="1"></audio>
+      <audio id="vo-s8" src="assets/voice/s8.mp3" data-start="51.35" data-duration="8.26" data-track-index="3" data-volume="1"></audio>
+
+      <audio id="music" src="assets/music/bed.mp3" data-start="0" data-duration="60" data-track-index="4" data-volume="0.16" data-fade-out="2"></audio>
+      <audio id="sfx-00" src="assets/sfx/sparkle.mp3" data-start="0.5" data-duration="1.8" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-01" src="assets/sfx/pop.mp3" data-start="2.5" data-duration="0.72" data-track-index="6" data-volume="0.3"></audio>
+      <audio id="sfx-02" src="assets/sfx/pop.mp3" data-start="2.85" data-duration="0.72" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-03" src="assets/sfx/pop.mp3" data-start="3.2" data-duration="0.72" data-track-index="8" data-volume="0.3"></audio>
+      <audio id="sfx-04" src="assets/sfx/whoosh-short.mp3" data-start="5.47" data-duration="0.57" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-05" src="assets/sfx/pop.mp3" data-start="13.62" data-duration="0.72" data-track-index="6" data-volume="0.35"></audio>
+      <audio id="sfx-06" src="assets/sfx/whoosh-short.mp3" data-start="15.31" data-duration="0.57" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-07" src="assets/sfx/pop.mp3" data-start="16.86" data-duration="0.72" data-track-index="8" data-volume="0.3"></audio>
+      <audio id="sfx-08" src="assets/sfx/pop.mp3" data-start="17.41" data-duration="0.72" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-09" src="assets/sfx/pop.mp3" data-start="17.96" data-duration="0.72" data-track-index="6" data-volume="0.3"></audio>
+      <audio id="sfx-10" src="assets/sfx/whoosh-short.mp3" data-start="20.58" data-duration="0.57" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-11" src="assets/sfx/pop.mp3" data-start="25.13" data-duration="0.72" data-track-index="8" data-volume="0.3"></audio>
+      <audio id="sfx-12" src="assets/sfx/pop.mp3" data-start="25.73" data-duration="0.72" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-13" src="assets/sfx/pop.mp3" data-start="26.33" data-duration="0.72" data-track-index="6" data-volume="0.3"></audio>
+      <audio id="sfx-14" src="assets/sfx/pop.mp3" data-start="26.83" data-duration="0.72" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-15" src="assets/sfx/whoosh-short.mp3" data-start="28.42" data-duration="0.57" data-track-index="8" data-volume="0.3"></audio>
+      <audio id="sfx-16" src="assets/sfx/pop.mp3" data-start="30.17" data-duration="0.72" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-17" src="assets/sfx/pop.mp3" data-start="32.32" data-duration="0.72" data-track-index="6" data-volume="0.3"></audio>
+      <audio id="sfx-18" src="assets/sfx/whoosh-short.mp3" data-start="34.2" data-duration="0.57" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-19" src="assets/sfx/pop.mp3" data-start="39.1" data-duration="0.72" data-track-index="8" data-volume="0.3"></audio>
+      <audio id="sfx-20" src="assets/sfx/pop.mp3" data-start="39.7" data-duration="0.72" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-21" src="assets/sfx/pop.mp3" data-start="40.25" data-duration="0.72" data-track-index="6" data-volume="0.3"></audio>
+      <audio id="sfx-22" src="assets/sfx/pop.mp3" data-start="40.8" data-duration="0.72" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-23" src="assets/sfx/whoosh-short.mp3" data-start="42.37" data-duration="0.57" data-track-index="8" data-volume="0.3"></audio>
+      <audio id="sfx-24" src="assets/sfx/pop.mp3" data-start="47.22" data-duration="0.72" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-25" src="assets/sfx/pop.mp3" data-start="47.77" data-duration="0.72" data-track-index="6" data-volume="0.3"></audio>
+      <audio id="sfx-26" src="assets/sfx/pop.mp3" data-start="48.37" data-duration="0.72" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-27" src="assets/sfx/pop.mp3" data-start="48.87" data-duration="0.72" data-track-index="8" data-volume="0.3"></audio>
+      <audio id="sfx-28" src="assets/sfx/whoosh-short.mp3" data-start="50.6" data-duration="0.57" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-29" src="assets/sfx/sparkle.mp3" data-start="51.25" data-duration="1.8" data-track-index="6" data-volume="0.35"></audio>
+      <audio id="sfx-30" src="assets/sfx/chime.mp3" data-start="54.4" data-duration="2.54" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-31" src="assets/sfx/chime.mp3" data-start="55.4" data-duration="2.54" data-track-index="8" data-volume="0.3"></audio>
+      <audio id="sfx-32" src="assets/sfx/chime.mp3" data-start="56.25" data-duration="2.54" data-track-index="5" data-volume="0.3"></audio>
+
+      <div id="wipe" data-composition-id="wipe" data-composition-src="compositions/wipe.html"
+        data-start="0" data-duration="60" data-track-index="2" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 10"></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

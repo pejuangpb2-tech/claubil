@@ -1,0 +1,57 @@
+<template>
+  <style>
+    #s5-root { position: absolute; inset: 0; }
+    #s5-title { position: absolute; left: 0; top: 40px; width: 1920px; text-align: center; font-weight: 800; font-size: 100px; line-height: 1; color: var(--navy); }
+    #s5-cap1, #s5-cap2 { left: 90px; top: 180px; height: 110px; padding: 0 40px; color: #fff; font-size: 52px; line-height: 110px; box-shadow: var(--clay); }
+    #s5-cap1 { background: var(--p1); }
+    #s5-cap2 { background: var(--p3); }
+    #s5-root .lasso { position: absolute; }
+    #s5-l1 { left: 80px; top: 400px; width: 760px; height: 760px; }
+    #s5-l2 { left: 60px; top: 330px; width: 1800px; height: 860px; }
+    #s5-girl { left: 160px; bottom: 0; height: 600px; }
+    #s5-kids { left: 0; bottom: 0; width: 820px; }
+    #s5-teacher { left: 1482px; bottom: 0; height: 650px; }
+    #s5-tag { left: 1540px; top: 330px; background: #c23a64; }
+    #s5-b1 { left: 660px; top: 410px; font-size: 52px; line-height: 1.12; padding: 24px 36px; }
+    #s5-b2 { left: 900px; top: 330px; font-size: 52px; line-height: 1.12; padding: 24px 36px; }
+    #s5-b1 b { color: #6a4cb5; font-weight: 800; }
+    #s5-b2 b { color: var(--p3); font-weight: 800; }
+  </style>
+  <div id="s5-root" data-composition-id="s5" data-width="1920" data-height="1080" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="s5-title">Kami atau Kita?</div>
+    <!-- KAMI: the speaker and her group; the teacher (listener) stays outside -->
+    <svg id="s5-l1" class="lasso" viewBox="0 0 760 760"><ellipse cx="380" cy="420" rx="350" ry="330" fill="rgba(143,111,209,0.14)" stroke="#8f6fd1" stroke-width="10" stroke-dasharray="26 18" /></svg>
+    <img id="s5-girl" class="char" src="assets/art/speaker-girl.png" alt="" />
+    <div id="s5-cap1" class="pill">kami: pendengar tidak termasuk</div>
+    <div id="s5-b1" class="bubble">Cikgu, <b>kami</b><br />sudah siap!</div>
+    <!-- KITA: one ring takes in the speaker and the listeners -->
+    <svg id="s5-l2" class="lasso" viewBox="0 0 1800 860"><ellipse cx="900" cy="480" rx="880" ry="400" fill="rgba(58,143,79,0.12)" stroke="#3a8f4f" stroke-width="10" stroke-dasharray="26 18" /></svg>
+    <img id="s5-kids" class="char" src="assets/art/card2-pair.png" alt="" />
+    <div id="s5-cap2" class="pill">kita: pendengar termasuk</div>
+    <div id="s5-b2" class="bubble">Mari <b>kita</b> baca<br />bersama-sama!</div>
+    <img id="s5-teacher" class="char" src="assets/art/teacher.png" alt="" />
+    <div id="s5-tag" class="tag">pendengar</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s5-title", { scale: 0.4, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2.4)" }, 0.15);
+      tl.fromTo("#s5-teacher", { y: 700 }, { y: 0, duration: 0.6, ease: "back.out(1.4)" }, 0.3);
+      // KAMI
+      tl.fromTo("#s5-girl", { y: 640 }, { y: 0, duration: 0.6, ease: "back.out(1.4)" }, 0.4);
+      tl.fromTo("#s5-b1", { scale: 0, transformOrigin: "0% 100%" }, { scale: 1, duration: 0.45, ease: "back.out(2.6)" }, 0.9);
+      tl.fromTo("#s5-l1", { scale: 0, opacity: 0, transformOrigin: "50% 55%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.8)" }, 1.4);
+      tl.fromTo("#s5-cap1", { x: -1100 }, { x: 0, duration: 0.45, ease: "back.out(1.6)" }, 1.5);
+      tl.fromTo("#s5-tag", { scale: 0, transformOrigin: "50% 100%" }, { scale: 1, duration: 0.35, ease: "back.out(3)" }, 1.9);
+      tl.to("#s5-girl, #s5-b1, #s5-l1", { x: -1400, duration: 0.45, ease: "power2.in" }, 2.75);
+      tl.to("#s5-cap1", { x: -1100, duration: 0.35, ease: "power2.in" }, 2.75);
+      tl.to("#s5-tag", { scale: 0, duration: 0.25, ease: "back.in(2)" }, 2.75);
+      // KITA
+      tl.fromTo("#s5-kids", { y: 520 }, { y: 0, duration: 0.6, ease: "back.out(1.4)" }, 3.0);
+      tl.fromTo("#s5-b2", { scale: 0, transformOrigin: "100% 100%" }, { scale: 1, duration: 0.45, ease: "back.out(2.6)" }, 3.15);
+      tl.fromTo("#s5-l2", { scale: 0, opacity: 0, transformOrigin: "50% 55%" }, { scale: 1, opacity: 1, duration: 0.55, ease: "back.out(1.6)" }, 3.55);
+      tl.fromTo("#s5-cap2", { x: -1100 }, { x: 0, duration: 0.45, ease: "back.out(1.6)" }, 3.7);
+      window.__timelines["s5"] = tl;
+    })();
+  </script>
+</template>
