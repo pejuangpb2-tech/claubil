@@ -1,0 +1,53 @@
+<template>
+  <style>
+    #s3-root { position: absolute; inset: 0; }
+    #s3-head { left: 560px; top: 30px; width: 980px; height: 220px; }
+    #s3-head-t { position: absolute; left: 560px; top: 30px; width: 980px; height: 220px; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 800; font-size: 78px; line-height: 1.02; color: var(--navy); }
+    #s3-root .card { position: absolute; top: 320px; width: 440px; height: 690px; border: 8px solid; border-radius: 44px; box-shadow: var(--clay); overflow: hidden; }
+    #s3-root .card .badge { left: 137px; top: 14px; width: 150px; height: 150px; }
+    #s3-root .card .role { position: absolute; left: 34px; top: 176px; width: 356px; height: 150px; background: #fff; border-radius: 34px; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; font-size: 46px; line-height: 1.05; z-index: 2; }
+    #s3-root .card img { position: absolute; left: 50%; bottom: 150px; transform: translateX(-50%); }
+    #s3-root .card .lbl { position: absolute; left: 24px; bottom: 22px; width: 376px; height: 120px; background: var(--cream); border-radius: 30px; line-height: 120px; text-align: center; font-weight: 800; font-size: 52px; color: var(--navy); }
+    #s3-c1 { left: 380px; background: var(--p1-soft); border-color: var(--p1-edge); }
+    #s3-c2 { left: 860px; background: var(--p2-soft); border-color: var(--p2-edge); }
+    #s3-c3 { left: 1340px; background: var(--p3-soft); border-color: var(--p3-edge); }
+    #s3-cat { left: 20px; top: 470px; width: 340px; }
+  </style>
+  <div id="s3-root" data-composition-id="s3" data-width="1920" data-height="1080" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="s3-head" class="panel"></div>
+    <div id="s3-head-t">Kenali 3 Pasukan<br />Kata Ganti Nama Diri!</div>
+    <div id="s3-c1" class="card">
+      <div class="badge" style="background: var(--p1)">1</div>
+      <div class="role" style="color: var(--p1)">orang yang bercakap</div>
+      <img src="assets/art/card1-girl.png" alt="" style="width: 300px" />
+      <div class="lbl">Orang Pertama</div>
+    </div>
+    <div id="s3-c2" class="card">
+      <div class="badge" style="background: var(--p2)">2</div>
+      <div class="role" style="color: var(--p2)">orang yang diajak bercakap</div>
+      <img src="assets/art/card2-pair.png" alt="" style="width: 400px" />
+      <div class="lbl">Orang Kedua</div>
+    </div>
+    <div id="s3-c3" class="card">
+      <div class="badge" style="background: var(--p3)">3</div>
+      <div class="role" style="color: var(--p3)">orang yang diperkatakan</div>
+      <img src="assets/art/card3-pair.png" alt="" style="width: 410px" />
+      <div class="lbl">Orang Ketiga</div>
+    </div>
+    <img id="s3-cat" class="char" src="assets/art/cat.png" alt="" />
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s3-head, #s3-head-t", { scale: 0.5, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 0.3);
+      tl.fromTo("#s3-cat", { x: -420, rotation: -20 }, { x: 0, rotation: 0, duration: 0.6, ease: "back.out(1.8)" }, 0.6);
+      // cards deal in like trading cards, one per spoken number
+      ["#s3-c1", "#s3-c2", "#s3-c3"].forEach(function (id, i) {
+        tl.fromTo(id, { y: 760, rotation: -10 + i * 10 }, { y: 0, rotation: 0, duration: 0.6, ease: "back.out(1.5)" }, 1.0 + i * 0.35);
+        tl.fromTo(id + " .badge", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(3)" }, 1.45 + i * 0.35);
+      });
+      tl.to("#s3-cat", { rotation: 6, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut", transformOrigin: "50% 100%" }, 2.6);
+      window.__timelines["s3"] = tl;
+    })();
+  </script>
+</template>

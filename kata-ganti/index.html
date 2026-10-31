@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      /* Baloo 2: the kids/education pairing recommended by ui-ux-pro-max, close to the site's titles */
+      @font-face {
+        font-family: "Baloo 2";
+        src: url("assets/fonts/baloo-2-latin-500-normal.woff2") format("woff2");
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: "Baloo 2";
+        src: url("assets/fonts/baloo-2-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: "Baloo 2";
+        src: url("assets/fonts/baloo-2-latin-700-normal.woff2") format("woff2");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "Baloo 2";
+        src: url("assets/fonts/baloo-2-latin-800-normal.woff2") format("woff2");
+        font-weight: 800;
+      }
+      /* Palette taken from the "Misi Kata Ganti Nama Diri" website */
+      :root {
+        --navy: #1f2f66;
+        --pink: #e04a76;
+        --pink-dark: #d6406c;
+        --cream: #fff6e3;
+        --cream-edge: #f3cf9c;
+        --ink: #3b2418;
+        --p1: #8f6fd1;
+        --p1-soft: #ece3fa;
+        --p1-edge: #c3aef0;
+        --p2: #d6527a;
+        --p2-soft: #fde1e6;
+        --p2-edge: #f5b1bf;
+        --p3: #3a8f4f;
+        --p3-soft: #e0f2dd;
+        --p3-edge: #a8d9a0;
+        --lilac: #ddd0f3;
+        --yellow: #ffe27a;
+        --star: #ffd23f;
+        --font: "Baloo 2", sans-serif;
+        /* claymorphism (ui-ux-pro-max): chunky edge + soft drop + inner highlight */
+        --clay: 0 14px 0 rgba(150, 100, 60, 0.18), 0 26px 40px rgba(60, 90, 140, 0.18), inset 0 -10px 0 rgba(0, 0, 0, 0.05), inset 0 8px 0 rgba(255, 255, 255, 0.7);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #a9dcf7;
+        font-family: var(--font);
+        color: var(--navy);
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      /* Shared pieces used by every scene */
+      .abs {
+        position: absolute;
+      }
+      .panel {
+        position: absolute;
+        background: var(--cream);
+        border: 8px solid var(--cream-edge);
+        border-radius: 48px;
+        box-shadow: var(--clay);
+      }
+      .pill {
+        position: absolute;
+        border-radius: 999px;
+        font-weight: 600;
+        text-align: center;
+        white-space: nowrap;
+      }
+      .chip {
+        position: absolute;
+        width: 320px;
+        height: 150px;
+        background: #fff;
+        border: 8px solid;
+        border-radius: 40px;
+        font-weight: 600;
+        font-size: 84px;
+        line-height: 132px;
+        text-align: center;
+        color: var(--navy);
+        box-shadow: var(--clay);
+      }
+      .badge {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 8px solid #fff;
+        color: #fff;
+        font-weight: 700;
+        font-size: 96px;
+        line-height: 134px;
+        text-align: center;
+        box-shadow: 0 8px 0 rgba(0, 0, 0, 0.12);
+      }
+      .bubble {
+        position: absolute;
+        background: #fff;
+        border: 7px solid var(--ink);
+        border-radius: 44px;
+        font-weight: 600;
+        color: var(--navy);
+        text-align: center;
+        white-space: nowrap;
+      }
+      .char {
+        position: absolute;
+        display: block;
+      }
+      .tag {
+        position: absolute;
+        background: var(--navy);
+        color: #fff;
+        border-radius: 22px;
+        font-weight: 600;
+        font-size: 44px;
+        padding: 6px 28px;
+        white-space: nowrap;
+      }
+      .head {
+        position: absolute;
+        width: 112px;
+        height: 112px;
+        overflow: hidden;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 0 0 5px #fff;
+      }
+      .head img {
+        position: absolute;
+        width: 160px;
+        left: -24px;
+        top: -22px;
+      }
+      .tip {
+        position: absolute;
+        background: #fff;
+        border: 8px dashed;
+        border-radius: 40px;
+      }
+      .tip .lbl {
+        position: absolute;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="60"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="bg" data-composition-id="bg" data-composition-src="compositions/bg.html"
+        data-start="0" data-duration="60" data-track-index="0" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 0"></div>
+
+      <div id="s1" data-composition-id="s1" data-composition-src="compositions/s1-tajuk.html"
+        data-start="0" data-duration="6.5" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s2" data-composition-id="s2" data-composition-src="compositions/s2-maksud.html"
+        data-start="6.5" data-duration="7.5" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s3" data-composition-id="s3" data-composition-src="compositions/s3-pasukan.html"
+        data-start="14" data-duration="5" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s4" data-composition-id="s4" data-composition-src="compositions/s4-pertama.html"
+        data-start="19" data-duration="9.5" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s5" data-composition-id="s5" data-composition-src="compositions/s5-kedua.html"
+        data-start="28.5" data-duration="8.5" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s6" data-composition-id="s6" data-composition-src="compositions/s6-ketiga.html"
+        data-start="37" data-duration="9" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s7" data-composition-id="s7" data-composition-src="compositions/s7-kuiz.html"
+        data-start="46" data-duration="8.5" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+      <div id="s8" data-composition-id="s8" data-composition-src="compositions/s8-tamat.html"
+        data-start="54.5" data-duration="5.5" data-track-index="1" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 2"></div>
+
+      <div id="wipe" data-composition-id="wipe" data-composition-src="compositions/wipe.html"
+        data-start="0" data-duration="60" data-track-index="2" data-track-kind="graphics"
+        data-width="1920" data-height="1080" style="z-index: 10"></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

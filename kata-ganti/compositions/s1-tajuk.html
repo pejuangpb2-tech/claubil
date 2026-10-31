@@ -1,0 +1,80 @@
+<template>
+  <style>
+    #s1-root { position: absolute; inset: 0; }
+    #s1-panel { left: 540px; top: 130px; width: 840px; height: 740px; }
+    #s1-ribbon { position: absolute; left: 600px; top: 64px; width: 720px; height: 150px; }
+    #s1-badges { position: absolute; left: 790px; top: 40px; width: 340px; height: 130px; }
+    #s1-root .bdg { position: absolute; top: 0; width: 104px; height: 104px; border-radius: 50%; border: 7px solid #fff; box-shadow: 0 8px 0 rgba(0,0,0,0.12); }
+    #s1-root .bdg svg { position: absolute; left: 18px; top: 18px; width: 56px; height: 56px; }
+    #s1-t1, #s1-t2, #s1-t3 { position: absolute; left: 540px; width: 840px; text-align: center; font-weight: 800; line-height: 1; }
+    #s1-t1 { top: 238px; font-size: 150px; color: var(--navy); }
+    #s1-t2 { top: 378px; font-size: 140px; color: var(--pink); }
+    #s1-t3 { top: 512px; font-size: 128px; color: var(--navy); }
+    #s1-pill1 { left: 690px; top: 668px; width: 540px; height: 76px; background: var(--lilac); color: #5b3f9e; font-size: 44px; line-height: 76px; }
+    #s1-pill2 { left: 740px; top: 760px; width: 440px; height: 70px; background: var(--yellow); color: var(--navy); font-size: 38px; line-height: 70px; }
+    #s1-girl { left: 70px; bottom: 0; height: 720px; }
+    #s1-boy { left: 1420px; bottom: 0; height: 720px; }
+    #s1-btn { left: 690px; top: 900px; width: 540px; height: 110px; border-radius: 40px; background: linear-gradient(180deg, #f9a2b7, #ef6f92); border: 7px solid #fff; color: #fff; font-weight: 800; font-size: 60px; line-height: 92px; text-align: center; text-decoration: underline; text-underline-offset: 8px; box-shadow: var(--clay); }
+    #s1-tag { position: absolute; left: 690px; top: 1024px; width: 540px; text-align: center; font-size: 34px; font-weight: 600; color: var(--navy); }
+    #s1-bush1 { left: 330px; bottom: -18px; width: 340px; }
+    #s1-bush2 { left: 1330px; bottom: -6px; width: 570px; }
+  </style>
+  <div id="s1-root" data-composition-id="s1" data-width="1920" data-height="1080" data-layout-allow-overflow data-layout-allow-overlap>
+    <div id="s1-panel" class="panel"></div>
+    <svg id="s1-ribbon" viewBox="0 0 720 150">
+      <path d="M0 40 L90 40 L90 130 L0 130 L36 85 Z" fill="#d6406c" />
+      <path d="M720 40 L630 40 L630 130 L720 130 L684 85 Z" fill="#d6406c" />
+      <path d="M60 20 Q360 -10 660 20 L660 110 Q360 80 60 110 Z" fill="#e2557f" stroke="#fff" stroke-width="6" />
+    </svg>
+    <div id="s1-badges">
+      <div id="s1-b1" class="bdg" style="left: 0; background: #ffc94a">
+        <svg viewBox="0 0 56 56"><path d="M4 12 Q16 6 28 12 L28 48 Q16 42 4 48 Z M52 12 Q40 6 28 12 L28 48 Q40 42 52 48 Z" fill="#fff" stroke="#c98a14" stroke-width="4" stroke-linejoin="round" /></svg>
+      </div>
+      <div id="s1-b2" class="bdg" style="left: 118px; top: -14px; background: #ef6f92">
+        <svg viewBox="0 0 56 56"><circle cx="28" cy="22" r="16" fill="#fff6a8" stroke="#fff" stroke-width="4" /><rect x="20" y="38" width="16" height="12" rx="3" fill="#fff" /></svg>
+      </div>
+      <div id="s1-b3" class="bdg" style="left: 236px; background: #8fc9ef">
+        <svg viewBox="0 0 56 56"><path d="M10 46 L14 34 L40 8 L48 16 L22 42 Z" fill="#fff" stroke="#3d82c4" stroke-width="4" stroke-linejoin="round" /><path d="M10 46 L14 34 L22 42 Z" fill="#ffd23f" /></svg>
+      </div>
+    </div>
+    <div id="s1-t1" data-var-text="s1-t1">Misi</div>
+    <div id="s1-t2" data-var-text="s1-t2">Kata Ganti</div>
+    <div id="s1-t3" data-var-text="s1-t3">Nama Diri!</div>
+    <div id="s1-pill1" class="pill">Kenali &nbsp;•&nbsp; Fahami &nbsp;•&nbsp; Gunakan</div>
+    <div id="s1-pill2" class="pill">Bahasa Melayu Tahun 4</div>
+    <img id="s1-girl" class="char" src="assets/art/girl-book.png" alt="" />
+    <img id="s1-boy" class="char" src="assets/art/boy-owl.png" alt="" />
+    <img id="s1-bush1" class="char" src="assets/art/bush.svg" alt="" />
+    <img id="s1-bush2" class="char" src="assets/art/bush.svg" alt="" />
+    <div id="s1-btn" class="abs">JOM MULAKAN!</div>
+    <div id="s1-tag">Jom kumpul bintang sambil belajar!</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const pop = (sel, t, from) =>
+        tl.fromTo(sel, Object.assign({ scale: 0, opacity: 0, transformOrigin: "50% 50%" }, from || {}), { scale: 1, opacity: 1, rotation: 0, duration: 0.55, ease: "back.out(2.2)" }, t);
+      pop("#s1-panel", 0.05, { scale: 0.7 });
+      tl.fromTo("#s1-ribbon", { scaleX: 0, transformOrigin: "50% 50%" }, { scaleX: 1, duration: 0.5, ease: "back.out(1.6)" }, 0.35);
+      pop("#s1-b1", 0.6, { rotation: -40 });
+      pop("#s1-b2", 0.72, { rotation: 40 });
+      pop("#s1-b3", 0.84, { rotation: -40 });
+      // title words drop and land with a bounce, one per beat of the greeting
+      tl.fromTo("#s1-t1", { y: -260, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "bounce.out" }, 0.9);
+      tl.fromTo("#s1-t2", { y: -300, opacity: 0, rotation: -4 }, { y: 0, opacity: 1, rotation: 0, duration: 0.75, ease: "bounce.out" }, 1.2);
+      tl.fromTo("#s1-t3", { y: -340, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "bounce.out" }, 1.5);
+      pop("#s1-pill1", 2.2, { scale: 0.4 });
+      pop("#s1-pill2", 2.4, { scale: 0.4 });
+      tl.fromTo("#s1-girl", { y: 760 }, { y: 0, duration: 0.7, ease: "back.out(1.4)" }, 0.4);
+      tl.fromTo("#s1-boy", { y: 760 }, { y: 0, duration: 0.7, ease: "back.out(1.4)" }, 0.6);
+      pop("#s1-btn", 3.6, { scale: 0.5 });
+      tl.fromTo("#s1-tag", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 4.0);
+      // the button "presses" once the voice says "jom"
+      tl.to("#s1-btn", { scale: 0.92, duration: 0.12, ease: "power2.in" }, 4.6).to("#s1-btn", { scale: 1, duration: 0.3, ease: "back.out(3)" }, 4.72);
+      tl.to("#s1-boy", { rotation: 3, duration: 0.3, ease: "sine.inOut", yoyo: true, repeat: 3, transformOrigin: "50% 100%" }, 3.0);
+      tl.to("#s1-girl", { rotation: -3, duration: 0.3, ease: "sine.inOut", yoyo: true, repeat: 3, transformOrigin: "50% 100%" }, 3.2);
+      tl.fromTo("#s1-bush1, #s1-bush2", { y: 200 }, { y: 0, duration: 0.5, ease: "back.out(1.6)", stagger: 0.1 }, 0.75);
+      window.__timelines["s1"] = tl;
+    })();
+  </script>
+</template>
