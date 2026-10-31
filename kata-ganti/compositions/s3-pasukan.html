@@ -1,52 +1,52 @@
 <template>
   <style>
     #s3-root { position: absolute; inset: 0; }
-    #s3-head { left: 560px; top: 30px; width: 980px; height: 220px; }
-    #s3-head-t { position: absolute; left: 560px; top: 30px; width: 980px; height: 220px; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 800; font-size: 78px; line-height: 1.02; color: var(--navy); }
-    #s3-root .card { position: absolute; top: 320px; width: 440px; height: 690px; border: 8px solid; border-radius: 44px; box-shadow: var(--clay); overflow: hidden; }
-    #s3-root .card .badge { left: 137px; top: 14px; width: 150px; height: 150px; }
-    #s3-root .card .role { position: absolute; left: 34px; top: 176px; width: 356px; height: 150px; background: #fff; border-radius: 34px; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; font-size: 46px; line-height: 1.05; z-index: 2; }
-    #s3-root .card img { position: absolute; left: 50%; bottom: 150px; transform: translateX(-50%); }
-    #s3-root .card .lbl { position: absolute; left: 24px; bottom: 22px; width: 376px; height: 120px; background: var(--cream); border-radius: 30px; line-height: 120px; text-align: center; font-weight: 800; font-size: 52px; color: var(--navy); }
-    #s3-c1 { left: 380px; background: var(--p1-soft); border-color: var(--p1-edge); }
-    #s3-c2 { left: 860px; background: var(--p2-soft); border-color: var(--p2-edge); }
-    #s3-c3 { left: 1340px; background: var(--p3-soft); border-color: var(--p3-edge); }
-    #s3-cat { left: 20px; top: 470px; width: 340px; }
+    #s3-ribbon { position: absolute; left: 300px; top: 50px; width: 1320px; height: 180px; }
+    #s3-rt { position: absolute; left: 300px; top: 66px; width: 1320px; height: 120px; line-height: 120px; text-align: center; font-weight: 800; font-size: 72px; color: #fff; }
+    #s3-path { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    #s3-root .stop { position: absolute; width: 220px; height: 220px; border-radius: 50%; border: 10px solid #fff; color: #fff; font-weight: 800; font-size: 130px; line-height: 200px; text-align: center; box-shadow: var(--clay); }
+    #s3-root .lab { position: absolute; width: 440px; height: 160px; background: #fff; border-radius: 36px; box-shadow: var(--clay); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    #s3-root .lab b { font-weight: 800; font-size: 58px; color: var(--navy); line-height: 1.05; }
+    #s3-root .lab span { font-weight: 700; font-size: 38px; line-height: 1.1; }
+    #s3-n1 { left: 360px; top: 300px; background: var(--p1); }
+    #s3-n2 { left: 850px; top: 420px; background: var(--p2); }
+    #s3-n3 { left: 1340px; top: 300px; background: var(--p3); }
+    #s3-l1 { left: 250px; top: 550px; }
+    #s3-l2 { left: 740px; top: 670px; }
+    #s3-l3 { left: 1230px; top: 550px; }
+    #s3-cat { left: 0; bottom: 0; width: 330px; }
+    #s3-bush { left: -20px; bottom: -14px; width: 420px; }
   </style>
   <div id="s3-root" data-composition-id="s3" data-width="1920" data-height="1080" data-layout-allow-overflow data-layout-allow-overlap>
-    <div id="s3-head" class="panel"></div>
-    <div id="s3-head-t">Kenali 3 Pasukan<br />Kata Ganti Nama Diri!</div>
-    <div id="s3-c1" class="card">
-      <div class="badge" style="background: var(--p1)">1</div>
-      <div class="role" style="color: var(--p1)">orang yang bercakap</div>
-      <img src="assets/art/card1-girl.png" alt="" style="width: 300px" />
-      <div class="lbl">Orang Pertama</div>
-    </div>
-    <div id="s3-c2" class="card">
-      <div class="badge" style="background: var(--p2)">2</div>
-      <div class="role" style="color: var(--p2)">orang yang diajak bercakap</div>
-      <img src="assets/art/card2-pair.png" alt="" style="width: 400px" />
-      <div class="lbl">Orang Kedua</div>
-    </div>
-    <div id="s3-c3" class="card">
-      <div class="badge" style="background: var(--p3)">3</div>
-      <div class="role" style="color: var(--p3)">orang yang diperkatakan</div>
-      <img src="assets/art/card3-pair.png" alt="" style="width: 410px" />
-      <div class="lbl">Orang Ketiga</div>
-    </div>
+    <svg id="s3-ribbon" viewBox="0 0 1320 180">
+      <path d="M0 50 L130 50 L130 170 L0 170 L50 110 Z" fill="#c23a64" />
+      <path d="M1320 50 L1190 50 L1190 170 L1320 170 L1270 110 Z" fill="#c23a64" />
+      <path d="M80 20 Q660 -14 1240 20 L1240 140 Q660 106 80 140 Z" fill="#e2557f" stroke="#fff" stroke-width="7" />
+    </svg>
+    <div id="s3-rt">3 Pasukan Kata Ganti Nama Diri</div>
+    <svg id="s3-path" viewBox="0 0 1920 1080"><path d="M120 900 C260 700 330 430 470 410 C640 390 760 560 960 530 C1160 500 1260 390 1450 410 C1620 430 1720 600 1840 720" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" stroke-dasharray="4 34" /></svg>
+    <div id="s3-n1" class="stop">1</div>
+    <div id="s3-n2" class="stop">2</div>
+    <div id="s3-n3" class="stop">3</div>
+    <div id="s3-l1" class="lab"><b>Orang Pertama</b><span style="color: var(--p1)">orang yang bercakap</span></div>
+    <div id="s3-l2" class="lab"><b>Orang Kedua</b><span style="color: var(--p2)">orang yang diajak bercakap</span></div>
+    <div id="s3-l3" class="lab"><b>Orang Ketiga</b><span style="color: var(--p3)">orang yang diperkatakan</span></div>
     <img id="s3-cat" class="char" src="assets/art/cat.png" alt="" />
+    <img id="s3-bush" class="char" src="assets/art/bush.svg" alt="" />
   </div>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
-      tl.fromTo("#s3-head, #s3-head-t", { scale: 0.5, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 0.3);
-      tl.fromTo("#s3-cat", { x: -420, rotation: -20 }, { x: 0, rotation: 0, duration: 0.6, ease: "back.out(1.8)" }, 0.6);
-      // cards deal in like trading cards, one per spoken number
-      ["#s3-c1", "#s3-c2", "#s3-c3"].forEach(function (id, i) {
-        tl.fromTo(id, { y: 760, rotation: -10 + i * 10 }, { y: 0, rotation: 0, duration: 0.6, ease: "back.out(1.5)" }, 1.0 + i * 0.35);
-        tl.fromTo(id + " .badge", { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(3)" }, 1.45 + i * 0.35);
+      tl.fromTo("#s3-ribbon, #s3-rt", { scaleX: 0, transformOrigin: "50% 50%" }, { scaleX: 1, duration: 0.5, ease: "back.out(1.6)" }, 0.2);
+      tl.fromTo("#s3-cat", { y: 420 }, { y: 0, duration: 0.6, ease: "back.out(1.8)" }, 0.4);
+      tl.fromTo("#s3-bush", { y: 200 }, { y: 0, duration: 0.5, ease: "back.out(1.6)" }, 0.5);
+      tl.fromTo("#s3-path", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 1.6, ease: "power1.inOut" }, 0.8);
+      // each stop lands as the path reaches it
+      [["#s3-n1", "#s3-l1", 1.2], ["#s3-n2", "#s3-l2", 1.75], ["#s3-n3", "#s3-l3", 2.3]].forEach(function (s) {
+        tl.fromTo(s[0], { scale: 0, rotation: -120 }, { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2.4)" }, s[2]);
+        tl.fromTo(s[1], { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "back.out(2)" }, s[2] + 0.25);
       });
-      tl.to("#s3-cat", { rotation: 6, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut", transformOrigin: "50% 100%" }, 2.6);
+      tl.to("#s3-cat", { rotation: 6, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut", transformOrigin: "50% 100%" }, 3.2);
       window.__timelines["s3"] = tl;
     })();
   </script>

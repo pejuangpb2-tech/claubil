@@ -1,25 +1,24 @@
 <template>
   <style>
     #s2-root { position: absolute; inset: 0; }
-    #s2-head { left: 360px; top: 46px; width: 1200px; height: 170px; }
-    #s2-head-t { position: absolute; left: 360px; top: 46px; width: 1200px; height: 170px; line-height: 170px; text-align: center; font-weight: 800; font-size: 80px; color: var(--navy); }
-    #s2-def { position: absolute; left: 360px; top: 258px; width: 1200px; height: 170px; background: #fff; border: 8px solid var(--p1-edge); border-radius: 40px; box-shadow: var(--clay); }
-    #s2-def-t { position: absolute; left: 360px; top: 258px; width: 1200px; height: 170px; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 58px; color: var(--navy); line-height: 1.15; text-align: center; }
-    #s2-def-t b { color: var(--pink); font-weight: 800; position: relative; }
-    #s2-uline { position: absolute; left: 1010px; top: 380px; width: 330px; height: 12px; border-radius: 6px; background: var(--star); }
-    #s2-row1, #s2-row2 { position: absolute; left: 360px; width: 900px; height: 140px; background: var(--cream); border: 8px solid var(--cream-edge); border-radius: 36px; box-shadow: var(--clay); }
+    #s2-head { left: 330px; top: 46px; width: 1200px; height: 170px; }
+    #s2-head-t { position: absolute; left: 330px; top: 46px; width: 1200px; height: 170px; line-height: 170px; text-align: center; font-weight: 800; font-size: 80px; color: var(--navy); }
+    #s2-def { position: absolute; left: 330px; top: 258px; width: 1080px; height: 170px; background: #fff; border: 8px solid var(--p1-edge); border-radius: 40px; box-shadow: var(--clay); }
+    #s2-def-t { position: absolute; left: 330px; top: 258px; width: 1080px; height: 170px; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 56px; color: var(--navy); line-height: 1.15; text-align: center; }
+    #s2-def-t b { color: var(--pink); font-weight: 800; }
+    #s2-uline { position: absolute; left: 900px; top: 384px; width: 310px; height: 12px; border-radius: 6px; background: var(--star); }
+    #s2-row1, #s2-row2 { position: absolute; left: 330px; width: 1080px; height: 140px; background: var(--cream); border: 8px solid var(--cream-edge); border-radius: 36px; box-shadow: var(--clay); }
     #s2-row1 { top: 486px; }
     #s2-row2 { top: 700px; }
-    #s2-root .sent { position: absolute; left: 360px; width: 900px; height: 140px; line-height: 124px; text-align: center; font-weight: 600; font-size: 70px; color: var(--navy); white-space: nowrap; }
+    #s2-root .sent { position: absolute; left: 330px; width: 1080px; height: 140px; line-height: 124px; text-align: center; font-weight: 600; font-size: 48px; color: var(--navy); white-space: nowrap; }
     #s2-s1 { top: 486px; }
     #s2-s2 { top: 700px; }
-    #s2-root .nm { display: inline-block; padding: 0 22px; border-radius: 26px; line-height: 96px; }
-    #s2-ali { background: #dbe9ff; color: #2c5fb8; }
+    #s2-root .nm { display: inline-block; padding: 0 18px; border-radius: 24px; line-height: 84px; }
+    #s2-aina2 { background: #dbe9ff; color: #2c5fb8; }
     #s2-dia { background: var(--pink); color: #fff; }
-    #s2-arrow { position: absolute; left: 760px; top: 628px; width: 100px; height: 70px; }
-    #s2-pair { left: 1296px; bottom: 0; width: 616px; }
-    #s2-tag { left: 1712px; top: 690px; background: #2c5fb8; }
-    #s2-owl { left: 50px; bottom: 0; width: 300px; }
+    #s2-arrow { position: absolute; left: 820px; top: 628px; width: 100px; height: 70px; }
+    #s2-aina { left: 1484px; bottom: 0; height: 600px; }
+    #s2-tag { left: 1500px; top: 410px; background: #8f6fd1; }
   </style>
   <div id="s2-root" data-composition-id="s2" data-width="1920" data-height="1080" data-layout-allow-overflow data-layout-allow-overlap>
     <div id="s2-head" class="panel"></div>
@@ -28,29 +27,27 @@
     <div id="s2-uline"></div>
     <div id="s2-def-t"><span>Perkataan yang digunakan untuk menggantikan <b>nama orang</b></span></div>
     <div id="s2-row1"></div>
-    <div id="s2-s1" class="sent"><span id="s2-ali" class="nm">Ali</span> suka membaca.</div>
+    <div id="s2-s1" class="sent">Aina suka membaca. <span id="s2-aina2" class="nm">Aina</span> membaca buku cerita.</div>
     <svg id="s2-arrow" viewBox="0 0 100 70"><path d="M30 0 L70 0 L70 30 L94 30 L50 68 L6 30 L30 30 Z" fill="var(--star)" stroke="#f0a51c" stroke-width="5" stroke-linejoin="round" /></svg>
     <div id="s2-row2"></div>
-    <div id="s2-s2" class="sent"><span id="s2-dia" class="nm">Dia</span> suka membaca.</div>
-    <img id="s2-pair" class="char" src="assets/art/card3-pair.png" alt="" />
-    <div id="s2-tag" class="tag">Ali</div>
-    <img id="s2-owl" class="char" src="assets/art/owl.png" alt="" />
+    <div id="s2-s2" class="sent">Aina suka membaca. <span id="s2-dia" class="nm">Dia</span> membaca buku cerita.</div>
+    <img id="s2-aina" class="char" src="assets/art/aina.png" alt="" />
+    <div id="s2-tag" class="tag">Aina</div>
   </div>
   <script>
     (function () {
       const tl = gsap.timeline({ paused: true });
       tl.fromTo("#s2-head, #s2-head-t", { y: -260 }, { y: 0, duration: 0.6, ease: "back.out(1.6)" }, 0.25);
-      tl.fromTo("#s2-owl", { y: 320 }, { y: 0, duration: 0.6, ease: "back.out(2)" }, 0.5);
       tl.fromTo("#s2-def, #s2-def-t", { scale: 0.6, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 0.9);
       tl.fromTo("#s2-uline", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.45, ease: "power2.out" }, 2.6);
-      tl.fromTo("#s2-pair", { y: 340 }, { y: 0, duration: 0.6, ease: "back.out(1.6)" }, 3.2);
+      tl.fromTo("#s2-aina", { y: 620 }, { y: 0, duration: 0.6, ease: "back.out(1.6)" }, 3.2);
       tl.fromTo("#s2-tag", { scale: 0, transformOrigin: "50% 100%" }, { scale: 1, duration: 0.4, ease: "back.out(3)" }, 3.6);
-      tl.fromTo("#s2-row1, #s2-s1", { x: -1100 }, { x: 0, duration: 0.55, ease: "back.out(1.2)" }, 3.5);
-      // "Ali" is singled out, then replaced by "Dia" in the second sentence
-      tl.fromTo("#s2-ali", { scale: 1 }, { scale: 1.18, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }, 5.0);
-      tl.fromTo("#s2-arrow", { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 0.3, ease: "back.out(2)" }, 5.2);
-      tl.fromTo("#s2-row2, #s2-s2", { scale: 0.5, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2)" }, 5.4);
-      tl.fromTo("#s2-dia", { scale: 2.2, rotation: -12 }, { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2.5)" }, 5.6);
+      tl.fromTo("#s2-row1, #s2-s1", { x: -1200 }, { x: 0, duration: 0.55, ease: "back.out(1.2)" }, 3.5);
+      // the repeated name is singled out, then replaced by "Dia" in the second line
+      tl.fromTo("#s2-aina2", { scale: 1 }, { scale: 1.18, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }, 5.2);
+      tl.fromTo("#s2-arrow", { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 0.3, ease: "back.out(2)" }, 5.5);
+      tl.fromTo("#s2-row2, #s2-s2", { scale: 0.5, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2)" }, 5.7);
+      tl.fromTo("#s2-dia", { scale: 2.2, rotation: -12 }, { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2.5)" }, 5.9);
       window.__timelines["s2"] = tl;
     })();
   </script>

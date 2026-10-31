@@ -34,12 +34,12 @@
     (function () {
       const tl = gsap.timeline({ paused: true });
       // the band fully covers the frame for ~0.15 s centred on each cut
-      const cuts = [6.5, 14, 19, 28.5, 37, 46, 54.5];
+      const cuts = [6.5, 14.5, 20, 28, 35.5, 43, 50.5];
       cuts.forEach(function (c, i) {
         tl.fromTo(
           "#wipe-band",
           { x: 1940 },
-          { x: -2620, duration: 1.0, ease: "none", immediateRender: i === 0 },
+          { x: -2720, duration: 1.0, ease: "none", immediateRender: i === 0 },
           c - 0.5,
         );
       });
