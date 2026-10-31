@@ -39,15 +39,15 @@
       const tl = gsap.timeline({ paused: true });
       tl.fromTo("#s2-head, #s2-head-t", { y: -260 }, { y: 0, duration: 0.6, ease: "back.out(1.6)" }, 0.25);
       tl.fromTo("#s2-def, #s2-def-t", { scale: 0.6, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 0.9);
-      tl.fromTo("#s2-uline", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.45, ease: "power2.out" }, 2.6);
-      tl.fromTo("#s2-aina", { y: 620 }, { y: 0, duration: 0.6, ease: "back.out(1.6)" }, 3.2);
-      tl.fromTo("#s2-tag", { scale: 0, transformOrigin: "50% 100%" }, { scale: 1, duration: 0.4, ease: "back.out(3)" }, 3.6);
-      tl.fromTo("#s2-row1, #s2-s1", { x: -1200 }, { x: 0, duration: 0.55, ease: "back.out(1.2)" }, 3.5);
+      tl.fromTo("#s2-uline", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.45, ease: "power2.out" }, 3.4);
+      tl.fromTo("#s2-aina", { y: 620 }, { y: 0, duration: 0.6, ease: "back.out(1.6)" }, 4.8);
+      tl.fromTo("#s2-tag", { scale: 0, transformOrigin: "50% 100%" }, { scale: 1, duration: 0.4, ease: "back.out(3)" }, 5.2);
+      tl.fromTo("#s2-row1, #s2-s1", { x: -1200 }, { x: 0, duration: 0.55, ease: "back.out(1.2)" }, 5.5);
       // the repeated name is singled out, then replaced by "Dia" in the second line
-      tl.fromTo("#s2-aina2", { scale: 1 }, { scale: 1.18, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }, 5.2);
-      tl.fromTo("#s2-arrow", { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 0.3, ease: "back.out(2)" }, 5.5);
-      tl.fromTo("#s2-row2, #s2-s2", { scale: 0.5, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2)" }, 5.7);
-      tl.fromTo("#s2-dia", { scale: 2.2, rotation: -12 }, { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2.5)" }, 5.9);
+      tl.fromTo("#s2-aina2", { scale: 1 }, { scale: 1.18, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }, 7.1);
+      tl.fromTo("#s2-arrow", { scaleY: 0, transformOrigin: "50% 0%" }, { scaleY: 1, duration: 0.3, ease: "back.out(2)" }, 7.35);
+      tl.fromTo("#s2-row2, #s2-s2", { scale: 0.5, opacity: 0, transformOrigin: "50% 50%" }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2)" }, 7.5);
+      tl.fromTo("#s2-dia", { scale: 2.2, rotation: -12 }, { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2.5)" }, 7.8);
       window.__timelines["s2"] = tl;
     })();
   </script>

@@ -56,12 +56,12 @@
         tl.to("#s8-k" + (i + 1), { opacity: 0, duration: 0.4 }, 1.2);
       });
       // one medal swings in per team as the voice names it
-      [["#s8-m1", "#s8-l1", 1.6], ["#s8-m2", "#s8-l2", 3.3], ["#s8-m3", "#s8-l3", 5.2]].forEach(function (m) {
+      [["#s8-m1", "#s8-l1", 3.45], ["#s8-m2", "#s8-l2", 4.45], ["#s8-m3", "#s8-l3", 5.3]].forEach(function (m) {
         tl.fromTo(m[0], { y: -500, rotation: -25, transformOrigin: "50% 0%" }, { y: 0, rotation: 0, duration: 0.8, ease: "elastic.out(1, 0.55)" }, m[2]);
         tl.fromTo(m[1], { scale: 0.4, opacity: 0, transformOrigin: "50% 0%" }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2)" }, m[2] + 0.35);
       });
-      tl.fromTo("#s8-t2", { y: -140, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "bounce.out" }, 7.0);
-      tl.fromTo("#s8-btn", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.5, ease: "back.out(2.4)" }, 7.2);
+      tl.fromTo("#s8-t2", { y: -140, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "bounce.out" }, 6.75);
+      tl.fromTo("#s8-btn", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.5, ease: "back.out(2.4)" }, 7.0);
       tl.to("#s8-girl", { rotation: -3, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut", transformOrigin: "50% 100%" }, 7.2);
       tl.to("#s8-boy", { rotation: 3, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut", transformOrigin: "50% 100%" }, 7.3);
       window.__timelines["s8"] = tl;
