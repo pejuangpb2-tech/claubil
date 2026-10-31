@@ -1,0 +1,246 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #s4-all { position: absolute; inset: 0; }
+    .s4-hd { opacity: 0; }
+    #s4-chips { position: absolute; top: 262px; left: 0; right: 0; display: flex; justify-content: center; gap: 26px; }
+    #s4-chips .chip { opacity: 0; }
+    #s4-r1 { position: absolute; inset: 0; opacity: 0; }
+    #s4-ground { position: absolute; left: -120px; top: 760px; width: 2160px; height: 620px; }
+    #s4-rock { position: absolute; left: 820px; top: 520px; width: 480px; height: 300px; }
+    #s4-gogo { position: absolute; left: 960px; top: 345px; width: 200px; height: 211px; }
+    #s4-pin { position: absolute; left: 1170px; top: 360px; font-size: 90px; opacity: 0; }
+    #s4-arcke { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; opacity: 0; }
+    #s4-arcdari { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; opacity: 0; }
+    .s4-sent { top: 862px; opacity: 0; }
+    .s4-box { position: absolute; left: 360px; right: 360px; top: 330px; padding: 40px 50px; opacity: 0; }
+    .s4-row { font: 900 72px/1.5 var(--font); color: #fff; opacity: 0; white-space: nowrap; }
+    .s4-row .mk { display: inline-grid; place-items: center; width: 84px; height: 84px; border-radius: 50%; font-size: 52px; vertical-align: middle; margin-right: 26px; border: 5px solid var(--ink); color: var(--ink); }
+    .s4-row .mk.g { background: #7CF5B4; } .s4-row .mk.r { background: var(--coral); }
+    #s4-word { position: absolute; left: 0; right: 0; top: 380px; text-align: center; font: 900 170px/1 var(--font); color: #fff; opacity: 0; white-space: nowrap; }
+    #s4-word span { display: inline-block; }
+    #s4-wd { color: var(--pink); }
+    #s4-wa { color: var(--yellow); }
+    #s4-tick { position: absolute; left: 1420px; top: 400px; font: 900 130px var(--font); color: #7CF5B4; opacity: 0; }
+    #s4-old { position: absolute; left: 0; right: 0; top: 640px; text-align: center; font: 900 90px var(--font); color: var(--coral); opacity: 0; }
+    #s4-laserrk { position: absolute; left: 60px; top: 150px; width: 300px; height: 140px; opacity: 0; }
+    #s4-beam { position: absolute; left: 330px; top: 214px; width: 640px; height: 220px; opacity: 0; }
+    #s4-grid { position: absolute; left: 330px; top: 300px; width: 1260px; display: grid; grid-template-columns: 1fr 1fr; gap: 26px 60px; }
+    .s4-g { font: 900 84px var(--font); padding: 16px 30px; border-radius: 28px; text-align: center; opacity: 0; white-space: nowrap; }
+    .s4-g.ok { background: rgba(124,245,180,.16); border: 5px solid #7CF5B4; color: #fff; }
+    .s4-g.no { background: rgba(254,88,95,.14); border: 5px solid var(--coral); color: var(--cream); }
+    .s4-gap { display: inline-block; width: 26px; height: 64px; margin: 0 6px; vertical-align: middle; border-left: 6px solid var(--yellow); border-right: 6px solid var(--yellow); border-radius: 6px; opacity: 0; }
+    #s4-cols { position: absolute; left: 160px; right: 160px; top: 290px; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+    .s4-col { padding: 34px 36px; text-align: center; opacity: 0; }
+    .s4-col h3 { font: 900 56px var(--font); color: #fff; }
+    .s4-col .big { font: 900 92px var(--font); margin: 14px 0; }
+    .s4-col .ex { font: 900 66px var(--font); color: var(--cream); opacity: 0; }
+    #s4-c1 { border-color: var(--cyan); } #s4-c1 .big { color: var(--cyan); }
+    #s4-c2 { border-color: var(--orange); } #s4-c2 .big { color: var(--orange); }
+    #s4-bgogo { position: absolute; left: 180px; top: 300px; width: 260px; height: 274px; opacity: 0; }
+    #s4-bub { position: absolute; left: 470px; top: 350px; font: 900 56px var(--font); color: var(--ink); background: #fff; border: 6px solid var(--ink); border-radius: 40px; padding: 14px 34px; opacity: 0; }
+    #s4-bsent { position: absolute; left: 80px; right: 80px; top: 640px; text-align: center; font: 900 82px/1.2 var(--font); color: #fff; opacity: 0; }
+    #s4-bsent .w { display: inline-block; margin: 0 .13em; }
+    #s4-blank { display: inline-block; min-width: 230px; border-bottom: 10px solid var(--yellow); margin-left: .2em; text-align: center; }
+    #s4-meja { color: var(--yellow); opacity: 0; }
+    #s4-table { position: absolute; left: 1220px; top: 300px; width: 520px; height: 310px; opacity: 0; }
+    #s4-ball { position: absolute; left: 1430px; top: 480px; width: 120px; height: 120px; opacity: 0; }
+    #s4-okstamp { position: absolute; left: 0; right: 0; top: 780px; text-align: center; opacity: 0; }
+    #s4-okstamp span { display: inline-block; font: 900 54px var(--font); color: var(--ink); background: #7CF5B4; border: 6px solid var(--ink); border-radius: 999px; padding: 10px 36px; }
+    #s4-a4 { position: absolute; inset: 0; opacity: 0; }
+    #s4-arkt { position: absolute; left: 180px; top: 400px; width: 420px; height: 196px; }
+    #s4-amoon { position: absolute; left: 860px; top: 390px; width: 200px; height: 200px; }
+    #s4-aplan { position: absolute; left: 1360px; top: 380px; width: 220px; height: 220px; }
+    #s4-asent { top: 700px; }
+    #s4-achips { position: absolute; left: 0; right: 0; top: 862px; display: flex; justify-content: center; gap: 40px; }
+    #s4-achips div { font: 900 60px var(--font); padding: 8px 36px; border-radius: 999px; border: 6px solid var(--ink); color: var(--ink); opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="s4" data-width="1920" data-height="1080">
+    <div id="s4-all">
+      <div class="warp" id="s4-warp"></div>
+      <div class="stn" id="s4-card">
+        <div class="stn-planet pc4" id="s4-cp">4</div>
+        <div class="stn-kicker" id="s4-ck">STESEN 4</div>
+        <div class="stn-title" id="s4-ct">Cara Menggunakan Kata Arah</div>
+      </div>
+      <div class="head s4-hd" id="s4-h1">Peraturan 1: <span class="c-di">di</span> · <span class="c-ke">ke</span> · <span class="c-dari">dari</span></div>
+      <div class="head s4-hd" id="s4-h2">Peraturan 2: <span class="y">Ejaan</span></div>
+      <div class="head s4-hd" id="s4-h3">Peraturan 3: Letakkan <span class="y">nama benda/tempat</span><br>selepas kata arah</div>
+      <div class="head s4-hd" id="s4-h4">Peraturan 4: <span class="y">antara … dengan</span></div>
+
+      <div id="s4-r1">
+        <svg id="s4-ground" viewBox="0 0 2160 620"><ellipse cx="1080" cy="420" rx="1300" ry="300" fill="#493F8F" stroke="#3C3579" stroke-width="8" /><ellipse cx="380" cy="240" rx="80" ry="20" fill="#3C3579" /></svg>
+        <svg id="s4-rock" viewBox="0 0 240 150"><use href="#a-rock" width="240" height="150" /></svg>
+        <svg id="s4-arcke" viewBox="0 0 1920 1080"><path d="M420 780 Q620 260 1010 470" fill="none" stroke="#FE8B42" stroke-width="10" stroke-dasharray="22 18" stroke-linecap="round" /><path d="M960 448 L1016 474 L986 416" fill="none" stroke="#FE8B42" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        <svg id="s4-arcdari" viewBox="0 0 1920 1080"><path d="M1100 470 Q1380 320 1560 780" fill="none" stroke="#35D0BA" stroke-width="10" stroke-dasharray="22 18" stroke-linecap="round" /><path d="M1520 744 L1562 786 L1574 728" fill="none" stroke="#35D0BA" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        <div id="s4-pin">📍</div>
+        <div id="s4-gogo"><div id="s4-gogo-in" style="width:100%;height:100%"></div></div>
+      </div>
+      <div id="s4-chips"><div class="chip di" id="s4-k1">di = kedudukan 📍</div><div class="chip ke" id="s4-k2">ke = hala tuju ➜</div><div class="chip dari" id="s4-k3">dari = tempat asal ↩</div></div>
+      <div class="sentence s4-sent" id="s4-s39"></div><div class="sentence s4-sent" id="s4-s40"></div><div class="sentence s4-sent" id="s4-s41"></div>
+
+      <div class="panel s4-box" id="s4-dp">
+        <div class="s4-row" id="s4-dp1"><span class="mk g">✓</span><span class="c-dari">dari</span> <span class="ka">atas</span> batu</div>
+        <div class="s4-row" id="s4-dp2"><span class="mk r">✗</span><span class="strike">daripada atas batu</span></div>
+      </div>
+
+      <svg id="s4-laserrk" viewBox="0 0 300 140"><use href="#a-rocket" width="300" height="140" /></svg>
+      <svg id="s4-beam" viewBox="0 0 640 220"><path d="M0 6 L600 200" stroke="#FE585F" stroke-width="12" stroke-linecap="round" /><path d="M0 6 L600 200" stroke="#FFF2C2" stroke-width="4" stroke-linecap="round" /></svg>
+      <div id="s4-word"><span id="s4-wd">di</span><span id="s4-wa">atas</span></div>
+      <div id="s4-tick">✓</div>
+      <div id="s4-old"><span class="strike">diatas</span> ✗</div>
+      <div id="s4-grid">
+        <div class="s4-g ok" id="s4-g1">✓ <span class="c-di">di</span><span class="s4-gap"></span><span class="ka">atas</span></div><div class="s4-g no" id="s4-g2">✗ <span class="strike">diatas</span></div>
+        <div class="s4-g ok" id="s4-g3">✓ <span class="c-ke">ke</span><span class="s4-gap"></span><span class="ka">dalam</span></div><div class="s4-g no" id="s4-g4">✗ <span class="strike">kedalam</span></div>
+        <div class="s4-g ok" id="s4-g5">✓ <span class="c-dari">dari</span><span class="s4-gap"></span><span class="ka">luar</span></div><div class="s4-g no" id="s4-g6">✗ <span class="strike">dariluar</span></div>
+      </div>
+      <div id="s4-cols">
+        <div class="panel s4-col" id="s4-c1" style="position:relative"><h3>di + tempat / arah</h3><div class="big">JARAK ↔</div><div class="ex" id="s4-e1">di atas · di rumah</div></div>
+        <div class="panel s4-col" id="s4-c2" style="position:relative"><h3>di + perbuatan</h3><div class="big">RAPAT →←</div><div class="ex" id="s4-e2">diletakkan</div><div class="ex" id="s4-e3">dimakan</div></div>
+      </div>
+
+      <div id="s4-bgogo"><div id="s4-bgogo-in" style="width:100%;height:100%"></div></div>
+      <div id="s4-bub">di bawah apa? 🤔</div>
+      <div id="s4-bsent"></div>
+      <svg id="s4-table" viewBox="0 0 420 250"><use href="#a-table" width="420" height="250" /></svg>
+      <svg id="s4-ball" viewBox="0 0 100 100"><use href="#a-ball" width="100" height="100" /></svg>
+      <div id="s4-okstamp"><span>✓ Ayat jelas dan lengkap!</span></div>
+
+      <div id="s4-a4">
+        <div id="s4-arkt"><div id="s4-arkt-in" style="width:100%;height:100%"></div></div>
+        <svg id="s4-amoon" viewBox="0 0 120 120"><use href="#a-moon" width="120" height="120" /></svg>
+        <svg id="s4-aplan" viewBox="0 0 200 200"><use href="#a-planet-blue" width="200" height="200" /></svg>
+        <div class="sentence" id="s4-asent"></div>
+      </div>
+      <div id="s4-achips"><div id="s4-ac1" style="background:#7CF5B4">✓ dengan</div><div id="s4-ac2" style="background:var(--coral)"><span class="strike" style="text-decoration-color:var(--ink)">✗ dan</span></div></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const KA = window.KA;
+      KA.put("#s4-warp", KA.svgWarp(54));
+      KA.put("#s4-gogo-in", KA.svgGogo("s4g"));
+      KA.put("#s4-bgogo-in", KA.svgGogo("s4b"));
+      KA.put("#s4-arkt-in", KA.svgRocket("s4r"));
+      const tl = gsap.timeline({ paused: true });
+      const D = KA.secDur("s4"), T = (id) => KA.t(id), W = (id, i) => KA.w(id, i);
+      KA.warp(tl, "#s4-warp", 0);
+      KA.card(tl, "s4", T("37_s4_tajuk") - 0.5, T("38_peraturan1") - 0.7);
+
+      /* ===== Peraturan 1 ===== */
+      const t38 = T("38_peraturan1");
+      KA.blurIn(tl, "#s4-h1", t38 - 0.1);
+      KA.fadeIn(tl, "#s4-r1", t38 - 0.3, 0.5);
+      KA.blink(tl, "#s4g-eye", t38, 30, "90 92");
+      [["#s4-k1", 12], ["#s4-k2", 13], ["#s4-k3", 15]].forEach(([s, i]) => KA.pop(tl, s, W("38_peraturan1", i) - 0.1, 0.45));
+      function chipOn(n, t) {
+        [1, 2, 3].forEach((k) => tl.to(`#s4-k${k}`, { opacity: k === n ? 1 : 0.35, scale: k === n ? 1.1 : 1, duration: 0.3 }, t));
+      }
+      function sent(n, id, from, nextT) {
+        const sp = KA.sentence(document.getElementById(`s4-s${n}`), id, from);
+        KA.fadeIn(tl, `#s4-s${n}`, W(id, from) - 0.3, 0.25);
+        KA.karaoke(tl, sp, id, from);
+        KA.out(tl, `#s4-s${n}`, nextT - 0.5, 0.25);
+      }
+      /* di: Gogo berdiri di atas batu (diam) */
+      const t39 = T("39_di");
+      chipOn(1, t39 - 0.2);
+      KA.pop(tl, "#s4-pin", W("39_di", 3), 0.5);
+      tl.to("#s4-pin", { opacity: 0, duration: 0.25 }, T("40_ke") - 1.0);
+      sent(39, "39_di", 3, T("40_ke"));
+      /* ke: Gogo melompat ke atas batu */
+      const t40 = T("40_ke"), j = W("40_ke", 5);
+      chipOn(2, t40 - 0.2);
+      tl.to("#s4-gogo", { x: -560, y: 240, duration: 0.6, ease: "power2.inOut" }, t40 - 0.8);
+      KA.fadeIn(tl, "#s4-arcke", t40 + 0.4, 0.4);
+      tl.to("#s4-gogo", { x: 0, duration: 0.9, ease: "none" }, j - 0.15);
+      tl.to("#s4-gogo", { y: -120, duration: 0.45, ease: "power2.out" }, j - 0.15);
+      tl.to("#s4-gogo", { y: 0, duration: 0.45, ease: "power2.in" }, j + 0.3);
+      KA.out(tl, "#s4-arcke", T("41_dari") - 0.6, 0.3);
+      sent(40, "40_ke", 4, T("41_dari"));
+      /* dari: Gogo turun dari atas batu, menjauhi batu */
+      const t41 = T("41_dari"), k = W("41_dari", 5);
+      chipOn(3, t41 - 0.2);
+      KA.fadeIn(tl, "#s4-arcdari", k - 0.6, 0.4);
+      tl.to("#s4-gogo", { x: 520, duration: 0.9, ease: "none" }, k - 0.15);
+      tl.to("#s4-gogo", { y: -110, duration: 0.4, ease: "power2.out" }, k - 0.15);
+      tl.to("#s4-gogo", { y: 240, duration: 0.5, ease: "power2.in" }, k + 0.25);
+      KA.wave(tl, "#s4g-arm", k + 0.9, 2.5, "38 112");
+      sent(41, "41_dari", 4, T("42_daripada"));
+      KA.out(tl, ["#s4-r1", "#s4-chips", "#s4-h1"], T("42_daripada") - 0.5, 0.35);
+      /* jangan guna daripada */
+      const t42 = T("42_daripada");
+      KA.fadeIn(tl, "#s4-dp", t42 - 0.2, 0.3);
+      KA.blurIn(tl, "#s4-dp1", W("42_daripada", 2) - 0.1);
+      KA.blurIn(tl, "#s4-dp2", W("42_daripada", 7) - 0.1);
+      KA.out(tl, "#s4-dp", T("43_peraturan2") - 0.6, 0.3);
+
+      /* ===== Peraturan 2: ejaan ===== */
+      const t43 = T("43_peraturan2"), lz = W("43_peraturan2", 7);
+      KA.blurIn(tl, "#s4-h2", t43 - 0.1);
+      KA.pop(tl, "#s4-word", W("43_peraturan2", 2) - 0.1, 0.5);
+      tl.fromTo("#s4-laserrk", { opacity: 0, x: -400 }, { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" }, lz - 0.9);
+      tl.fromTo("#s4-beam", { opacity: 0 }, { opacity: 1, duration: 0.05 }, lz - 0.1);
+      tl.to("#s4-beam", { opacity: 0, duration: 0.2 }, lz + 0.25);
+      tl.fromTo("#s4-wa", { x: 0 }, { x: 70, duration: 0.4, ease: "back.out(2)" }, lz + 0.15);
+      tl.fromTo("#s4-wd", { x: 0 }, { x: -20, duration: 0.4, ease: "back.out(2)" }, lz + 0.15);
+      KA.pop(tl, "#s4-tick", lz + 0.4, 0.45);
+      KA.blurIn(tl, "#s4-old", lz + 0.6, 0.3);
+      tl.to("#s4-laserrk", { x: 2200, duration: 0.9, ease: "power2.in" }, lz + 0.5);
+      const t44 = T("44_ejaan_betul");
+      KA.out(tl, ["#s4-word", "#s4-tick", "#s4-old"], t44 - 0.5, 0.3);
+      [["#s4-g1", "#s4-g2", 4], ["#s4-g3", "#s4-g4", 6], ["#s4-g5", "#s4-g6", 9]].forEach(([a, b, i]) => { KA.pop(tl, a, W("44_ejaan_betul", i) - 0.1, 0.45); KA.pop(tl, b, W("44_ejaan_betul", i) + 0.15, 0.45); });
+      tl.fromTo("#s4-grid .s4-gap", { opacity: 0, scaleY: 0.3 }, { opacity: 1, scaleY: 1, duration: 0.35, stagger: 0.12, ease: "back.out(2)" }, W("44_ejaan_betul", 11));
+      KA.out(tl, "#s4-grid", T("45_tip_rapat") - 0.5, 0.3);
+      /* tip: jarak atau rapat */
+      const t45 = T("45_tip_rapat");
+      KA.pop(tl, "#s4-c1", t45 - 0.3, 0.5);
+      KA.blurIn(tl, "#s4-e1", t45);
+      KA.pop(tl, "#s4-c2", W("45_tip_rapat", 5) - 0.1, 0.5);
+      KA.blurIn(tl, "#s4-e2", W("45_tip_rapat", 9) - 0.05);
+      KA.blurIn(tl, "#s4-e3", W("45_tip_rapat", 11) - 0.05);
+      KA.out(tl, ["#s4-cols", "#s4-h2"], T("46_peraturan3") - 0.5, 0.3);
+
+      /* ===== Peraturan 3 ===== */
+      const t46 = T("46_peraturan3");
+      KA.blurIn(tl, "#s4-h3", t46 - 0.1);
+      const t47 = T("47_gogo_bola");
+      KA.pop(tl, "#s4-bgogo", t47 - 0.5, 0.5);
+      KA.float(tl, "#s4-bgogo-in", t47 - 0.5, 14, 6, 2.6);
+      KA.blink(tl, "#s4b-eye", t47, 14, "90 92");
+      const bs = document.getElementById("s4-bsent");
+      const sp47 = KA.sentence(bs, "47_gogo_bola", 0, 5);
+      const blank = document.createElement("span"); blank.id = "s4-blank"; blank.className = "w";
+      blank.innerHTML = '<span id="s4-meja">meja</span>'; bs.appendChild(blank);
+      const dot = document.createElement("span"); dot.className = "w"; dot.textContent = "."; dot.style.marginLeft = "0"; bs.appendChild(dot);
+      KA.fadeIn(tl, "#s4-bsent", t47 - 0.2, 0.25);
+      KA.karaoke(tl, sp47, "47_gogo_bola", 0);
+      KA.pop(tl, "#s4-bub", W("47_gogo_bola", 5) - 0.05, 0.45);
+      tl.fromTo("#s4-bgogo-in", { rotation: -6 }, { rotation: 6, duration: 0.2, repeat: 5, yoyo: true, transformOrigin: "50% 80%" }, W("47_gogo_bola", 6));
+      const t48 = T("48_bola_meja"), wm = W("48_bola_meja", 5);
+      KA.out(tl, "#s4-bub", t48 - 0.2, 0.25);
+      KA.fadeIn(tl, "#s4-table", t48 - 0.1, 0.4);
+      tl.fromTo("#s4-ball", { opacity: 0, x: -400, rotation: -360 }, { opacity: 1, x: 0, rotation: 0, duration: 0.9, ease: "power3.out" }, t48);
+      tl.fromTo("#s4-meja", { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(2)" }, wm - 0.1);
+      KA.pop(tl, "#s4-okstamp", W("48_bola_meja", 6) - 0.1, 0.5);
+      KA.out(tl, ["#s4-h3", "#s4-bgogo", "#s4-bsent", "#s4-table", "#s4-ball", "#s4-okstamp"], T("49_peraturan4") - 0.5, 0.3);
+
+      /* ===== Peraturan 4: antara ... dengan ===== */
+      const t49 = T("49_peraturan4");
+      KA.blurIn(tl, "#s4-h4", t49 - 0.1);
+      const t50 = T("50_antara_dengan");
+      KA.fadeIn(tl, "#s4-a4", t49 + 1.5, 0.5);
+      KA.flicker(tl, "#s4r-flame", t49 + 1.5, 14);
+      KA.float(tl, "#s4-amoon", t49 + 1.5, 14, 6, 2.8);
+      const sp50 = KA.sentence(document.getElementById("s4-asent"), "50_antara_dengan", 0, 7);
+      tl.set("#s4-asent", { opacity: 1 }, t50 - 0.3);
+      KA.karaoke(tl, sp50, "50_antara_dengan", 0);
+      tl.to(sp50[5], { color: "#1A1442", backgroundColor: "#7CF5B4", duration: 0.3 }, W("50_antara_dengan", 5));
+      tl.set(sp50[5], { borderRadius: 14, padding: "0 10px" }, 0);
+      KA.pop(tl, "#s4-ac1", W("50_antara_dengan", 8) - 0.1, 0.45);
+      KA.pop(tl, "#s4-ac2", W("50_antara_dengan", 10) - 0.1, 0.45);
+      tl.to("#s4-all", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.45);
+      window.__timelines["s4"] = tl;
+    })();
+  </script>
+</template>

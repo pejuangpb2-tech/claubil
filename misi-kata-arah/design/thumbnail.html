@@ -1,0 +1,4984 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+      @font-face { font-family: "Nunito KA"; font-weight: 800; src: url("../assets/fonts/nunito-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Nunito KA"; font-weight: 900; src: url("../assets/fonts/nunito-latin-900-normal.woff2") format("woff2"); }
+      :root {
+        --space: #1E194C; --space-deep: #150F3A; --moon: #493F8F; --crater: #3C3579;
+        --yellow: #FDD13F; --coral: #FE585F; --cyan: #3EBFD2; --orange: #FE8B42; --cream: #F4EFEA;
+        --lilac: #9B8CFF; --pink: #F48FB1; --teal: #35D0BA; --green: #6CCB4E; --ink: #1A1442;
+        --font: "Nunito KA", "Nunito", sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--space); }
+      #root { position: relative; width: 100%; height: 100%; font-family: var(--font); color: #fff; }
+      .sky { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 50% 40%, #241E58 0%, var(--space) 60%, var(--space-deep) 100%); }
+      .stars { position: absolute; top: -60px; bottom: -60px; left: -60px; width: 2600px; background-repeat: repeat; }
+      .stars.s1 { background-image: radial-gradient(1.5px 1.5px at 20px 30px, #fff 60%, transparent), radial-gradient(1.2px 1.2px at 140px 90px, #D9D2FF 60%, transparent), radial-gradient(1.4px 1.4px at 230px 180px, #fff 60%, transparent), radial-gradient(1.1px 1.1px at 80px 220px, #FFE7A8 60%, transparent); background-size: 260px 260px; opacity: .55; }
+      .stars.s2 { background-image: radial-gradient(2.2px 2.2px at 60px 120px, #fff 60%, transparent), radial-gradient(1.8px 1.8px at 330px 40px, #fff 60%, transparent), radial-gradient(2px 2px at 420px 300px, #FFE7A8 60%, transparent); background-size: 520px 380px; opacity: .8; }
+      .stars.s3 { background-image: radial-gradient(3px 3px at 200px 160px, #fff 55%, transparent), radial-gradient(2.6px 2.6px at 900px 520px, #fff 55%, transparent); background-size: 1100px 760px; opacity: .9; }
+
+      /* ===== komponen bersama ===== */
+      .abs { position: absolute; }
+      .full { position: absolute; inset: 0; }
+      .stn { position: absolute; left: 0; right: 0; top: 330px; text-align: center; }
+      .stn-planet { display: inline-grid; place-items: center; width: 150px; height: 150px; border-radius: 50%; border: 8px solid var(--ink); font: 900 84px var(--font); color: var(--ink); box-shadow: 0 10px 0 rgba(10,7,32,.55); }
+      .stn-kicker { font: 900 58px var(--font); letter-spacing: 8px; color: var(--yellow); margin-top: 26px; }
+      .stn-title { font: 900 104px/1.05 var(--font); color: #fff; text-shadow: 0 8px 0 #0F0B2E; margin-top: 8px; }
+      .pc1 { background: var(--coral); } .pc2 { background: var(--cyan); } .pc3 { background: var(--yellow); } .pc4 { background: var(--orange); } .pc5 { background: var(--lilac); }
+      .warp { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; opacity: 0; }
+
+      .tag { position: absolute; left: 96px; top: 136px; font: 900 42px var(--font); color: var(--cream); background: rgba(21,15,58,.8); border: 3px solid rgba(244,239,234,.25); border-radius: 999px; padding: 6px 26px; white-space: nowrap; }
+      .tag b { color: var(--yellow); }
+      .head { position: absolute; left: 80px; right: 80px; top: 140px; text-align: center; font: 900 68px/1.2 var(--font); color: #fff; text-shadow: 0 6px 0 rgba(10,7,32,.55); }
+      .head .y, .y { color: var(--yellow); }
+      .sentence { position: absolute; left: 80px; right: 80px; text-align: center; font: 900 76px/1.25 var(--font); color: #fff; text-shadow: 0 5px 0 rgba(10,7,32,.55); }
+      .sentence .w, .cap .w { display: inline-block; margin: 0 .13em; }
+      .ka { color: var(--yellow); text-decoration: underline; text-decoration-thickness: 8px; text-underline-offset: 14px; }
+      .c-di { color: var(--pink); } .c-ke { color: var(--orange); } .c-dari { color: var(--teal); }
+      .label-ka { position: absolute; font: 900 128px/1 var(--font); color: var(--yellow); letter-spacing: 2px; text-shadow: 0 8px 0 #0F0B2E; white-space: nowrap; }
+      .chip { display: inline-block; font: 900 44px var(--font); color: var(--ink); border-radius: 999px; padding: 10px 30px; border: 5px solid var(--ink); white-space: nowrap; }
+      .chip.di { background: var(--pink); } .chip.ke { background: var(--orange); } .chip.dari { background: var(--teal); }
+      .panel { position: absolute; background: rgba(21,15,58,.82); border: 4px solid rgba(244,239,234,.25); border-radius: 36px; }
+      .ok { color: #7CF5B4; } .bad { color: var(--coral); }
+      .strike { text-decoration: line-through; text-decoration-thickness: 8px; text-decoration-color: var(--coral); }
+
+      /* bar kemajuan */
+      .prog { position: absolute; top: 34px; left: 560px; width: 800px; height: 72px; }
+      .prog .line { position: absolute; left: 30px; right: 30px; top: 34px; border-top: 5px dashed rgba(244,239,234,.35); }
+      .prog .line-done { position: absolute; left: 30px; top: 32px; height: 9px; width: 740px; border-radius: 9px; background: var(--yellow); transform-origin: 0 50%; }
+      .prog .pl { position: absolute; top: 10px; width: 56px; height: 56px; margin-left: -28px; border-radius: 50%; border: 4px solid var(--ink); display: grid; place-items: center; font: 900 30px var(--font); color: var(--ink); }
+      .prog .ring { position: absolute; top: 4px; width: 68px; height: 68px; margin-left: -34px; border-radius: 50%; border: 5px solid var(--yellow); }
+      .prog .rkt { position: absolute; top: -20px; left: -13px; width: 86px; height: 40px; }
+
+      /* kapsyen */
+      .cap { position: absolute; left: 180px; right: 180px; bottom: 44px; text-align: center; font: 800 54px/1.3 var(--font); color: #fff; }
+      .cap .box { display: inline-block; background: rgba(12,9,38,.82); border-radius: 26px; padding: 12px 34px 16px; }
+      .cap .ka { text-decoration-thickness: 5px; text-underline-offset: 9px; }
+      .cap .hl { position: absolute; border-radius: 12px; background: rgba(62,191,210,.38); }
+    
+html,body{width:1920px;height:1080px}
+#t-kick{position:absolute;left:96px;top:120px;font:900 64px var(--font);letter-spacing:12px;color:var(--cyan)}
+#t-big{position:absolute;left:84px;top:200px;font:900 250px/0.95 var(--font);color:#fff;text-shadow:0 14px 0 #0F0B2E}
+#t-sub{position:absolute;left:100px;top:760px;font:900 62px var(--font);color:var(--ink);background:var(--yellow);border:7px solid var(--ink);border-radius:999px;padding:10px 40px}
+#t-w{position:absolute;left:1180px;top:330px;width:520px;height:702px}
+#t-r{position:absolute;left:1180px;top:60px;width:620px;height:289px}
+#t-g{position:absolute;left:1560px;top:680px;width:300px;height:317px}
+</style><script>window.CUES={
+ "bpm": 96,
+ "lines": [
+  {
+   "id": "01_berlepas",
+   "section": "pembukaan",
+   "spk": "W",
+   "text": "Tiga, dua, satu… berlepas!",
+   "start": 1.2,
+   "dur": 2.683,
+   "words": [
+    {
+     "w": "Tiga",
+     "t": 1.303,
+     "d": 0.395
+    },
+    {
+     "w": "dua",
+     "t": 1.908,
+     "d": 0.395
+    },
+    {
+     "w": "satu",
+     "t": 2.526,
+     "d": 0.421
+    },
+    {
+     "w": "berlepas",
+     "t": 3.105,
+     "d": 0.645
+    }
+   ],
+   "sfx": [
+    [
+     "rumble",
+     1.4
+    ],
+    [
+     "whoosh1",
+     3.2
+    ]
+   ]
+  },
+  {
+   "id": "02_tajuk",
+   "section": "pembukaan",
+   "spk": "N",
+   "text": "Selamat datang ke Misi Angkasa: Ekspedisi Kata Arah!",
+   "start": 6.032,
+   "dur": 3.753,
+   "words": [
+    {
+     "w": "Selamat",
+     "t": 6.138,
+     "d": 0.431
+    },
+    {
+     "w": "datang",
+     "t": 6.568,
+     "d": 0.347
+    },
+    {
+     "w": "ke",
+     "t": 6.957,
+     "d": 0.097
+    },
+    {
+     "w": "Misi",
+     "t": 7.082,
+     "d": 0.347
+    },
+    {
+     "w": "Angkasa",
+     "t": 7.429,
+     "d": 0.625
+    },
+    {
+     "w": "Ekspedisi",
+     "t": 8.249,
+     "d": 0.681
+    },
+    {
+     "w": "Kata",
+     "t": 8.971,
+     "d": 0.25
+    },
+    {
+     "w": "Arah",
+     "t": 9.221,
+     "d": 0.444
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     6.032
+    ]
+   ]
+  },
+  {
+   "id": "03_hari_ini",
+   "section": "pembukaan",
+   "spk": "N",
+   "text": "Hari ini, kita akan belajar apa itu kata arah, kegunaannya, cara menggunakannya, dan cara membina ayat. Jom!",
+   "start": 10.935,
+   "dur": 9.568,
+   "words": [
+    {
+     "w": "Hari",
+     "t": 11.041,
+     "d": 0.292
+    },
+    {
+     "w": "ini",
+     "t": 11.332,
+     "d": 0.472
+    },
+    {
+     "w": "kita",
+     "t": 12.124,
+     "d": 0.278
+    },
+    {
+     "w": "akan",
+     "t": 12.402,
+     "d": 0.264
+    },
+    {
+     "w": "belajar",
+     "t": 12.721,
+     "d": 0.444
+    },
+    {
+     "w": "apa",
+     "t": 13.179,
+     "d": 0.278
+    },
+    {
+     "w": "itu",
+     "t": 13.471,
+     "d": 0.236
+    },
+    {
+     "w": "kata",
+     "t": 13.735,
+     "d": 0.264
+    },
+    {
+     "w": "arah",
+     "t": 13.999,
+     "d": 0.458
+    },
+    {
+     "w": "kegunaannya",
+     "t": 14.652,
+     "d": 0.861
+    },
+    {
+     "w": "cara",
+     "t": 15.874,
+     "d": 0.306
+    },
+    {
+     "w": "menggunakannya",
+     "t": 16.193,
+     "d": 0.889
+    },
+    {
+     "w": "dan",
+     "t": 17.318,
+     "d": 0.25
+    },
+    {
+     "w": "cara",
+     "t": 17.624,
+     "d": 0.306
+    },
+    {
+     "w": "membina",
+     "t": 17.943,
+     "d": 0.444
+    },
+    {
+     "w": "ayat",
+     "t": 18.388,
+     "d": 0.542
+    },
+    {
+     "w": "Jom",
+     "t": 19.921,
+     "d": 0.431
+    }
+   ],
+   "sfx": []
+  },
+  {
+   "id": "04_gogo_tolong",
+   "section": "masalah",
+   "spk": "G",
+   "text": "Wafiy! Tolong! Saya ada di… di… alamak, saya tidak tahu cara hendak memberitahu!",
+   "start": 22.653,
+   "dur": 7.023,
+   "words": [
+    {
+     "w": "Wafiy",
+     "t": 22.75,
+     "d": 0.546
+    },
+    {
+     "w": "Tolong",
+     "t": 24.229,
+     "d": 0.385
+    },
+    {
+     "w": "Saya",
+     "t": 25.558,
+     "d": 0.335
+    },
+    {
+     "w": "ada",
+     "t": 25.893,
+     "d": 0.26
+    },
+    {
+     "w": "di",
+     "t": 26.178,
+     "d": 0.137
+    },
+    {
+     "w": "di",
+     "t": 26.489,
+     "d": 0.149
+    },
+    {
+     "w": "alamak",
+     "t": 26.799,
+     "d": 0.522
+    },
+    {
+     "w": "saya",
+     "t": 27.531,
+     "d": 0.248
+    },
+    {
+     "w": "tidak",
+     "t": 27.792,
+     "d": 0.211
+    },
+    {
+     "w": "tahu",
+     "t": 28.015,
+     "d": 0.236
+    },
+    {
+     "w": "cara",
+     "t": 28.301,
+     "d": 0.224
+    },
+    {
+     "w": "hendak",
+     "t": 28.525,
+     "d": 0.323
+    },
+    {
+     "w": "memberitahu",
+     "t": 28.86,
+     "d": 0.645
+    }
+   ],
+   "sfx": [
+    [
+     "radio",
+     21.253
+    ]
+   ]
+  },
+  {
+   "id": "05_wafiy_jangan_risau",
+   "section": "masalah",
+   "spk": "W",
+   "text": "Jangan risau, Gogo! Kita belajar kata arah dahulu. Selepas itu, kamu boleh beritahu saya di mana kamu berada!",
+   "start": 30.526,
+   "dur": 9.233,
+   "words": [
+    {
+     "w": "Jangan",
+     "t": 30.629,
+     "d": 0.368
+    },
+    {
+     "w": "risau",
+     "t": 31.01,
+     "d": 0.474
+    },
+    {
+     "w": "Gogo",
+     "t": 31.708,
+     "d": 0.447
+    },
+    {
+     "w": "Kita",
+     "t": 33.144,
+     "d": 0.276
+    },
+    {
+     "w": "belajar",
+     "t": 33.447,
+     "d": 0.408
+    },
+    {
+     "w": "kata",
+     "t": 33.908,
+     "d": 0.25
+    },
+    {
+     "w": "arah",
+     "t": 34.158,
+     "d": 0.316
+    },
+    {
+     "w": "dahulu",
+     "t": 34.487,
+     "d": 0.461
+    },
+    {
+     "w": "Selepas",
+     "t": 35.973,
+     "d": 0.474
+    },
+    {
+     "w": "itu",
+     "t": 36.447,
+     "d": 0.342
+    },
+    {
+     "w": "kamu",
+     "t": 37.026,
+     "d": 0.289
+    },
+    {
+     "w": "boleh",
+     "t": 37.329,
+     "d": 0.25
+    },
+    {
+     "w": "beritahu",
+     "t": 37.618,
+     "d": 0.447
+    },
+    {
+     "w": "saya",
+     "t": 38.092,
+     "d": 0.303
+    },
+    {
+     "w": "di",
+     "t": 38.421,
+     "d": 0.105
+    },
+    {
+     "w": "mana",
+     "t": 38.539,
+     "d": 0.211
+    },
+    {
+     "w": "kamu",
+     "t": 38.789,
+     "d": 0.303
+    },
+    {
+     "w": "berada",
+     "t": 39.105,
+     "d": 0.461
+    }
+   ],
+   "sfx": []
+  },
+  {
+   "id": "06_s1_tajuk",
+   "section": "s1",
+   "spk": "N",
+   "text": "Stesen satu. Apa itu kata arah?",
+   "start": 41.709,
+   "dur": 3.582,
+   "words": [
+    {
+     "w": "Stesen",
+     "t": 41.815,
+     "d": 0.514
+    },
+    {
+     "w": "satu",
+     "t": 42.342,
+     "d": 0.417
+    },
+    {
+     "w": "Apa",
+     "t": 43.848,
+     "d": 0.278
+    },
+    {
+     "w": "itu",
+     "t": 44.126,
+     "d": 0.264
+    },
+    {
+     "w": "kata",
+     "t": 44.417,
+     "d": 0.278
+    },
+    {
+     "w": "arah",
+     "t": 44.695,
+     "d": 0.472
+    }
+   ],
+   "sfx": [
+    [
+     "whoosh2",
+     40.209
+    ]
+   ]
+  },
+  {
+   "id": "07_definisi",
+   "section": "s1",
+   "spk": "N",
+   "text": "Kata arah ialah perkataan yang menunjukkan arah atau kedudukan sesuatu benda.",
+   "start": 46.441,
+   "dur": 5.157,
+   "words": [
+    {
+     "w": "Kata",
+     "t": 46.547,
+     "d": 0.333
+    },
+    {
+     "w": "arah",
+     "t": 46.88,
+     "d": 0.431
+    },
+    {
+     "w": "ialah",
+     "t": 47.324,
+     "d": 0.389
+    },
+    {
+     "w": "perkataan",
+     "t": 47.727,
+     "d": 0.597
+    },
+    {
+     "w": "yang",
+     "t": 48.324,
+     "d": 0.125
+    },
+    {
+     "w": "menunjukkan",
+     "t": 48.477,
+     "d": 0.556
+    },
+    {
+     "w": "arah",
+     "t": 49.033,
+     "d": 0.417
+    },
+    {
+     "w": "atau",
+     "t": 49.505,
+     "d": 0.333
+    },
+    {
+     "w": "kedudukan",
+     "t": 49.894,
+     "d": 0.569
+    },
+    {
+     "w": "sesuatu",
+     "t": 50.477,
+     "d": 0.472
+    },
+    {
+     "w": "benda",
+     "t": 50.949,
+     "d": 0.431
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     46.741
+    ]
+   ]
+  },
+  {
+   "id": "08_kedudukan",
+   "section": "s1",
+   "spk": "N",
+   "text": "Di mana kata arah dalam ayat? Kata arah datang selepas di, ke atau dari, dan sebelum nama benda atau tempat.",
+   "start": 52.948,
+   "dur": 8.525,
+   "words": [
+    {
+     "w": "Di",
+     "t": 53.054,
+     "d": 0.153
+    },
+    {
+     "w": "mana",
+     "t": 53.234,
+     "d": 0.208
+    },
+    {
+     "w": "kata",
+     "t": 53.47,
+     "d": 0.278
+    },
+    {
+     "w": "arah",
+     "t": 53.748,
+     "d": 0.347
+    },
+    {
+     "w": "dalam",
+     "t": 54.123,
+     "d": 0.264
+    },
+    {
+     "w": "ayat",
+     "t": 54.387,
+     "d": 0.514
+    },
+    {
+     "w": "Kata",
+     "t": 55.92,
+     "d": 0.347
+    },
+    {
+     "w": "arah",
+     "t": 56.267,
+     "d": 0.361
+    },
+    {
+     "w": "datang",
+     "t": 56.642,
+     "d": 0.375
+    },
+    {
+     "w": "selepas",
+     "t": 57.045,
+     "d": 0.514
+    },
+    {
+     "w": "di",
+     "t": 57.573,
+     "d": 0.278
+    },
+    {
+     "w": "ke",
+     "t": 58.129,
+     "d": 0.125
+    },
+    {
+     "w": "atau",
+     "t": 58.254,
+     "d": 0.278
+    },
+    {
+     "w": "dari",
+     "t": 58.587,
+     "d": 0.375
+    },
+    {
+     "w": "dan",
+     "t": 59.198,
+     "d": 0.222
+    },
+    {
+     "w": "sebelum",
+     "t": 59.434,
+     "d": 0.389
+    },
+    {
+     "w": "nama",
+     "t": 59.851,
+     "d": 0.264
+    },
+    {
+     "w": "benda",
+     "t": 60.129,
+     "d": 0.403
+    },
+    {
+     "w": "atau",
+     "t": 60.545,
+     "d": 0.319
+    },
+    {
+     "w": "tempat",
+     "t": 60.906,
+     "d": 0.486
+    }
+   ],
+   "sfx": []
+  },
+  {
+   "id": "09_di_atas_meja",
+   "section": "s1",
+   "spk": "N",
+   "text": "Contohnya, di atas meja. Di ialah kata sendi nama, atas ialah kata arah, dan meja ialah nama benda.",
+   "start": 62.423,
+   "dur": 8.867,
+   "words": [
+    {
+     "w": "Contohnya",
+     "t": 62.529,
+     "d": 0.722
+    },
+    {
+     "w": "di",
+     "t": 63.431,
+     "d": 0.139
+    },
+    {
+     "w": "atas",
+     "t": 63.57,
+     "d": 0.375
+    },
+    {
+     "w": "meja",
+     "t": 63.959,
+     "d": 0.431
+    },
+    {
+     "w": "Di",
+     "t": 65.492,
+     "d": 0.25
+    },
+    {
+     "w": "ialah",
+     "t": 65.756,
+     "d": 0.403
+    },
+    {
+     "w": "kata",
+     "t": 66.159,
+     "d": 0.292
+    },
+    {
+     "w": "sendi",
+     "t": 66.479,
+     "d": 0.306
+    },
+    {
+     "w": "nama",
+     "t": 66.84,
+     "d": 0.389
+    },
+    {
+     "w": "atas",
+     "t": 67.492,
+     "d": 0.458
+    },
+    {
+     "w": "ialah",
+     "t": 67.951,
+     "d": 0.361
+    },
+    {
+     "w": "kata",
+     "t": 68.326,
+     "d": 0.25
+    },
+    {
+     "w": "arah",
+     "t": 68.576,
+     "d": 0.444
+    },
+    {
+     "w": "dan",
+     "t": 69.215,
+     "d": 0.222
+    },
+    {
+     "w": "meja",
+     "t": 69.437,
+     "d": 0.403
+    },
+    {
+     "w": "ialah",
+     "t": 69.895,
+     "d": 0.417
+    },
+    {
+     "w": "nama",
+     "t": 70.326,
+     "d": 0.306
+    },
+    {
+     "w": "benda",
+     "t": 70.631,
+     "d": 0.444
+    }
+   ],
+   "sfx": [
+    [
+     "klik",
+     63.431
+    ],
+    [
+     "klik",
+     63.72
+    ],
+    [
+     "klik",
+     64.159
+    ]
+   ]
+  },
+  {
+   "id": "10_kata_tugas",
+   "section": "s1",
+   "spk": "N",
+   "text": "Kata arah ialah sejenis kata tugas.",
+   "start": 72.24,
+   "dur": 2.801,
+   "words": [
+    {
+     "w": "Kata",
+     "t": 72.346,
+     "d": 0.306
+    },
+    {
+     "w": "arah",
+     "t": 72.651,
+     "d": 0.431
+    },
+    {
+     "w": "ialah",
+     "t": 73.096,
+     "d": 0.389
+    },
+    {
+     "w": "sejenis",
+     "t": 73.484,
+     "d": 0.514
+    },
+    {
+     "w": "kata",
+     "t": 74.04,
+     "d": 0.236
+    },
+    {
+     "w": "tugas",
+     "t": 74.29,
+     "d": 0.611
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     72.24
+    ]
+   ]
+  },
+  {
+   "id": "11_s2_tajuk",
+   "section": "s2",
+   "spk": "N",
+   "text": "Stesen dua. Kenali kata arah. Kita mulakan dengan pasangan berlawanan.",
+   "start": 76.991,
+   "dur": 6.588,
+   "words": [
+    {
+     "w": "Stesen",
+     "t": 77.097,
+     "d": 0.514
+    },
+    {
+     "w": "dua",
+     "t": 77.638,
+     "d": 0.319
+    },
+    {
+     "w": "Kenali",
+     "t": 79.06,
+     "d": 0.347
+    },
+    {
+     "w": "kata",
+     "t": 79.449,
+     "d": 0.25
+    },
+    {
+     "w": "arah",
+     "t": 79.699,
+     "d": 0.472
+    },
+    {
+     "w": "Kita",
+     "t": 81.185,
+     "d": 0.292
+    },
+    {
+     "w": "mulakan",
+     "t": 81.505,
+     "d": 0.417
+    },
+    {
+     "w": "dengan",
+     "t": 81.935,
+     "d": 0.208
+    },
+    {
+     "w": "pasangan",
+     "t": 82.172,
+     "d": 0.458
+    },
+    {
+     "w": "berlawanan",
+     "t": 82.658,
+     "d": 0.778
+    }
+   ],
+   "sfx": [
+    [
+     "whoosh3",
+     75.491
+    ]
+   ]
+  },
+  {
+   "id": "12_atas",
+   "section": "s2",
+   "spk": "N",
+   "text": "Atas. Bintang berkelip di atas roket.",
+   "start": 85.229,
+   "dur": 3.936,
+   "words": [
+    {
+     "w": "Atas",
+     "t": 85.335,
+     "d": 0.597
+    },
+    {
+     "w": "Bintang",
+     "t": 86.965,
+     "d": 0.486
+    },
+    {
+     "w": "berkelip",
+     "t": 87.479,
+     "d": 0.514
+    },
+    {
+     "w": "di",
+     "t": 88.007,
+     "d": 0.125
+    },
+    {
+     "w": "atas",
+     "t": 88.132,
+     "d": 0.389
+    },
+    {
+     "w": "roket",
+     "t": 88.535,
+     "d": 0.528
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     85.229
+    ]
+   ]
+  },
+  {
+   "id": "13_bawah",
+   "section": "s2",
+   "spk": "N",
+   "text": "Bawah. Bumi kelihatan di bawah roket.",
+   "start": 90.815,
+   "dur": 3.764,
+   "words": [
+    {
+     "w": "Bawah",
+     "t": 90.921,
+     "d": 0.583
+    },
+    {
+     "w": "Bumi",
+     "t": 92.537,
+     "d": 0.347
+    },
+    {
+     "w": "kelihatan",
+     "t": 92.926,
+     "d": 0.597
+    },
+    {
+     "w": "di",
+     "t": 93.537,
+     "d": 0.125
+    },
+    {
+     "w": "bawah",
+     "t": 93.676,
+     "d": 0.319
+    },
+    {
+     "w": "roket",
+     "t": 93.996,
+     "d": 0.5
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     90.815
+    ]
+   ]
+  },
+  {
+   "id": "14_dalam",
+   "section": "s2",
+   "spk": "N",
+   "text": "Dalam. Wafiy duduk di dalam roket.",
+   "start": 96.228,
+   "dur": 3.546,
+   "words": [
+    {
+     "w": "Dalam",
+     "t": 96.334,
+     "d": 0.472
+    },
+    {
+     "w": "Wafiy",
+     "t": 97.784,
+     "d": 0.514
+    },
+    {
+     "w": "duduk",
+     "t": 98.325,
+     "d": 0.375
+    },
+    {
+     "w": "di",
+     "t": 98.742,
+     "d": 0.125
+    },
+    {
+     "w": "dalam",
+     "t": 98.895,
+     "d": 0.278
+    },
+    {
+     "w": "roket",
+     "t": 99.2,
+     "d": 0.486
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     96.228
+    ]
+   ]
+  },
+  {
+   "id": "15_luar",
+   "section": "s2",
+   "spk": "N",
+   "text": "Luar. Gogo melambai di luar roket.",
+   "start": 101.424,
+   "dur": 3.557,
+   "words": [
+    {
+     "w": "Luar",
+     "t": 101.53,
+     "d": 0.472
+    },
+    {
+     "w": "Gogo",
+     "t": 102.993,
+     "d": 0.444
+    },
+    {
+     "w": "melambai",
+     "t": 103.466,
+     "d": 0.486
+    },
+    {
+     "w": "di",
+     "t": 103.993,
+     "d": 0.111
+    },
+    {
+     "w": "luar",
+     "t": 104.16,
+     "d": 0.236
+    },
+    {
+     "w": "roket",
+     "t": 104.424,
+     "d": 0.472
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     101.424
+    ]
+   ]
+  },
+  {
+   "id": "16_hadapan",
+   "section": "s2",
+   "spk": "N",
+   "text": "Hadapan. Bulan bersinar di hadapan roket.",
+   "start": 106.631,
+   "dur": 3.97,
+   "words": [
+    {
+     "w": "Hadapan",
+     "t": 106.737,
+     "d": 0.611
+    },
+    {
+     "w": "Bulan",
+     "t": 108.367,
+     "d": 0.347
+    },
+    {
+     "w": "bersinar",
+     "t": 108.728,
+     "d": 0.556
+    },
+    {
+     "w": "di",
+     "t": 109.353,
+     "d": 0.139
+    },
+    {
+     "w": "hadapan",
+     "t": 109.52,
+     "d": 0.444
+    },
+    {
+     "w": "roket",
+     "t": 109.992,
+     "d": 0.528
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     106.631
+    ]
+   ]
+  },
+  {
+   "id": "17_belakang",
+   "section": "s2",
+   "spk": "N",
+   "text": "Belakang. Komet meluncur di belakang roket.",
+   "start": 112.251,
+   "dur": 3.853,
+   "words": [
+    {
+     "w": "Belakang",
+     "t": 112.357,
+     "d": 0.597
+    },
+    {
+     "w": "Komet",
+     "t": 114.001,
+     "d": 0.375
+    },
+    {
+     "w": "meluncur",
+     "t": 114.39,
+     "d": 0.528
+    },
+    {
+     "w": "di",
+     "t": 114.959,
+     "d": 0.111
+    },
+    {
+     "w": "belakang",
+     "t": 115.098,
+     "d": 0.431
+    },
+    {
+     "w": "roket",
+     "t": 115.557,
+     "d": 0.458
+    }
+   ],
+   "sfx": [
+    [
+     "whoosh1",
+     111.351
+    ],
+    [
+     "pop2",
+     112.251
+    ]
+   ]
+  },
+  {
+   "id": "18_tip_kiri_kanan",
+   "section": "s2",
+   "spk": "N",
+   "text": "Untuk kiri dan kanan, kita lihat dari belakang Wafiy. Jadi, kiri dan kanan Wafiy sama dengan kiri dan kanan kamu.",
+   "start": 117.654,
+   "dur": 9.061,
+   "words": [
+    {
+     "w": "Untuk",
+     "t": 117.76,
+     "d": 0.347
+    },
+    {
+     "w": "kiri",
+     "t": 118.148,
+     "d": 0.278
+    },
+    {
+     "w": "dan",
+     "t": 118.454,
+     "d": 0.167
+    },
+    {
+     "w": "kanan",
+     "t": 118.676,
+     "d": 0.486
+    },
+    {
+     "w": "kita",
+     "t": 119.412,
+     "d": 0.264
+    },
+    {
+     "w": "lihat",
+     "t": 119.718,
+     "d": 0.361
+    },
+    {
+     "w": "dari",
+     "t": 120.093,
+     "d": 0.236
+    },
+    {
+     "w": "belakang",
+     "t": 120.357,
+     "d": 0.417
+    },
+    {
+     "w": "Wafiy",
+     "t": 120.801,
+     "d": 0.597
+    },
+    {
+     "w": "Jadi",
+     "t": 122.46,
+     "d": 0.486
+    },
+    {
+     "w": "kiri",
+     "t": 123.21,
+     "d": 0.292
+    },
+    {
+     "w": "dan",
+     "t": 123.529,
+     "d": 0.181
+    },
+    {
+     "w": "kanan",
+     "t": 123.765,
+     "d": 0.278
+    },
+    {
+     "w": "Wafiy",
+     "t": 124.057,
+     "d": 0.403
+    },
+    {
+     "w": "sama",
+     "t": 124.487,
+     "d": 0.361
+    },
+    {
+     "w": "dengan",
+     "t": 124.876,
+     "d": 0.222
+    },
+    {
+     "w": "kiri",
+     "t": 125.154,
+     "d": 0.347
+    },
+    {
+     "w": "dan",
+     "t": 125.515,
+     "d": 0.208
+    },
+    {
+     "w": "kanan",
+     "t": 125.765,
+     "d": 0.278
+    },
+    {
+     "w": "kamu",
+     "t": 126.098,
+     "d": 0.417
+    }
+   ],
+   "sfx": []
+  },
+  {
+   "id": "19_kiri",
+   "section": "s2",
+   "spk": "N",
+   "text": "Kiri. Planet merah berada di sebelah kiri Wafiy.",
+   "start": 128.065,
+   "dur": 4.415,
+   "words": [
+    {
+     "w": "Kiri",
+     "t": 128.171,
+     "d": 0.361
+    },
+    {
+     "w": "Planet",
+     "t": 129.621,
+     "d": 0.389
+    },
+    {
+     "w": "merah",
+     "t": 130.009,
+     "d": 0.361
+    },
+    {
+     "w": "berada",
+     "t": 130.384,
+     "d": 0.431
+    },
+    {
+     "w": "di",
+     "t": 130.843,
+     "d": 0.111
+    },
+    {
+     "w": "sebelah",
+     "t": 130.982,
+     "d": 0.403
+    },
+    {
+     "w": "kiri",
+     "t": 131.412,
+     "d": 0.25
+    },
+    {
+     "w": "Wafiy",
+     "t": 131.704,
+     "d": 0.583
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     128.065
+    ]
+   ]
+  },
+  {
+   "id": "20_kanan",
+   "section": "s2",
+   "spk": "N",
+   "text": "Kanan. Planet biru berada di sebelah kanan Wafiy.",
+   "start": 134.13,
+   "dur": 4.379,
+   "words": [
+    {
+     "w": "Kanan",
+     "t": 134.236,
+     "d": 0.472
+    },
+    {
+     "w": "Planet",
+     "t": 135.713,
+     "d": 0.389
+    },
+    {
+     "w": "biru",
+     "t": 136.102,
+     "d": 0.292
+    },
+    {
+     "w": "berada",
+     "t": 136.408,
+     "d": 0.444
+    },
+    {
+     "w": "di",
+     "t": 136.894,
+     "d": 0.111
+    },
+    {
+     "w": "sebelah",
+     "t": 137.033,
+     "d": 0.417
+    },
+    {
+     "w": "kanan",
+     "t": 137.463,
+     "d": 0.278
+    },
+    {
+     "w": "Wafiy",
+     "t": 137.741,
+     "d": 0.583
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     134.13
+    ]
+   ]
+  },
+  {
+   "id": "21_tepi",
+   "section": "s2",
+   "spk": "N",
+   "text": "Tepi. Bendera dipacak di tepi kawah.",
+   "start": 140.159,
+   "dur": 3.674,
+   "words": [
+    {
+     "w": "Tepi",
+     "t": 140.265,
+     "d": 0.361
+    },
+    {
+     "w": "Bendera",
+     "t": 141.715,
+     "d": 0.5
+    },
+    {
+     "w": "dipacak",
+     "t": 142.242,
+     "d": 0.5
+    },
+    {
+     "w": "di",
+     "t": 142.77,
+     "d": 0.125
+    },
+    {
+     "w": "tepi",
+     "t": 142.909,
+     "d": 0.264
+    },
+    {
+     "w": "kawah",
+     "t": 143.228,
+     "d": 0.486
+    }
+   ],
+   "sfx": [
+    [
+     "klik",
+     139.859
+    ],
+    [
+     "pop1",
+     140.159
+    ]
+   ]
+  },
+  {
+   "id": "22_tengah",
+   "section": "s2",
+   "spk": "N",
+   "text": "Tengah. Matahari berada di tengah sistem suria.",
+   "start": 145.483,
+   "dur": 4.15,
+   "words": [
+    {
+     "w": "Tengah",
+     "t": 145.589,
+     "d": 0.403
+    },
+    {
+     "w": "Matahari",
+     "t": 147.011,
+     "d": 0.556
+    },
+    {
+     "w": "berada",
+     "t": 147.594,
+     "d": 0.417
+    },
+    {
+     "w": "di",
+     "t": 148.052,
+     "d": 0.097
+    },
+    {
+     "w": "tengah",
+     "t": 148.177,
+     "d": 0.333
+    },
+    {
+     "w": "sistem",
+     "t": 148.511,
+     "d": 0.417
+    },
+    {
+     "w": "suria",
+     "t": 148.941,
+     "d": 0.472
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     145.483
+    ]
+   ]
+  },
+  {
+   "id": "23_bonus",
+   "section": "s2",
+   "spk": "N",
+   "text": "Bonus! Dua lagi kata arah.",
+   "start": 150.983,
+   "dur": 3.176,
+   "words": [
+    {
+     "w": "Bonus",
+     "t": 151.089,
+     "d": 0.597
+    },
+    {
+     "w": "Dua",
+     "t": 152.719,
+     "d": 0.264
+    },
+    {
+     "w": "lagi",
+     "t": 153.025,
+     "d": 0.236
+    },
+    {
+     "w": "kata",
+     "t": 153.289,
+     "d": 0.264
+    },
+    {
+     "w": "arah",
+     "t": 153.552,
+     "d": 0.486
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     150.983
+    ]
+   ]
+  },
+  {
+   "id": "24_antara",
+   "section": "s2",
+   "spk": "N",
+   "text": "Antara. Bulan berada di antara dua bintang.",
+   "start": 155.809,
+   "dur": 4.078,
+   "words": [
+    {
+     "w": "Antara",
+     "t": 155.915,
+     "d": 0.5
+    },
+    {
+     "w": "Bulan",
+     "t": 157.476,
+     "d": 0.361
+    },
+    {
+     "w": "berada",
+     "t": 157.851,
+     "d": 0.431
+    },
+    {
+     "w": "di",
+     "t": 158.309,
+     "d": 0.111
+    },
+    {
+     "w": "antara",
+     "t": 158.42,
+     "d": 0.389
+    },
+    {
+     "w": "dua",
+     "t": 158.865,
+     "d": 0.222
+    },
+    {
+     "w": "bintang",
+     "t": 159.115,
+     "d": 0.569
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     155.809
+    ]
+   ]
+  },
+  {
+   "id": "25_sisi",
+   "section": "s2",
+   "spk": "N",
+   "text": "Sisi. Tangga diletakkan di sisi roket.",
+   "start": 161.537,
+   "dur": 3.765,
+   "words": [
+    {
+     "w": "Sisi",
+     "t": 161.643,
+     "d": 0.458
+    },
+    {
+     "w": "Tangga",
+     "t": 163.162,
+     "d": 0.375
+    },
+    {
+     "w": "diletakkan",
+     "t": 163.579,
+     "d": 0.611
+    },
+    {
+     "w": "di",
+     "t": 164.204,
+     "d": 0.125
+    },
+    {
+     "w": "sisi",
+     "t": 164.356,
+     "d": 0.347
+    },
+    {
+     "w": "roket",
+     "t": 164.745,
+     "d": 0.472
+    }
+   ],
+   "sfx": [
+    [
+     "klik",
+     161.237
+    ],
+    [
+     "pop1",
+     161.537
+    ]
+   ]
+  },
+  {
+   "id": "26_tahukah_kamu",
+   "section": "s2",
+   "spk": "N",
+   "text": "Tahukah kamu? Utara, selatan, timur dan barat juga kata arah!",
+   "start": 166.652,
+   "dur": 5.83,
+   "words": [
+    {
+     "w": "Tahukah",
+     "t": 166.758,
+     "d": 0.5
+    },
+    {
+     "w": "kamu",
+     "t": 167.271,
+     "d": 0.389
+    },
+    {
+     "w": "Utara",
+     "t": 168.735,
+     "d": 0.556
+    },
+    {
+     "w": "selatan",
+     "t": 169.527,
+     "d": 0.639
+    },
+    {
+     "w": "timur",
+     "t": 170.374,
+     "d": 0.347
+    },
+    {
+     "w": "dan",
+     "t": 170.749,
+     "d": 0.167
+    },
+    {
+     "w": "barat",
+     "t": 170.958,
+     "d": 0.292
+    },
+    {
+     "w": "juga",
+     "t": 171.291,
+     "d": 0.292
+    },
+    {
+     "w": "kata",
+     "t": 171.624,
+     "d": 0.25
+    },
+    {
+     "w": "arah",
+     "t": 171.874,
+     "d": 0.486
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     166.652
+    ]
+   ]
+  },
+  {
+   "id": "27_dua_belas",
+   "section": "s2",
+   "spk": "N",
+   "text": "Hebat! Inilah dua belas kata arah yang kita kenali hari ini.",
+   "start": 173.632,
+   "dur": 5.231,
+   "words": [
+    {
+     "w": "Hebat",
+     "t": 173.738,
+     "d": 0.5
+    },
+    {
+     "w": "Inilah",
+     "t": 175.229,
+     "d": 0.431
+    },
+    {
+     "w": "dua",
+     "t": 175.688,
+     "d": 0.208
+    },
+    {
+     "w": "belas",
+     "t": 175.91,
+     "d": 0.319
+    },
+    {
+     "w": "kata",
+     "t": 176.285,
+     "d": 0.236
+    },
+    {
+     "w": "arah",
+     "t": 176.521,
+     "d": 0.389
+    },
+    {
+     "w": "yang",
+     "t": 176.924,
+     "d": 0.181
+    },
+    {
+     "w": "kita",
+     "t": 177.16,
+     "d": 0.278
+    },
+    {
+     "w": "kenali",
+     "t": 177.465,
+     "d": 0.389
+    },
+    {
+     "w": "hari",
+     "t": 177.882,
+     "d": 0.292
+    },
+    {
+     "w": "ini",
+     "t": 178.174,
+     "d": 0.472
+    }
+   ],
+   "sfx": []
+  },
+  {
+   "id": "28_s3_tajuk",
+   "section": "s3",
+   "spk": "N",
+   "text": "Stesen tiga. Kegunaan kata arah.",
+   "start": 180.813,
+   "dur": 3.513,
+   "words": [
+    {
+     "w": "Stesen",
+     "t": 180.919,
+     "d": 0.5
+    },
+    {
+     "w": "tiga",
+     "t": 181.446,
+     "d": 0.389
+    },
+    {
+     "w": "Kegunaan",
+     "t": 182.924,
+     "d": 0.528
+    },
+    {
+     "w": "kata",
+     "t": 183.494,
+     "d": 0.222
+    },
+    {
+     "w": "arah",
+     "t": 183.716,
+     "d": 0.486
+    }
+   ],
+   "sfx": [
+    [
+     "whoosh2",
+     179.313
+    ]
+   ]
+  },
+  {
+   "id": "29_guna_kedudukan",
+   "section": "s3",
+   "spk": "N",
+   "text": "Pertama, kata arah memberitahu kedudukan benda. Di mana? Satelit berada di sebelah kanan bulan.",
+   "start": 185.575,
+   "dur": 8.438,
+   "words": [
+    {
+     "w": "Pertama",
+     "t": 185.681,
+     "d": 0.556
+    },
+    {
+     "w": "kata",
+     "t": 186.444,
+     "d": 0.319
+    },
+    {
+     "w": "arah",
+     "t": 186.764,
+     "d": 0.319
+    },
+    {
+     "w": "memberitahu",
+     "t": 187.097,
+     "d": 0.667
+    },
+    {
+     "w": "kedudukan",
+     "t": 187.806,
+     "d": 0.528
+    },
+    {
+     "w": "benda",
+     "t": 188.361,
+     "d": 0.431
+    },
+    {
+     "w": "Di",
+     "t": 189.867,
+     "d": 0.153
+    },
+    {
+     "w": "mana",
+     "t": 190.047,
+     "d": 0.403
+    },
+    {
+     "w": "Satelit",
+     "t": 191.506,
+     "d": 0.514
+    },
+    {
+     "w": "berada",
+     "t": 192.033,
+     "d": 0.444
+    },
+    {
+     "w": "di",
+     "t": 192.519,
+     "d": 0.097
+    },
+    {
+     "w": "sebelah",
+     "t": 192.644,
+     "d": 0.389
+    },
+    {
+     "w": "kanan",
+     "t": 193.047,
+     "d": 0.278
+    },
+    {
+     "w": "bulan",
+     "t": 193.339,
+     "d": 0.528
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     185.575
+    ]
+   ]
+  },
+  {
+   "id": "30_guna_hala_tuju",
+   "section": "s3",
+   "spk": "N",
+   "text": "Kedua, kata arah menunjukkan hala tuju. Ke mana? Roket terbang ke atas.",
+   "start": 195.263,
+   "dur": 7.087,
+   "words": [
+    {
+     "w": "Kedua",
+     "t": 195.369,
+     "d": 0.444
+    },
+    {
+     "w": "kata",
+     "t": 196.035,
+     "d": 0.319
+    },
+    {
+     "w": "arah",
+     "t": 196.355,
+     "d": 0.319
+    },
+    {
+     "w": "menunjukkan",
+     "t": 196.688,
+     "d": 0.653
+    },
+    {
+     "w": "hala",
+     "t": 197.341,
+     "d": 0.292
+    },
+    {
+     "w": "tuju",
+     "t": 197.66,
+     "d": 0.444
+    },
+    {
+     "w": "Ke",
+     "t": 199.194,
+     "d": 0.111
+    },
+    {
+     "w": "mana",
+     "t": 199.332,
+     "d": 0.375
+    },
+    {
+     "w": "Roket",
+     "t": 200.763,
+     "d": 0.403
+    },
+    {
+     "w": "terbang",
+     "t": 201.18,
+     "d": 0.361
+    },
+    {
+     "w": "ke",
+     "t": 201.582,
+     "d": 0.056
+    },
+    {
+     "w": "atas",
+     "t": 201.638,
+     "d": 0.583
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     195.263
+    ],
+    [
+     "whoosh3",
+     200.98
+    ]
+   ]
+  },
+  {
+   "id": "31_guna_asal",
+   "section": "s3",
+   "spk": "N",
+   "text": "Ketiga, kata arah memberitahu tempat asal. Dari mana? Gogo keluar dari dalam roket.",
+   "start": 203.6,
+   "dur": 8.071,
+   "words": [
+    {
+     "w": "Ketiga",
+     "t": 203.706,
+     "d": 0.542
+    },
+    {
+     "w": "kata",
+     "t": 204.456,
+     "d": 0.333
+    },
+    {
+     "w": "arah",
+     "t": 204.789,
+     "d": 0.333
+    },
+    {
+     "w": "memberitahu",
+     "t": 205.136,
+     "d": 0.653
+    },
+    {
+     "w": "tempat",
+     "t": 205.844,
+     "d": 0.319
+    },
+    {
+     "w": "asal",
+     "t": 206.178,
+     "d": 0.556
+    },
+    {
+     "w": "Dari",
+     "t": 207.808,
+     "d": 0.264
+    },
+    {
+     "w": "mana",
+     "t": 208.1,
+     "d": 0.403
+    },
+    {
+     "w": "Gogo",
+     "t": 209.558,
+     "d": 0.444
+    },
+    {
+     "w": "keluar",
+     "t": 210.044,
+     "d": 0.403
+    },
+    {
+     "w": "dari",
+     "t": 210.503,
+     "d": 0.292
+    },
+    {
+     "w": "dalam",
+     "t": 210.808,
+     "d": 0.278
+    },
+    {
+     "w": "roket",
+     "t": 211.1,
+     "d": 0.472
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     203.6
+    ]
+   ]
+  },
+  {
+   "id": "32_harian",
+   "section": "s3",
+   "spk": "N",
+   "text": "Kata arah juga kita gunakan setiap hari.",
+   "start": 213.021,
+   "dur": 2.854,
+   "words": [
+    {
+     "w": "Kata",
+     "t": 213.127,
+     "d": 0.319
+    },
+    {
+     "w": "arah",
+     "t": 213.446,
+     "d": 0.333
+    },
+    {
+     "w": "juga",
+     "t": 213.807,
+     "d": 0.264
+    },
+    {
+     "w": "kita",
+     "t": 214.113,
+     "d": 0.25
+    },
+    {
+     "w": "gunakan",
+     "t": 214.39,
+     "d": 0.5
+    },
+    {
+     "w": "setiap",
+     "t": 214.904,
+     "d": 0.347
+    },
+    {
+     "w": "hari",
+     "t": 215.252,
+     "d": 0.417
+    }
+   ],
+   "sfx": [
+    [
+     "whoosh1",
+     212.121
+    ]
+   ]
+  },
+  {
+   "id": "33_kasut",
+   "section": "s3",
+   "spk": "N",
+   "text": "Kasut disusun di atas rak kasut.",
+   "start": 217.025,
+   "dur": 2.477,
+   "words": [
+    {
+     "w": "Kasut",
+     "t": 217.131,
+     "d": 0.431
+    },
+    {
+     "w": "disusun",
+     "t": 217.561,
+     "d": 0.542
+    },
+    {
+     "w": "di",
+     "t": 218.117,
+     "d": 0.097
+    },
+    {
+     "w": "atas",
+     "t": 218.214,
+     "d": 0.403
+    },
+    {
+     "w": "rak",
+     "t": 218.644,
+     "d": 0.208
+    },
+    {
+     "w": "kasut",
+     "t": 218.881,
+     "d": 0.5
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     217.025
+    ]
+   ]
+  },
+  {
+   "id": "34_pisau",
+   "section": "s3",
+   "spk": "N",
+   "text": "Pisau disimpan di dalam laci.",
+   "start": 220.652,
+   "dur": 2.2,
+   "words": [
+    {
+     "w": "Pisau",
+     "t": 220.758,
+     "d": 0.389
+    },
+    {
+     "w": "disimpan",
+     "t": 221.202,
+     "d": 0.556
+    },
+    {
+     "w": "di",
+     "t": 221.771,
+     "d": 0.125
+    },
+    {
+     "w": "dalam",
+     "t": 221.924,
+     "d": 0.264
+    },
+    {
+     "w": "laci",
+     "t": 222.188,
+     "d": 0.431
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     220.652
+    ]
+   ]
+  },
+  {
+   "id": "35_sekolah",
+   "section": "s3",
+   "spk": "N",
+   "text": "Sekolah saya terletak di sebelah kiri masjid.",
+   "start": 224.002,
+   "dur": 2.858,
+   "words": [
+    {
+     "w": "Sekolah",
+     "t": 224.108,
+     "d": 0.5
+    },
+    {
+     "w": "saya",
+     "t": 224.608,
+     "d": 0.278
+    },
+    {
+     "w": "terletak",
+     "t": 224.899,
+     "d": 0.458
+    },
+    {
+     "w": "di",
+     "t": 225.385,
+     "d": 0.097
+    },
+    {
+     "w": "sebelah",
+     "t": 225.51,
+     "d": 0.389
+    },
+    {
+     "w": "kiri",
+     "t": 225.927,
+     "d": 0.264
+    },
+    {
+     "w": "masjid",
+     "t": 226.219,
+     "d": 0.528
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     224.002
+    ]
+   ]
+  },
+  {
+   "id": "36_membantu",
+   "section": "s3",
+   "spk": "N",
+   "text": "Kata arah membantu kita mencari barang, memberi arah jalan dan menyimpan barang dengan selamat.",
+   "start": 228.01,
+   "dur": 5.918,
+   "words": [
+    {
+     "w": "Kata",
+     "t": 228.116,
+     "d": 0.347
+    },
+    {
+     "w": "arah",
+     "t": 228.463,
+     "d": 0.361
+    },
+    {
+     "w": "membantu",
+     "t": 228.838,
+     "d": 0.5
+    },
+    {
+     "w": "kita",
+     "t": 229.379,
+     "d": 0.222
+    },
+    {
+     "w": "mencari",
+     "t": 229.629,
+     "d": 0.403
+    },
+    {
+     "w": "barang",
+     "t": 230.046,
+     "d": 0.403
+    },
+    {
+     "w": "memberi",
+     "t": 230.727,
+     "d": 0.333
+    },
+    {
+     "w": "arah",
+     "t": 231.06,
+     "d": 0.306
+    },
+    {
+     "w": "jalan",
+     "t": 231.393,
+     "d": 0.444
+    },
+    {
+     "w": "dan",
+     "t": 231.852,
+     "d": 0.208
+    },
+    {
+     "w": "menyimpan",
+     "t": 232.074,
+     "d": 0.514
+    },
+    {
+     "w": "barang",
+     "t": 232.602,
+     "d": 0.361
+    },
+    {
+     "w": "dengan",
+     "t": 233.018,
+     "d": 0.25
+    },
+    {
+     "w": "selamat",
+     "t": 233.282,
+     "d": 0.528
+    }
+   ],
+   "sfx": []
+  },
+  {
+   "id": "37_s4_tajuk",
+   "section": "s4",
+   "spk": "N",
+   "text": "Stesen empat. Cara menggunakan kata arah.",
+   "start": 235.877,
+   "dur": 3.983,
+   "words": [
+    {
+     "w": "Stesen",
+     "t": 235.983,
+     "d": 0.528
+    },
+    {
+     "w": "empat",
+     "t": 236.51,
+     "d": 0.569
+    },
+    {
+     "w": "Cara",
+     "t": 238.058,
+     "d": 0.306
+    },
+    {
+     "w": "menggunakan",
+     "t": 238.377,
+     "d": 0.597
+    },
+    {
+     "w": "kata",
+     "t": 239.03,
+     "d": 0.236
+    },
+    {
+     "w": "arah",
+     "t": 239.266,
+     "d": 0.472
+    }
+   ],
+   "sfx": [
+    [
+     "whoosh3",
+     234.377
+    ]
+   ]
+  },
+  {
+   "id": "38_peraturan1",
+   "section": "s4",
+   "spk": "N",
+   "text": "Peraturan pertama. Kata arah yang sama membawa makna berbeza apabila digunakan dengan di, ke dan dari.",
+   "start": 241.01,
+   "dur": 7.926,
+   "words": [
+    {
+     "w": "Peraturan",
+     "t": 241.116,
+     "d": 0.528
+    },
+    {
+     "w": "pertama",
+     "t": 241.671,
+     "d": 0.528
+    },
+    {
+     "w": "Kata",
+     "t": 243.274,
+     "d": 0.333
+    },
+    {
+     "w": "arah",
+     "t": 243.607,
+     "d": 0.403
+    },
+    {
+     "w": "yang",
+     "t": 244.01,
+     "d": 0.222
+    },
+    {
+     "w": "sama",
+     "t": 244.26,
+     "d": 0.375
+    },
+    {
+     "w": "membawa",
+     "t": 244.635,
+     "d": 0.403
+    },
+    {
+     "w": "makna",
+     "t": 245.038,
+     "d": 0.403
+    },
+    {
+     "w": "berbeza",
+     "t": 245.454,
+     "d": 0.5
+    },
+    {
+     "w": "apabila",
+     "t": 245.954,
+     "d": 0.542
+    },
+    {
+     "w": "digunakan",
+     "t": 246.538,
+     "d": 0.556
+    },
+    {
+     "w": "dengan",
+     "t": 247.121,
+     "d": 0.25
+    },
+    {
+     "w": "di",
+     "t": 247.399,
+     "d": 0.25
+    },
+    {
+     "w": "ke",
+     "t": 247.885,
+     "d": 0.208
+    },
+    {
+     "w": "dan",
+     "t": 248.121,
+     "d": 0.208
+    },
+    {
+     "w": "dari",
+     "t": 248.371,
+     "d": 0.361
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     241.01
+    ]
+   ]
+  },
+  {
+   "id": "39_di",
+   "section": "s4",
+   "spk": "N",
+   "text": "Di menunjukkan kedudukan. Gogo berdiri di atas batu.",
+   "start": 250.086,
+   "dur": 4.934,
+   "words": [
+    {
+     "w": "Di",
+     "t": 250.192,
+     "d": 0.153
+    },
+    {
+     "w": "menunjukkan",
+     "t": 250.386,
+     "d": 0.667
+    },
+    {
+     "w": "kedudukan",
+     "t": 251.094,
+     "d": 0.75
+    },
+    {
+     "w": "Gogo",
+     "t": 252.864,
+     "d": 0.458
+    },
+    {
+     "w": "berdiri",
+     "t": 253.336,
+     "d": 0.514
+    },
+    {
+     "w": "di",
+     "t": 253.864,
+     "d": 0.097
+    },
+    {
+     "w": "atas",
+     "t": 253.961,
+     "d": 0.403
+    },
+    {
+     "w": "batu",
+     "t": 254.378,
+     "d": 0.431
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     250.086
+    ]
+   ]
+  },
+  {
+   "id": "40_ke",
+   "section": "s4",
+   "spk": "N",
+   "text": "Ke menunjukkan hala tuju. Gogo melompat ke atas batu.",
+   "start": 256.171,
+   "dur": 4.849,
+   "words": [
+    {
+     "w": "Ke",
+     "t": 256.277,
+     "d": 0.139
+    },
+    {
+     "w": "menunjukkan",
+     "t": 256.457,
+     "d": 0.639
+    },
+    {
+     "w": "hala",
+     "t": 257.096,
+     "d": 0.292
+    },
+    {
+     "w": "tuju",
+     "t": 257.415,
+     "d": 0.431
+    },
+    {
+     "w": "Gogo",
+     "t": 258.949,
+     "d": 0.431
+    },
+    {
+     "w": "melompat",
+     "t": 259.407,
+     "d": 0.472
+    },
+    {
+     "w": "ke",
+     "t": 259.921,
+     "d": 0.083
+    },
+    {
+     "w": "atas",
+     "t": 260.004,
+     "d": 0.375
+    },
+    {
+     "w": "batu",
+     "t": 260.393,
+     "d": 0.417
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     256.171
+    ],
+    [
+     "whoosh1",
+     259.307
+    ]
+   ]
+  },
+  {
+   "id": "41_dari",
+   "section": "s4",
+   "spk": "N",
+   "text": "Dari menunjukkan tempat asal. Gogo turun dari atas batu.",
+   "start": 262.17,
+   "dur": 5.158,
+   "words": [
+    {
+     "w": "Dari",
+     "t": 262.276,
+     "d": 0.306
+    },
+    {
+     "w": "menunjukkan",
+     "t": 262.609,
+     "d": 0.597
+    },
+    {
+     "w": "tempat",
+     "t": 263.248,
+     "d": 0.333
+    },
+    {
+     "w": "asal",
+     "t": 263.595,
+     "d": 0.556
+    },
+    {
+     "w": "Gogo",
+     "t": 265.212,
+     "d": 0.472
+    },
+    {
+     "w": "turun",
+     "t": 265.739,
+     "d": 0.292
+    },
+    {
+     "w": "dari",
+     "t": 266.059,
+     "d": 0.222
+    },
+    {
+     "w": "atas",
+     "t": 266.281,
+     "d": 0.403
+    },
+    {
+     "w": "batu",
+     "t": 266.698,
+     "d": 0.431
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     262.17
+    ],
+    [
+     "whoosh2",
+     265.639
+    ]
+   ]
+  },
+  {
+   "id": "42_daripada",
+   "section": "s4",
+   "spk": "N",
+   "text": "Ingat, gunakan dari untuk tempat. Jangan gunakan daripada bersama kata arah.",
+   "start": 268.478,
+   "dur": 6.025,
+   "words": [
+    {
+     "w": "Ingat",
+     "t": 268.584,
+     "d": 0.472
+    },
+    {
+     "w": "gunakan",
+     "t": 269.25,
+     "d": 0.5
+    },
+    {
+     "w": "dari",
+     "t": 269.764,
+     "d": 0.264
+    },
+    {
+     "w": "untuk",
+     "t": 270.028,
+     "d": 0.319
+    },
+    {
+     "w": "tempat",
+     "t": 270.389,
+     "d": 0.486
+    },
+    {
+     "w": "Jangan",
+     "t": 271.853,
+     "d": 0.417
+    },
+    {
+     "w": "gunakan",
+     "t": 272.311,
+     "d": 0.486
+    },
+    {
+     "w": "daripada",
+     "t": 272.811,
+     "d": 0.375
+    },
+    {
+     "w": "bersama",
+     "t": 273.214,
+     "d": 0.403
+    },
+    {
+     "w": "kata",
+     "t": 273.659,
+     "d": 0.25
+    },
+    {
+     "w": "arah",
+     "t": 273.909,
+     "d": 0.472
+    }
+   ],
+   "sfx": []
+  },
+  {
+   "id": "43_peraturan2",
+   "section": "s4",
+   "spk": "N",
+   "text": "Peraturan kedua. Di, ke dan dari ditulis terpisah daripada kata arah.",
+   "start": 275.853,
+   "dur": 5.875,
+   "words": [
+    {
+     "w": "Peraturan",
+     "t": 275.959,
+     "d": 0.556
+    },
+    {
+     "w": "kedua",
+     "t": 276.556,
+     "d": 0.444
+    },
+    {
+     "w": "Di",
+     "t": 278.089,
+     "d": 0.292
+    },
+    {
+     "w": "ke",
+     "t": 278.631,
+     "d": 0.194
+    },
+    {
+     "w": "dan",
+     "t": 278.853,
+     "d": 0.208
+    },
+    {
+     "w": "dari",
+     "t": 279.089,
+     "d": 0.25
+    },
+    {
+     "w": "ditulis",
+     "t": 279.353,
+     "d": 0.458
+    },
+    {
+     "w": "terpisah",
+     "t": 279.811,
+     "d": 0.597
+    },
+    {
+     "w": "daripada",
+     "t": 280.422,
+     "d": 0.389
+    },
+    {
+     "w": "kata",
+     "t": 280.853,
+     "d": 0.264
+    },
+    {
+     "w": "arah",
+     "t": 281.117,
+     "d": 0.486
+    }
+   ],
+   "sfx": [
+    [
+     "laser",
+     279.711
+    ]
+   ]
+  },
+  {
+   "id": "44_ejaan_betul",
+   "section": "s4",
+   "spk": "N",
+   "text": "Lihat ejaan yang betul: di atas, ke dalam, dan dari luar. Ada jarak di antara perkataan itu.",
+   "start": 282.678,
+   "dur": 8.035,
+   "words": [
+    {
+     "w": "Lihat",
+     "t": 282.784,
+     "d": 0.431
+    },
+    {
+     "w": "ejaan",
+     "t": 283.214,
+     "d": 0.5
+    },
+    {
+     "w": "yang",
+     "t": 283.714,
+     "d": 0.111
+    },
+    {
+     "w": "betul",
+     "t": 283.881,
+     "d": 0.5
+    },
+    {
+     "w": "di",
+     "t": 284.603,
+     "d": 0.139
+    },
+    {
+     "w": "atas",
+     "t": 284.742,
+     "d": 0.597
+    },
+    {
+     "w": "ke",
+     "t": 285.52,
+     "d": 0.111
+    },
+    {
+     "w": "dalam",
+     "t": 285.645,
+     "d": 0.486
+    },
+    {
+     "w": "dan",
+     "t": 286.27,
+     "d": 0.222
+    },
+    {
+     "w": "dari",
+     "t": 286.534,
+     "d": 0.25
+    },
+    {
+     "w": "luar",
+     "t": 286.825,
+     "d": 0.458
+    },
+    {
+     "w": "Ada",
+     "t": 288.261,
+     "d": 0.278
+    },
+    {
+     "w": "jarak",
+     "t": 288.581,
+     "d": 0.375
+    },
+    {
+     "w": "di",
+     "t": 288.97,
+     "d": 0.139
+    },
+    {
+     "w": "antara",
+     "t": 289.109,
+     "d": 0.375
+    },
+    {
+     "w": "perkataan",
+     "t": 289.511,
+     "d": 0.569
+    },
+    {
+     "w": "itu",
+     "t": 290.081,
+     "d": 0.417
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     284.603
+    ],
+    [
+     "pop2",
+     285.52
+    ],
+    [
+     "pop1",
+     286.534
+    ]
+   ]
+  },
+  {
+   "id": "45_tip_rapat",
+   "section": "s4",
+   "spk": "N",
+   "text": "Tetapi, di yang melekat pada perbuatan ditulis rapat, seperti diletakkan dan dimakan.",
+   "start": 291.863,
+   "dur": 5.88,
+   "words": [
+    {
+     "w": "Tetapi",
+     "t": 291.969,
+     "d": 0.542
+    },
+    {
+     "w": "di",
+     "t": 292.732,
+     "d": 0.167
+    },
+    {
+     "w": "yang",
+     "t": 292.899,
+     "d": 0.111
+    },
+    {
+     "w": "melekat",
+     "t": 293.038,
+     "d": 0.417
+    },
+    {
+     "w": "pada",
+     "t": 293.482,
+     "d": 0.222
+    },
+    {
+     "w": "perbuatan",
+     "t": 293.732,
+     "d": 0.569
+    },
+    {
+     "w": "ditulis",
+     "t": 294.316,
+     "d": 0.444
+    },
+    {
+     "w": "rapat",
+     "t": 294.76,
+     "d": 0.486
+    },
+    {
+     "w": "seperti",
+     "t": 295.538,
+     "d": 0.458
+    },
+    {
+     "w": "diletakkan",
+     "t": 296.038,
+     "d": 0.694
+    },
+    {
+     "w": "dan",
+     "t": 296.76,
+     "d": 0.181
+    },
+    {
+     "w": "dimakan",
+     "t": 296.969,
+     "d": 0.611
+    }
+   ],
+   "sfx": [
+    [
+     "klik",
+     293.732
+    ]
+   ]
+  },
+  {
+   "id": "46_peraturan3",
+   "section": "s4",
+   "spk": "N",
+   "text": "Peraturan ketiga. Letakkan nama benda atau tempat selepas kata arah.",
+   "start": 299.093,
+   "dur": 5.607,
+   "words": [
+    {
+     "w": "Peraturan",
+     "t": 299.199,
+     "d": 0.569
+    },
+    {
+     "w": "ketiga",
+     "t": 299.81,
+     "d": 0.486
+    },
+    {
+     "w": "Letakkan",
+     "t": 301.399,
+     "d": 0.569
+    },
+    {
+     "w": "nama",
+     "t": 301.968,
+     "d": 0.292
+    },
+    {
+     "w": "benda",
+     "t": 302.274,
+     "d": 0.389
+    },
+    {
+     "w": "atau",
+     "t": 302.662,
+     "d": 0.306
+    },
+    {
+     "w": "tempat",
+     "t": 303.024,
+     "d": 0.347
+    },
+    {
+     "w": "selepas",
+     "t": 303.385,
+     "d": 0.458
+    },
+    {
+     "w": "kata",
+     "t": 303.899,
+     "d": 0.236
+    },
+    {
+     "w": "arah",
+     "t": 304.135,
+     "d": 0.444
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     299.093
+    ]
+   ]
+  },
+  {
+   "id": "47_gogo_bola",
+   "section": "s4",
+   "spk": "G",
+   "text": "Bola itu berada di bawah… di bawah apa?",
+   "start": 305.65,
+   "dur": 2.756,
+   "words": [
+    {
+     "w": "Bola",
+     "t": 305.747,
+     "d": 0.31
+    },
+    {
+     "w": "itu",
+     "t": 306.07,
+     "d": 0.236
+    },
+    {
+     "w": "berada",
+     "t": 306.318,
+     "d": 0.385
+    },
+    {
+     "w": "di",
+     "t": 306.727,
+     "d": 0.111
+    },
+    {
+     "w": "bawah",
+     "t": 306.852,
+     "d": 0.373
+    },
+    {
+     "w": "di",
+     "t": 307.348,
+     "d": 0.125
+    },
+    {
+     "w": "bawah",
+     "t": 307.485,
+     "d": 0.347
+    },
+    {
+     "w": "apa",
+     "t": 307.832,
+     "d": 0.385
+    }
+   ],
+   "sfx": []
+  },
+  {
+   "id": "48_bola_meja",
+   "section": "s4",
+   "spk": "N",
+   "text": "Bola itu berada di bawah meja. Barulah ayat itu jelas dan lengkap.",
+   "start": 309.256,
+   "dur": 5.801,
+   "words": [
+    {
+     "w": "Bola",
+     "t": 309.362,
+     "d": 0.361
+    },
+    {
+     "w": "itu",
+     "t": 309.737,
+     "d": 0.264
+    },
+    {
+     "w": "berada",
+     "t": 310.014,
+     "d": 0.444
+    },
+    {
+     "w": "di",
+     "t": 310.487,
+     "d": 0.125
+    },
+    {
+     "w": "bawah",
+     "t": 310.625,
+     "d": 0.319
+    },
+    {
+     "w": "meja",
+     "t": 310.945,
+     "d": 0.444
+    },
+    {
+     "w": "Barulah",
+     "t": 312.506,
+     "d": 0.583
+    },
+    {
+     "w": "ayat",
+     "t": 313.103,
+     "d": 0.347
+    },
+    {
+     "w": "itu",
+     "t": 313.45,
+     "d": 0.236
+    },
+    {
+     "w": "jelas",
+     "t": 313.714,
+     "d": 0.5
+    },
+    {
+     "w": "dan",
+     "t": 314.242,
+     "d": 0.194
+    },
+    {
+     "w": "lengkap",
+     "t": 314.437,
+     "d": 0.542
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     309.256
+    ]
+   ]
+  },
+  {
+   "id": "49_peraturan4",
+   "section": "s4",
+   "spk": "N",
+   "text": "Peraturan keempat. Apabila menyebut dua benda, gunakan antara bersama perkataan dengan.",
+   "start": 316.407,
+   "dur": 6.827,
+   "words": [
+    {
+     "w": "Peraturan",
+     "t": 316.513,
+     "d": 0.556
+    },
+    {
+     "w": "keempat",
+     "t": 317.11,
+     "d": 0.597
+    },
+    {
+     "w": "Apabila",
+     "t": 318.685,
+     "d": 0.486
+    },
+    {
+     "w": "menyebut",
+     "t": 319.199,
+     "d": 0.472
+    },
+    {
+     "w": "dua",
+     "t": 319.671,
+     "d": 0.236
+    },
+    {
+     "w": "benda",
+     "t": 319.921,
+     "d": 0.417
+    },
+    {
+     "w": "gunakan",
+     "t": 320.601,
+     "d": 0.528
+    },
+    {
+     "w": "antara",
+     "t": 321.143,
+     "d": 0.347
+    },
+    {
+     "w": "bersama",
+     "t": 321.518,
+     "d": 0.472
+    },
+    {
+     "w": "perkataan",
+     "t": 322.004,
+     "d": 0.611
+    },
+    {
+     "w": "dengan",
+     "t": 322.643,
+     "d": 0.444
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     316.407
+    ]
+   ]
+  },
+  {
+   "id": "50_antara_dengan",
+   "section": "s4",
+   "spk": "N",
+   "text": "Bulan berada di antara roket dengan planet. Guna dengan, bukan dan.",
+   "start": 324.184,
+   "dur": 5.662,
+   "words": [
+    {
+     "w": "Bulan",
+     "t": 324.29,
+     "d": 0.375
+    },
+    {
+     "w": "berada",
+     "t": 324.678,
+     "d": 0.431
+    },
+    {
+     "w": "di",
+     "t": 325.137,
+     "d": 0.125
+    },
+    {
+     "w": "antara",
+     "t": 325.262,
+     "d": 0.361
+    },
+    {
+     "w": "roket",
+     "t": 325.665,
+     "d": 0.417
+    },
+    {
+     "w": "dengan",
+     "t": 326.081,
+     "d": 0.236
+    },
+    {
+     "w": "planet",
+     "t": 326.359,
+     "d": 0.5
+    },
+    {
+     "w": "Guna",
+     "t": 327.865,
+     "d": 0.375
+    },
+    {
+     "w": "dengan",
+     "t": 328.267,
+     "d": 0.417
+    },
+    {
+     "w": "bukan",
+     "t": 328.878,
+     "d": 0.403
+    },
+    {
+     "w": "dan",
+     "t": 329.323,
+     "d": 0.361
+    }
+   ],
+   "sfx": []
+  },
+  {
+   "id": "51_s5_tajuk",
+   "section": "s5",
+   "spk": "N",
+   "text": "Stesen lima. Cara membina ayat.",
+   "start": 331.796,
+   "dur": 3.517,
+   "words": [
+    {
+     "w": "Stesen",
+     "t": 331.902,
+     "d": 0.514
+    },
+    {
+     "w": "lima",
+     "t": 332.429,
+     "d": 0.431
+    },
+    {
+     "w": "Cara",
+     "t": 333.949,
+     "d": 0.306
+    },
+    {
+     "w": "membina",
+     "t": 334.282,
+     "d": 0.417
+    },
+    {
+     "w": "ayat",
+     "t": 334.699,
+     "d": 0.542
+    }
+   ],
+   "sfx": [
+    [
+     "whoosh1",
+     330.296
+    ]
+   ]
+  },
+  {
+   "id": "52_formula",
+   "section": "s5",
+   "spk": "N",
+   "text": "Inilah formula ayat kita. Siapa atau apa, buat apa, di, ke atau dari, kata arah, dan nama benda atau tempat.",
+   "start": 336.463,
+   "dur": 9.953,
+   "words": [
+    {
+     "w": "Inilah",
+     "t": 336.569,
+     "d": 0.431
+    },
+    {
+     "w": "formula",
+     "t": 336.999,
+     "d": 0.486
+    },
+    {
+     "w": "ayat",
+     "t": 337.485,
+     "d": 0.361
+    },
+    {
+     "w": "kita",
+     "t": 337.902,
+     "d": 0.389
+    },
+    {
+     "w": "Siapa",
+     "t": 339.38,
+     "d": 0.472
+    },
+    {
+     "w": "atau",
+     "t": 339.852,
+     "d": 0.319
+    },
+    {
+     "w": "apa",
+     "t": 340.199,
+     "d": 0.431
+    },
+    {
+     "w": "buat",
+     "t": 340.894,
+     "d": 0.222
+    },
+    {
+     "w": "apa",
+     "t": 341.13,
+     "d": 0.444
+    },
+    {
+     "w": "di",
+     "t": 341.81,
+     "d": 0.306
+    },
+    {
+     "w": "ke",
+     "t": 342.38,
+     "d": 0.125
+    },
+    {
+     "w": "atau",
+     "t": 342.505,
+     "d": 0.292
+    },
+    {
+     "w": "dari",
+     "t": 342.852,
+     "d": 0.403
+    },
+    {
+     "w": "kata",
+     "t": 343.463,
+     "d": 0.333
+    },
+    {
+     "w": "arah",
+     "t": 343.796,
+     "d": 0.458
+    },
+    {
+     "w": "dan",
+     "t": 344.477,
+     "d": 0.222
+    },
+    {
+     "w": "nama",
+     "t": 344.699,
+     "d": 0.306
+    },
+    {
+     "w": "benda",
+     "t": 345.019,
+     "d": 0.417
+    },
+    {
+     "w": "atau",
+     "t": 345.449,
+     "d": 0.333
+    },
+    {
+     "w": "tempat",
+     "t": 345.838,
+     "d": 0.472
+    }
+   ],
+   "sfx": [
+    [
+     "klik",
+     339.38
+    ],
+    [
+     "klik",
+     340.894
+    ],
+    [
+     "klik",
+     341.81
+    ],
+    [
+     "klik",
+     343.463
+    ],
+    [
+     "klik",
+     344.699
+    ]
+   ]
+  },
+  {
+   "id": "53_contoh1",
+   "section": "s5",
+   "spk": "N",
+   "text": "Wafiy duduk di dalam roket.",
+   "start": 348.366,
+   "dur": 2.108,
+   "words": [
+    {
+     "w": "Wafiy",
+     "t": 348.472,
+     "d": 0.514
+    },
+    {
+     "w": "duduk",
+     "t": 349.013,
+     "d": 0.375
+    },
+    {
+     "w": "di",
+     "t": 349.43,
+     "d": 0.125
+    },
+    {
+     "w": "dalam",
+     "t": 349.583,
+     "d": 0.278
+    },
+    {
+     "w": "roket",
+     "t": 349.888,
+     "d": 0.486
+    }
+   ],
+   "sfx": [
+    [
+     "klik",
+     346.966
+    ],
+    [
+     "klik",
+     347.266
+    ],
+    [
+     "klik",
+     347.566
+    ],
+    [
+     "klik",
+     347.866
+    ],
+    [
+     "klik",
+     348.166
+    ]
+   ]
+  },
+  {
+   "id": "54_contoh2",
+   "section": "s5",
+   "spk": "N",
+   "text": "Gogo melompat ke atas batu.",
+   "start": 352.424,
+   "dur": 2.183,
+   "words": [
+    {
+     "w": "Gogo",
+     "t": 352.53,
+     "d": 0.431
+    },
+    {
+     "w": "melompat",
+     "t": 352.988,
+     "d": 0.472
+    },
+    {
+     "w": "ke",
+     "t": 353.502,
+     "d": 0.083
+    },
+    {
+     "w": "atas",
+     "t": 353.585,
+     "d": 0.375
+    },
+    {
+     "w": "batu",
+     "t": 353.974,
+     "d": 0.417
+    }
+   ],
+   "sfx": [
+    [
+     "klik",
+     351.024
+    ],
+    [
+     "klik",
+     351.324
+    ],
+    [
+     "klik",
+     351.624
+    ],
+    [
+     "klik",
+     351.924
+    ],
+    [
+     "klik",
+     352.224
+    ]
+   ]
+  },
+  {
+   "id": "55_contoh3",
+   "section": "s5",
+   "spk": "N",
+   "text": "Komet datang dari belakang planet.",
+   "start": 356.557,
+   "dur": 2.178,
+   "words": [
+    {
+     "w": "Komet",
+     "t": 356.663,
+     "d": 0.375
+    },
+    {
+     "w": "datang",
+     "t": 357.038,
+     "d": 0.375
+    },
+    {
+     "w": "dari",
+     "t": 357.454,
+     "d": 0.194
+    },
+    {
+     "w": "belakang",
+     "t": 357.676,
+     "d": 0.389
+    },
+    {
+     "w": "planet",
+     "t": 358.107,
+     "d": 0.5
+    }
+   ],
+   "sfx": [
+    [
+     "klik",
+     355.157
+    ],
+    [
+     "klik",
+     355.457
+    ],
+    [
+     "klik",
+     355.757
+    ],
+    [
+     "klik",
+     356.057
+    ],
+    [
+     "klik",
+     356.357
+    ]
+   ]
+  },
+  {
+   "id": "56_lihat_cara",
+   "section": "s5",
+   "spk": "N",
+   "text": "Sekarang, lihat cara saya membina ayat berdasarkan gambar.",
+   "start": 360.085,
+   "dur": 4.157,
+   "words": [
+    {
+     "w": "Sekarang",
+     "t": 360.191,
+     "d": 0.556
+    },
+    {
+     "w": "lihat",
+     "t": 361.01,
+     "d": 0.306
+    },
+    {
+     "w": "cara",
+     "t": 361.357,
+     "d": 0.25
+    },
+    {
+     "w": "saya",
+     "t": 361.635,
+     "d": 0.292
+    },
+    {
+     "w": "membina",
+     "t": 361.954,
+     "d": 0.444
+    },
+    {
+     "w": "ayat",
+     "t": 362.399,
+     "d": 0.403
+    },
+    {
+     "w": "berdasarkan",
+     "t": 362.829,
+     "d": 0.708
+    },
+    {
+     "w": "gambar",
+     "t": 363.579,
+     "d": 0.528
+    }
+   ],
+   "sfx": []
+  },
+  {
+   "id": "57_think_aloud",
+   "section": "s5",
+   "spk": "N",
+   "text": "Apa dalam gambar? Satelit. Apa yang ia buat? Berputar. Di mana? Di sisi bulan.",
+   "start": 365.392,
+   "dur": 10.765,
+   "words": [
+    {
+     "w": "Apa",
+     "t": 365.498,
+     "d": 0.333
+    },
+    {
+     "w": "dalam",
+     "t": 365.859,
+     "d": 0.25
+    },
+    {
+     "w": "gambar",
+     "t": 366.15,
+     "d": 0.514
+    },
+    {
+     "w": "Satelit",
+     "t": 367.684,
+     "d": 0.597
+    },
+    {
+     "w": "Apa",
+     "t": 369.267,
+     "d": 0.333
+    },
+    {
+     "w": "yang",
+     "t": 369.642,
+     "d": 0.194
+    },
+    {
+     "w": "ia",
+     "t": 369.85,
+     "d": 0.264
+    },
+    {
+     "w": "buat",
+     "t": 370.142,
+     "d": 0.375
+    },
+    {
+     "w": "Berputar",
+     "t": 371.517,
+     "d": 0.736
+    },
+    {
+     "w": "Di",
+     "t": 373.253,
+     "d": 0.153
+    },
+    {
+     "w": "mana",
+     "t": 373.434,
+     "d": 0.403
+    },
+    {
+     "w": "Di",
+     "t": 374.892,
+     "d": 0.181
+    },
+    {
+     "w": "sisi",
+     "t": 375.114,
+     "d": 0.361
+    },
+    {
+     "w": "bulan",
+     "t": 375.503,
+     "d": 0.5
+    }
+   ],
+   "sfx": [
+    [
+     "klik",
+     367.684
+    ],
+    [
+     "klik",
+     371.517
+    ],
+    [
+     "klik",
+     374.892
+    ]
+   ]
+  },
+  {
+   "id": "58_ayat_lengkap",
+   "section": "s5",
+   "spk": "N",
+   "text": "Ayat lengkapnya: Satelit berputar di sisi bulan.",
+   "start": 376.907,
+   "dur": 3.669,
+   "words": [
+    {
+     "w": "Ayat",
+     "t": 377.013,
+     "d": 0.361
+    },
+    {
+     "w": "lengkapnya",
+     "t": 377.374,
+     "d": 0.667
+    },
+    {
+     "w": "Satelit",
+     "t": 378.304,
+     "d": 0.458
+    },
+    {
+     "w": "berputar",
+     "t": 378.776,
+     "d": 0.542
+    },
+    {
+     "w": "di",
+     "t": 379.374,
+     "d": 0.153
+    },
+    {
+     "w": "sisi",
+     "t": 379.554,
+     "d": 0.333
+    },
+    {
+     "w": "bulan",
+     "t": 379.915,
+     "d": 0.5
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     376.907
+    ]
+   ]
+  },
+  {
+   "id": "59_tip_ayat",
+   "section": "s5",
+   "spk": "N",
+   "text": "Tip ayat hebat! Mulakan dengan huruf besar. Pilih kata arah yang tepat. Akhiri dengan noktah.",
+   "start": 381.926,
+   "dur": 8.852,
+   "words": [
+    {
+     "w": "Tip",
+     "t": 382.032,
+     "d": 0.222
+    },
+    {
+     "w": "ayat",
+     "t": 382.282,
+     "d": 0.347
+    },
+    {
+     "w": "hebat",
+     "t": 382.629,
+     "d": 0.542
+    },
+    {
+     "w": "Mulakan",
+     "t": 384.162,
+     "d": 0.514
+    },
+    {
+     "w": "dengan",
+     "t": 384.69,
+     "d": 0.264
+    },
+    {
+     "w": "huruf",
+     "t": 384.968,
+     "d": 0.347
+    },
+    {
+     "w": "besar",
+     "t": 385.315,
+     "d": 0.486
+    },
+    {
+     "w": "Pilih",
+     "t": 386.815,
+     "d": 0.278
+    },
+    {
+     "w": "kata",
+     "t": 387.134,
+     "d": 0.25
+    },
+    {
+     "w": "arah",
+     "t": 387.384,
+     "d": 0.361
+    },
+    {
+     "w": "yang",
+     "t": 387.745,
+     "d": 0.208
+    },
+    {
+     "w": "tepat",
+     "t": 387.982,
+     "d": 0.444
+    },
+    {
+     "w": "Akhiri",
+     "t": 389.398,
+     "d": 0.431
+    },
+    {
+     "w": "dengan",
+     "t": 389.857,
+     "d": 0.236
+    },
+    {
+     "w": "noktah",
+     "t": 390.107,
+     "d": 0.556
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     384.162
+    ],
+    [
+     "pop1",
+     386.815
+    ],
+    [
+     "pop2",
+     389.398
+    ]
+   ]
+  },
+  {
+   "id": "60_gogo_tahu",
+   "section": "s5",
+   "spk": "G",
+   "text": "Wafiy! Sekarang saya tahu! Saya bersembunyi di belakang batu besar!",
+   "start": 392.528,
+   "dur": 5.645,
+   "words": [
+    {
+     "w": "Wafiy",
+     "t": 392.625,
+     "d": 0.546
+    },
+    {
+     "w": "Sekarang",
+     "t": 394.104,
+     "d": 0.385
+    },
+    {
+     "w": "saya",
+     "t": 394.502,
+     "d": 0.211
+    },
+    {
+     "w": "tahu",
+     "t": 394.725,
+     "d": 0.335
+    },
+    {
+     "w": "Saya",
+     "t": 396.003,
+     "d": 0.323
+    },
+    {
+     "w": "bersembunyi",
+     "t": 396.352,
+     "d": 0.546
+    },
+    {
+     "w": "di",
+     "t": 396.91,
+     "d": 0.087
+    },
+    {
+     "w": "belakang",
+     "t": 397.021,
+     "d": 0.335
+    },
+    {
+     "w": "batu",
+     "t": 397.394,
+     "d": 0.236
+    },
+    {
+     "w": "besar",
+     "t": 397.63,
+     "d": 0.409
+    }
+   ],
+   "sfx": [
+    [
+     "radio",
+     391.328
+    ],
+    [
+     "klik",
+     396.003
+    ],
+    [
+     "klik",
+     396.352
+    ],
+    [
+     "klik",
+     396.91
+    ],
+    [
+     "klik",
+     397.021
+    ],
+    [
+     "klik",
+     397.394
+    ]
+   ]
+  },
+  {
+   "id": "61_wafiy_datang",
+   "section": "s5",
+   "spk": "W",
+   "text": "Saya nampak kamu, Gogo! Saya datang!",
+   "start": 399.023,
+   "dur": 3.799,
+   "words": [
+    {
+     "w": "Saya",
+     "t": 399.126,
+     "d": 0.368
+    },
+    {
+     "w": "nampak",
+     "t": 399.534,
+     "d": 0.316
+    },
+    {
+     "w": "kamu",
+     "t": 399.889,
+     "d": 0.382
+    },
+    {
+     "w": "Gogo",
+     "t": 400.441,
+     "d": 0.447
+    },
+    {
+     "w": "Saya",
+     "t": 401.878,
+     "d": 0.329
+    },
+    {
+     "w": "datang",
+     "t": 402.22,
+     "d": 0.421
+    }
+   ],
+   "sfx": [
+    [
+     "whoosh2",
+     402.02
+    ]
+   ]
+  },
+  {
+   "id": "62_gogo_terima_kasih",
+   "section": "s5",
+   "spk": "G",
+   "text": "Terima kasih, Wafiy!",
+   "start": 404.972,
+   "dur": 1.732,
+   "words": [
+    {
+     "w": "Terima",
+     "t": 405.069,
+     "d": 0.286
+    },
+    {
+     "w": "kasih",
+     "t": 405.392,
+     "d": 0.409
+    },
+    {
+     "w": "Wafiy",
+     "t": 405.999,
+     "d": 0.546
+    }
+   ],
+   "sfx": [
+    [
+     "fanfare",
+     404.372
+    ]
+   ]
+  },
+  {
+   "id": "63_rumusan",
+   "section": "rumusan",
+   "spk": "N",
+   "text": "Mari kita rumuskan.",
+   "start": 408.454,
+   "dur": 1.616,
+   "words": [
+    {
+     "w": "Mari",
+     "t": 408.56,
+     "d": 0.347
+    },
+    {
+     "w": "kita",
+     "t": 408.935,
+     "d": 0.236
+    },
+    {
+     "w": "rumuskan",
+     "t": 409.212,
+     "d": 0.694
+    }
+   ],
+   "sfx": [
+    [
+     "whoosh3",
+     407.154
+    ]
+   ]
+  },
+  {
+   "id": "64_poin1",
+   "section": "rumusan",
+   "spk": "N",
+   "text": "Satu. Kata arah menunjukkan arah atau kedudukan.",
+   "start": 410.92,
+   "dur": 4.658,
+   "words": [
+    {
+     "w": "Satu",
+     "t": 411.026,
+     "d": 0.458
+    },
+    {
+     "w": "Kata",
+     "t": 412.559,
+     "d": 0.333
+    },
+    {
+     "w": "arah",
+     "t": 412.892,
+     "d": 0.319
+    },
+    {
+     "w": "menunjukkan",
+     "t": 413.226,
+     "d": 0.583
+    },
+    {
+     "w": "arah",
+     "t": 413.823,
+     "d": 0.431
+    },
+    {
+     "w": "atau",
+     "t": 414.281,
+     "d": 0.333
+    },
+    {
+     "w": "kedudukan",
+     "t": 414.67,
+     "d": 0.736
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     410.92
+    ]
+   ]
+  },
+  {
+   "id": "65_poin2",
+   "section": "rumusan",
+   "spk": "N",
+   "text": "Dua. Kata arah datang selepas di, ke atau dari, dan sebelum nama benda atau tempat.",
+   "start": 416.428,
+   "dur": 7.164,
+   "words": [
+    {
+     "w": "Dua",
+     "t": 416.534,
+     "d": 0.389
+    },
+    {
+     "w": "Kata",
+     "t": 418.039,
+     "d": 0.347
+    },
+    {
+     "w": "arah",
+     "t": 418.386,
+     "d": 0.361
+    },
+    {
+     "w": "datang",
+     "t": 418.761,
+     "d": 0.375
+    },
+    {
+     "w": "selepas",
+     "t": 419.164,
+     "d": 0.514
+    },
+    {
+     "w": "di",
+     "t": 419.692,
+     "d": 0.278
+    },
+    {
+     "w": "ke",
+     "t": 420.247,
+     "d": 0.125
+    },
+    {
+     "w": "atau",
+     "t": 420.372,
+     "d": 0.278
+    },
+    {
+     "w": "dari",
+     "t": 420.706,
+     "d": 0.375
+    },
+    {
+     "w": "dan",
+     "t": 421.317,
+     "d": 0.222
+    },
+    {
+     "w": "sebelum",
+     "t": 421.553,
+     "d": 0.389
+    },
+    {
+     "w": "nama",
+     "t": 421.97,
+     "d": 0.264
+    },
+    {
+     "w": "benda",
+     "t": 422.247,
+     "d": 0.403
+    },
+    {
+     "w": "atau",
+     "t": 422.664,
+     "d": 0.319
+    },
+    {
+     "w": "tempat",
+     "t": 423.025,
+     "d": 0.486
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     416.428
+    ]
+   ]
+  },
+  {
+   "id": "66_poin3",
+   "section": "rumusan",
+   "spk": "N",
+   "text": "Tiga. Di untuk kedudukan, ke untuk hala tuju, dan dari untuk tempat asal.",
+   "start": 424.442,
+   "dur": 6.822,
+   "words": [
+    {
+     "w": "Tiga",
+     "t": 424.548,
+     "d": 0.389
+    },
+    {
+     "w": "Di",
+     "t": 426.025,
+     "d": 0.222
+    },
+    {
+     "w": "untuk",
+     "t": 426.275,
+     "d": 0.389
+    },
+    {
+     "w": "kedudukan",
+     "t": 426.692,
+     "d": 0.736
+    },
+    {
+     "w": "ke",
+     "t": 427.65,
+     "d": 0.194
+    },
+    {
+     "w": "untuk",
+     "t": 427.859,
+     "d": 0.333
+    },
+    {
+     "w": "hala",
+     "t": 428.22,
+     "d": 0.278
+    },
+    {
+     "w": "tuju",
+     "t": 428.539,
+     "d": 0.444
+    },
+    {
+     "w": "dan",
+     "t": 429.234,
+     "d": 0.222
+    },
+    {
+     "w": "dari",
+     "t": 429.498,
+     "d": 0.292
+    },
+    {
+     "w": "untuk",
+     "t": 429.789,
+     "d": 0.333
+    },
+    {
+     "w": "tempat",
+     "t": 430.164,
+     "d": 0.306
+    },
+    {
+     "w": "asal",
+     "t": 430.484,
+     "d": 0.597
+    }
+   ],
+   "sfx": [
+    [
+     "pop1",
+     424.442
+    ]
+   ]
+  },
+  {
+   "id": "67_poin4",
+   "section": "rumusan",
+   "spk": "N",
+   "text": "Empat. Di, ke dan dari ditulis terpisah.",
+   "start": 432.114,
+   "dur": 4.136,
+   "words": [
+    {
+     "w": "Empat",
+     "t": 432.22,
+     "d": 0.514
+    },
+    {
+     "w": "Di",
+     "t": 433.711,
+     "d": 0.278
+    },
+    {
+     "w": "ke",
+     "t": 434.239,
+     "d": 0.194
+    },
+    {
+     "w": "dan",
+     "t": 434.461,
+     "d": 0.208
+    },
+    {
+     "w": "dari",
+     "t": 434.697,
+     "d": 0.264
+    },
+    {
+     "w": "ditulis",
+     "t": 434.989,
+     "d": 0.444
+    },
+    {
+     "w": "terpisah",
+     "t": 435.433,
+     "d": 0.694
+    }
+   ],
+   "sfx": [
+    [
+     "pop2",
+     432.114
+    ]
+   ]
+  },
+  {
+   "id": "68_chant_ajak",
+   "section": "rumusan",
+   "spk": "N",
+   "text": "Jom sebut bersama!",
+   "start": 437.4,
+   "dur": 1.626,
+   "words": [
+    {
+     "w": "Jom",
+     "t": 437.506,
+     "d": 0.333
+    },
+    {
+     "w": "sebut",
+     "t": 437.867,
+     "d": 0.361
+    },
+    {
+     "w": "bersama",
+     "t": 438.228,
+     "d": 0.597
+    }
+   ],
+   "sfx": []
+  },
+  {
+   "id": "80_syabas",
+   "section": "penutup",
+   "spk": "N",
+   "text": "Syabas! Sekarang kamu sudah tahu tentang kata arah. Teruskan misi kamu di Zon Cabaran. Jumpa lagi!",
+   "start": 450.55,
+   "dur": 9.683,
+   "words": [
+    {
+     "w": "Syabas",
+     "t": 450.656,
+     "d": 0.653
+    },
+    {
+     "w": "Sekarang",
+     "t": 452.342,
+     "d": 0.444
+    },
+    {
+     "w": "kamu",
+     "t": 452.828,
+     "d": 0.306
+    },
+    {
+     "w": "sudah",
+     "t": 453.161,
+     "d": 0.278
+    },
+    {
+     "w": "tahu",
+     "t": 453.439,
+     "d": 0.319
+    },
+    {
+     "w": "tentang",
+     "t": 453.8,
+     "d": 0.319
+    },
+    {
+     "w": "kata",
+     "t": 454.161,
+     "d": 0.236
+    },
+    {
+     "w": "arah",
+     "t": 454.397,
+     "d": 0.472
+    },
+    {
+     "w": "Teruskan",
+     "t": 455.897,
+     "d": 0.472
+    },
+    {
+     "w": "misi",
+     "t": 456.383,
+     "d": 0.319
+    },
+    {
+     "w": "kamu",
+     "t": 456.744,
+     "d": 0.361
+    },
+    {
+     "w": "di",
+     "t": 457.147,
+     "d": 0.125
+    },
+    {
+     "w": "Zon",
+     "t": 457.328,
+     "d": 0.25
+    },
+    {
+     "w": "Cabaran",
+     "t": 457.633,
+     "d": 0.583
+    },
+    {
+     "w": "Jumpa",
+     "t": 459.217,
+     "d": 0.389
+    },
+    {
+     "w": "lagi",
+     "t": 459.647,
+     "d": 0.375
+    }
+   ],
+   "sfx": [
+    [
+     "fanfare",
+     449.35
+    ]
+   ]
+  },
+  {
+   "id": "81_jumpa_lagi",
+   "section": "penutup",
+   "spk": "W",
+   "text": "Jumpa lagi!",
+   "start": 460.883,
+   "dur": 1.077,
+   "words": [
+    {
+     "w": "Jumpa",
+     "t": 460.986,
+     "d": 0.368
+    },
+    {
+     "w": "lagi",
+     "t": 461.394,
+     "d": 0.355
+    }
+   ],
+   "sfx": [
+    [
+     "whoosh1",
+     462.083
+    ]
+   ]
+  }
+ ],
+ "sections": [
+  {
+   "id": "pembukaan",
+   "start": 0.0,
+   "end": 20.853
+  },
+  {
+   "id": "masalah",
+   "start": 20.853,
+   "end": 40.109
+  },
+  {
+   "id": "s1",
+   "start": 40.109,
+   "end": 75.391
+  },
+  {
+   "id": "s2",
+   "start": 75.391,
+   "end": 179.213
+  },
+  {
+   "id": "s3",
+   "start": 179.213,
+   "end": 234.277
+  },
+  {
+   "id": "s4",
+   "start": 234.277,
+   "end": 330.196
+  },
+  {
+   "id": "s5",
+   "start": 330.196,
+   "end": 407.054
+  },
+  {
+   "id": "rumusan",
+   "start": 407.054,
+   "end": 449.15
+  },
+  {
+   "id": "penutup",
+   "start": 449.15,
+   "end": 462.31
+  }
+ ],
+ "chant": [
+  {
+   "w": "Atas",
+   "t": 440.0
+  },
+  {
+   "w": "bawah",
+   "t": 440.625
+  },
+  {
+   "w": "dalam",
+   "t": 441.25
+  },
+  {
+   "w": "luar",
+   "t": 441.875
+  },
+  {
+   "w": "hadapan",
+   "t": 442.5
+  },
+  {
+   "w": "belakang",
+   "t": 443.125
+  },
+  {
+   "w": "Kiri",
+   "t": 444.375
+  },
+  {
+   "w": "kanan",
+   "t": 445.0
+  },
+  {
+   "w": "tepi",
+   "t": 445.625
+  },
+  {
+   "w": "tengah",
+   "t": 446.25
+  },
+  {
+   "w": "antara",
+   "t": 446.875
+  },
+  {
+   "w": "sisi",
+   "t": 447.5
+  }
+ ],
+ "total": 464.81
+};</script><script>
+      /* ===== Pustaka bersama: masa daripada audio sebenar + pembina SVG + animasi ===== */
+      (function () {
+        const C = window.CUES;
+        const L = {}, S = {};
+        C.lines.forEach((l) => (L[l.id] = l));
+        C.sections.forEach((s) => (S[s.id] = s));
+        const KA = (window.KA = {});
+        KA.sec = (id) => S[id].start;
+        KA.secDur = (id) => S[id].end - S[id].start;
+        KA.line = (id) => L[id];
+        KA.t = (id) => L[id].start - S[L[id].section].start;
+        KA.end = (id) => KA.t(id) + L[id].dur;
+        KA.w = (id, i) => {
+          const l = L[id], ws = l.words;
+          if (!ws.length) return KA.t(id);
+          return ws[Math.max(0, Math.min(i, ws.length - 1))].t - S[l.section].start;
+        };
+        KA.chant = () => C.chant.map((c) => ({ w: c.w, t: c.t - S.rumusan.start }));
+        KA.rng = (seed) => { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); };
+
+        const KATA = ["atas", "bawah", "dalam", "luar", "hadapan", "belakang", "kiri", "kanan", "tepi", "tengah", "antara", "sisi"];
+        const FORCE = { "18_tip_kiri_kanan": ["kiri", "kanan"], "26_tahukah_kamu": ["utara", "selatan", "timur", "barat"], "64_poin1": [], "68_chant_ajak": [] };
+        const KSN = { di: "c-di", ke: "c-ke", dari: "c-dari" };
+        const bare = (s) => s.toLowerCase().replace(/[^a-z]/g, "");
+        KA.tokens = (id) => L[id].text.split(/\s+/).filter(Boolean);
+        KA.classes = (id) => {
+          const tk = KA.tokens(id), f = FORCE[id] || [];
+          return tk.map((t, i) => {
+            const b = bare(t), p = i ? bare(tk[i - 1]) : "";
+            if (KSN[b]) return KSN[b];
+            if (f.includes(b)) return "ka";
+            if (KATA.includes(b) && ["di", "ke", "dari", "sebelah"].includes(p)) return "ka";
+            return "";
+          });
+        };
+        /* ayat besar di skrin, perkataan from..to-1 daripada baris */
+        KA.sentence = (el, id, from = 0, to) => {
+          const tk = KA.tokens(id), cl = KA.classes(id);
+          to = to == null ? tk.length : to;
+          el.innerHTML = "";
+          const spans = [];
+          for (let i = from; i < to; i++) {
+            const s = document.createElement("span");
+            s.className = "w " + cl[i];
+            s.textContent = tk[i];
+            el.appendChild(s);
+            spans.push(s);
+          }
+          return spans;
+        };
+        KA.karaoke = (tl, spans, id, from = 0) => {
+          spans.forEach((s, j) => {
+            tl.set(s, { opacity: 0.38 }, 0);
+            tl.to(s, { opacity: 1, duration: 0.12, ease: "none" }, KA.w(id, from + j) - 0.02);
+          });
+        };
+        /* animasi asas */
+        KA.pop = (tl, sel, t, dur = 0.55) => tl.fromTo(sel, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: dur, ease: "back.out(2.2)" }, t);
+        KA.blurIn = (tl, sel, t, dur = 0.2) => tl.fromTo(sel, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: dur, ease: "power2.out" }, t);
+        KA.fadeIn = (tl, sel, t, dur = 0.35) => tl.fromTo(sel, { opacity: 0 }, { opacity: 1, duration: dur, ease: "power2.out" }, t);
+        KA.out = (tl, sel, t, dur = 0.28) => tl.to(sel, { opacity: 0, filter: "blur(6px)", duration: dur, ease: "power2.in" }, t);
+        KA.flicker = (tl, sel, t, dur) => tl.fromTo(sel, { scaleX: 0.82 }, { scaleX: 1.18, duration: 0.12, ease: "none", repeat: Math.max(1, Math.floor(dur / 0.12)), yoyo: true, transformOrigin: "100% 50%" }, t);
+        KA.float = (tl, sel, t, dur, amp = 10, period = 2.6) => tl.fromTo(sel, { y: -amp }, { y: amp, duration: period / 2, ease: "sine.inOut", repeat: Math.max(1, Math.floor((dur * 2) / period)), yoyo: true }, t);
+        KA.wave = (tl, sel, t, dur, origin) => tl.fromTo(sel, { rotation: -10 }, { rotation: 14, duration: 0.32, ease: "sine.inOut", repeat: Math.max(1, Math.floor(dur / 0.32)), yoyo: true, svgOrigin: origin }, t);
+        KA.blink = (tl, sel, t, dur, origin) => { for (let x = t + 1.1; x < t + dur - 0.3; x += 3.1) { tl.to(sel, { scaleY: 0.1, duration: 0.07, svgOrigin: origin }, x).to(sel, { scaleY: 1, duration: 0.09, svgOrigin: origin }, x + 0.08); } };
+        KA.warp = (tl, sel, t) => { tl.fromTo(sel, { scale: 0.25, opacity: 0 }, { scale: 1.9, opacity: 1, duration: 0.75, ease: "power2.in" }, t); tl.to(sel, { opacity: 0, duration: 0.35, ease: "power1.out" }, t + 0.75); };
+        /* kad stesen: planet pop, kicker & tajuk masuk, keluar sebelum isi */
+        KA.card = (tl, p, t, tOut) => {
+          KA.pop(tl, `#${p}-cp`, t, 0.6);
+          KA.blurIn(tl, `#${p}-ck`, t + 0.15);
+          KA.blurIn(tl, `#${p}-ct`, t + 0.3, 0.25);
+          tl.to(`#${p}-card`, { opacity: 0, scale: 0.92, filter: "blur(8px)", duration: 0.35, ease: "power2.in" }, tOut);
+        };
+
+        /* ===== pembina SVG watak (bahagian boleh dianimasi) ===== */
+        const K = "#1A1442";
+        KA.svgWarp = (seed) => {
+          const r = KA.rng(seed); let s = "";
+          for (let i = 0; i < 70; i++) {
+            const a = r() * Math.PI * 2, d0 = 80 + r() * 260, d1 = d0 + 120 + r() * 380;
+            const x0 = 960 + Math.cos(a) * d0, y0 = 540 + Math.sin(a) * d0 * 0.75, x1 = 960 + Math.cos(a) * d1, y1 = 540 + Math.sin(a) * d1 * 0.75;
+            const c = ["#FFFFFF", "#D9D2FF", "#FFE7A8", "#9FE7F0"][i % 4];
+            s += `<line x1="${x0.toFixed(1)}" y1="${y0.toFixed(1)}" x2="${x1.toFixed(1)}" y2="${y1.toFixed(1)}" stroke="${c}" stroke-width="${(2 + r() * 4).toFixed(1)}" stroke-linecap="round" opacity="${(0.5 + r() * 0.5).toFixed(2)}"/>`;
+          }
+          return `<svg viewBox="0 0 1920 1080" width="1920" height="1080">${s}</svg>`;
+        };
+        KA.svgRocket = (p, o = {}) => `
+<svg viewBox="0 0 300 140" width="100%" height="100%" overflow="visible">
+  <g stroke="${K}" stroke-width="6" stroke-linejoin="round">
+    <path d="M84 36 L64 6 H100 L126 36Z" fill="#FE585F"/><path d="M84 104 L64 134 H100 L126 104Z" fill="#FE585F"/>
+    <g id="${p}-flame"><path d="M66 48 Q18 54 0 70 Q18 86 66 92Z" fill="#FE8B42"/><path d="M66 58 Q36 62 24 70 Q36 78 66 82Z" fill="#FDD13F" stroke-width="0"/></g>
+    <path d="M78 34 H204 Q252 40 284 70 Q252 100 204 106 H78 Q64 106 64 92 V48 Q64 34 78 34Z" fill="#F4EFEA"/>
+    <path d="M206 34.5 Q254 40 284 70 Q254 100 206 105.5 Q216 70 206 34.5Z" fill="#FE585F"/>
+    <rect x="98" y="34" width="18" height="72" fill="#FE585F"/>
+    <circle cx="160" cy="70" r="25" fill="#3EBFD2"/>
+  </g>
+  ${o.face ? `<clipPath id="${p}-clip"><circle cx="160" cy="70" r="22"/></clipPath><g clip-path="url(#${p}-clip)"><g id="${p}-face"><circle cx="160" cy="80" r="17" fill="#F6C9A3"/><path d="M142 78 Q141 58 160 57 Q179 58 178 78 Q172 68 165 66 Q158 73 150 69 Q145 71 142 78Z" fill="#5B3420"/><circle cx="154" cy="81" r="2.6" fill="${K}"/><circle cx="166" cy="81" r="2.6" fill="${K}"/><path d="M155 88 Q160 92 165 88" fill="none" stroke="${K}" stroke-width="2.2" stroke-linecap="round"/></g></g><circle cx="160" cy="70" r="25" fill="none" stroke="${K}" stroke-width="6"/>` : ""}
+  <path d="M146 58 Q154 50 166 50" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+</svg>`;
+        KA.svgWafiy = (p) => `
+<svg viewBox="0 0 200 270" width="100%" height="100%" overflow="visible">
+  <defs><clipPath id="${p}-vc"><ellipse cx="100" cy="88" rx="50" ry="44"/></clipPath></defs>
+  <g stroke="${K}" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="50" y="140" width="100" height="78" rx="24" fill="#D8D2EA"/>
+    <rect x="68" y="200" width="26" height="44" rx="11" fill="#F4EFEA"/><rect x="106" y="200" width="26" height="44" rx="11" fill="#F4EFEA"/>
+    <path d="M62 236 H100 V250 A8 8 0 0 1 92 258 H70 A8 8 0 0 1 62 250Z" fill="#FE8B42"/><path d="M100 236 H138 V250 A8 8 0 0 1 130 258 H108 A8 8 0 0 1 100 250Z" fill="#FE8B42"/>
+    <g id="${p}-arml"><path d="M64 158 Q42 178 40 202" fill="none" stroke-width="27"/><path d="M64 158 Q42 178 40 202" fill="none" stroke="#F4EFEA" stroke-width="17"/><circle cx="40" cy="208" r="13" fill="#FE8B42"/></g>
+    <g id="${p}-arm"><path d="M136 158 Q162 142 166 112" fill="none" stroke-width="27"/><path d="M136 158 Q162 142 166 112" fill="none" stroke="#F4EFEA" stroke-width="17"/><circle cx="167" cy="104" r="14" fill="#FE8B42"/></g>
+    <rect x="58" y="138" width="84" height="76" rx="28" fill="#F4EFEA"/>
+    <rect x="82" y="154" width="36" height="24" rx="6" fill="#3EBFD2"/>
+    <path d="M58 194 H142 V204 H58Z" fill="#FE8B42" stroke-width="3"/>
+    <circle cx="32" cy="88" r="11" fill="#3EBFD2"/><circle cx="168" cy="88" r="11" fill="#3EBFD2"/>
+    <circle cx="100" cy="84" r="68" fill="#F4EFEA"/>
+    <ellipse cx="100" cy="88" rx="50" ry="44" fill="#BDEFF4"/>
+  </g>
+  <g clip-path="url(#${p}-vc)">
+    <circle cx="100" cy="100" r="34" fill="#F6C9A3"/>
+    <path d="M64 96 Q62 58 100 56 Q138 58 136 96 Q128 80 114 76 Q104 88 86 82 Q72 84 64 96Z" fill="#5B3420"/>
+    <g id="${p}-eyes"><circle cx="88" cy="102" r="5" fill="${K}"/><circle cx="112" cy="102" r="5" fill="${K}"/></g>
+    <ellipse cx="80" cy="112" rx="6" ry="4" fill="#FF9FB0"/><ellipse cx="120" cy="112" rx="6" ry="4" fill="#FF9FB0"/>
+    <path id="${p}-mouth" d="M90 116 Q100 125 110 116" fill="none" stroke="${K}" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <ellipse cx="100" cy="88" rx="50" ry="44" fill="none" stroke="${K}" stroke-width="5"/>
+  <path d="M66 70 Q74 54 92 50" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+</svg>`;
+        KA.svgWafiyBack = (p) => `
+<svg viewBox="0 0 200 270" width="100%" height="100%" overflow="visible">
+  <g stroke="${K}" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="68" y="200" width="26" height="44" rx="11" fill="#F4EFEA"/><rect x="106" y="200" width="26" height="44" rx="11" fill="#F4EFEA"/>
+    <path d="M62 236 H100 V250 A8 8 0 0 1 92 258 H70 A8 8 0 0 1 62 250Z" fill="#FE8B42"/><path d="M100 236 H138 V250 A8 8 0 0 1 130 258 H108 A8 8 0 0 1 100 250Z" fill="#FE8B42"/>
+    <path d="M64 158 Q40 178 36 204" fill="none" stroke-width="27"/><path d="M64 158 Q40 178 36 204" fill="none" stroke="#F4EFEA" stroke-width="17"/>
+    <path d="M136 158 Q160 178 164 204" fill="none" stroke-width="27"/><path d="M136 158 Q160 178 164 204" fill="none" stroke="#F4EFEA" stroke-width="17"/>
+    <circle id="${p}-gl" cx="35" cy="210" r="13" fill="#FE8B42"/><circle id="${p}-gr" cx="165" cy="210" r="13" fill="#FE8B42"/>
+    <rect x="58" y="138" width="84" height="76" rx="28" fill="#F4EFEA"/>
+    <rect x="56" y="130" width="88" height="86" rx="18" fill="#FE8B42"/>
+    <rect x="74" y="146" width="52" height="36" rx="8" fill="#F4EFEA"/>
+    <circle cx="88" cy="164" r="6" fill="#3EBFD2"/><circle cx="112" cy="164" r="6" fill="#FE585F"/>
+    <circle cx="32" cy="88" r="11" fill="#3EBFD2"/><circle cx="168" cy="88" r="11" fill="#3EBFD2"/>
+    <circle cx="100" cy="84" r="68" fill="#F4EFEA"/>
+    <path d="M36 98 Q100 118 164 98" fill="none" stroke="#3EBFD2" stroke-width="10"/>
+  </g>
+</svg>`;
+        KA.svgGogo = (p) => `
+<svg viewBox="0 0 180 190" width="100%" height="100%" overflow="visible">
+  <g stroke="${K}" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <g id="${p}-ant"><path d="M72 56 L58 16 M108 56 L122 16" fill="none"/><circle cx="57" cy="13" r="9" fill="#FDD13F"/><circle cx="123" cy="13" r="9" fill="#FDD13F"/></g>
+    <g id="${p}-arm"><path d="M38 112 Q16 92 20 68" fill="none" stroke-width="20"/><path d="M38 112 Q16 92 20 68" fill="none" stroke="#6CCB4E" stroke-width="11"/></g>
+    <g id="${p}-armr"><path d="M142 116 Q164 130 160 150" fill="none" stroke-width="20"/><path d="M142 116 Q164 130 160 150" fill="none" stroke="#6CCB4E" stroke-width="11"/></g>
+    <ellipse cx="66" cy="176" rx="20" ry="10" fill="#4FAE3A"/><ellipse cx="114" cy="176" rx="20" ry="10" fill="#4FAE3A"/>
+    <ellipse cx="90" cy="112" rx="62" ry="62" fill="#6CCB4E"/>
+  </g>
+  <ellipse cx="90" cy="148" rx="34" ry="20" fill="#A8E58C" opacity=".9"/>
+  <circle cx="50" cy="120" r="6" fill="#4FAE3A"/><circle cx="132" cy="96" r="5" fill="#4FAE3A"/>
+  <g id="${p}-eye"><circle cx="90" cy="92" r="28" fill="#fff" stroke="${K}" stroke-width="5"/><circle cx="94" cy="94" r="13" fill="${K}"/><circle cx="99" cy="88" r="5" fill="#fff"/></g>
+  <path id="${p}-mouth" d="M74 128 Q90 142 106 128" fill="none" stroke="${K}" stroke-width="5" stroke-linecap="round"/>
+</svg>`;
+        /* pasang SVG ke dalam elemen sasaran */
+        KA.put = (sel, html) => { document.querySelectorAll(sel).forEach((e) => (e.innerHTML = html)); };
+      })();
+    </script></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <linearGradient id="g-comet" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FE8B42" stop-opacity="0"/><stop offset="1" stop-color="#FE8B42"/></linearGradient>
+      </defs>
+      <symbol id="a-rocket" viewBox="0 0 300 140">
+        <g stroke="#1A1442" stroke-width="6" stroke-linejoin="round">
+          <path d="M84 36 L64 6 H100 L126 36Z" fill="#FE585F" /><path d="M84 104 L64 134 H100 L126 104Z" fill="#FE585F" />
+          <path d="M66 50 Q22 56 6 70 Q22 84 66 90Z" fill="#FE8B42" /><path d="M66 58 Q38 62 28 70 Q38 78 66 82Z" fill="#FDD13F" stroke-width="0" />
+          <path d="M78 34 H204 Q252 40 284 70 Q252 100 204 106 H78 Q64 106 64 92 V48 Q64 34 78 34Z" fill="#F4EFEA" />
+          <path d="M206 34.5 Q254 40 284 70 Q254 100 206 105.5 Q216 70 206 34.5Z" fill="#FE585F" />
+          <rect x="98" y="34" width="18" height="72" fill="#FE585F" /><circle cx="160" cy="70" r="25" fill="#3EBFD2" />
+        </g>
+        <path d="M146 58 Q154 50 166 50" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".85" />
+      </symbol>
+      <symbol id="a-star" viewBox="0 0 100 100">
+        <path d="M50 6 L62 36 L94 38 L69 58 L78 90 L50 72 L22 90 L31 58 L6 38 L38 36 Z" fill="#FDD13F" stroke="#1A1442" stroke-width="5" stroke-linejoin="round" />
+        <circle cx="42" cy="50" r="4" fill="#1A1442" /><circle cx="58" cy="50" r="4" fill="#1A1442" />
+        <path d="M43 60 Q50 66 57 60" fill="none" stroke="#1A1442" stroke-width="3.5" stroke-linecap="round" />
+      </symbol>
+      <symbol id="a-earth" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="94" fill="#4C8DF6" stroke="#1A1442" stroke-width="6" />
+        <path d="M40 70 Q60 40 96 52 Q110 70 90 86 Q70 84 66 104 Q50 104 40 70Z M120 120 Q150 104 170 126 Q164 160 132 170 Q118 150 120 120Z M118 30 Q140 28 150 46 Q132 52 118 30Z" fill="#4FBF6F" stroke="#1A1442" stroke-width="5" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="a-moon" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="54" fill="#EDE6CF" stroke="#1A1442" stroke-width="5" />
+        <circle cx="34" cy="40" r="9" fill="#D3C9A8" /><circle cx="84" cy="34" r="6" fill="#D3C9A8" /><circle cx="88" cy="82" r="11" fill="#D3C9A8" /><circle cx="30" cy="84" r="6" fill="#D3C9A8" />
+        <circle cx="50" cy="60" r="4.5" fill="#1A1442" /><circle cx="70" cy="60" r="4.5" fill="#1A1442" />
+        <path d="M52 72 Q60 79 68 72" fill="none" stroke="#1A1442" stroke-width="4" stroke-linecap="round" />
+      </symbol>
+      <symbol id="a-comet" viewBox="0 0 260 90">
+        <path d="M0 45 Q140 8 214 26 L214 64 Q140 82 0 45Z" fill="url(#g-comet)" />
+        <path d="M70 45 Q160 26 214 36 L214 54 Q160 64 70 45Z" fill="#FDD13F" opacity=".85" />
+        <circle cx="218" cy="45" r="28" fill="#FDD13F" stroke="#1A1442" stroke-width="5" />
+        <circle cx="210" cy="38" r="7" fill="#fff" opacity=".7" />
+      </symbol>
+      <symbol id="a-rock" viewBox="0 0 240 150">
+        <path d="M16 140 C2 100 30 52 76 46 C96 14 160 14 176 50 C218 56 238 104 226 140 Z" fill="#7A70C2" stroke="#1A1442" stroke-width="6" stroke-linejoin="round" />
+        <ellipse cx="90" cy="92" rx="20" ry="11" fill="#635AA8" /><ellipse cx="160" cy="80" rx="14" ry="8" fill="#635AA8" /><ellipse cx="180" cy="116" rx="11" ry="6" fill="#635AA8" />
+      </symbol>
+      <symbol id="a-planet-red" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="92" fill="#FE585F" stroke="#1A1442" stroke-width="6" />
+        <path d="M14 82 Q100 62 186 82 M10 118 Q100 98 190 120" fill="none" stroke="#D93F4E" stroke-width="14" stroke-linecap="round" /><circle cx="66" cy="60" r="12" fill="#fff" opacity=".45" />
+      </symbol>
+      <symbol id="a-planet-blue" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="92" fill="#4C8DF6" stroke="#1A1442" stroke-width="6" />
+        <path d="M14 82 Q100 62 186 82 M10 118 Q100 98 190 120" fill="none" stroke="#3468D6" stroke-width="14" stroke-linecap="round" /><circle cx="66" cy="60" r="12" fill="#fff" opacity=".45" />
+      </symbol>
+      <symbol id="a-planet-ring" viewBox="0 0 260 180">
+        <path d="M18 104 Q130 40 242 76" fill="none" stroke="#FDD13F" stroke-width="14" stroke-linecap="round" />
+        <circle cx="130" cy="90" r="66" fill="#FE8B42" stroke="#1A1442" stroke-width="6" />
+        <path d="M70 70 Q130 56 190 70 M66 104 Q130 92 194 106" fill="none" stroke="#E46F2C" stroke-width="10" stroke-linecap="round" />
+        <path d="M18 104 Q130 140 242 76" fill="none" stroke="#FDD13F" stroke-width="14" stroke-linecap="round" />
+      </symbol>
+      <symbol id="a-sun" viewBox="0 0 220 220">
+        <g stroke="#FE8B42" stroke-width="12" stroke-linecap="round"><path d="M110 8 V30 M110 190 V212 M8 110 H30 M190 110 H212 M38 38 L54 54 M166 166 L182 182 M182 38 L166 54 M38 182 L54 166" /></g>
+        <circle cx="110" cy="110" r="66" fill="#FDD13F" stroke="#1A1442" stroke-width="6" />
+        <circle cx="92" cy="104" r="6" fill="#1A1442" /><circle cx="128" cy="104" r="6" fill="#1A1442" />
+        <path d="M94 124 Q110 136 126 124" fill="none" stroke="#1A1442" stroke-width="5" stroke-linecap="round" />
+        <ellipse cx="80" cy="120" rx="8" ry="5" fill="#FE8B42" opacity=".6" /><ellipse cx="140" cy="120" rx="8" ry="5" fill="#FE8B42" opacity=".6" />
+      </symbol>
+      <symbol id="a-sat" viewBox="0 0 220 110">
+        <g stroke="#1A1442" stroke-width="5" stroke-linejoin="round">
+          <path d="M70 55 H90 M130 55 H150" />
+          <rect x="6" y="30" width="66" height="50" rx="4" fill="#3EBFD2" /><rect x="148" y="30" width="66" height="50" rx="4" fill="#3EBFD2" />
+          <path d="M28 30 V80 M50 30 V80 M6 55 H72 M170 30 V80 M192 30 V80 M148 55 H214" stroke-width="3" />
+          <rect x="88" y="24" width="44" height="62" rx="8" fill="#F4EFEA" />
+          <path d="M110 24 V8" /><circle cx="110" cy="7" r="6" fill="#FE585F" />
+        </g>
+      </symbol>
+      <symbol id="a-flag" viewBox="0 0 90 160">
+        <path d="M14 10 L84 30 L14 52Z" fill="#FE585F" stroke="#1A1442" stroke-width="5" stroke-linejoin="round" />
+        <path d="M14 6 V154" stroke="#1A1442" stroke-width="12" stroke-linecap="round" /><path d="M14 6 V154" stroke="#F4EFEA" stroke-width="5" stroke-linecap="round" />
+      </symbol>
+      <symbol id="a-ladder" viewBox="0 0 80 300">
+        <g stroke="#1A1442" stroke-width="16" stroke-linecap="round"><path d="M12 8 V292 M68 8 V292 M12 50 H68 M12 100 H68 M12 150 H68 M12 200 H68 M12 250 H68" /></g>
+        <g stroke="#FDD13F" stroke-width="8" stroke-linecap="round"><path d="M12 8 V292 M68 8 V292 M12 50 H68 M12 100 H68 M12 150 H68 M12 200 H68 M12 250 H68" /></g>
+      </symbol>
+      <symbol id="a-table" viewBox="0 0 420 250">
+        <g stroke="#1A1442" stroke-width="6" stroke-linejoin="round">
+          <rect x="40" y="70" width="26" height="176" rx="6" fill="#C9677A" /><rect x="354" y="70" width="26" height="176" rx="6" fill="#C9677A" />
+          <rect x="10" y="40" width="400" height="40" rx="12" fill="#FE8B42" />
+        </g>
+      </symbol>
+      <symbol id="a-ball" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="44" fill="#FE585F" stroke="#1A1442" stroke-width="5" />
+        <path d="M10 44 Q50 30 90 44 M10 58 Q50 72 90 58" fill="none" stroke="#F4EFEA" stroke-width="7" />
+      </symbol>
+      <symbol id="a-rack" viewBox="0 0 420 300">
+        <g stroke="#1A1442" stroke-width="6" stroke-linejoin="round">
+          <rect x="30" y="120" width="360" height="26" rx="6" fill="#9B8CFF" /><rect x="30" y="210" width="360" height="26" rx="6" fill="#9B8CFF" />
+          <rect x="30" y="120" width="24" height="176" rx="6" fill="#7A6BE0" /><rect x="366" y="120" width="24" height="176" rx="6" fill="#7A6BE0" />
+          <path d="M70 120 V86 Q70 64 96 66 L120 72 Q130 92 160 96 Q178 100 178 120Z" fill="#3EBFD2" />
+          <path d="M230 120 V86 Q230 64 256 66 L280 72 Q290 92 320 96 Q338 100 338 120Z" fill="#FE585F" />
+        </g>
+      </symbol>
+      <symbol id="a-drawer" viewBox="0 0 420 320">
+        <g stroke="#1A1442" stroke-width="6" stroke-linejoin="round">
+          <rect x="40" y="40" width="340" height="270" rx="18" fill="#F4EFEA" />
+          <rect x="70" y="210" width="280" height="80" rx="10" fill="#DCD6EA" /><rect x="180" y="238" width="60" height="16" rx="8" fill="#9B8CFF" />
+          <path d="M20 110 H400 L370 186 H50Z" fill="#C8C0E4" />
+          <path d="M20 110 H400 V122 H20Z" fill="#9B8CFF" />
+          <path d="M120 150 H250 L290 140 L250 160 H120Z" fill="#E6EEF4" /><rect x="70" y="144" width="56" height="22" rx="8" fill="#FE8B42" />
+        </g>
+      </symbol>
+      <symbol id="a-school" viewBox="0 0 320 300">
+        <g stroke="#1A1442" stroke-width="6" stroke-linejoin="round">
+          <path d="M160 6 V60" /><path d="M160 8 L206 22 L160 36Z" fill="#FE585F" />
+          <path d="M20 120 L160 56 L300 120Z" fill="#FE585F" />
+          <rect x="34" y="118" width="252" height="176" fill="#FDD13F" />
+          <rect x="60" y="150" width="50" height="42" rx="6" fill="#3EBFD2" /><rect x="210" y="150" width="50" height="42" rx="6" fill="#3EBFD2" />
+          <rect x="60" y="214" width="50" height="42" rx="6" fill="#3EBFD2" /><rect x="210" y="214" width="50" height="42" rx="6" fill="#3EBFD2" />
+          <rect x="132" y="210" width="56" height="84" rx="6" fill="#C9677A" />
+        </g>
+      </symbol>
+      <symbol id="a-mosque" viewBox="0 0 320 300">
+        <g stroke="#1A1442" stroke-width="6" stroke-linejoin="round">
+          <rect x="250" y="70" width="40" height="224" fill="#F4EFEA" /><path d="M244 72 L270 26 L296 72Z" fill="#35D0BA" />
+          <rect x="40" y="160" width="210" height="134" fill="#F4EFEA" />
+          <path d="M60 162 Q60 70 145 62 Q230 70 230 162Z" fill="#35D0BA" />
+          <path d="M145 62 V30" /><path d="M150 14 A12 12 0 1 0 150 38 A9 9 0 1 1 150 14Z" fill="#FDD13F" />
+          <path d="M120 294 V236 Q145 206 170 236 V294Z" fill="#9B8CFF" />
+        </g>
+      </symbol>
+      <symbol id="a-compass" viewBox="0 0 300 300">
+        <circle cx="150" cy="150" r="136" fill="#F4EFEA" stroke="#1A1442" stroke-width="8" />
+        <circle cx="150" cy="150" r="104" fill="none" stroke="#C9C1E6" stroke-width="5" />
+        <path d="M150 54 L170 150 L150 246 L130 150Z" fill="#DCD6EA" stroke="#1A1442" stroke-width="5" stroke-linejoin="round" />
+        <path d="M150 54 L170 150 H130Z" fill="#FE585F" stroke="#1A1442" stroke-width="5" stroke-linejoin="round" />
+        <circle cx="150" cy="150" r="12" fill="#1A1442" />
+      </symbol>
+      <symbol id="a-radio" viewBox="0 0 300 220">
+        <g stroke="#1A1442" stroke-width="6" stroke-linejoin="round">
+          <path d="M220 52 L250 6" /><circle cx="252" cy="6" r="8" fill="#FE585F" />
+          <rect x="14" y="50" width="272" height="160" rx="26" fill="#9B8CFF" />
+          <rect x="40" y="76" width="130" height="108" rx="16" fill="#130D34" />
+          <circle cx="226" cy="112" r="34" fill="#7A6BE0" /><circle cx="226" cy="112" r="12" fill="#1A1442" />
+          <rect x="196" y="160" width="60" height="16" rx="8" fill="#FDD13F" />
+        </g>
+      </symbol>
+      <symbol id="a-crater" viewBox="0 0 640 180">
+        <ellipse cx="320" cy="90" rx="300" ry="72" fill="#3C3579" stroke="#2C2660" stroke-width="10" />
+        <ellipse cx="320" cy="104" rx="226" ry="44" fill="#2A2361" />
+      </symbol>
+      <symbol id="a-search" viewBox="0 0 160 160"><circle cx="66" cy="66" r="44" fill="#BDEFF4" stroke="#1A1442" stroke-width="12" /><path d="M100 100 L144 144" stroke="#1A1442" stroke-width="22" stroke-linecap="round" /><path d="M100 100 L144 144" stroke="#FE8B42" stroke-width="10" stroke-linecap="round" /></symbol>
+      <symbol id="a-sign" viewBox="0 0 160 160"><path d="M76 20 V150" stroke="#1A1442" stroke-width="14" stroke-linecap="round" /><path d="M30 30 H120 L144 50 L120 70 H30Z" fill="#35D0BA" stroke="#1A1442" stroke-width="7" stroke-linejoin="round" /><path d="M130 80 H40 L16 100 L40 120 H130Z" fill="#FDD13F" stroke="#1A1442" stroke-width="7" stroke-linejoin="round" /></symbol>
+      <symbol id="a-box" viewBox="0 0 160 160"><path d="M20 56 L80 30 L140 56 V122 L80 148 L20 122Z" fill="#FE8B42" stroke="#1A1442" stroke-width="8" stroke-linejoin="round" /><path d="M20 56 L80 82 L140 56 M80 82 V148" fill="none" stroke="#1A1442" stroke-width="8" stroke-linejoin="round" /><path d="M50 43 L110 69" stroke="#FDD13F" stroke-width="10" /></symbol>
+    </svg>
+<div id="root"><div class="sky"></div><div class="stars s1"></div><div class="stars s2"></div><div class="stars s3"></div>
+<div id="t-kick">MISI ANGKASA</div>
+<div id="t-big">KATA<br><span class="y">ARAH</span></div>
+<div id="t-sub">Bahasa Melayu · Tahun 3</div>
+<div id="t-r"></div><div id="t-w"></div><div id="t-g"></div></div>
+<script>
+document.getElementById('t-w').innerHTML=KA.svgWafiy('tw');
+document.getElementById('t-r').innerHTML=KA.svgRocket('tr',{face:true});
+document.getElementById('t-g').innerHTML=KA.svgGogo('tg');
+document.getElementById('t-r').style.transform='rotate(-14deg)';
+</script></body></html>

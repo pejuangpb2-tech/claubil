@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planet Ilmu – Misi Angkasa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ===== Palet Misi Angkasa (sama seperti Blok 1) ===== */
+  :root{
+    --bg:#1D0851; --card:#241A6B; --card-line:#4B3FA0; --screen:#130536;
+    --navy:#2D2B64; --purple:#634790; --pink:#D6337F; --pink-soft:#FF8FC0;
+    --teal:#3BFEC1; --ice:#9FF0FF; --coral:#F0A27A; --gold:#FFD447;
+    --text-2:#DCD5FF; --ok:#7CF5B4; --no:#FF8FC0; --line:#3A1F6E; --radius:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  body{
+    font-family:"Nunito",system-ui,sans-serif;font-size:19px;line-height:1.55;color:#fff;
+    background-color:var(--bg);
+    background-image:
+      radial-gradient(ellipse 55% 20% at 10% 8%, rgba(43,34,144,.55), transparent 70%),
+      radial-gradient(ellipse 45% 18% at 92% 30%, rgba(30,26,119,.85), transparent 70%),
+      radial-gradient(ellipse 60% 20% at 20% 62%, rgba(30,26,119,.7), transparent 70%),
+      radial-gradient(ellipse 50% 18% at 85% 90%, rgba(43,34,144,.5), transparent 70%);
+    position:relative;min-height:100vh;
+  }
+  body::before,body::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0}
+  body::before{
+    background-image:
+      radial-gradient(1.6px 1.6px at 20px 30px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 120px 80px,#C9BCFF,transparent),
+      radial-gradient(1.8px 1.8px at 210px 160px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 60px 200px,#FF9CCB,transparent),
+      radial-gradient(1.4px 1.4px at 260px 40px,#9FF0FF,transparent),
+      radial-gradient(1.2px 1.2px at 170px 250px,#fff,transparent);
+    background-size:290px 290px;opacity:.75;
+  }
+  body::after{
+    background-image:
+      radial-gradient(2px 2px at 70px 110px,#fff,transparent),
+      radial-gradient(1.6px 1.6px at 330px 60px,#E9E3FF,transparent),
+      radial-gradient(2px 2px at 250px 300px,#fff,transparent),
+      radial-gradient(1.4px 1.4px at 400px 220px,#9FF0FF,transparent);
+    background-size:460px 380px;animation:twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{from{opacity:.25}to{opacity:.95}}
+  .wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:20px 16px 32px;display:grid;gap:22px}
+  h1,h2,h3{font-family:"Fredoka","Nunito",sans-serif;font-weight:600;line-height:1.2}
+
+  /* ===== Header papan pemuka ===== */
+  .dash{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 18px;border-radius:var(--radius);
+    background:linear-gradient(180deg,#34307A 0%,var(--navy) 100%);
+    border:3px solid rgba(255,255,255,.9);box-shadow:0 8px 0 #120638,0 14px 30px rgba(5,0,25,.55);
+  }
+  .dash-lights{display:flex;gap:8px}
+  .dash-lights i{width:14px;height:14px;border-radius:50%;display:block;box-shadow:0 0 10px currentColor;animation:blink 2.4s infinite}
+  .dash-lights i:nth-child(1){background:var(--teal);color:var(--teal)}
+  .dash-lights i:nth-child(2){background:var(--pink-soft);color:var(--pink-soft);animation-delay:.8s}
+  .dash-lights i:nth-child(3){background:var(--gold);color:var(--gold);animation-delay:1.6s}
+  @keyframes blink{0%,70%,100%{opacity:1}80%{opacity:.35}}
+  .dash-screen{flex:1 1 220px;min-width:0;display:flex;align-items:center;gap:12px;background:var(--screen);border-radius:16px;padding:8px 14px;border:2px solid var(--card-line)}
+  .dash-screen .logo{font-size:30px;line-height:1}
+  .dash-screen .t1{font-family:"Fredoka",sans-serif;font-weight:700;font-size:24px;letter-spacing:.5px}
+  .dash-screen .t2{font-size:18px;color:var(--teal);font-weight:800}
+  .pill{display:inline-block;background:#fff;color:var(--purple);font-family:"Fredoka",sans-serif;font-weight:600;font-size:22px;padding:6px 18px;border-radius:999px;box-shadow:0 4px 0 #B9A8F0}
+  .sound-toggle{min-height:48px;min-width:48px;border-radius:999px;cursor:pointer;background:var(--screen);color:#fff;border:2px solid var(--card-line);font:700 18px "Nunito",sans-serif;padding:0 16px;display:inline-flex;align-items:center;gap:8px}
+  .sound-toggle:hover{border-color:var(--teal)}
+
+  /* ===== Kad / seksyen ===== */
+  .card{position:relative;background:var(--card);border:2px solid var(--card-line);border-radius:var(--radius);padding:24px;box-shadow:0 10px 0 rgba(10,2,40,.55),0 18px 34px rgba(5,0,25,.45)}
+  .card-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .card-head .pill{font-size:26px}
+  .step{font:600 18px "Fredoka",sans-serif;color:var(--teal)}
+  .lead{color:var(--text-2);font-size:20px;margin-bottom:16px}
+  .lead b{color:#fff}
+
+  /* ===== Butang ===== */
+  .btn{-webkit-appearance:none;appearance:none;border:0;cursor:pointer;min-height:52px;padding:0 22px;border-radius:999px;font-family:"Fredoka",sans-serif;font-weight:600;font-size:20px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .1s,box-shadow .1s;-webkit-tap-highlight-color:transparent}
+  .btn:active{transform:translateY(3px)}
+  .btn:focus-visible,.sound-toggle:focus-visible,.face:focus-visible{outline:4px solid var(--teal);outline-offset:3px}
+  .btn-light{background:#fff;color:var(--purple);box-shadow:0 5px 0 #B9A8F0}
+  .btn-light:active{box-shadow:0 2px 0 #B9A8F0}
+  .btn-sm{min-height:48px;font-size:18px;padding:0 16px}
+  .speak{display:none}
+  .has-voice .speak{display:inline-flex}
+
+  /* ===== Bahagian 1: Pengenalan ===== */
+  .intro{display:grid;grid-template-columns:150px 1fr;gap:22px;align-items:center}
+  .intro h1{font-size:36px;margin-bottom:12px}
+  .planet-ico{width:100%;max-width:150px;height:auto;margin:0 auto;display:block;animation:spin 14s linear infinite}
+  @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  .def{
+    background:#fff;color:var(--navy);border-radius:20px;padding:18px 20px;box-shadow:0 6px 0 #B9A8F0;
+    font:600 24px/1.4 "Fredoka",sans-serif;position:relative;margin-bottom:14px;border-left:10px solid var(--gold);
+  }
+  .def .tag{display:block;font:700 18px "Nunito",sans-serif;color:var(--pink);margin-bottom:4px}
+  .def b{color:var(--purple)}
+
+  /* ===== Bahagian 2: Kad kata arah ===== */
+  .legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:16px;font-size:18px;color:var(--text-2)}
+  .legend span{display:inline-flex;align-items:center;gap:8px}
+  .ksn{color:var(--pink-soft);font-weight:800}
+  .ka{color:var(--gold);font-weight:800}
+  .progress{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+  .bar{flex:1 1 200px;height:22px;background:var(--screen);border-radius:999px;border:2px solid var(--card-line);overflow:hidden;position:relative}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:999px;transition:width .4s ease}
+  .progress-txt{font:600 20px "Fredoka",sans-serif}
+  .pairs{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .pair{background:rgba(19,5,54,.55);border:2px dashed rgba(220,213,255,.35);border-radius:20px;padding:12px}
+  .pair-label{display:inline-block;font:600 18px "Fredoka",sans-serif;color:var(--navy);background:var(--ice);border-radius:999px;padding:2px 14px;margin-bottom:10px}
+  .pair-label.same{background:var(--coral)}
+  .pair-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .fcard{perspective:1000px;height:300px}
+  .inner{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.3,.7,.3,1);transform-style:preserve-3d}
+  .fcard.flipped .inner{transform:rotateY(180deg)}
+  .fcard:not(.flipped) .back,.fcard.flipped .front{pointer-events:none}
+  .side{position:absolute;inset:0;border-radius:18px;-webkit-backface-visibility:hidden;backface-visibility:hidden;overflow:hidden}
+  .front{background:#fff;box-shadow:0 6px 0 #B9A8F0;display:flex;flex-direction:column;padding:8px}
+  .front .scene{flex:1;min-height:0;background:radial-gradient(ellipse at 50% 0%,#2B2290,#130536 75%);border-radius:12px;display:flex;align-items:center;justify-content:center;padding:4px}
+  .front .scene svg{width:100%;height:100%;max-height:170px}
+  .front .word{font:700 32px/1.1 "Fredoka",sans-serif;color:var(--purple);text-align:center;padding:10px 0 6px}
+  .front .seen{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;background:var(--ok);color:var(--navy);font:700 18px/30px "Nunito";text-align:center;display:none;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+  .fcard.explored .front .seen{display:block}
+  .back{transform:rotateY(180deg);background:var(--screen);border:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:14px;text-align:center}
+  .back .bword{font:700 22px "Fredoka",sans-serif;color:var(--gold)}
+  .back .sent{font-size:20px;font-weight:700;line-height:1.4}
+  .back .speak{position:relative;z-index:3}
+  .face{position:absolute;inset:0;z-index:2;background:transparent;border:0;border-radius:18px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .back .flipnote{position:absolute;top:8px;right:10px;font-size:18px;line-height:1;opacity:.8}
+  .badge-wrap{position:relative;margin-top:20px;text-align:center;min-height:0}
+  .badge{
+    display:none;align-items:center;gap:12px;padding:14px 26px;border-radius:999px;background:var(--gold);color:var(--navy);
+    font:700 26px "Fredoka",sans-serif;box-shadow:0 6px 0 #B98E10,0 0 30px rgba(255,212,71,.55);
+  }
+  .badge.show{display:inline-flex;animation:popin .6s cubic-bezier(.2,1.6,.4,1)}
+  @keyframes popin{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+
+  /* ===== Bahagian 3: Rahsia ejaan ===== */
+  .spell{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  .spell-box{border-radius:20px;padding:16px 18px}
+  .spell-box h3{font-size:24px;margin-bottom:8px}
+  .spell-box ul{list-style:none;display:grid;gap:8px}
+  .spell-box li{font:600 26px "Fredoka",sans-serif;background:rgba(0,0,0,.18);border-radius:14px;padding:6px 14px}
+  .good{background:#14523F;border:3px solid var(--ok)}
+  .good h3{color:var(--ok)}
+  .bad{background:#5A1940;border:3px solid var(--no)}
+  .bad h3{color:var(--no)}
+  .bad li{text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:var(--no)}
+  .tip{background:rgba(19,5,54,.7);border-radius:16px;padding:14px 16px;border:2px solid var(--card-line);font-size:19px;color:var(--text-2);margin-bottom:20px}
+  .tip b{color:#fff}
+  .quiz h3{font-size:24px;margin-bottom:12px}
+  .q{background:rgba(19,5,54,.55);border:2px solid var(--card-line);border-radius:18px;padding:14px 16px;margin-bottom:12px}
+  .q-text{font-size:20px;font-weight:700;margin-bottom:10px}
+  .q-opts{display:flex;gap:12px;flex-wrap:wrap}
+  .opt{min-height:56px;min-width:140px;border-radius:16px;border:3px solid #fff;background:#fff;color:var(--navy);font:600 24px "Fredoka",sans-serif;cursor:pointer;padding:0 20px;box-shadow:0 5px 0 #B9A8F0}
+  .opt:active{transform:translateY(3px);box-shadow:0 2px 0 #B9A8F0}
+  .opt.right{background:var(--ok);border-color:var(--ok);box-shadow:0 5px 0 #2FA36B}
+  .opt.wrong{background:#FFD3E3;border-color:var(--no);box-shadow:0 5px 0 #D46A93}
+  .opt[disabled]{cursor:default}
+  .fb{min-height:30px;margin-top:10px;font-weight:800;font-size:19px}
+  .fb.ok{color:var(--ok)} .fb.no{color:var(--no)}
+  .quiz-score{font:600 20px "Fredoka",sans-serif;color:var(--gold)}
+
+  /* ===== Bahagian 4: Di, Ke, Dari ===== */
+  .rules{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .rule{background:#fff;color:var(--navy);border-radius:20px;padding:14px;box-shadow:0 6px 0 #B9A8F0;display:flex;flex-direction:column;gap:10px}
+  .rule .formula{font:700 26px "Fredoka",sans-serif;color:var(--purple)}
+  .rule .formula .ksn{color:var(--pink)}
+  .rule .mean{font-size:19px;font-weight:800;color:var(--navy)}
+  .rule .scene{background:radial-gradient(ellipse at 50% 0%,#2B2290,#130536 75%);border-radius:14px;padding:6px}
+  .rule .scene svg{width:100%;height:auto;display:block;max-height:150px}
+  .rule .ex{font-size:20px;font-weight:700}
+  .rule .ex .ksn{color:var(--pink)} .rule .ex .ka{color:var(--purple);text-decoration:underline;text-decoration-thickness:3px;text-decoration-color:var(--gold)}
+  .rule .speak{align-self:flex-start;background:var(--purple);color:#fff;box-shadow:0 5px 0 #3E2A66}
+  .closing{margin-top:22px;text-align:center;background:var(--gold);color:var(--navy);border-radius:20px;padding:16px 18px;font:600 24px/1.35 "Fredoka",sans-serif;box-shadow:0 6px 0 #B98E10}
+
+  .teacher{background:rgba(19,5,54,.7);border:2px dashed rgba(220,213,255,.45);border-radius:20px;padding:16px 20px;max-width:760px;justify-self:center;width:100%;font-size:18px}
+  .teacher h2{font-size:22px;margin-bottom:8px;color:var(--gold)}
+  .teacher dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+  .teacher dt{color:var(--text-2);font-weight:700}
+  .teacher dd{font-weight:700}
+
+  .confetti{position:absolute;left:0;right:0;top:-160px;height:320px;pointer-events:none;overflow:hidden;z-index:5}
+  .confetti span{position:absolute;top:0;animation:fall 2.4s ease-in forwards}
+  @keyframes fall{to{transform:translateY(300px) rotate(300deg);opacity:0}}
+
+  @media (max-width:860px){
+    .pairs{grid-template-columns:1fr}
+    .rules{grid-template-columns:1fr}
+    .rule{display:grid;grid-template-columns:1fr 1fr;align-items:center}
+    .rule .scene{grid-row:span 4}
+  }
+  @media (max-width:700px){
+    .intro{grid-template-columns:1fr;text-align:center}
+    .planet-ico{max-width:110px}
+    .spell{grid-template-columns:1fr}
+    .rule{display:flex}
+  }
+  @media (max-width:420px){
+    body{font-size:18px}
+    .card{padding:16px}
+    .intro h1{font-size:30px}
+    .def{font-size:21px;padding:14px 16px}
+    .card-head .pill{font-size:22px}
+    .pair{padding:10px}
+    .pair-cards{gap:10px}
+    .fcard{height:240px}
+    .front .word{font-size:27px}
+    .back{padding:10px;gap:10px}
+    .back .bword,.back .flipnote{display:none}
+    .back .sent{font-size:18px;line-height:1.35}
+    .back .speak{padding:0 14px}
+    .opt{min-width:0;font-size:22px;flex:1 1 auto;white-space:nowrap;padding:0 14px}
+    .teacher dl{grid-template-columns:1fr;gap:2px}
+    .teacher dd{margin-bottom:8px}
+    .badge{font-size:21px;padding:12px 18px}
+    .closing{font-size:21px}
+    .dash-lights{order:1}
+    .sound-toggle{order:2;margin-left:auto}
+    .dash-screen{order:3;flex-basis:100%}
+    .dash .pill{order:4}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Simbol SVG dikongsi (ilustrasi asli, dilukis dengan kod) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gVisor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D27BF0"/><stop offset="1" stop-color="#4A1580"/></linearGradient>
+  </defs>
+  <!-- roket -->
+  <symbol id="s-rocket" viewBox="0 0 60 100">
+    <g stroke="#3A1F6E" stroke-width="3" stroke-linejoin="round">
+      <path d="M14 58 L3 80 L3 88 L17 80Z" fill="#EC4C9A"/>
+      <path d="M46 58 L57 80 L57 88 L43 80Z" fill="#EC4C9A"/>
+      <rect x="21" y="81" width="18" height="9" rx="2" fill="#634790"/>
+      <path d="M30 4 C46 20 48 50 45 82 L15 82 C12 50 14 20 30 4Z" fill="#fff"/>
+      <path d="M30 4 C37 11 41 19 44 28 L16 28 C19 19 23 11 30 4Z" fill="#EC4C9A"/>
+      <circle cx="30" cy="44" r="9" fill="#3BFEC1"/>
+    </g>
+    <circle cx="27" cy="41" r="2.5" fill="#fff"/>
+  </symbol>
+  <!-- bintang -->
+  <symbol id="s-star" viewBox="0 0 40 40">
+    <path d="M20 2 L25.3 13.6 L38 15.2 L28.6 24 L31.2 36.6 L20 30.4 L8.8 36.6 L11.4 24 L2 15.2 L14.7 13.6Z" fill="#FFD447" stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round"/>
+    <circle cx="16" cy="17" r="2.5" fill="#fff" opacity=".8"/>
+  </symbol>
+  <!-- batu angkasa -->
+  <symbol id="s-rock" viewBox="0 0 80 50">
+    <path d="M6 46 C1 32 11 15 27 13 C35 4 54 5 60 16 C74 18 80 34 75 46 Z" fill="#8C85B8" stroke="#3A1F6E" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="30" cy="30" rx="7" ry="4" fill="#6E6699"/><ellipse cx="54" cy="25" rx="5" ry="3" fill="#6E6699"/><ellipse cx="60" cy="38" rx="4" ry="2.5" fill="#6E6699"/>
+  </symbol>
+  <!-- kapal angkasa (pandangan sisi) -->
+  <symbol id="s-ship" viewBox="0 0 140 90">
+    <g stroke="#3A1F6E" stroke-width="3" stroke-linejoin="round">
+      <path d="M22 34 L6 16 L14 44Z" fill="#EC4C9A"/>
+      <path d="M22 62 L6 80 L14 52Z" fill="#EC4C9A"/>
+      <path d="M12 48 C12 26 42 14 80 14 C112 14 132 32 134 48 C132 64 112 78 80 78 C42 78 12 68 12 48Z" fill="#fff"/>
+      <path d="M118 30 C126 36 131 42 134 48 C131 54 126 60 118 66Z" fill="#EC4C9A"/>
+      <circle cx="78" cy="46" r="21" fill="#9B8CE0"/>
+      <circle cx="78" cy="46" r="16" fill="#130536"/>
+    </g>
+    <circle cx="36" cy="46" r="4" fill="#3BFEC1" stroke="#3A1F6E" stroke-width="2"/>
+  </symbol>
+  <!-- kepala angkasawan (untuk tingkap) -->
+  <symbol id="s-astro-head" viewBox="0 0 40 40">
+    <g stroke="#3A1F6E" stroke-width="2.5">
+      <circle cx="20" cy="22" r="15" fill="#fff"/>
+      <rect x="10" y="14" width="20" height="14" rx="7" fill="url(#gVisor)"/>
+    </g>
+    <ellipse cx="15" cy="18" rx="3" ry="2" fill="#fff" opacity=".8"/>
+  </symbol>
+  <!-- angkasawan (depan) -->
+  <symbol id="s-astro" viewBox="0 0 50 72">
+    <g stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M16 37 L8 49" stroke-width="9"/><path d="M16 37 L8 49" stroke="#fff" stroke-width="4.5"/>
+      <path d="M34 37 L42 49" stroke-width="9"/><path d="M34 37 L42 49" stroke="#fff" stroke-width="4.5"/>
+      <circle cx="7.5" cy="50" r="3.5" fill="#EC4C9A"/><circle cx="42.5" cy="50" r="3.5" fill="#EC4C9A"/>
+      <rect x="16" y="50" width="7" height="14" rx="3" fill="#fff"/><rect x="27" y="50" width="7" height="14" rx="3" fill="#fff"/>
+      <rect x="14.5" y="62" width="10" height="7" rx="2.5" fill="#EC4C9A"/><rect x="25.5" y="62" width="10" height="7" rx="2.5" fill="#EC4C9A"/>
+      <rect x="14" y="31" width="22" height="23" rx="8" fill="#fff"/>
+      <path d="M14 44 h22 v4 h-22z" fill="#EC4C9A" stroke-width="1.5"/>
+      <circle cx="10" cy="18" r="3.5" fill="#EC4C9A"/><circle cx="40" cy="18" r="3.5" fill="#EC4C9A"/>
+      <circle cx="25" cy="17" r="14" fill="#fff"/>
+      <rect x="15" y="10" width="20" height="14" rx="7" fill="url(#gVisor)"/>
+    </g>
+    <ellipse cx="20" cy="14" rx="3" ry="2" fill="#fff" opacity=".8"/>
+  </symbol>
+  <!-- angkasawan (membelakangi kita: kiri dia = kiri kita) -->
+  <symbol id="s-astro-back" viewBox="0 0 50 72">
+    <g stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M16 37 L8 49" stroke-width="9"/><path d="M16 37 L8 49" stroke="#fff" stroke-width="4.5"/>
+      <path d="M34 37 L42 49" stroke-width="9"/><path d="M34 37 L42 49" stroke="#fff" stroke-width="4.5"/>
+      <circle cx="7.5" cy="50" r="3.5" fill="#EC4C9A"/><circle cx="42.5" cy="50" r="3.5" fill="#EC4C9A"/>
+      <rect x="16" y="50" width="7" height="14" rx="3" fill="#fff"/><rect x="27" y="50" width="7" height="14" rx="3" fill="#fff"/>
+      <rect x="14.5" y="62" width="10" height="7" rx="2.5" fill="#EC4C9A"/><rect x="25.5" y="62" width="10" height="7" rx="2.5" fill="#EC4C9A"/>
+      <rect x="14" y="31" width="22" height="23" rx="8" fill="#fff"/>
+      <rect x="15" y="29" width="20" height="21" rx="5" fill="#E9E3FF"/>
+      <path d="M19 35 h12 M19 41 h12" stroke-width="2"/>
+      <circle cx="10" cy="18" r="3.5" fill="#EC4C9A"/><circle cx="40" cy="18" r="3.5" fill="#EC4C9A"/>
+      <circle cx="25" cy="17" r="14" fill="#fff"/>
+      <circle cx="25" cy="4" r="3" fill="#3BFEC1" stroke-width="2"/>
+    </g>
+  </symbol>
+  <!-- satelit -->
+  <symbol id="s-sat" viewBox="0 0 70 40">
+    <g stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round">
+      <path d="M24 20 H28 M42 20 H46"/>
+      <rect x="2" y="11" width="22" height="18" rx="2" fill="#4FC3F7"/>
+      <rect x="46" y="11" width="22" height="18" rx="2" fill="#4FC3F7"/>
+      <path d="M9 11 V29 M17 11 V29 M53 11 V29 M61 11 V29 M2 20 H24 M46 20 H68" stroke-width="1.5"/>
+      <rect x="27" y="8" width="16" height="24" rx="3" fill="#FFD447"/>
+      <path d="M35 8 V2" /><circle cx="35" cy="2" r="2" fill="#EC4C9A"/>
+    </g>
+  </symbol>
+  <!-- robot -->
+  <symbol id="s-robot" viewBox="0 0 40 64">
+    <g stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round">
+      <path d="M20 4 V10"/><circle cx="20" cy="4" r="3" fill="#EC4C9A"/>
+      <rect x="1" y="32" width="6" height="15" rx="3" fill="#B8C4E8"/><rect x="33" y="32" width="6" height="15" rx="3" fill="#B8C4E8"/>
+      <rect x="11" y="49" width="7" height="12" rx="2" fill="#B8C4E8"/><rect x="22" y="49" width="7" height="12" rx="2" fill="#B8C4E8"/>
+      <rect x="6" y="29" width="28" height="22" rx="6" fill="#9B8CE0"/>
+      <rect x="8" y="10" width="24" height="18" rx="6" fill="#E9E3FF"/>
+      <circle cx="15" cy="19" r="3.5" fill="#3BFEC1"/><circle cx="25" cy="19" r="3.5" fill="#3BFEC1"/>
+      <circle cx="20" cy="40" r="4" fill="#FFD447"/>
+    </g>
+  </symbol>
+  <!-- alien comel -->
+  <symbol id="s-alien" viewBox="0 0 50 50">
+    <g stroke="#3A1F6E" stroke-width="2.5" stroke-linecap="round">
+      <path d="M17 14 L12 4 M33 14 L38 4"/>
+      <circle cx="12" cy="4" r="3" fill="#FFD447"/><circle cx="38" cy="4" r="3" fill="#FFD447"/>
+      <ellipse cx="25" cy="29" rx="19" ry="17" fill="#7CF5B4"/>
+      <ellipse cx="18" cy="26" rx="5" ry="6" fill="#fff"/><ellipse cx="32" cy="26" rx="5" ry="6" fill="#fff"/>
+    </g>
+    <circle cx="19" cy="27" r="2.6" fill="#2D2B64"/><circle cx="33" cy="27" r="2.6" fill="#2D2B64"/>
+    <path d="M19 37 Q25 42 31 37" fill="none" stroke="#3A1F6E" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="12" cy="35" r="2.5" fill="#FF8FC0"/><circle cx="38" cy="35" r="2.5" fill="#FF8FC0"/>
+  </symbol>
+  <!-- bendera -->
+  <symbol id="s-flag" viewBox="0 0 30 50">
+    <path d="M4 3 L27 10 L4 19Z" fill="#EC4C9A" stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M4 2 V48" stroke="#3A1F6E" stroke-width="5" stroke-linecap="round"/>
+    <path d="M4 2 V48" stroke="#E9E3FF" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <!-- tangga -->
+  <symbol id="s-ladder" viewBox="0 0 24 70">
+    <g stroke="#3A1F6E" stroke-width="7" stroke-linecap="round"><path d="M4 3 V67 M20 3 V67 M4 14 H20 M4 28 H20 M4 42 H20 M4 56 H20"/></g>
+    <g stroke="#FFD447" stroke-width="3.5" stroke-linecap="round"><path d="M4 3 V67 M20 3 V67 M4 14 H20 M4 28 H20 M4 42 H20 M4 56 H20"/></g>
+  </symbol>
+  <!-- bulan sabit -->
+  <symbol id="s-moon" viewBox="0 0 40 40">
+    <path d="M25 3 A18 18 0 1 0 37 29 A14 14 0 1 1 25 3Z" fill="#F4EEFF" stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round"/>
+  </symbol>
+  <!-- planet (warna ikut "color") -->
+  <symbol id="s-planet" viewBox="0 0 40 40">
+    <circle cx="20" cy="20" r="17" fill="currentColor" stroke="#3A1F6E" stroke-width="2.5"/>
+    <path d="M6 15 Q20 10 34 15 M5 24 Q20 20 35 25" fill="none" stroke="#fff" stroke-width="2.5" opacity=".45"/>
+    <circle cx="14" cy="12" r="3" fill="#fff" opacity=".6"/>
+  </symbol>
+</svg>
+
+<main class="wrap">
+
+  <!-- ===== Papan pemuka ===== -->
+  <header class="dash">
+    <div class="dash-lights" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="dash-screen">
+      <span class="logo" aria-hidden="true">🪐</span>
+      <div><div class="t1">MISI ANGKASA</div><div class="t2">Hentian 1: Planet Ilmu</div></div>
+    </div>
+    <span class="pill">Kenali Kata Arah</span>
+    <button class="sound-toggle" id="soundBtn" type="button" aria-pressed="true" aria-label="Kesan bunyi hidup. Tekan untuk senyap.">
+      <span aria-hidden="true" id="soundIcon">🔊</span><span>Bunyi</span>
+    </button>
+  </header>
+
+  <!-- ===== Bahagian 1: Pengenalan ===== -->
+  <section class="card intro" aria-labelledby="t1">
+    <svg class="planet-ico" viewBox="0 0 120 120" aria-hidden="true">
+      <ellipse cx="60" cy="62" rx="56" ry="15" fill="none" stroke="#9FF0FF" stroke-width="6" opacity=".7"/>
+      <circle cx="60" cy="58" r="36" fill="#F0A27A" stroke="#3A1F6E" stroke-width="4"/>
+      <path d="M28 46 Q60 36 92 46 M26 64 Q60 56 94 66" fill="none" stroke="#C9677A" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="46" cy="40" r="6" fill="#fff" opacity=".55"/>
+      <path d="M4 62 A56 15 0 0 0 116 62" fill="none" stroke="#9FF0FF" stroke-width="6"/>
+    </svg>
+    <div>
+      <span class="step">Bahagian 1</span>
+      <h1 id="t1">Planet Ilmu 🪐</h1>
+      <div class="def">
+        <span class="tag">⭐ Apakah kata arah?</span>
+        <b>Kata arah</b> ialah perkataan yang menunjukkan kedudukan atau arah sesuatu benda.
+      </div>
+      <button class="btn btn-light speak" type="button" data-say="Kata arah ialah perkataan yang menunjukkan kedudukan atau arah sesuatu benda.">
+        <span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== Bahagian 2: Kad kata arah ===== -->
+  <section class="card" aria-labelledby="t2">
+    <div class="card-head"><span class="step">Bahagian 2</span><span class="pill" id="t2">🃏 Kad Kata Arah</span></div>
+    <p class="lead">Ada <b>12 kata arah</b>. Tekan setiap kad untuk melihat ayat contoh. Tekan sekali lagi untuk memusingkannya semula 🔄</p>
+    <div class="legend">
+      <span><b class="ksn">di</b> = kata sendi nama</span>
+      <span><b class="ka">atas</b> = kata arah</span>
+    </div>
+    <div class="progress">
+      <span class="progress-txt" id="progTxt">Kad diterokai: 0/12</span>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" id="progBar"><i></i></div>
+    </div>
+    <div class="pairs" id="pairs"></div>
+    <div class="badge-wrap">
+      <div class="confetti" id="confetti" aria-hidden="true"></div>
+      <div class="badge" id="badge" role="status">⭐ Peneroka Planet Ilmu!</div>
+    </div>
+  </section>
+
+  <!-- ===== Bahagian 3: Rahsia Ejaan ===== -->
+  <section class="card" aria-labelledby="t3">
+    <div class="card-head"><span class="step">Bahagian 3</span><span class="pill" id="t3">🔍 Rahsia Ejaan</span></div>
+    <p class="lead"><b class="ksn">di</b>, <b class="ksn">ke</b> dan <b class="ksn">dari</b> ditulis <b>terpisah</b> daripada kata arah. Ada ruang kosong di tengah!</p>
+    <div class="spell">
+      <div class="spell-box good">
+        <h3>✅ Betul</h3>
+        <ul><li>di atas</li><li>ke dalam</li><li>dari luar</li></ul>
+      </div>
+      <div class="spell-box bad">
+        <h3>❌ Salah</h3>
+        <ul><li>diatas</li><li>kedalam</li><li>dariluar</li></ul>
+      </div>
+    </div>
+    <div class="tip">💡 <b>Ingat:</b> "di" dalam perkataan <b>dipacak</b> dan <b>diletakkan</b> ditulis rapat kerana ia bukan kata sendi nama. "di" sebelum kata arah, seperti <b>di atas</b>, ditulis terpisah.</div>
+
+    <div class="quiz">
+      <h3>🧪 Mini-semakan: Yang mana betul?</h3>
+      <div id="quiz"></div>
+      <p class="quiz-score" id="quizScore" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- ===== Bahagian 4: Di, Ke, Dari ===== -->
+  <section class="card" aria-labelledby="t4">
+    <div class="card-head"><span class="step">Bahagian 4</span><span class="pill" id="t4">🧭 Di, Ke, Dari</span></div>
+    <p class="lead">Kata arah selalu datang selepas <b class="ksn">di</b>, <b class="ksn">ke</b> atau <b class="ksn">dari</b>.</p>
+    <div class="rules">
+      <div class="rule">
+        <div class="formula"><span class="ksn">di</span> + kata arah</div>
+        <div class="mean">📍 menunjukkan tempat</div>
+        <div class="scene">
+          <svg viewBox="0 0 160 110" role="img" aria-label="Angkasawan berdiri di atas batu">
+            <use href="#s-rock" x="30" y="60" width="100" height="62"/>
+            <use href="#s-astro" x="58" y="8" width="44" height="64"/>
+          </svg>
+        </div>
+        <div class="ex">Angkasawan berdiri <span class="ksn">di</span> <span class="ka">atas</span> batu.</div>
+        <button class="btn btn-sm speak" type="button" data-say="Angkasawan berdiri di atas batu."><span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span></button>
+      </div>
+      <div class="rule">
+        <div class="formula"><span class="ksn">ke</span> + kata arah</div>
+        <div class="mean">➡️ menunjukkan hala tuju</div>
+        <div class="scene">
+          <svg viewBox="0 0 160 110" role="img" aria-label="Angkasawan melompat ke atas batu">
+            <use href="#s-rock" x="72" y="62" width="84" height="52"/>
+            <use href="#s-astro" x="6" y="48" width="38" height="55"/>
+            <path d="M34 44 Q72 -4 110 52" fill="none" stroke="#FFD447" stroke-width="4" stroke-dasharray="7 6" stroke-linecap="round"/>
+            <path d="M102 50 L111 56 L113 45" fill="none" stroke="#FFD447" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="ex">Angkasawan melompat <span class="ksn">ke</span> <span class="ka">atas</span> batu.</div>
+        <button class="btn btn-sm speak" type="button" data-say="Angkasawan melompat ke atas batu."><span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span></button>
+      </div>
+      <div class="rule">
+        <div class="formula"><span class="ksn">dari</span> + kata arah</div>
+        <div class="mean">🏠 menunjukkan tempat asal</div>
+        <div class="scene">
+          <svg viewBox="0 0 160 110" role="img" aria-label="Robot keluar dari dalam roket">
+            <use href="#s-rocket" x="78" y="2" width="62" height="103"/>
+            <rect x="100.5" y="61.5" width="16.5" height="22.5" rx="3" fill="#130536" stroke="#3A1F6E" stroke-width="2.5"/>
+            <path d="M96 74 H62" stroke="#FFD447" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 5"/>
+            <path d="M70 66 L61 74 L70 82" fill="none" stroke="#FFD447" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <use href="#s-robot" x="18" y="54" width="34" height="54"/>
+          </svg>
+        </div>
+        <div class="ex">Robot keluar <span class="ksn">dari</span> <span class="ka">dalam</span> roket.</div>
+        <button class="btn btn-sm speak" type="button" data-say="Robot keluar dari dalam roket."><span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span></button>
+      </div>
+    </div>
+    <div class="closing">🚀 Bagus! Sekarang pergi ke <b>STESEN PENERANGAN</b> untuk menonton video.</div>
+  </section>
+
+  <!-- ===== Untuk Guru ===== -->
+  <aside class="teacher" aria-labelledby="tg">
+    <h2 id="tg">📋 Untuk Guru / Ibu Bapa</h2>
+    <dl>
+      <dt>Standard Kandungan</dt><dd>5.1 Memahami dan menggunakan golongan kata mengikut konteks.</dd>
+      <dt>Standard Pembelajaran</dt><dd>5.1.4 Memahami dan menggunakan kata tugas mengikut konteks: (iii) kata arah.</dd>
+      <dt>Fokus</dt><dd>Kata arah selepas kata sendi nama di, ke dan dari.</dd>
+    </dl>
+  </aside>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Kesan bunyi (Web Audio API) ---------- */
+  var soundOn = true, ctx = null;
+  function audio(){
+    if(!soundOn) return null;
+    try{
+      if(!ctx){ var AC = window.AudioContext || window.webkitAudioContext; if(!AC) return null; ctx = new AC(); }
+      if(ctx.state === "suspended") ctx.resume();
+      return ctx;
+    }catch(e){ return null; }
+  }
+  function beep(freq, dur, type, vol, delay){
+    var a = audio(); if(!a) return;
+    try{
+      var o = a.createOscillator(), g = a.createGain(), t = a.currentTime + (delay || 0);
+      o.type = type || "sine"; o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol || 0.15, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.05);
+    }catch(e){}
+  }
+  function sFlip(){ beep(660, .12, "triangle", .12); }
+  function sRight(){ beep(784, .16, "triangle", .15); beep(1047, .25, "triangle", .15, .12); }
+  function sWrong(){ beep(330, .22, "sine", .12); }
+  function sWin(){ [523,659,784,1047].forEach(function(n,i){ beep(n, .3, "triangle", .14, i*.12); }); }
+
+  var soundBtn = document.getElementById("soundBtn");
+  soundBtn.addEventListener("click", function(){
+    soundOn = !soundOn;
+    document.getElementById("soundIcon").textContent = soundOn ? "🔊" : "🔇";
+    soundBtn.setAttribute("aria-pressed", soundOn ? "true" : "false");
+    soundBtn.setAttribute("aria-label", soundOn ? "Kesan bunyi hidup. Tekan untuk senyap." : "Kesan bunyi senyap. Tekan untuk hidupkan.");
+    if(soundOn) beep(880, .15);
+  });
+
+  /* ---------- Dengar (Web Speech API) ---------- */
+  var synth = ("speechSynthesis" in window) ? window.speechSynthesis : null;
+  var voice = null, activeBtn = null;
+  function pickVoice(){
+    if(!synth) return;
+    var vs = [];
+    try{ vs = synth.getVoices() || []; }catch(e){}
+    function find(re){ for(var i=0;i<vs.length;i++){ if(re.test(vs[i].lang)) return vs[i]; } return null; }
+    voice = find(/^ms[-_]MY/i) || find(/^ms\b/i) || find(/^id[-_]ID/i) || find(/^id\b/i) || find(/^in[-_]ID/i);
+    root.classList.toggle("has-voice", !!voice);
+  }
+  if(synth){
+    pickVoice();
+    try{ synth.addEventListener ? synth.addEventListener("voiceschanged", pickVoice) : (synth.onvoiceschanged = pickVoice); }catch(e){}
+    [300, 1000, 2500].forEach(function(ms){ setTimeout(pickVoice, ms); });
+  }
+  function resetSpeakBtn(){
+    if(activeBtn){ activeBtn.querySelector(".lbl").textContent = "Dengar"; activeBtn.querySelector("[aria-hidden]").textContent = "🔊"; activeBtn = null; }
+  }
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest ? e.target.closest(".speak") : null;
+    if(!btn) return;
+    e.stopPropagation();
+    if(!synth || !voice) return;
+    var wasActive = (btn === activeBtn);
+    try{ synth.cancel(); }catch(err){}
+    resetSpeakBtn();
+    if(wasActive) return;
+    activeBtn = btn;
+    btn.querySelector(".lbl").textContent = "Berhenti";
+    btn.querySelector("[aria-hidden]").textContent = "⏹";
+    try{
+      var u = new SpeechSynthesisUtterance(btn.getAttribute("data-say"));
+      u.lang = voice.lang; u.rate = 0.9; u.pitch = 1.05;
+      try{ u.voice = voice; }catch(vErr){}
+      u.onend = u.onerror = function(){ if(activeBtn === btn) resetSpeakBtn(); };
+      synth.speak(u);
+    }catch(err){ resetSpeakBtn(); }
+  }, true);
+
+  /* ---------- Data 12 kata arah (Bahagian D) ---------- */
+  function U(id, x, y, w, h, extra){ return '<use href="#' + id + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '"' + (extra || "") + '/>'; }
+  var ground = '<path d="M0 112 H160" stroke="#5A4BB0" stroke-width="4"/>';
+  var cards = {
+    atas: { ksn:"di", s:["Bintang bersinar", "roket."], alt:"Bintang di atas roket",
+      svg: U("s-rocket",56,38,48,80) + U("s-star",62,2,36,36) +
+           '<path d="M50 14 l-6 -3 M110 14 l6 -3 M80 0" stroke="#FFD447" stroke-width="3" stroke-linecap="round"/>' },
+    bawah: { ksn:"di", s:["Batu angkasa berada", "roket."], alt:"Batu di bawah roket",
+      svg: U("s-rocket",59,0,42,70) + U("s-rock",36,70,88,55) },
+    dalam: { ksn:"di", s:["Angkasawan duduk", "kapal angkasa."], alt:"Angkasawan di dalam kapal angkasa, kelihatan melalui tingkap",
+      svg: '<clipPath id="cWin"><circle cx="88.2" cy="62.3" r="16.4"/></clipPath>' + U("s-ship",8,15,144,92.6) +
+           '<g clip-path="url(#cWin)">' + U("s-astro-head",70,46,36,36) + '</g>' },
+    luar: { ksn:"di", s:["Satelit terapung", "kapal angkasa."], alt:"Satelit terapung di luar kapal angkasa",
+      svg: U("s-ship",0,38,120,77) + U("s-sat",96,4,60,34) +
+           '<path d="M104 46 q4 4 0 8 M116 46 q4 4 0 8" fill="none" stroke="#9FF0FF" stroke-width="2.5" stroke-linecap="round"/>' },
+    hadapan: { ksn:"di", s:["Robot berdiri", "pintu roket."], alt:"Robot berdiri di hadapan pintu roket",
+      svg: ground + U("s-rocket",50,14,64.8,108) +
+           '<rect x="73.8" y="76.6" width="17.3" height="23.8" rx="3" fill="#9B8CE0" stroke="#3A1F6E" stroke-width="2.5"/><circle cx="87.5" cy="89" r="1.8" fill="#3A1F6E"/>' +
+           U("s-robot",67,68,30,48) },
+    belakang: { ksn:"di", s:["Alien kecil bersembunyi", "batu."], alt:"Alien kecil separuh tersorok di belakang batu",
+      svg: U("s-alien",58,30,46,46) + U("s-rock",28,56,104,65) },
+    tepi: { ksn:"di", s:["Bendera dipacak", "kawah."], alt:"Bendera di tepi kawah",
+      svg: '<rect x="0" y="80" width="160" height="40" fill="#3E3082"/>' +
+           '<ellipse cx="72" cy="90" rx="58" ry="20" fill="#2F2470" stroke="#5A4BB0" stroke-width="4"/>' +
+           '<ellipse cx="72" cy="94" rx="42" ry="11" fill="#1E1550"/>' + U("s-flag",126,40,30,50) },
+    sisi: { ksn:"di", s:["Tangga diletakkan", "roket."], alt:"Tangga bersandar di sisi roket",
+      svg: ground + U("s-rocket",62,10,60,100) + '<g transform="rotate(16 62 110)">' + U("s-ladder",52,42,22,68) + '</g>' },
+    tengah: { ksn:"di", s:["Matahari berada", "sistem suria."], alt:"Matahari di tengah, planet mengelilinginya",
+      svg: '<ellipse cx="80" cy="60" rx="64" ry="42" fill="none" stroke="#9FF0FF" stroke-width="2" stroke-dasharray="5 5" opacity=".7"/>' +
+           '<g stroke="#FFD447" stroke-width="4" stroke-linecap="round"><path d="M80 30 V22 M80 90 V98 M50 60 H42 M110 60 H118 M59 39 L53 33 M101 39 L107 33 M59 81 L53 87 M101 81 L107 87"/></g>' +
+           '<circle cx="80" cy="60" r="19" fill="#FFD447" stroke="#3A1F6E" stroke-width="3"/><circle cx="74" cy="54" r="5" fill="#FFF3C2"/>' +
+           U("s-planet",6,48,24,24,' style="color:#FF6B6B"') + U("s-planet",130,48,24,24,' style="color:#4FA8FF"') +
+           U("s-planet",70,4,20,20,' style="color:#7CF5B4"') + U("s-planet",68,96,22,22,' style="color:#F0A27A"') },
+    antara: { ksn:"di", s:["Bulan berada", "dua bintang."], alt:"Bulan di antara dua bintang",
+      svg: U("s-star",8,42,38,38) + U("s-star",114,42,38,38) + U("s-moon",56,34,48,48) },
+    kiri: { ksn:"di", pre:"sebelah", s:["Planet merah berada", "angkasawan."], alt:"Angkasawan membelakangi kita. Planet merah di sebelah kirinya",
+      svg: ground + U("s-planet",4,30,44,44,' style="color:#FF5A5F"') + U("s-astro-back",56,30,50,72) },
+    kanan: { ksn:"di", pre:"sebelah", s:["Planet biru berada", "angkasawan."], alt:"Angkasawan membelakangi kita. Planet biru di sebelah kanannya",
+      svg: ground + U("s-planet",112,30,44,44,' style="color:#4FA8FF"') + U("s-astro-back",54,30,50,72) }
+  };
+  var pairs = [
+    { label:"↔️ Pasangan Berlawanan", words:["atas","bawah"] },
+    { label:"↔️ Pasangan Berlawanan", words:["dalam","luar"] },
+    { label:"↔️ Pasangan Berlawanan", words:["hadapan","belakang"] },
+    { label:"🤝 Pasangan Hampir Sama", words:["tepi","sisi"], same:true },
+    { label:"🎯 Pasangan Kedudukan Tengah", words:["tengah","antara"], same:true },
+    { label:"↔️ Pasangan Berlawanan", words:["kiri","kanan"] }
+  ];
+
+  function sentenceHTML(w, c){
+    var mid = '<span class="ksn">' + c.ksn + '</span> ' + (c.pre ? '<span class="ka">' + c.pre + ' ' + w + '</span>' : '<span class="ka">' + w + '</span>');
+    return c.s[0] + ' ' + mid + ' ' + c.s[1];
+  }
+  function sentencePlain(w, c){ return c.s[0] + ' ' + c.ksn + ' ' + (c.pre ? c.pre + ' ' : '') + w + ' ' + c.s[1]; }
+
+  var html = "";
+  pairs.forEach(function(p){
+    html += '<div class="pair"><span class="pair-label' + (p.same ? ' same' : '') + '">' + p.label + '</span><div class="pair-cards">';
+    p.words.forEach(function(w){
+      var c = cards[w];
+      html += '<div class="fcard" data-w="' + w + '"><div class="inner">' +
+        '<div class="side front">' +
+          '<button class="face" type="button" aria-label="Kad kata arah ' + w + '. Tekan untuk melihat ayat contoh."></button>' +
+          '<div class="scene"><svg viewBox="0 0 160 120" role="img" aria-label="' + c.alt + '">' + c.svg + '</svg></div>' +
+          '<div class="word">' + w + '</div><span class="seen" aria-hidden="true">✓</span>' +
+        '</div>' +
+        '<div class="side back" aria-hidden="true">' +
+          '<button class="face" type="button" tabindex="-1" aria-label="Pusing semula kad ' + w + '"></button>' +
+          '<div class="bword">' + w + '</div>' +
+          '<p class="sent">' + sentenceHTML(w, c) + '</p>' +
+          '<button class="btn btn-light btn-sm speak" type="button" tabindex="-1" data-say="' + sentencePlain(w, c) + '"><span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span></button>' +
+          '<span class="flipnote" aria-hidden="true">🔄</span>' +
+        '</div>' +
+      '</div></div>';
+    });
+    html += '</div></div>';
+  });
+  document.getElementById("pairs").innerHTML = html;
+
+  /* ---------- Pusing kad & kemajuan ---------- */
+  var explored = {}, total = 12, done = false;
+  var progTxt = document.getElementById("progTxt"), progBar = document.getElementById("progBar"), badge = document.getElementById("badge");
+  function updateProgress(){
+    var n = Object.keys(explored).length;
+    progTxt.textContent = "Kad diterokai: " + n + "/" + total;
+    progBar.setAttribute("aria-valuenow", n);
+    progBar.querySelector("i").style.width = (n / total * 100) + "%";
+    if(n === total && !done){
+      done = true;
+      badge.classList.add("show");
+      sWin(); burst(document.getElementById("confetti"));
+    }
+  }
+  document.getElementById("pairs").addEventListener("click", function(e){
+    var face = e.target.closest(".face"); if(!face) return;
+    var card = face.closest(".fcard"); if(!card) return;
+    var flipped = card.classList.toggle("flipped");
+    var front = card.querySelector(".front"), back = card.querySelector(".back");
+    front.setAttribute("aria-hidden", flipped ? "true" : "false");
+    back.setAttribute("aria-hidden", flipped ? "false" : "true");
+    front.querySelector(".face").tabIndex = flipped ? -1 : 0;
+    back.querySelectorAll("button").forEach(function(b){ b.tabIndex = flipped ? 0 : -1; });
+    (flipped ? back : front).querySelector(".face").focus({preventScroll:true});
+    sFlip();
+    if(flipped){ card.classList.add("explored"); explored[card.getAttribute("data-w")] = 1; updateProgress(); }
+  });
+
+  function burst(box){
+    if(reduceMotion || !box) return;
+    box.innerHTML = "";
+    var icons = ["⭐","✨","🌟","🪐","⭐"];
+    for(var i=0;i<20;i++){
+      var s = document.createElement("span");
+      s.textContent = icons[i % icons.length];
+      s.style.left = ((i * 37) % 94 + 3) + "%";
+      s.style.animationDelay = ((i % 6) * 0.1) + "s";
+      s.style.fontSize = (18 + (i % 4) * 5) + "px";
+      box.appendChild(s);
+    }
+  }
+
+  /* ---------- Mini-semakan ejaan ---------- */
+  var quiz = [
+    { q:"Yang mana betul?", opts:["diatas","di atas"], ans:"di atas", why:"\"di\" ditulis terpisah daripada \"atas\"." },
+    { q:"Yang mana betul?", opts:["ke dalam","kedalam"], ans:"ke dalam", why:"\"ke\" ditulis terpisah daripada \"dalam\"." },
+    { q:"Yang mana betul?", opts:["dariluar","dari luar"], ans:"dari luar", why:"\"dari\" ditulis terpisah daripada \"luar\"." }
+  ];
+  var solved = 0, qbox = document.getElementById("quiz"), qhtml = "";
+  quiz.forEach(function(item, i){
+    qhtml += '<div class="q" data-i="' + i + '"><p class="q-text">' + (i+1) + '. ' + item.q + '</p><div class="q-opts">';
+    item.opts.forEach(function(o){ qhtml += '<button class="opt" type="button" data-v="' + o + '">' + o + '</button>'; });
+    qhtml += '</div><p class="fb" aria-live="polite"></p></div>';
+  });
+  qbox.innerHTML = qhtml;
+  qbox.addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var q = b.closest(".q"), item = quiz[+q.getAttribute("data-i")], fb = q.querySelector(".fb");
+    if(b.getAttribute("data-v") === item.ans){
+      b.classList.add("right");
+      q.querySelectorAll(".opt").forEach(function(x){ x.disabled = true; });
+      fb.className = "fb ok"; fb.textContent = "Hebat, angkasawan! ⭐ " + item.why;
+      sRight(); solved++;
+      document.getElementById("quizScore").textContent = solved === quiz.length ? "🌟 Kamu menjawab semua dengan betul! Hebat!" : "Betul: " + solved + "/" + quiz.length;
+    } else {
+      b.classList.add("wrong"); b.disabled = true;
+      fb.className = "fb no"; fb.textContent = "Hampir! Cuba lagi 🚀";
+      sWrong();
+    }
+  });
+})();
+</script>
+</body>
+</html>
