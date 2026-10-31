@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ms">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Nunito KA"; font-weight: 800; src: url("assets/fonts/nunito-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Nunito KA"; font-weight: 900; src: url("assets/fonts/nunito-latin-900-normal.woff2") format("woff2"); }
+      /* Palet video contoh (diukur daripada kata_arah_ipan_1.mp4) */
+      :root {
+        --space: #1E194C;
+        --space-deep: #150F3A;
+        --moon: #493F8F;
+        --crater: #3C3579;
+        --yellow: #FDD13F;
+        --coral: #FE585F;
+        --cyan: #3EBFD2;
+        --orange: #FE8B42;
+        --cream: #F4EFEA;
+        --lilac: #9B8CFF;
+        --pink: #F48FB1;
+        --teal: #35D0BA;
+        --ink: #1A1442;
+        --font: "Nunito KA", "Nunito", sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--space); }
+      #root { position: relative; width: 100%; height: 100%; font-family: var(--font); color: #fff; }
+
+      /* Latar angkasa: 3 lapisan bintang (parallax dalam video) */
+      .sky { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 50% 40%, #241E58 0%, var(--space) 60%, var(--space-deep) 100%); }
+      .stars { position: absolute; inset: -40px; background-repeat: repeat; }
+      .stars.s1 { background-image: radial-gradient(1.5px 1.5px at 20px 30px, #fff 60%, transparent), radial-gradient(1.2px 1.2px at 140px 90px, #D9D2FF 60%, transparent), radial-gradient(1.4px 1.4px at 230px 180px, #fff 60%, transparent), radial-gradient(1.1px 1.1px at 80px 220px, #FFE7A8 60%, transparent); background-size: 260px 260px; opacity: .55; }
+      .stars.s2 { background-image: radial-gradient(2.2px 2.2px at 60px 120px, #fff 60%, transparent), radial-gradient(1.8px 1.8px at 330px 40px, #fff 60%, transparent), radial-gradient(2px 2px at 420px 300px, #FFE7A8 60%, transparent); background-size: 520px 380px; opacity: .8; }
+      .stars.s3 { background-image: radial-gradient(3px 3px at 200px 160px, #fff 55%, transparent), radial-gradient(2.6px 2.6px at 900px 520px, #fff 55%, transparent); background-size: 1100px 760px; opacity: .9; }
+
+      /* Bar kemajuan misi: 5 planet */
+      .prog { position: absolute; top: 34px; left: 560px; width: 800px; height: 72px; }
+      .prog .line { position: absolute; left: 30px; right: 30px; top: 34px; border-top: 5px dashed rgba(244,239,234,.35); }
+      .prog .line-done { position: absolute; left: 30px; top: 32px; height: 9px; border-radius: 9px; background: var(--yellow); }
+      .prog .pl { position: absolute; top: 12px; width: 52px; height: 52px; margin-left: -26px; border-radius: 50%; border: 4px solid var(--ink); display: grid; place-items: center; font: 900 26px var(--font); color: var(--ink); opacity: .38; }
+      .prog .pl.on { opacity: 1; box-shadow: 0 0 0 5px rgba(253,209,63,.9); }
+      .prog .pl.done { opacity: 1; }
+      .prog .p1 { left: 30px; background: var(--coral); } .prog .p2 { left: 215px; background: var(--cyan); } .prog .p3 { left: 400px; background: var(--yellow); }
+      .prog .p4 { left: 585px; background: var(--orange); } .prog .p5 { left: 770px; background: var(--lilac); }
+      .prog .rkt { position: absolute; top: -18px; width: 86px; height: 40px; }
+
+      /* Tajuk stesen kecil (kiri atas) */
+      .tag { position: absolute; left: 96px; top: 136px; font: 900 40px var(--font); color: var(--cream); background: rgba(21,15,58,.75); border: 3px solid rgba(244,239,234,.25); border-radius: 999px; padding: 6px 24px; }
+      .tag b { color: var(--yellow); }
+
+      /* Ayat utama (karaoke) */
+      .sentence { position: absolute; left: 80px; right: 80px; text-align: center; font: 900 74px/1.2 var(--font); color: #fff; text-shadow: 0 5px 0 rgba(10,7,32,.55); }
+      .sentence .w { display: inline-block; margin: 0 .12em; }
+      .sentence .dim { opacity: .4; }
+      .ka { color: var(--yellow); text-decoration: underline; text-decoration-thickness: 8px; text-underline-offset: 14px; }
+      .c-di { color: var(--pink); } .c-ke { color: var(--orange); } .c-dari { color: var(--teal); }
+
+      /* Label kata arah "pop" */
+      .label-ka { position: absolute; font: 900 124px/1 var(--font); color: var(--yellow); letter-spacing: 2px; text-shadow: 0 7px 0 #0F0B2E; }
+
+      /* Kapsyen dibakar */
+      .cap { position: absolute; left: 50%; bottom: 44px; width: 1560px; margin-left: -780px; text-align: center; font: 800 52px/1.3 var(--font); color: #fff; background: rgba(12,9,38,.78); border-radius: 26px; padding: 14px 36px 18px; }
+      .cap .cw { opacity: .55; } .cap .cw.said { opacity: 1; } .cap .cw.now { opacity: 1; color: #fff; background: rgba(62,191,210,.35); border-radius: 10px; padding: 0 6px; }
+      .cap .ka { text-decoration-thickness: 5px; text-underline-offset: 9px; opacity: 1; }
+    </style>
+  </head>
+  <body>
+    <!-- Aset SVG asli (gaya flat video contoh) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <clipPath id="clip-visor"><ellipse cx="100" cy="88" rx="50" ry="44" /></clipPath>
+      </defs>
+      <!-- Roket mendatar (hidung ke kanan) -->
+      <symbol id="a-rocket" viewBox="0 0 300 140">
+        <g stroke="#1A1442" stroke-width="6" stroke-linejoin="round">
+          <path d="M84 36 L64 6 H100 L126 36Z" fill="#FE585F" />
+          <path d="M84 104 L64 134 H100 L126 104Z" fill="#FE585F" />
+          <path d="M66 50 Q22 56 6 70 Q22 84 66 90Z" fill="#FE8B42" />
+          <path d="M66 58 Q38 62 28 70 Q38 78 66 82Z" fill="#FDD13F" stroke-width="0" />
+          <path d="M78 34 H204 Q252 40 284 70 Q252 100 204 106 H78 Q64 106 64 92 V48 Q64 34 78 34Z" fill="#F4EFEA" />
+          <path d="M206 34.5 Q254 40 284 70 Q254 100 206 105.5 Q216 70 206 34.5Z" fill="#FE585F" />
+          <rect x="98" y="34" width="18" height="72" fill="#FE585F" />
+          <circle cx="160" cy="70" r="25" fill="#3EBFD2" />
+        </g>
+        <path d="M146 58 Q154 50 166 50" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".85" />
+      </symbol>
+      <!-- Bintang comel -->
+      <symbol id="a-star" viewBox="0 0 100 100">
+        <path d="M50 6 L62 36 L94 38 L69 58 L78 90 L50 72 L22 90 L31 58 L6 38 L38 36 Z" fill="#FDD13F" stroke="#1A1442" stroke-width="5" stroke-linejoin="round" />
+        <circle cx="42" cy="50" r="4" fill="#1A1442" /><circle cx="58" cy="50" r="4" fill="#1A1442" />
+        <path d="M43 60 Q50 66 57 60" fill="none" stroke="#1A1442" stroke-width="3.5" stroke-linecap="round" />
+      </symbol>
+      <!-- Bumi -->
+      <symbol id="a-earth" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="94" fill="#4C8DF6" stroke="#1A1442" stroke-width="6" />
+        <path d="M40 70 Q60 40 96 52 Q110 70 90 86 Q70 84 66 104 Q50 104 40 70Z M120 120 Q150 104 170 126 Q164 160 132 170 Q118 150 120 120Z M118 30 Q140 28 150 46 Q132 52 118 30Z" fill="#4FBF6F" stroke="#1A1442" stroke-width="5" stroke-linejoin="round" />
+      </symbol>
+      <!-- Batu angkasa -->
+      <symbol id="a-rock" viewBox="0 0 240 150">
+        <path d="M16 140 C2 100 30 52 76 46 C96 14 160 14 176 50 C218 56 238 104 226 140 Z" fill="#7A70C2" stroke="#1A1442" stroke-width="6" stroke-linejoin="round" />
+        <ellipse cx="90" cy="92" rx="20" ry="11" fill="#635AA8" /><ellipse cx="160" cy="80" rx="14" ry="8" fill="#635AA8" /><ellipse cx="180" cy="116" rx="11" ry="6" fill="#635AA8" />
+      </symbol>
+      <!-- Planet -->
+      <symbol id="a-planet-red" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="92" fill="#FE585F" stroke="#1A1442" stroke-width="6" />
+        <path d="M14 82 Q100 62 186 82 M10 118 Q100 98 190 120" fill="none" stroke="#D93F4E" stroke-width="14" stroke-linecap="round" />
+        <circle cx="66" cy="60" r="12" fill="#fff" opacity=".45" />
+      </symbol>
+      <symbol id="a-planet-blue" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="92" fill="#4C8DF6" stroke="#1A1442" stroke-width="6" />
+        <path d="M14 82 Q100 62 186 82 M10 118 Q100 98 190 120" fill="none" stroke="#3468D6" stroke-width="14" stroke-linecap="round" />
+        <circle cx="66" cy="60" r="12" fill="#fff" opacity=".45" />
+      </symbol>
+      <!-- Aira (depan) -->
+      <symbol id="a-aira" viewBox="0 0 200 270">
+        <g stroke="#1A1442" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+          <rect x="50" y="140" width="100" height="78" rx="24" fill="#D8D2EA" />
+          <rect x="68" y="200" width="26" height="44" rx="11" fill="#F4EFEA" />
+          <rect x="106" y="200" width="26" height="44" rx="11" fill="#F4EFEA" />
+          <path d="M62 236 H100 V250 A8 8 0 0 1 92 258 H70 A8 8 0 0 1 62 250Z" fill="#FE8B42" />
+          <path d="M100 236 H138 V250 A8 8 0 0 1 130 258 H108 A8 8 0 0 1 100 250Z" fill="#FE8B42" />
+          <path d="M64 158 Q42 178 40 202" fill="none" stroke-width="27" />
+          <path d="M64 158 Q42 178 40 202" fill="none" stroke="#F4EFEA" stroke-width="17" />
+          <circle cx="40" cy="208" r="13" fill="#FE8B42" />
+          <path d="M136 158 Q162 142 166 112" fill="none" stroke-width="27" />
+          <path d="M136 158 Q162 142 166 112" fill="none" stroke="#F4EFEA" stroke-width="17" />
+          <circle cx="167" cy="104" r="14" fill="#FE8B42" />
+          <rect x="58" y="138" width="84" height="76" rx="28" fill="#F4EFEA" />
+          <rect x="82" y="154" width="36" height="24" rx="6" fill="#3EBFD2" />
+          <path d="M58 194 H142 V204 H58Z" fill="#FE8B42" stroke-width="3" />
+          <circle cx="32" cy="88" r="11" fill="#3EBFD2" /><circle cx="168" cy="88" r="11" fill="#3EBFD2" />
+          <circle cx="100" cy="84" r="68" fill="#F4EFEA" />
+          <ellipse cx="100" cy="88" rx="50" ry="44" fill="#BDEFF4" />
+        </g>
+        <g clip-path="url(#clip-visor)">
+          <circle cx="100" cy="100" r="34" fill="#F6C9A3" />
+          <path d="M64 96 Q62 58 100 56 Q138 58 136 96 Q128 80 114 76 Q104 88 86 82 Q72 84 64 96Z" fill="#5B3420" />
+          <circle cx="88" cy="102" r="5" fill="#1A1442" /><circle cx="112" cy="102" r="5" fill="#1A1442" />
+          <ellipse cx="80" cy="112" rx="6" ry="4" fill="#FF9FB0" /><ellipse cx="120" cy="112" rx="6" ry="4" fill="#FF9FB0" />
+          <path d="M90 116 Q100 125 110 116" fill="none" stroke="#1A1442" stroke-width="4" stroke-linecap="round" />
+        </g>
+        <ellipse cx="100" cy="88" rx="50" ry="44" fill="none" stroke="#1A1442" stroke-width="5" />
+        <path d="M66 70 Q74 54 92 50" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".8" />
+      </symbol>
+      <!-- Aira (belakang): kiri Aira = kiri skrin -->
+      <symbol id="a-aira-back" viewBox="0 0 200 270">
+        <g stroke="#1A1442" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+          <rect x="68" y="200" width="26" height="44" rx="11" fill="#F4EFEA" />
+          <rect x="106" y="200" width="26" height="44" rx="11" fill="#F4EFEA" />
+          <path d="M62 236 H100 V250 A8 8 0 0 1 92 258 H70 A8 8 0 0 1 62 250Z" fill="#FE8B42" />
+          <path d="M100 236 H138 V250 A8 8 0 0 1 130 258 H108 A8 8 0 0 1 100 250Z" fill="#FE8B42" />
+          <path d="M64 158 Q40 178 36 204" fill="none" stroke-width="27" />
+          <path d="M64 158 Q40 178 36 204" fill="none" stroke="#F4EFEA" stroke-width="17" />
+          <circle cx="35" cy="210" r="13" fill="#FE8B42" />
+          <path d="M136 158 Q160 178 164 204" fill="none" stroke-width="27" />
+          <path d="M136 158 Q160 178 164 204" fill="none" stroke="#F4EFEA" stroke-width="17" />
+          <circle cx="165" cy="210" r="13" fill="#FE8B42" />
+          <rect x="58" y="138" width="84" height="76" rx="28" fill="#F4EFEA" />
+          <rect x="56" y="130" width="88" height="86" rx="18" fill="#FE8B42" />
+          <rect x="74" y="146" width="52" height="36" rx="8" fill="#F4EFEA" />
+          <circle cx="88" cy="164" r="6" fill="#3EBFD2" /><circle cx="112" cy="164" r="6" fill="#FE585F" />
+          <circle cx="32" cy="88" r="11" fill="#3EBFD2" /><circle cx="168" cy="88" r="11" fill="#3EBFD2" />
+          <circle cx="100" cy="84" r="68" fill="#F4EFEA" />
+          <path d="M36 98 Q100 118 164 98" fill="none" stroke="#3EBFD2" stroke-width="10" />
+        </g>
+      </symbol>
+      <!-- Gogo: makhluk asing hijau bermata satu -->
+      <symbol id="a-gogo" viewBox="0 0 180 190">
+        <g stroke="#1A1442" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M72 56 L58 16 M108 56 L122 16" fill="none" />
+          <circle cx="57" cy="13" r="9" fill="#FDD13F" /><circle cx="123" cy="13" r="9" fill="#FDD13F" />
+          <path d="M38 112 Q16 92 20 68" fill="none" stroke-width="20" />
+          <path d="M38 112 Q16 92 20 68" fill="none" stroke="#6CCB4E" stroke-width="11" />
+          <path d="M142 116 Q164 130 160 150" fill="none" stroke-width="20" />
+          <path d="M142 116 Q164 130 160 150" fill="none" stroke="#6CCB4E" stroke-width="11" />
+          <ellipse cx="66" cy="176" rx="20" ry="10" fill="#4FAE3A" /><ellipse cx="114" cy="176" rx="20" ry="10" fill="#4FAE3A" />
+          <ellipse cx="90" cy="112" rx="62" ry="62" fill="#6CCB4E" />
+          <circle cx="90" cy="92" r="28" fill="#fff" />
+        </g>
+        <ellipse cx="90" cy="148" rx="34" ry="20" fill="#A8E58C" opacity=".9" />
+        <path d="M74 128 Q90 142 106 128" fill="none" stroke="#1A1442" stroke-width="5" stroke-linecap="round" />
+        <circle cx="50" cy="120" r="6" fill="#4FAE3A" /><circle cx="132" cy="96" r="5" fill="#4FAE3A" />
+        <circle cx="94" cy="94" r="13" fill="#1A1442" /><circle cx="99" cy="88" r="5" fill="#fff" />
+      </symbol>
+    </svg>
+
+    <div id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <div class="sky"></div>
+      <div class="stars s1"></div>
+      <div class="stars s2"></div>
+      <div class="stars s3"></div>
+
+      <div id="d1" data-composition-id="d1" data-composition-src="compositions/d1-tajuk.html" data-start="0" data-duration="1" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="d2" data-composition-id="d2" data-composition-src="compositions/d2-gerabak.html" data-start="1" data-duration="1" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="d3" data-composition-id="d3" data-composition-src="compositions/d3-pasangan.html" data-start="2" data-duration="1" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="d4" data-composition-id="d4" data-composition-src="compositions/d4-kiri.html" data-start="3" data-duration="1" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="d5" data-composition-id="d5" data-composition-src="compositions/d5-dikedari.html" data-start="4" data-duration="1" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="d6" data-composition-id="d6" data-composition-src="compositions/d6-formula.html" data-start="5" data-duration="1" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
