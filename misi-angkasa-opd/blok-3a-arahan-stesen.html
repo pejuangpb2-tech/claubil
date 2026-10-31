@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arahan Stesen – Misi Angkasa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1D0851; --card:#241A6B; --card-line:#4B3FA0; --screen:#130536;
+    --navy:#2D2B64; --purple:#634790; --pink:#D6337F; --pink-soft:#FF8FC0;
+    --teal:#3BFEC1; --ice:#9FF0FF; --gold:#FFD447; --text-2:#DCD5FF; --radius:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  body{
+    font-family:"Nunito",system-ui,sans-serif;font-size:19px;line-height:1.5;color:#fff;
+    background-color:var(--bg);
+    background-image:
+      radial-gradient(ellipse 50% 60% at 8% 20%, rgba(43,34,144,.55), transparent 70%),
+      radial-gradient(ellipse 45% 60% at 95% 80%, rgba(30,26,119,.85), transparent 70%);
+    position:relative;
+  }
+  body::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      radial-gradient(1.6px 1.6px at 20px 30px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 120px 80px,#C9BCFF,transparent),
+      radial-gradient(1.8px 1.8px at 210px 160px,#fff,transparent),
+      radial-gradient(1.4px 1.4px at 260px 40px,#9FF0FF,transparent);
+    background-size:290px 200px;opacity:.75;animation:twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{from{opacity:.35}to{opacity:.9}}
+  .wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:14px 16px 18px}
+  .card{
+    background:var(--card);border:2px solid var(--card-line);border-radius:var(--radius);padding:18px 22px;
+    box-shadow:0 8px 0 rgba(10,2,40,.55),0 14px 28px rgba(5,0,25,.45);
+  }
+  .head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .tv{width:58px;height:50px;flex:0 0 auto;animation:bob 3s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .pill{display:inline-block;background:#fff;color:var(--purple);font:600 28px "Fredoka",sans-serif;padding:6px 20px;border-radius:999px;box-shadow:0 4px 0 #B9A8F0}
+  .steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+  .steps li{display:flex;align-items:center;gap:12px;background:var(--screen);border:2px solid var(--card-line);border-radius:18px;padding:10px 14px;font-weight:700;font-size:19px}
+  .num{flex:0 0 44px;height:44px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;font:700 22px "Fredoka",sans-serif;position:relative}
+  .num i{position:absolute;right:-8px;bottom:-6px;font-style:normal;font-size:20px}
+  .tip{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between}
+  .tip p{font:600 22px "Fredoka",sans-serif;color:var(--teal)}
+  .tip .down{color:var(--text-2);font:600 19px "Nunito",sans-serif}
+  .btn{-webkit-appearance:none;appearance:none;border:0;cursor:pointer;min-height:52px;padding:0 22px;border-radius:999px;font:600 20px "Fredoka",sans-serif;display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--purple);box-shadow:0 5px 0 #B9A8F0;-webkit-tap-highlight-color:transparent}
+  .btn:active{transform:translateY(3px);box-shadow:0 2px 0 #B9A8F0}
+  .btn:focus-visible{outline:4px solid var(--teal);outline-offset:3px}
+  .speak{display:none}
+  .has-voice .speak{display:inline-flex}
+  @media (max-width:820px){
+    .steps{grid-template-columns:1fr}
+  }
+  @media (max-width:420px){
+    .card{padding:16px}
+    .pill{font-size:23px;padding:6px 16px}
+    .tv{width:48px;height:42px}
+    .tip p{font-size:20px}
+  }
+  @media (prefers-reduced-motion: reduce){ *,*::before{animation:none!important} }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="card" aria-labelledby="title">
+    <div class="head">
+      <svg class="tv" viewBox="0 0 58 50" aria-hidden="true">
+        <g stroke="#3A1F6E" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M20 4 L29 12 L38 4" fill="none" stroke="#9FF0FF"/>
+          <rect x="3" y="12" width="52" height="34" rx="9" fill="#fff"/>
+          <rect x="9" y="17" width="40" height="24" rx="5" fill="#2B2290"/>
+          <path d="M25 23 L35 29 L25 35Z" fill="#FFD447" stroke-width="2"/>
+        </g>
+      </svg>
+      <h1 class="pill" id="title">Stesen Penerangan 📺</h1>
+    </div>
+    <ol class="steps">
+      <li><span class="num">1<i aria-hidden="true">👀</i></span><span>Tonton video dengan teliti.</span></li>
+      <li><span class="num">2<i aria-hidden="true">🔍</i></span><span>Cari kata arah yang disebut dalam video.</span></li>
+      <li><span class="num">3<i aria-hidden="true">✅</i></span><span>Jawab soalan Semak Faham di bawah video.</span></li>
+    </ol>
+    <div class="tip">
+      <p>💡 Boleh tonton lebih daripada sekali!</p>
+      <button class="btn speak" type="button"
+        data-say="Stesen Penerangan. Satu. Tonton video dengan teliti. Dua. Cari kata arah yang disebut dalam video. Tiga. Jawab soalan Semak Faham di bawah video. Boleh tonton lebih daripada sekali!">
+        <span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span>
+      </button>
+      <span class="down">👇 Video ada di bawah</span>
+    </div>
+  </section>
+</main>
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var synth = ("speechSynthesis" in window) ? window.speechSynthesis : null;
+  var voice = null, activeBtn = null;
+  function pickVoice(){
+    if(!synth) return;
+    var vs = [];
+    try{ vs = synth.getVoices() || []; }catch(e){}
+    function find(re){ for(var i=0;i<vs.length;i++){ if(re.test(vs[i].lang)) return vs[i]; } return null; }
+    voice = find(/^ms[-_]MY/i) || find(/^ms\b/i) || find(/^id[-_]ID/i) || find(/^id\b/i) || find(/^in[-_]ID/i);
+    root.classList.toggle("has-voice", !!voice);
+  }
+  if(synth){
+    pickVoice();
+    try{ synth.addEventListener ? synth.addEventListener("voiceschanged", pickVoice) : (synth.onvoiceschanged = pickVoice); }catch(e){}
+    [300, 1000, 2500].forEach(function(ms){ setTimeout(pickVoice, ms); });
+  }
+  function resetSpeakBtn(){
+    if(activeBtn){ activeBtn.querySelector(".lbl").textContent = "Dengar"; activeBtn.querySelector("[aria-hidden]").textContent = "🔊"; activeBtn = null; }
+  }
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest ? e.target.closest(".speak") : null;
+    if(!btn || !synth || !voice) return;
+    var wasActive = (btn === activeBtn);
+    try{ synth.cancel(); }catch(err){}
+    resetSpeakBtn();
+    if(wasActive) return;
+    activeBtn = btn;
+    btn.querySelector(".lbl").textContent = "Berhenti";
+    btn.querySelector("[aria-hidden]").textContent = "⏹";
+    try{
+      var u = new SpeechSynthesisUtterance(btn.getAttribute("data-say"));
+      u.lang = voice.lang; u.rate = 0.9; u.pitch = 1.05;
+      try{ u.voice = voice; }catch(vErr){}
+      u.onend = u.onerror = function(){ if(activeBtn === btn) resetSpeakBtn(); };
+      synth.speak(u);
+    }catch(err){ resetSpeakBtn(); }
+  });
+})();
+</script>
+</body>
+</html>
