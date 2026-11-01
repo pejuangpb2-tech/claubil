@@ -3,7 +3,7 @@
 latar angkasa dengan palet dan watak OPD Misi Angkasa.
 
 Usage (dari misi-kata-arah/):  python3 tools/cover.py
-Input:  design/cover/kepala.png (kepala yang telah dipotong, 720x1000, latar lutsinar)
+Input:  design/cover/potongan.png (foto dengan latar dibuang: npx hyperframes remove-background)
 Output: design/cover/cover-biodata.png dan .jpg
 """
 import os
@@ -12,15 +12,43 @@ import subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "design", "cover")
+
+# Sediakan kepala.png daripada potongan.png (output `hyperframes remove-background`):
+# potong kepala, pudarkan leher, dan buang songkok (topi komunikasi dilukis di atasnya).
+from PIL import Image, ImageChops, ImageDraw  # noqa: E402
+_c = Image.open(os.path.join(OUT, "potongan.png")).convert("RGBA").crop((820, 150, 1540, 1150))
+_m = Image.new("L", _c.size, 255)
+_d = ImageDraw.Draw(_m)
+for _y in range(861, 1000):
+    _d.line([(0, _y), (720, _y)], fill=max(0, int(255 * (1 - (_y - 860) / 120))))
+_d.polygon([(0, 0), (720, 0), (720, 330), (600, 340), (565, 352), (470, 322), (370, 318), (270, 330), (178, 366), (0, 380)], fill=0)
+_c.putalpha(ImageChops.multiply(_c.split()[3], _m))
+_c.save(os.path.join(OUT, "kepala.png"))
 tpl = open(os.path.join(ROOT, "tools", "index.template.html")).read()
 style = re.search(r"<style>(.*?)</style>", tpl, re.S).group(1).replace('url("assets/', 'url("../../assets/')
 lib = re.findall(r"<script>(.*?)</script>", tpl, re.S)[1]
 symbols = re.search(r'(<svg width="0" height="0".*?</svg>)\s*\n\s*<div id="root"', tpl, re.S).group(1)
 
+# Topi komunikasi ("snoopy cap") menggantikan songkok, dilukis dalam koordinat kepala.png
+CAP = """
+<path d="M120 650 C100 560 95 470 105 400 C112 230 230 95 375 92 C520 95 645 230 655 400 C662 480 655 560 640 650 C620 668 600 668 578 656 C592 560 590 450 565 350 C500 318 430 310 370 314 C300 318 230 335 180 362 C160 450 162 560 182 660 C160 668 138 664 120 650 Z" fill="url(#g-capw)"/>
+<path d="M105 420 C100 500 105 580 120 650 C138 664 160 668 182 660 C162 560 160 470 178 392 C150 400 125 410 105 420 Z" fill="url(#g-capd)"/>
+<path d="M655 420 C662 500 655 580 640 650 C620 668 600 668 578 656 C592 560 590 470 570 382 C600 392 630 405 655 420 Z" fill="url(#g-capd)"/>
+<path d="M375 94 C382 180 380 260 370 314" stroke="#C9C2DA" stroke-width="6" fill="none"/>
+<path d="M196 205 C250 160 300 143 332 140 M556 205 C500 160 450 143 418 140" stroke="#D6D0E3" stroke-width="5" fill="none"/>
+<path d="M567 352 C500 318 430 310 370 314 C300 318 230 335 178 364" stroke="#3EBFD2" stroke-width="16" fill="none" stroke-linecap="round"/>
+<circle cx="118" cy="548" r="66" fill="url(#g-ear)" stroke="#0B0920" stroke-width="5"/>
+<circle cx="118" cy="548" r="40" fill="none" stroke="#4A4373" stroke-width="6"/>
+<circle cx="624" cy="530" r="56" fill="url(#g-ear)" stroke="#0B0920" stroke-width="5"/>
+<circle cx="624" cy="530" r="33" fill="none" stroke="#4A4373" stroke-width="6"/>
+<path d="M150 596 C190 660 240 690 292 684" stroke="#15122E" stroke-width="11" fill="none" stroke-linecap="round"/>
+<rect x="280" y="668" width="38" height="30" rx="14" fill="#2A2547" stroke="#0B0920" stroke-width="3"/>
+"""
+
 # Pusat topi keledar dan skala kepala (kepala.png 720x1000; pusat muka pada (360, 450))
-HX, HY, SC = 1340, 470, 0.62
+HX, HY, SC = 1340, 470, 0.74
 IW, IH = 720 * SC, 1000 * SC
-IX, IY = HX - 360 * SC, HY + 25 - 450 * SC
+IX, IY = HX - 360 * SC, HY + 13 - 450 * SC
 
 suit = f"""
 <svg id="astro" viewBox="0 0 1920 1080" width="1920" height="1080">
@@ -51,6 +79,10 @@ suit = f"""
   <radialGradient id="g-halo" cx="50%" cy="50%" r="50%">
    <stop offset="0" stop-color="#3EBFD2" stop-opacity=".32"/><stop offset=".6" stop-color="#9B8CFF" stop-opacity=".12"/><stop offset="1" stop-color="#9B8CFF" stop-opacity="0"/>
   </radialGradient>
+  <radialGradient id="g-capw" cx="40%" cy="25%" r="80%"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#ECE8F3"/><stop offset="1" stop-color="#B3ABCB"/></radialGradient>
+  <linearGradient id="g-capd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A5290"/><stop offset="1" stop-color="#2E2866"/></linearGradient>
+  <radialGradient id="g-ear" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#3A3460"/><stop offset="1" stop-color="#0F0C26"/></radialGradient>
+  <filter id="f-cap" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="9" stdDeviation="9" flood-color="#000" flood-opacity=".45"/></filter>
   <clipPath id="c-visor"><ellipse cx="{HX}" cy="{HY + 10}" rx="262" ry="292"/></clipPath>
   <filter id="f-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
   <filter id="f-shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#07051C" flood-opacity=".55"/></filter>
@@ -102,6 +134,7 @@ suit = f"""
  <g clip-path="url(#c-visor)">
   <rect x="{HX - 280}" y="{HY - 300}" width="560" height="620" fill="url(#g-inside)"/>
   <image href="kepala.png" x="{IX:.1f}" y="{IY:.1f}" width="{IW:.1f}" height="{IH:.1f}" preserveAspectRatio="none"/>
+  <g transform="translate({IX:.1f} {IY:.1f}) scale({SC})" filter="url(#f-cap)">{CAP}</g>
   <rect x="{HX - 280}" y="{HY - 300}" width="560" height="620" fill="url(#g-rim)"/>
   <rect x="{HX - 280}" y="{HY - 300}" width="560" height="620" fill="url(#g-vig)"/>
   <rect x="{HX - 280}" y="{HY - 300}" width="560" height="620" fill="url(#g-glass)"/>
