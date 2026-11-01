@@ -1,0 +1,466 @@
+<!doctype html>
+<!-- Misi Kata Ganti Nama Diri: Maklum Balas Murid (satu fail). Gambar, fon dan bunyi dimuatkan dari https://pejuangpb2-tech.github.io/claubil/penilaian/ -->
+<html lang="ms">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Misi Kata Ganti Nama Diri: Maklum Balas</title>
+  <meta name="description" content="Maklum balas murid selepas pelajaran kata ganti nama diri, Bahasa Melayu Tahun 4." />
+  <style>
+/* Misi Kata Ganti Nama Diri: penilaian murid
+   Same look as the lesson video: sky world, cream clay panels, purple/pink/green teams, Baloo 2. */
+@font-face { font-family: "Baloo 2"; src: url("https://pejuangpb2-tech.github.io/claubil/penilaian/assets/fonts/baloo-2-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Baloo 2"; src: url("https://pejuangpb2-tech.github.io/claubil/penilaian/assets/fonts/baloo-2-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Baloo 2"; src: url("https://pejuangpb2-tech.github.io/claubil/penilaian/assets/fonts/baloo-2-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Baloo 2"; src: url("https://pejuangpb2-tech.github.io/claubil/penilaian/assets/fonts/baloo-2-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+
+:root {
+  --navy: #1f2f66;
+  --pink: #c42d5c;
+  --cream: #fff6e3;
+  --edge: #f3cf9c;
+  --p1: #8f6fd1; --p1s: #ece3fa; --p1e: #c3aef0;
+  --p2: #d6527a; --p2s: #fde1e6; --p2e: #f5b1bf;
+  --p3: #3a8f4f; --p3s: #e0f2dd; --p3e: #a8d9a0;
+  --y: #f0a51c; --ys: #fdf2c8;
+  --ok: #3a8f4f; --no: #d6406c;
+  --clay: 0 10px 0 rgba(150, 100, 60, 0.18), 0 20px 30px rgba(60, 90, 140, 0.16), inset 0 -8px 0 rgba(0, 0, 0, 0.05), inset 0 6px 0 rgba(255, 255, 255, 0.7);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #7cc6f1; }
+body { font-family: "Baloo 2", system-ui, sans-serif; color: var(--navy); -webkit-tap-highlight-color: transparent; }
+
+/* a fixed 1280x720 stage, scaled to fit any frame (Canva embed, phone, projector) */
+#stage {
+  position: absolute; left: 50%; top: 50%;
+  width: 1280px; height: 720px; transform-origin: 50% 50%;
+  background: #a9dcf7 url("https://pejuangpb2-tech.github.io/claubil/penilaian/assets/latar.png") center / cover no-repeat;
+  overflow: hidden;
+}
+
+.screen { position: absolute; inset: 0; display: none; }
+.screen.on { display: block; animation: enter 0.45s cubic-bezier(.2, 1.4, .4, 1); }
+@keyframes enter { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: none; } }
+
+/* shared pieces */
+.ribbon { position: absolute; left: 50%; top: 14px; width: 640px; height: 96px; margin-left: -320px; }
+.ribbon svg { width: 100%; height: 100%; }
+.ribbon span { position: absolute; left: 0; right: 0; top: 10px; height: 66px; line-height: 66px; text-align: center; color: #fff; font-weight: 800; font-size: 38px; text-shadow: 0 2px 0 #a3244c; white-space: nowrap; }
+.pill { position: absolute; left: 50%; transform: translateX(-50%); top: 102px; height: 38px; line-height: 38px; padding: 0 22px; border-radius: 999px; background: #ffe27a; font-weight: 700; font-size: 19px; white-space: nowrap; box-shadow: var(--clay); }
+.panel { position: absolute; background: var(--cream); border: 6px solid var(--edge); border-radius: 34px; box-shadow: var(--clay); }
+.char { position: absolute; display: block; pointer-events: none; user-select: none; }
+.bush { position: absolute; pointer-events: none; }
+.bubble { position: absolute; background: #fff; border: 4px solid #3b2418; border-radius: 24px; font-weight: 700; font-size: 19px; line-height: 1.15; padding: 10px 16px; text-align: center; }
+
+.btn {
+  display: inline-block; border: 5px solid #fff; border-radius: 26px; padding: 6px 30px;
+  background: linear-gradient(180deg, #f9a2b7, #ef6f92); color: #fff;
+  font: 800 26px/1.2 "Baloo 2", sans-serif; cursor: pointer; box-shadow: var(--clay);
+  transition: transform 0.12s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(3px) scale(0.98); }
+.btn.green { background: linear-gradient(180deg, #7cc48a, #3a8f4f); }
+.btn.purple { background: linear-gradient(180deg, #b79be6, #8f6fd1); }
+.btn[disabled] { opacity: 0.45; cursor: default; transform: none; }
+.btn[hidden] { display: none; }
+
+.progress { position: absolute; right: 22px; top: 22px; display: flex; gap: 8px; }
+.progress i { width: 18px; height: 18px; border-radius: 50%; background: rgba(255, 255, 255, 0.7); border: 3px solid #fff; }
+.progress i.done { background: var(--y); }
+
+/* screen 0: start */
+#s0 .title { position: absolute; left: 70px; top: 70px; font-weight: 800; line-height: 1; }
+#s0 .title small { display: inline-block; background: var(--pink); color: #fff; font-size: 30px; padding: 2px 20px; border-radius: 999px; transform: rotate(-3deg); box-shadow: var(--clay); }
+#s0 .title b { display: block; font-size: 80px; margin-top: 10px; }
+#s0 .title b + b { color: var(--pink); margin-top: 0; text-shadow: 0 4px 0 #fff; }
+#s0 .sub { position: absolute; left: 76px; top: 300px; font-weight: 700; font-size: 24px; background: var(--ys); padding: 4px 20px; border-radius: 999px; box-shadow: var(--clay); }
+#s0 .namebox { position: absolute; left: 70px; top: 380px; width: 520px; padding: 22px 26px; }
+label, .tl { display: block; font-weight: 800; font-size: 24px; margin-bottom: 8px; }
+input, textarea {
+  width: 100%; border: 4px solid var(--p1e); border-radius: 18px; padding: 8px 16px;
+  font: 600 24px/1.25 "Baloo 2", sans-serif; color: var(--navy); background: #fff; outline: none;
+}
+input:focus, textarea:focus { border-color: var(--p1); }
+#s0 .go { margin-top: 16px; }
+.steps { position: absolute; left: 680px; top: 170px; display: flex; flex-direction: column; gap: 14px; }
+.steps div { background: #fff; border-radius: 22px; padding: 8px 22px 8px 10px; font-weight: 700; font-size: 22px; display: flex; align-items: center; gap: 12px; box-shadow: var(--clay); }
+.steps span { width: 42px; height: 42px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 24px; line-height: 36px; text-align: center; border: 3px solid #fff; }
+.teacher-link { position: absolute; left: 22px; bottom: 18px; background: rgba(255, 255, 255, 0.85); border: 3px solid #fff; border-radius: 999px; padding: 2px 16px; font: 700 16px/1.4 "Baloo 2", sans-serif; color: var(--navy); cursor: pointer; }
+
+/* screen 1: feelings */
+.feel { left: 230px; right: 230px; top: 140px; padding: 20px 30px 24px; text-align: center; }
+.faces { display: flex; justify-content: center; gap: 30px; margin-bottom: 22px; }
+.face { background: #fff; border: 5px solid transparent; border-radius: 28px; padding: 12px 22px 6px; cursor: pointer; box-shadow: var(--clay); transition: transform 0.12s; font-family: inherit; color: var(--navy); }
+.face:hover { transform: translateY(-3px); }
+.face svg { width: 110px; height: 110px; display: block; margin: 0 auto; }
+.face b { display: block; font-weight: 800; font-size: 24px; }
+.face.on { border-color: var(--p3); background: var(--p3s); }
+.likes { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.like { background: #fff; border: 4px solid var(--p1e); border-radius: 999px; padding: 4px 22px; font: 700 22px/1.3 "Baloo 2", sans-serif; color: var(--p1); cursor: pointer; box-shadow: var(--clay); }
+.like.on { background: var(--p1); border-color: #fff; color: #fff; }
+
+.toast { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); min-width: 420px; text-align: center; border-radius: 22px; padding: 6px 22px; font-weight: 800; font-size: 22px; color: #fff; box-shadow: var(--clay); opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 5; }
+.toast.show { opacity: 1; }
+.toast.ok { background: var(--ok); }
+.toast.no { background: var(--no); }
+.next { position: absolute; right: 40px; bottom: 34px; z-index: 6; }
+.pop { animation: pop 0.35s; }
+@keyframes pop { 0% { transform: scale(0.6); } 70% { transform: scale(1.12); } 100% { transform: scale(1); } }
+
+/* screen 2: self assessment */
+.rows { left: 210px; right: 210px; top: 140px; padding: 18px 24px; }
+.rate { display: flex; align-items: center; background: #fff; border-radius: 18px; padding: 8px 12px; margin-bottom: 10px; }
+.rate p { flex: 1; font-weight: 600; font-size: 21px; line-height: 1.2; padding: 0 12px; }
+.rate .n { flex: 0 0 36px; height: 36px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 20px; line-height: 30px; text-align: center; border: 3px solid #fff; }
+.stars { display: flex; gap: 4px; }
+.stars button { background: none; border: none; cursor: pointer; padding: 2px; transition: transform 0.12s; }
+.stars button:hover { transform: scale(1.12); }
+.stars svg { width: 44px; height: 44px; display: block; }
+.stars svg path { fill: #fff; stroke: var(--y); stroke-width: 7; stroke-linejoin: round; }
+.stars button.on svg path { fill: #ffd23f; }
+.legend { display: flex; gap: 10px; margin-top: 6px; }
+.legend div { flex: 1; background: var(--ys); border-radius: 14px; padding: 4px 8px; font-weight: 700; font-size: 16px; text-align: center; }
+
+/* screen 3: reflection */
+.refl { left: 300px; right: 200px; top: 140px; padding: 22px 28px; }
+.refl textarea { height: 120px; resize: none; margin-bottom: 18px; }
+
+/* screen 4: thank you */
+.thanks { left: 330px; right: 330px; top: 130px; padding: 22px 30px; text-align: center; }
+.thanks h2 { font-weight: 800; font-size: 58px; line-height: 1; color: var(--pink); }
+.thanks .who { font-weight: 700; font-size: 26px; margin: 6px 0 12px; }
+.mystars { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.mystars div { background: #fff; border-radius: 18px; padding: 6px 10px; box-shadow: var(--clay); }
+.mystars span { display: block; font-weight: 700; font-size: 16px; }
+.mystars b { font-size: 26px; color: var(--y); letter-spacing: 2px; }
+.thanks .note { font-weight: 600; font-size: 18px; color: #6a5a92; margin-bottom: 14px; }
+.confetti { position: absolute; width: 26px; height: 26px; pointer-events: none; animation: fall 2.4s ease-in forwards; }
+@keyframes fall { from { transform: translateY(-60px) rotate(0); opacity: 1; } to { transform: translateY(760px) rotate(540deg); opacity: 0.9; } }
+
+/* teacher board */
+.board { left: 60px; right: 60px; top: 120px; bottom: 24px; padding: 16px 20px; display: flex; flex-direction: column; }
+.summary { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; margin-bottom: 12px; }
+.tile { background: #fff; border-radius: 16px; padding: 4px 6px; text-align: center; box-shadow: var(--clay); }
+.tile b { display: block; font-weight: 800; font-size: 30px; line-height: 1.1; color: var(--p1); }
+.tile b small { font-size: 16px; color: #8a7fb0; }
+.tile span { font-weight: 700; font-size: 13px; line-height: 1.1; display: block; }
+.list { flex: 1; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-content: start; padding: 4px; }
+.item { background: #fff; border-radius: 16px; padding: 8px 14px; }
+.item .h { display: flex; justify-content: space-between; gap: 8px; }
+.item .h b { font-weight: 800; font-size: 19px; }
+.item .h span { font-weight: 700; font-size: 14px; color: var(--y); white-space: nowrap; }
+.item p { font-weight: 600; font-size: 16px; line-height: 1.25; }
+.item p.s { font-size: 14px; color: #6a5a92; }
+.empty { grid-column: 1 / -1; text-align: center; font-weight: 700; font-size: 20px; padding: 40px; }
+.board-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px; }
+.btn.small { font-size: 20px; padding: 2px 20px; border-width: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .screen.on, .pop, .confetti { animation: none; }
+}
+
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- ===== 0: start ===== -->
+  <section id="s0" class="screen on">
+    <div class="title"><small>MAKLUM BALAS</small><b>Misi Kata Ganti</b><b>Nama Diri</b></div>
+    <div class="sub">Bahasa Melayu Tahun 4</div>
+    <div class="panel namebox">
+      <label for="nama">Siapakah nama anda?</label>
+      <input id="nama" type="text" maxlength="30" placeholder="Tulis nama anda di sini" autocomplete="off" />
+      <div class="go"><button class="btn" id="mula" disabled>Jom Mula!</button></div>
+    </div>
+    <div class="steps">
+      <div><span style="background: var(--p1)">1</span>Perasaan saya</div>
+      <div><span style="background: var(--p2)">2</span>Penilaian kendiri</div>
+      <div><span style="background: var(--p3)">3</span>Refleksi saya</div>
+    </div>
+    <button class="teacher-link" id="ke-cikgu">Papan Cikgu</button>
+    <img class="char" style="right: 0; bottom: 0; height: 430px" src="https://pejuangpb2-tech.github.io/claubil/penilaian/assets/art/boy-owl.png" alt="" />
+    <img class="bush" style="right: -20px; bottom: -4px; width: 400px" src="https://pejuangpb2-tech.github.io/claubil/penilaian/assets/art/bush.svg" alt="" />
+  </section>
+
+  <!-- ===== 1: feelings + favourite part ===== -->
+  <section id="s1" class="screen">
+    <div class="ribbon"><svg viewBox="0 0 640 96"><use href="#ribbon-shape" /></svg><span>Perasaan Saya</span></div>
+    <div class="panel feel">
+      <div class="tl">Bagaimana perasaan anda selepas belajar hari ini?</div>
+      <div class="faces" id="faces">
+        <button class="face" data-v="3"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#ffd23f" stroke="#f0a51c" stroke-width="6"/><circle cx="35" cy="42" r="6" fill="#3b2418"/><circle cx="65" cy="42" r="6" fill="#3b2418"/><path d="M28 60 Q50 84 72 60" fill="#fff" stroke="#3b2418" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Seronok</b></button>
+        <button class="face" data-v="2"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#a8d9f5" stroke="#5aa7d8" stroke-width="6"/><circle cx="35" cy="42" r="6" fill="#3b2418"/><circle cx="65" cy="42" r="6" fill="#3b2418"/><path d="M32 66 L68 66" stroke="#3b2418" stroke-width="6" stroke-linecap="round"/></svg><b>Biasa</b></button>
+        <button class="face" data-v="1"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#f5c3d0" stroke="#d6527a" stroke-width="6"/><circle cx="35" cy="42" r="6" fill="#3b2418"/><circle cx="65" cy="42" r="6" fill="#3b2418"/><path d="M30 72 Q50 54 70 72" fill="none" stroke="#3b2418" stroke-width="6" stroke-linecap="round"/></svg><b>Kurang seronok</b></button>
+      </div>
+      <div class="tl">Bahagian yang paling saya suka:</div>
+      <div class="likes" id="likes">
+        <button class="like">Video pembelajaran</button>
+        <button class="like">Watak-watak comel</button>
+        <button class="like">Tiga pasukan</button>
+        <button class="like">Kami dan kita</button>
+      </div>
+    </div>
+    <img class="char" style="left: 0; bottom: 0; width: 160px" src="https://pejuangpb2-tech.github.io/claubil/penilaian/assets/art/cat.png" alt="" />
+    <img class="bush" style="left: -20px; bottom: -10px; width: 210px" src="https://pejuangpb2-tech.github.io/claubil/penilaian/assets/art/bush.svg" alt="" />
+    <button class="btn green next" id="next1" disabled>Seterusnya</button>
+  </section>
+
+  <!-- ===== 2: self assessment ===== -->
+  <section id="s2" class="screen">
+    <div class="ribbon"><svg viewBox="0 0 640 96"><use href="#ribbon-shape" /></svg><span>Penilaian Kendiri</span></div>
+    <div class="panel rows">
+      <div class="tl">Berikan bintang mengikut kemahiran anda.</div>
+      <div class="rate"><span class="n" style="background: var(--p1)">1</span><p>Saya boleh mengenal pasti kata ganti nama diri orang pertama, kedua dan ketiga.</p><div class="stars" data-q="0"></div></div>
+      <div class="rate"><span class="n" style="background: var(--p2)">2</span><p>Saya boleh mengelaskan kata ganti nama diri mengikut golongannya.</p><div class="stars" data-q="1"></div></div>
+      <div class="rate"><span class="n" style="background: var(--p3)">3</span><p>Saya boleh menggunakan kata ganti nama diri yang sesuai dalam ayat.</p><div class="stars" data-q="2"></div></div>
+      <div class="rate"><span class="n" style="background: var(--y)">4</span><p>Saya tahu beza penggunaan <b>kami</b> dan <b>kita</b>.</p><div class="stars" data-q="3"></div></div>
+      <div class="legend"><div>1 bintang: Saya perlukan bantuan</div><div>2 bintang: Saya hampir boleh</div><div>3 bintang: Saya sudah mahir</div></div>
+    </div>
+    <img class="char" style="right: 0; bottom: 0; height: 250px" src="https://pejuangpb2-tech.github.io/claubil/penilaian/assets/art/teacher.png" alt="" />
+    <button class="btn green next" id="next2" disabled>Seterusnya</button>
+  </section>
+
+  <!-- ===== 3: reflection ===== -->
+  <section id="s3" class="screen">
+    <div class="ribbon"><svg viewBox="0 0 640 96"><use href="#ribbon-shape" /></svg><span>Refleksi Saya</span></div>
+    <div class="panel refl">
+      <div class="tl">Satu perkara yang saya pelajari hari ini:</div>
+      <textarea id="belajar" maxlength="200" placeholder="Hari ini saya belajar bahawa ..."></textarea>
+      <div class="tl">Pesanan untuk cikgu (jika ada):</div>
+      <textarea id="pesanan" maxlength="200" placeholder="Terima kasih cikgu kerana ..."></textarea>
+    </div>
+    <img class="char" style="left: 0; bottom: 0; height: 260px" src="https://pejuangpb2-tech.github.io/claubil/penilaian/assets/art/speaker-girl.png" alt="" />
+    <div class="bubble" style="left: 220px; top: 610px; width: 230px">Tulis dengan ayat yang lengkap ya!</div>
+    <button class="btn green next" id="hantar" disabled>Hantar</button>
+  </section>
+
+  <!-- ===== 4: thank you ===== -->
+  <section id="s4" class="screen">
+    <div class="panel thanks">
+      <h2>Terima kasih!</h2>
+      <div class="who" id="who4"></div>
+      <div class="mystars" id="mystars"></div>
+      <p class="note">Maklum balas anda sudah dihantar kepada cikgu.</p>
+      <button class="btn" id="seterusnya">Murid seterusnya</button>
+    </div>
+    <img class="char" style="left: 0; bottom: 0; height: 420px" src="https://pejuangpb2-tech.github.io/claubil/penilaian/assets/art/girl-book.png" alt="" />
+    <img class="char" style="right: 0; bottom: 0; height: 430px" src="https://pejuangpb2-tech.github.io/claubil/penilaian/assets/art/boy-owl.png" alt="" />
+    <img class="bush" style="left: 120px; bottom: -12px; width: 240px" src="https://pejuangpb2-tech.github.io/claubil/penilaian/assets/art/bush.svg" alt="" />
+    <img class="bush" style="right: -20px; bottom: -4px; width: 400px" src="https://pejuangpb2-tech.github.io/claubil/penilaian/assets/art/bush.svg" alt="" />
+  </section>
+
+  <!-- ===== T: teacher board ===== -->
+  <section id="sT" class="screen">
+    <div class="ribbon"><svg viewBox="0 0 640 96"><use href="#ribbon-shape" /></svg><span>Papan Cikgu</span></div>
+    <div class="panel board">
+      <div class="summary" id="summary"></div>
+      <div class="list" id="list"></div>
+      <div class="board-actions">
+        <button class="btn purple small" id="muat-turun">Muat turun (CSV)</button>
+        <button class="btn small" id="padam">Padam semua</button>
+        <button class="btn green small" id="kembali">Kembali</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="progress" id="progress"><i></i><i></i><i></i></div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<svg width="0" height="0" style="position: absolute">
+  <defs>
+    <g id="ribbon-shape">
+      <path d="M0 26 L72 26 L72 90 L0 90 L28 58 Z" fill="#c23a64" />
+      <path d="M640 26 L568 26 L568 90 L640 90 L612 58 Z" fill="#c23a64" />
+      <path d="M46 6 Q320 -12 594 6 L594 78 Q320 60 46 78 Z" fill="#e2557f" stroke="#fff" stroke-width="5" />
+    </g>
+  </defs>
+</svg>
+<audio id="sfx-pop" src="https://pejuangpb2-tech.github.io/claubil/penilaian/assets/pop.mp3" preload="auto"></audio>
+<audio id="sfx-chime" src="https://pejuangpb2-tech.github.io/claubil/penilaian/assets/chime.mp3" preload="auto"></audio>
+<script>
+// Misi Kata Ganti Nama Diri: maklum balas murid.
+// Responses stay in this browser (localStorage) and are shown on the teacher board.
+(function () {
+  "use strict";
+
+  const KEY = "misi-kgnd-maklum-balas";
+  const STAR = '<svg viewBox="0 0 100 100"><path d="M50 4 L62 36 L96 38 L69 59 L78 93 L50 74 L22 93 L31 59 L4 38 L38 36 Z"/></svg>';
+  const FEEL = { 3: "Seronok", 2: "Biasa", 1: "Kurang seronok" };
+  const SKILL = ["Mengenal pasti", "Mengelaskan", "Menggunakan dalam ayat", "Beza kami dan kita"];
+
+  const $ = (id) => document.getElementById(id);
+  let toastTimer;
+  let cur;
+  function fresh() { cur = { nama: "", perasaan: 0, suka: [], bintang: [0, 0, 0, 0], belajar: "", pesanan: "" }; }
+  fresh();
+
+  // ---------- storage (falls back to memory when blocked) ----------
+  let memory = [];
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) { return memory; }
+  }
+  function save(list) {
+    memory = list;
+    try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) { /* storage blocked: keep in memory */ }
+  }
+
+  // ---------- helpers ----------
+  function show(id) {
+    document.querySelectorAll(".screen").forEach((s) => s.classList.remove("on"));
+    $(id).classList.add("on");
+    const step = { s1: 1, s2: 2, s3: 3 }[id] || 0;
+    const dots = $("progress").children;
+    for (let i = 0; i < dots.length; i++) dots[i].classList.toggle("done", i < step);
+    $("progress").style.display = step ? "flex" : "none";
+    clearTimeout(toastTimer);
+    $("toast").className = "toast";
+    if (id !== "s4") document.querySelectorAll(".confetti").forEach((c) => c.remove());
+  }
+  function toast(msg, ok) {
+    const t = $("toast");
+    t.textContent = msg;
+    t.className = "toast show " + (ok ? "ok" : "no");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => (t.className = "toast"), 1800);
+  }
+  function play(id) {
+    const a = $(id);
+    try { a.currentTime = 0; a.play().catch(() => {}); } catch (e) { /* audio blocked */ }
+  }
+  function bounce(el) { el.classList.remove("pop"); void el.offsetWidth; el.classList.add("pop"); }
+  function esc(s) { return s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+  function starsText(n) { return "★".repeat(n) + "☆".repeat(3 - n); }
+
+  // ---------- fit the 1280x720 stage to any frame ----------
+  function fit() {
+    const s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    $("stage").style.transform = "translate(-50%, -50%) scale(" + s + ")";
+  }
+  window.addEventListener("resize", fit);
+  fit();
+
+  // ---------- 0: start ----------
+  $("nama").addEventListener("input", (e) => { $("mula").disabled = e.target.value.trim().length < 2; });
+  $("nama").addEventListener("keydown", (e) => { if (e.key === "Enter" && !$("mula").disabled) $("mula").click(); });
+  $("mula").addEventListener("click", () => {
+    cur.nama = $("nama").value.trim();
+    show("s1");
+  });
+  $("ke-cikgu").addEventListener("click", () => { renderBoard(); show("sT"); });
+
+  // ---------- 1: feelings ----------
+  document.querySelectorAll(".face").forEach((b) => {
+    b.addEventListener("click", () => {
+      cur.perasaan = +b.dataset.v;
+      document.querySelectorAll(".face").forEach((x) => x.classList.toggle("on", x === b));
+      bounce(b); play("sfx-pop");
+      $("next1").disabled = false;
+    });
+  });
+  document.querySelectorAll(".like").forEach((b) => {
+    b.addEventListener("click", () => {
+      b.classList.toggle("on"); bounce(b); play("sfx-pop");
+      cur.suka = [...document.querySelectorAll(".like.on")].map((x) => x.textContent);
+    });
+  });
+  $("next1").addEventListener("click", () => show("s2"));
+
+  // ---------- 2: self assessment ----------
+  document.querySelectorAll(".stars").forEach((box) => {
+    const q = +box.dataset.q;
+    for (let k = 1; k <= 3; k++) {
+      const b = document.createElement("button");
+      b.innerHTML = STAR; b.setAttribute("aria-label", k + " bintang");
+      b.addEventListener("click", () => {
+        cur.bintang[q] = k;
+        box.querySelectorAll("button").forEach((x, j) => x.classList.toggle("on", j < k));
+        bounce(b); play("sfx-pop");
+        $("next2").disabled = cur.bintang.some((r) => !r);
+      });
+      box.appendChild(b);
+    }
+  });
+  $("next2").addEventListener("click", () => show("s3"));
+
+  // ---------- 3: reflection ----------
+  $("belajar").addEventListener("input", () => { $("hantar").disabled = $("belajar").value.trim().length < 5; });
+  $("hantar").addEventListener("click", () => {
+    cur.belajar = $("belajar").value.trim();
+    cur.pesanan = $("pesanan").value.trim();
+    cur.masa = new Date().toLocaleString("ms-MY");
+    const list = load(); list.push(cur); save(list);
+    $("who4").textContent = "Syabas, " + cur.nama + "!";
+    $("mystars").innerHTML = cur.bintang.map((n, i) => "<div><span>" + SKILL[i] + "</span><b>" + starsText(n) + "</b></div>").join("");
+    show("s4");
+    play("sfx-chime");
+    confetti();
+  });
+
+  // ---------- 4: next pupil ----------
+  $("seterusnya").addEventListener("click", () => {
+    fresh();
+    $("nama").value = ""; $("mula").disabled = true;
+    document.querySelectorAll(".face, .like, .stars button").forEach((x) => x.classList.remove("on"));
+    $("next1").disabled = true; $("next2").disabled = true; $("hantar").disabled = true;
+    $("belajar").value = ""; $("pesanan").value = "";
+    show("s0");
+  });
+
+  // ---------- teacher board ----------
+  function renderBoard() {
+    const list = load();
+    const n = list.length;
+    const feel = { 3: 0, 2: 0, 1: 0 };
+    const avg = [0, 0, 0, 0];
+    list.forEach((r) => { feel[r.perasaan] = (feel[r.perasaan] || 0) + 1; r.bintang.forEach((b, i) => (avg[i] += b)); });
+    $("summary").innerHTML =
+      '<div class="tile"><b>' + n + "</b><span>maklum balas</span></div>" +
+      [3, 2, 1].map((v) => '<div class="tile"><b>' + feel[v] + "</b><span>" + FEEL[v] + "</span></div>").join("") +
+      SKILL.map((s, i) => '<div class="tile"><b>' + (n ? (avg[i] / n).toFixed(1) : "-") + "<small>/3</small></b><span>" + s + "</span></div>").join("");
+    $("list").innerHTML = n
+      ? list.slice().reverse().map((r) =>
+          '<div class="item"><div class="h"><b>' + esc(r.nama) + "</b><span>" + FEEL[r.perasaan] + " · " + r.bintang.map(starsText).join(" ") + "</span></div>" +
+          "<p>" + esc(r.belajar) + "</p>" +
+          (r.suka.length ? '<p class="s">Suka: ' + esc(r.suka.join(", ")) + "</p>" : "") +
+          (r.pesanan ? '<p class="s">Pesanan: ' + esc(r.pesanan) + "</p>" : "") + "</div>").join("")
+      : '<p class="empty">Belum ada maklum balas. Murid boleh mula dari skrin utama.</p>';
+  }
+  $("kembali").addEventListener("click", () => show("s0"));
+  $("padam").addEventListener("click", () => {
+    if (!load().length) return;
+    if (confirm("Padam semua maklum balas pada peranti ini?")) { save([]); renderBoard(); toast("Semua maklum balas dipadam.", true); }
+  });
+  $("muat-turun").addEventListener("click", () => {
+    const list = load();
+    if (!list.length) { toast("Belum ada maklum balas untuk dimuat turun.", false); return; }
+    const head = ["Nama", "Masa", "Perasaan", "Bahagian disukai"].concat(SKILL).concat(["Saya belajar", "Pesanan"]);
+    const q = (v) => '"' + String(v).replace(/"/g, '""') + '"';
+    const rows = list.map((r) => [r.nama, r.masa, FEEL[r.perasaan], r.suka.join("; ")].concat(r.bintang).concat([r.belajar, r.pesanan]).map(q).join(","));
+    const blob = new Blob(["﻿" + head.map(q).join(",") + "\n" + rows.join("\n")], { type: "text/csv;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "maklum-balas-kata-ganti.csv";
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  function confetti() {
+    const colors = ["#ffd23f", "#ef6f92", "#8f6fd1", "#4fa862", "#3d82c4"];
+    for (let i = 0; i < 26; i++) {
+      const s = document.createElement("div");
+      s.className = "confetti";
+      s.innerHTML = STAR.replace("<path", '<path fill="' + colors[i % colors.length] + '"');
+      s.style.left = ((i * 47) % 1240) + "px";
+      s.style.top = "-30px";
+      s.style.animationDelay = ((i % 7) * 0.12) + "s";
+      $("stage").appendChild(s);
+      setTimeout(() => s.remove(), 3400);
+    }
+  }
+})();
+
+</script>
+</body>
+</html>
