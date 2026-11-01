@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Misi Kata Ganti Nama Diri: Maklum Balas</title>
+  <meta name="description" content="Maklum balas murid selepas pelajaran kata ganti nama diri, Bahasa Melayu Tahun 4." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="stage">
+
+  <!-- ===== 0: start ===== -->
+  <section id="s0" class="screen on">
+    <div class="title"><small>MAKLUM BALAS</small><b>Misi Kata Ganti</b><b>Nama Diri</b></div>
+    <div class="sub">Bahasa Melayu Tahun 4</div>
+    <div class="panel namebox">
+      <label for="nama">Siapakah nama anda?</label>
+      <input id="nama" type="text" maxlength="30" placeholder="Tulis nama anda di sini" autocomplete="off" />
+      <div class="go"><button class="btn" id="mula" disabled>Jom Mula!</button></div>
+    </div>
+    <div class="steps">
+      <div><span style="background: var(--p1)">1</span>Perasaan saya</div>
+      <div><span style="background: var(--p2)">2</span>Penilaian kendiri</div>
+      <div><span style="background: var(--p3)">3</span>Refleksi saya</div>
+    </div>
+    <button class="teacher-link" id="ke-cikgu">Papan Cikgu</button>
+    <img class="char" style="right: 0; bottom: 0; height: 430px" src="assets/art/boy-owl.png" alt="" />
+    <img class="bush" style="right: -20px; bottom: -4px; width: 400px" src="assets/art/bush.svg" alt="" />
+  </section>
+
+  <!-- ===== 1: feelings + favourite part ===== -->
+  <section id="s1" class="screen">
+    <div class="ribbon"><svg viewBox="0 0 640 96"><use href="#ribbon-shape" /></svg><span>Perasaan Saya</span></div>
+    <div class="panel feel">
+      <div class="tl">Bagaimana perasaan anda selepas belajar hari ini?</div>
+      <div class="faces" id="faces">
+        <button class="face" data-v="3"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#ffd23f" stroke="#f0a51c" stroke-width="6"/><circle cx="35" cy="42" r="6" fill="#3b2418"/><circle cx="65" cy="42" r="6" fill="#3b2418"/><path d="M28 60 Q50 84 72 60" fill="#fff" stroke="#3b2418" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Seronok</b></button>
+        <button class="face" data-v="2"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#a8d9f5" stroke="#5aa7d8" stroke-width="6"/><circle cx="35" cy="42" r="6" fill="#3b2418"/><circle cx="65" cy="42" r="6" fill="#3b2418"/><path d="M32 66 L68 66" stroke="#3b2418" stroke-width="6" stroke-linecap="round"/></svg><b>Biasa</b></button>
+        <button class="face" data-v="1"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#f5c3d0" stroke="#d6527a" stroke-width="6"/><circle cx="35" cy="42" r="6" fill="#3b2418"/><circle cx="65" cy="42" r="6" fill="#3b2418"/><path d="M30 72 Q50 54 70 72" fill="none" stroke="#3b2418" stroke-width="6" stroke-linecap="round"/></svg><b>Kurang seronok</b></button>
+      </div>
+      <div class="tl">Bahagian yang paling saya suka:</div>
+      <div class="likes" id="likes">
+        <button class="like">Video pembelajaran</button>
+        <button class="like">Watak-watak comel</button>
+        <button class="like">Tiga pasukan</button>
+        <button class="like">Kami dan kita</button>
+      </div>
+    </div>
+    <img class="char" style="left: 0; bottom: 0; width: 160px" src="assets/art/cat.png" alt="" />
+    <img class="bush" style="left: -20px; bottom: -10px; width: 210px" src="assets/art/bush.svg" alt="" />
+    <button class="btn green next" id="next1" disabled>Seterusnya</button>
+  </section>
+
+  <!-- ===== 2: self assessment ===== -->
+  <section id="s2" class="screen">
+    <div class="ribbon"><svg viewBox="0 0 640 96"><use href="#ribbon-shape" /></svg><span>Penilaian Kendiri</span></div>
+    <div class="panel rows">
+      <div class="tl">Berikan bintang mengikut kemahiran anda.</div>
+      <div class="rate"><span class="n" style="background: var(--p1)">1</span><p>Saya boleh mengenal pasti kata ganti nama diri orang pertama, kedua dan ketiga.</p><div class="stars" data-q="0"></div></div>
+      <div class="rate"><span class="n" style="background: var(--p2)">2</span><p>Saya boleh mengelaskan kata ganti nama diri mengikut golongannya.</p><div class="stars" data-q="1"></div></div>
+      <div class="rate"><span class="n" style="background: var(--p3)">3</span><p>Saya boleh menggunakan kata ganti nama diri yang sesuai dalam ayat.</p><div class="stars" data-q="2"></div></div>
+      <div class="rate"><span class="n" style="background: var(--y)">4</span><p>Saya tahu beza penggunaan <b>kami</b> dan <b>kita</b>.</p><div class="stars" data-q="3"></div></div>
+      <div class="legend"><div>1 bintang: Saya perlukan bantuan</div><div>2 bintang: Saya hampir boleh</div><div>3 bintang: Saya sudah mahir</div></div>
+    </div>
+    <img class="char" style="right: 0; bottom: 0; height: 250px" src="assets/art/teacher.png" alt="" />
+    <button class="btn green next" id="next2" disabled>Seterusnya</button>
+  </section>
+
+  <!-- ===== 3: reflection ===== -->
+  <section id="s3" class="screen">
+    <div class="ribbon"><svg viewBox="0 0 640 96"><use href="#ribbon-shape" /></svg><span>Refleksi Saya</span></div>
+    <div class="panel refl">
+      <div class="tl">Satu perkara yang saya pelajari hari ini:</div>
+      <textarea id="belajar" maxlength="200" placeholder="Hari ini saya belajar bahawa ..."></textarea>
+      <div class="tl">Pesanan untuk cikgu (jika ada):</div>
+      <textarea id="pesanan" maxlength="200" placeholder="Terima kasih cikgu kerana ..."></textarea>
+    </div>
+    <img class="char" style="left: 0; bottom: 0; height: 260px" src="assets/art/speaker-girl.png" alt="" />
+    <div class="bubble" style="left: 220px; top: 610px; width: 230px">Tulis dengan ayat yang lengkap ya!</div>
+    <button class="btn green next" id="hantar" disabled>Hantar</button>
+  </section>
+
+  <!-- ===== 4: thank you ===== -->
+  <section id="s4" class="screen">
+    <div class="panel thanks">
+      <h2>Terima kasih!</h2>
+      <div class="who" id="who4"></div>
+      <div class="mystars" id="mystars"></div>
+      <p class="note">Maklum balas anda sudah dihantar kepada cikgu.</p>
+      <button class="btn" id="seterusnya">Murid seterusnya</button>
+    </div>
+    <img class="char" style="left: 0; bottom: 0; height: 420px" src="assets/art/girl-book.png" alt="" />
+    <img class="char" style="right: 0; bottom: 0; height: 430px" src="assets/art/boy-owl.png" alt="" />
+    <img class="bush" style="left: 120px; bottom: -12px; width: 240px" src="assets/art/bush.svg" alt="" />
+    <img class="bush" style="right: -20px; bottom: -4px; width: 400px" src="assets/art/bush.svg" alt="" />
+  </section>
+
+  <!-- ===== T: teacher board ===== -->
+  <section id="sT" class="screen">
+    <div class="ribbon"><svg viewBox="0 0 640 96"><use href="#ribbon-shape" /></svg><span>Papan Cikgu</span></div>
+    <div class="panel board">
+      <div class="summary" id="summary"></div>
+      <div class="list" id="list"></div>
+      <div class="board-actions">
+        <button class="btn purple small" id="muat-turun">Muat turun (CSV)</button>
+        <button class="btn small" id="padam">Padam semua</button>
+        <button class="btn green small" id="kembali">Kembali</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="progress" id="progress"><i></i><i></i><i></i></div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<svg width="0" height="0" style="position: absolute">
+  <defs>
+    <g id="ribbon-shape">
+      <path d="M0 26 L72 26 L72 90 L0 90 L28 58 Z" fill="#c23a64" />
+      <path d="M640 26 L568 26 L568 90 L640 90 L612 58 Z" fill="#c23a64" />
+      <path d="M46 6 Q320 -12 594 6 L594 78 Q320 60 46 78 Z" fill="#e2557f" stroke="#fff" stroke-width="5" />
+    </g>
+  </defs>
+</svg>
+<audio id="sfx-pop" src="assets/pop.mp3" preload="auto"></audio>
+<audio id="sfx-chime" src="assets/chime.mp3" preload="auto"></audio>
+<script src="app.js"></script>
+</body>
+</html>
