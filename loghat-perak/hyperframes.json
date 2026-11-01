@@ -8,5 +8,12 @@
   },
   "media": {
     "autoProxy": true
-  }
+  },
+  "registryItems": [
+    {
+      "name": "editorial-flash-overlay",
+      "type": "hyperframes:block",
+      "target": "compositions/editorial-flash-overlay.html"
+    }
+  ]
 }

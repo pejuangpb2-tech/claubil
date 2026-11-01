@@ -12,6 +12,9 @@
     #root .strike { position: absolute; left: -4%; right: -4%; top: 44%; height: 12px; background: #e3242b;
       border: 3px solid #000; border-radius: 8px; transform-origin: left center; opacity: 0; }
     #root .icon { width: 0.86em; height: 0.86em; display: block; flex: none; }
+    @font-face { font-family: "Emoji"; src: local("Noto Color Emoji"); }
+    #root .sticker { font-family: "Emoji", sans-serif; font-size: 1.35em; line-height: 1; -webkit-text-stroke: 0;
+      text-shadow: 0 6px 10px rgba(0, 0, 0, 0.35); display: block; flex: none; opacity: 0; margin-left: 4px; }
   </style>
   <div id="root" data-composition-id="__ID__" data-width="1080" data-height="1920" data-composition-variables='__VARS__'>
     <div class="band" id="__ID__-band">
@@ -28,6 +31,7 @@
           <rect x="6" y="6" width="88" height="88" rx="22" fill="#2fbf4f" stroke="#000" stroke-width="8" />
           <path d="M27 52 L44 69 L75 33" fill="none" stroke="#fff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
+        <span class="sticker" id="__ID__-sticker" data-var-text="sticker" data-layout-ignore>__STICKER__</span>
       </div>
     </div>
   </div>
@@ -42,6 +46,11 @@ __WOBBLE__    // ✅ Perak: strike the standard word, slam the Perak word in, st
     tl.to("#__ID__-w1", { opacity: 0.78, duration: 0.18, ease: "power1.out" }, P - 0.1);
     tl.fromTo("#__ID__-w2", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(1.8)" }, P);
     tl.fromTo("#__ID__-ok", { scale: 2.2, rotation: -25, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.18, ease: "power2.out" }, P + 0.1);
+    // reaction sticker: springs in tilted, then shakes once
+    tl.fromTo("#__ID__-sticker", { opacity: 0, scale: 0, rotation: -35 }, { opacity: 1, scale: 1, rotation: 12, duration: 0.42, ease: "elastic.out(1, 0.5)" }, P + 0.22);
+    tl.to("#__ID__-sticker", { rotation: -10, duration: 0.09, ease: "power2.inOut" }, P + 0.9)
+      .to("#__ID__-sticker", { rotation: 14, duration: 0.09, ease: "power2.inOut" })
+      .to("#__ID__-sticker", { rotation: 12, duration: 0.12, ease: "power2.out" });
     // exit with the camera whip: up and blurred
     tl.to("#__ID__-band", { y: -110, opacity: 0, filter: "blur(10px)", duration: 0.15, ease: "power3.in" }, E);
     window.__timelines["__ID__"] = tl;
