@@ -146,7 +146,8 @@ suit = f"""
  <ellipse cx="{HX}" cy="{HY + 10}" rx="280" ry="310" fill="none" stroke="#FFFFFF" stroke-opacity=".7" stroke-width="4"/>
 </svg>"""
 
-html = f"""<!doctype html><html><head><meta charset="utf-8"><style>{style}
+def page(extra_css, text_html):
+    return f"""<!doctype html><html><head><meta charset="utf-8"><style>{style}
 html,body{{width:1920px;height:1080px;margin:0;overflow:hidden;background:#1E194C}}
 #astro{{position:absolute;left:0;top:0}}
 .neb{{position:absolute;border-radius:50%;filter:blur(60px)}}
@@ -167,6 +168,7 @@ html,body{{width:1920px;height:1080px;margin:0;overflow:hidden;background:#1E194
 #gogo{{left:700px;top:850px;width:180px;height:190px;transform:rotate(-8deg)}}
 #st1{{left:1060px;top:120px;width:46px;height:46px}}#st2{{left:1810px;top:430px;width:38px;height:38px}}#st3{{left:900px;top:600px;width:30px;height:30px}}
 #comet{{left:1150px;top:30px;width:180px;height:63px;transform:rotate(12deg)}}
+{extra_css}
 </style><script>window.CUES={{"lines":[],"sections":[],"chant":[],"total":1}};</script><script>{lib}</script></head><body>
 {symbols}
 <div id="root"><div class="sky"></div><div class="stars s1"></div><div class="stars s2"></div><div class="stars s3"></div>
@@ -181,10 +183,7 @@ html,body{{width:1920px;height:1080px;margin:0;overflow:hidden;background:#1E194
 <svg class="dec" id="st1"><use href="#a-star" width="46" height="46"/></svg><svg class="dec" id="st2"><use href="#a-star" width="38" height="38"/></svg><svg class="dec" id="st3"><use href="#a-star" width="30" height="30"/></svg>
 {suit}
 <div class="dec" id="gogo"></div>
-<div id="kick">MISI ANGKASA</div>
-<div id="big">BIODATA<br><span class="y">DIRI</span></div>
-<div id="pill">Ketua Misi · Guru Pelatih</div>
-<div id="sub">Ekspedisi Kata Arah · Bahasa Melayu Tahun 3</div>
+{text_html}
 </div>
 <script>
 document.getElementById('rk').innerHTML=KA.svgRocket('cr',{{face:true}});
@@ -202,20 +201,65 @@ document.getElementById('gogo').innerHTML=KA.svgGogo('cg');
   document.getElementById('flag').innerHTML=s;
 }})();
 </script></body></html>"""
-page = os.path.join(OUT, "cover.html")
-open(page, "w").write(html)
-png = os.path.join(OUT, "cover-biodata.png")
-js = f"""
-const {{ chromium }} = require('playwright');
-(async () => {{
+COVER_TEXT = """<div id="kick">MISI ANGKASA</div>
+<div id="big">BIODATA<br><span class="y">DIRI</span></div>
+<div id="pill">Ketua Misi · Guru Pelatih</div>
+<div id="sub">Ekspedisi Kata Arah · Bahasa Melayu Tahun 3</div>"""
+
+# Halaman butiran: data peribadi dibaca dari design/cover/butiran.json (tidak disimpan dalam git)
+import html as _h  # noqa: E402
+import json  # noqa: E402
+B = json.load(open(os.path.join(OUT, "butiran.json")))
+ROWS = [("nama", "Nama", "👨‍🚀", "var(--coral)"), ("kelas", "Kelas", "📚", "var(--cyan)"),
+        ("angka_giliran", "Angka Giliran", "🎫", "var(--yellow)"), ("no_matrik", "No. Matrik", "🆔", "var(--orange)")]
+rows = "".join(
+    f'<div class="row"><div class="ic" style="background:{c}">{e}</div><div><div class="lb" style="color:{c}">{l}</div>'
+    f'<div class="val">{_h.escape(B[k])}</div></div></div>' for k, l, e, c in ROWS)
+DETAIL_TEXT = f"""<div id="panel"><div class="pk">MISI ANGKASA · KAD ANGKASAWAN</div>
+<div class="pt">BUTIRAN <span class="y">DIRI</span></div><div class="dv"></div>{rows}</div>"""
+DETAIL_CSS = """
+#astro{transform-origin:0 0;transform:translate(-602px,210px) scale(.8)}
+#n2{left:700px;top:300px}
+#rk{left:300px;top:70px;width:260px;height:121px;transform:rotate(-18deg)}
+#trail{left:20px;top:150px;width:300px;height:80px}
+#ring{left:930px;top:4px;width:200px;height:138px}
+#comet{left:1290px;top:44px;width:160px;height:56px;transform:rotate(14deg)}
+#gogo{left:1640px;top:22px;width:170px;height:180px;transform:rotate(8deg);z-index:2}
+#red{left:40px;top:470px;width:80px;height:80px}
+#st1{left:700px;top:60px}#st2{left:770px;top:520px}#st3{left:60px;top:330px}
+#panel{position:absolute;left:860px;top:160px;width:980px;box-sizing:border-box;padding:44px 56px 30px;border-radius:40px;
+  background:rgba(21,15,58,.86);border:5px solid rgba(244,239,234,.22);box-shadow:0 18px 0 rgba(10,7,32,.45)}
+#panel .pk{font:900 28px var(--font);letter-spacing:6px;color:var(--cyan)}
+#panel .pt{font:900 96px/1.08 var(--font);color:#fff;text-shadow:0 8px 0 #0F0B2E}
+#panel .pt .y{color:var(--yellow)}
+#panel .dv{border-top:4px dashed rgba(244,239,234,.25);margin:20px 0 28px}
+#panel .row{display:grid;grid-template-columns:92px 1fr;gap:30px;align-items:center;margin-bottom:28px}
+#panel .ic{width:92px;height:92px;box-sizing:border-box;border-radius:50%;border:6px solid var(--ink);display:grid;place-items:center;font-size:44px;box-shadow:0 6px 0 rgba(10,7,32,.55)}
+#panel .lb{font:900 28px var(--font);letter-spacing:4px;text-transform:uppercase}
+#panel .val{font:900 50px/1.12 var(--font);color:#fff;letter-spacing:1px}
+"""
+
+SHOT = """
+const { chromium } = require('playwright');
+(async () => {
   const b = await chromium.launch();
-  const p = await b.newPage({{ viewport: {{ width: 1920, height: 1080 }}, deviceScaleFactor: 2 }});
-  await p.goto('file://{page}');
-  await p.evaluate(() => document.fonts.ready);
-  await p.waitForTimeout(400);
-  await p.screenshot({{ path: '{png}' }});
+  const p = await b.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 2 });
+  for (const [page, png] of JOBS) {
+    await p.goto('file://' + page);
+    await p.evaluate(() => document.fonts.ready);
+    await p.waitForTimeout(400);
+    const over = await p.evaluate(() => { const e = document.getElementById('panel'); return e ? e.getBoundingClientRect().bottom : 0; });
+    if (over > 1040) console.log('AMARAN: panel melepasi bawah (' + Math.round(over) + 'px)');
+    await p.screenshot({ path: png });
+  }
   await b.close();
-}})();"""
-subprocess.run(["node", "-e", js], check=True)
-subprocess.run(["python3", "-c", f"from PIL import Image;Image.open('{png}').convert('RGB').save('{png[:-4]}.jpg',quality=92)"], check=True)
-print("cover-biodata.png / .jpg ditulis (3840x2160)")
+})();"""
+jobs = []
+for name, css, text in [("cover-biodata", "", COVER_TEXT), ("butiran-diri", DETAIL_CSS, DETAIL_TEXT)]:
+    pg = os.path.join(OUT, name + ".html")
+    open(pg, "w").write(page(css, text))
+    jobs.append([pg, os.path.join(OUT, name + ".png")])
+subprocess.run(["node", "-e", "const JOBS=" + json.dumps(jobs) + ";" + SHOT], check=True)
+for _, png in jobs:
+    Image.open(png).convert("RGB").save(png[:-4] + ".jpg", quality=92)
+print("cover-biodata dan butiran-diri (.png/.jpg, 3840x2160) ditulis")
