@@ -239,6 +239,93 @@ DETAIL_CSS = """
 #panel .val{font:900 50px/1.12 var(--font);color:#fff;letter-spacing:1px}
 """
 
+# ---- Dokumen Standard Kurikulum dan Pentaksiran (kulit + butiran)
+DOC_SVG = """<svg id="doc" viewBox="0 0 640 760" width="640" height="760">
+ <defs><linearGradient id="g-pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E9E3DA"/></linearGradient>
+ <filter id="f-pg" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="20" stdDeviation="18" flood-color="#07051C" flood-opacity=".6"/></filter></defs>
+ <ellipse cx="320" cy="400" rx="300" ry="110" fill="none" stroke="#3EBFD2" stroke-width="5" stroke-dasharray="6 16" opacity=".7" transform="rotate(-18 320 400)"/>
+ <g filter="url(#f-pg)">
+  <rect x="150" y="120" width="360" height="480" rx="26" fill="#CFC7DE" transform="rotate(9 330 360)"/>
+  <rect x="140" y="110" width="360" height="480" rx="26" fill="#E3DDEA" transform="rotate(4 320 350)"/>
+  <g transform="rotate(-5 320 350)">
+   <rect x="130" y="100" width="380" height="500" rx="28" fill="url(#g-pg)" stroke="#1A1442" stroke-width="7"/>
+   <path d="M130 128 a28 28 0 0 1 28 -28 h324 a28 28 0 0 1 28 28 v62 h-380 Z" fill="#FE585F" stroke="#1A1442" stroke-width="7"/>
+   <text x="320" y="160" text-anchor="middle" font-family="Nunito KA" font-weight="900" font-size="34" fill="#FFFFFF" letter-spacing="3">BAHASA MELAYU</text>
+   <rect x="170" y="230" width="300" height="18" rx="9" fill="#C9C1DA"/><rect x="170" y="266" width="230" height="18" rx="9" fill="#C9C1DA"/>
+   <g font-family="Nunito KA" font-weight="900" font-size="30" fill="#1A1442">
+    <circle cx="186" cy="337" r="17" fill="#35D0BA"/><path d="M178 337 l6 7 l11 -13" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/><text x="216" y="348">SK 5.1</text>
+    <circle cx="186" cy="391" r="17" fill="#35D0BA"/><path d="M178 391 l6 7 l11 -13" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/><text x="216" y="402">SP 5.1.4</text>
+    <circle cx="186" cy="445" r="17" fill="#FDD13F"/><path d="M178 445 l6 7 l11 -13" stroke="#1A1442" stroke-width="5" fill="none" stroke-linecap="round"/><text x="216" y="456">Kata arah</text>
+   </g>
+   <g transform="translate(420 520)"><circle r="58" fill="#FDD13F" stroke="#1A1442" stroke-width="7"/><use href="#a-star" x="-34" y="-36" width="68" height="68"/></g>
+  </g>
+ </g>
+</svg>"""
+DSKP_COVER_CSS = """
+#astro{display:none}
+#doc{position:absolute;left:1230px;top:150px}
+#rk{left:1560px;top:120px;width:250px;height:117px;transform:rotate(28deg);z-index:2}
+#trail{display:none}
+#gogo{left:1180px;top:760px;width:190px;height:200px;transform:rotate(-10deg);z-index:2}
+#ring{left:1650px;top:780px;width:230px;height:160px}
+#red{left:1140px;top:120px}#comet{left:900px;top:40px}
+#st1{left:1050px;top:660px}#st2{left:1820px;top:470px}#st3{left:980px;top:880px}
+#dk{position:absolute;left:110px;top:190px;font:900 46px var(--font);letter-spacing:12px;color:var(--cyan)}
+#dt{position:absolute;left:100px;top:255px;font:900 104px/1.06 var(--font);color:#fff;text-shadow:0 12px 0 #0F0B2E}
+#dt .y{color:var(--yellow)}
+#dp{position:absolute;left:112px;top:640px;font:900 46px var(--font);color:var(--ink);background:var(--yellow);border:6px solid var(--ink);border-radius:999px;padding:8px 34px;box-shadow:0 8px 0 rgba(10,7,32,.55)}
+#ds{position:absolute;left:118px;top:748px;font:800 34px/1.35 var(--font);color:var(--cream);opacity:.88}
+"""
+DSKP_COVER_TEXT = DOC_SVG + """<div id="dk">MISI ANGKASA</div>
+<div id="dt">DOKUMEN STANDARD<br>KURIKULUM DAN<br><span class="y">PENTAKSIRAN</span></div>
+<div id="dp">Bahasa Melayu · Tahun 3</div>
+<div id="ds">Kurikulum Standard Sekolah Rendah (Semakan 2017)<br>Aspek Tatabahasa · Kata Arah</div>"""
+
+DSKP_INFO_CSS = """
+#astro,#moon,#trail,#ring,#red{display:none}
+#rk{left:1250px;top:40px;width:240px;height:112px;transform:rotate(-12deg)}
+#gogo{left:1640px;top:36px;width:170px;height:180px;transform:rotate(8deg);z-index:2}
+#comet{display:none}
+#st1{left:1880px;top:640px}#st2{left:1860px;top:290px}#st3{display:none}
+#ih{position:absolute;left:100px;top:60px}
+#ih .k{font:900 30px var(--font);letter-spacing:5px;color:var(--cyan)}
+#ih .t{font:900 84px/1.1 var(--font);color:#fff;text-shadow:0 8px 0 #0F0B2E}
+#ih .t .y{color:var(--yellow)}
+#ih .chips{display:flex;gap:16px;margin-top:14px}
+#ih .chips span{font:900 28px var(--font);color:var(--cream);background:rgba(21,15,58,.85);border:4px solid rgba(244,239,234,.28);border-radius:999px;padding:6px 22px;white-space:nowrap}
+.card{position:absolute;box-sizing:border-box;border-radius:34px;padding:30px 38px;background:rgba(21,15,58,.88);border:5px solid rgba(244,239,234,.22);box-shadow:0 14px 0 rgba(10,7,32,.45)}
+.card .lab{display:inline-block;font:900 28px var(--font);letter-spacing:3px;color:var(--ink);border:5px solid var(--ink);border-radius:999px;padding:4px 22px;margin-bottom:20px}
+.card .g{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start}
+.card .no{font:900 60px/1 var(--font);color:var(--yellow);text-shadow:0 6px 0 #0F0B2E;padding-top:4px}
+.card .st{font:800 38px/1.3 var(--font);color:#fff}
+#sk{left:100px;top:330px;width:700px;height:400px}
+#sp{left:830px;top:330px;width:990px;height:400px}
+#sp .subs{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+#sp .subs span{font:900 30px var(--font);color:var(--cream);border:4px solid rgba(244,239,234,.3);border-radius:16px;padding:6px 18px}
+#sp .subs span.f{background:var(--yellow);color:var(--ink);border-color:var(--ink)}
+#sp .subs span.f b{font-size:22px;letter-spacing:2px;margin-left:8px;color:var(--coral)}
+#ob{left:100px;top:762px;width:1720px;height:270px}
+#ob .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+#ob .o{display:grid;grid-template-columns:62px 1fr;gap:18px;align-items:start}
+#ob .n{width:62px;height:62px;box-sizing:border-box;border-radius:50%;border:5px solid var(--ink);display:grid;place-items:center;font:900 32px var(--font);color:var(--ink)}
+#ob .tx{font:800 32px/1.3 var(--font);color:#fff}
+#ob .tx .kx{color:var(--yellow)}
+"""
+DSKP_INFO_TEXT = """<div id="ih"><div class="k">DOKUMEN STANDARD KURIKULUM DAN PENTAKSIRAN</div>
+<div class="t">BAHASA MELAYU <span class="y">TAHUN 3</span></div>
+<div class="chips"><span>📘 Aspek Tatabahasa</span><span>🧭 Topik: Kata Arah</span><span>🏫 Kurikulum Standard Sekolah Rendah (Semakan 2017)</span></div></div>
+<div class="card" id="sk"><div class="lab" style="background:var(--coral)">STANDARD KANDUNGAN</div>
+<div class="g"><div class="no">5.1</div><div class="st">Memahami dan menggunakan golongan kata mengikut konteks.</div></div></div>
+<div class="card" id="sp"><div class="lab" style="background:var(--cyan)">STANDARD PEMBELAJARAN</div>
+<div class="g"><div class="no">5.1.4</div><div class="st">Memahami dan menggunakan kata tugas mengikut konteks:</div></div>
+<div class="subs"><span>(i) kata hubung</span><span>(ii) kata sendi nama</span><span class="f">(iii) kata arah <b>FOKUS</b></span></div></div>
+<div class="card" id="ob"><div class="lab" style="background:var(--yellow)">OBJEKTIF PEMBELAJARAN · Pada akhir pembelajaran, murid dapat:</div>
+<div class="cols">
+<div class="o"><div class="n" style="background:var(--coral)">1</div><div class="tx">mengenal pasti <span class="kx">kata arah</span> dalam ayat;</div></div>
+<div class="o"><div class="n" style="background:var(--cyan)">2</div><div class="tx">menggunakan <span class="kx">kata arah</span> dengan betul berdasarkan gambar; dan</div></div>
+<div class="o"><div class="n" style="background:var(--orange)">3</div><div class="tx">menulis <span class="kx">kata arah</span> bersama di, ke dan dari dengan ejaan yang betul.</div></div>
+</div></div>"""
+
 SHOT = """
 const { chromium } = require('playwright');
 (async () => {
@@ -248,18 +335,20 @@ const { chromium } = require('playwright');
     await p.goto('file://' + page);
     await p.evaluate(() => document.fonts.ready);
     await p.waitForTimeout(400);
-    const over = await p.evaluate(() => { const e = document.getElementById('panel'); return e ? e.getBoundingClientRect().bottom : 0; });
-    if (over > 1040) console.log('AMARAN: panel melepasi bawah (' + Math.round(over) + 'px)');
+    const bad = await p.evaluate(() => [...document.querySelectorAll('#panel,.card,#dt,#ds,#ih')].filter(e => e.scrollHeight > e.clientHeight + 2 || e.getBoundingClientRect().bottom > 1075 || e.getBoundingClientRect().right > 1915).map(e => e.id || e.className));
+    if (bad.length) console.log('AMARAN limpahan ' + page.split('/').pop() + ': ' + bad.join(', '));
     await p.screenshot({ path: png });
   }
   await b.close();
 })();"""
 jobs = []
-for name, css, text in [("cover-biodata", "", COVER_TEXT), ("butiran-diri", DETAIL_CSS, DETAIL_TEXT)]:
+PAGES = [("cover-biodata", "", COVER_TEXT), ("butiran-diri", DETAIL_CSS, DETAIL_TEXT),
+         ("dskp-cover", DSKP_COVER_CSS, DSKP_COVER_TEXT), ("dskp-butiran", DSKP_INFO_CSS, DSKP_INFO_TEXT)]
+for name, css, text in PAGES:
     pg = os.path.join(OUT, name + ".html")
     open(pg, "w").write(page(css, text))
     jobs.append([pg, os.path.join(OUT, name + ".png")])
 subprocess.run(["node", "-e", "const JOBS=" + json.dumps(jobs) + ";" + SHOT], check=True)
 for _, png in jobs:
     Image.open(png).convert("RGB").save(png[:-4] + ".jpg", quality=92)
-print("cover-biodata dan butiran-diri (.png/.jpg, 3840x2160) ditulis")
+print("cover-biodata, butiran-diri, dskp-cover, dskp-butiran (.png/.jpg, 3840x2160) ditulis")
