@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pita Misi – Misi Angkasa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@800;900&display=swap" rel="stylesheet">
+<style>
+  /* ===== Palet Misi Angkasa (sama dengan Blok 1 dan Peta Misi) ===== */
+  :root{
+    --bg:#1D0851; --bg-deep:#120438; --nebula:#2B2290;
+    --line:#4B3FA0; --gold:#FFD447; --pink:#F68CB6; --white:#FFFFFF; --text-2:#DCD5FF;
+    /* warna label Peta Misi */
+    --c-ilmu:#56D8F0; --c-stesen:#A98BEF; --c-zon:#F36B6B; --c-semakan:#F68CB6; --c-maklum:#6ED8C0; --c-misi:#F4D06F;
+    --speed-1:38s; --speed-2:30s;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;background:transparent}
+  body{font-family:"Nunito",system-ui,sans-serif;display:flex;align-items:center}
+
+  .pita{
+    position:relative;width:100%;overflow:hidden;
+    border-radius:26px;border:3px solid var(--line);
+    background:
+      radial-gradient(ellipse 40% 90% at 8% 50%, rgba(43,34,144,.75), transparent 70%),
+      radial-gradient(ellipse 35% 90% at 92% 40%, rgba(147,42,225,.35), transparent 70%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+    box-shadow:0 0 0 1px rgba(255,255,255,.04) inset, 0 10px 30px rgba(10,4,40,.45);
+    padding:14px 0 16px;
+  }
+  /* bintang (CSS sahaja) */
+  .pita::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.8;
+    background-image:
+      radial-gradient(1.6px 1.6px at 20px 24px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 130px 70px,#C9BCFF,transparent),
+      radial-gradient(1.8px 1.8px at 220px 18px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 70px 118px,#FF9CCB,transparent),
+      radial-gradient(1.4px 1.4px at 280px 96px,#9FF0FF,transparent);
+    background-size:310px 140px;
+    animation:kelip 4s ease-in-out infinite alternate;
+  }
+  /* kabur di tepi supaya tulisan masuk dan keluar dengan lembut */
+  .lorong{
+    position:relative;z-index:1;overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+            mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+  }
+  .jalur{display:flex;width:max-content;will-change:transform}
+  .set{display:flex;align-items:center;flex-shrink:0}
+
+  /* Baris 1: mesej besar, bergerak ke kiri */
+  .l1 .jalur{animation:kiri var(--speed-1) linear infinite}
+  .mesej{
+    font-family:"Fredoka",sans-serif;font-weight:700;
+    font-size:clamp(26px,4.6vw,54px);line-height:1.2;color:var(--white);
+    white-space:nowrap;padding:0 22px;letter-spacing:.5px;
+    text-shadow:0 3px 0 rgba(10,4,40,.6), 0 0 18px rgba(147,42,225,.45);
+  }
+  .mesej .y{color:var(--gold)} .mesej .p{color:var(--pink)} .mesej .c{color:var(--c-ilmu)}
+  .bintang{color:var(--gold);font-size:clamp(18px,2.6vw,30px);text-shadow:0 0 12px rgba(255,212,71,.8);padding:0 4px}
+
+  /* Baris 2: 12 kata arah, bergerak ke kanan */
+  .l2{margin-top:10px}
+  .l2 .jalur{animation:kanan var(--speed-2) linear infinite}
+  .cip{
+    display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+    margin:0 8px;padding:6px 18px;border-radius:999px;
+    font-weight:900;font-size:clamp(16px,2.1vw,24px);color:#1A1442;
+    border:3px solid #1A1442;box-shadow:0 4px 0 rgba(10,4,40,.55), 0 0 14px var(--glow,rgba(255,255,255,.25));
+  }
+  .cip .ar{font-size:.9em;opacity:.85}
+  .label{
+    font-family:"Fredoka",sans-serif;font-weight:700;color:var(--text-2);
+    font-size:clamp(15px,1.9vw,22px);white-space:nowrap;padding:0 10px 0 18px;letter-spacing:1px;
+  }
+
+  /* roket kecil melintas sekali-sekala */
+  .roket{
+    position:absolute;z-index:0;top:50%;left:0;width:64px;height:30px;margin-top:-15px;pointer-events:none;
+    animation:terbang 14s ease-in-out infinite;opacity:0;
+  }
+
+  .pita:hover .jalur,.pita:focus-within .jalur{animation-play-state:paused}
+
+  @keyframes kiri{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes kanan{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+  @keyframes kelip{from{opacity:.55}to{opacity:.95}}
+  @keyframes terbang{
+    0%,62%{transform:translateX(-90px) translateY(0) rotate(-4deg);opacity:0}
+    64%{opacity:1}
+    80%{transform:translateX(calc(50vw - 32px)) translateY(-10px) rotate(-8deg)}
+    96%{opacity:1}
+    100%{transform:translateX(calc(100vw + 20px)) translateY(4px) rotate(-2deg);opacity:0}
+  }
+
+  /* Untuk pengguna yang memilih kurang gerakan: pita pegun di tengah */
+  @media (prefers-reduced-motion: reduce){
+    .jalur,.roket,.pita::before{animation:none!important}
+    .roket{display:none}
+    .lorong{-webkit-mask-image:none;mask-image:none}
+    .jalur{width:auto;justify-content:center;flex-wrap:wrap}
+    .set + .set{display:none}
+    .set{flex-wrap:wrap;justify-content:center;row-gap:8px;flex-shrink:1;width:100%}
+    .l1 .set > :nth-child(n+3){display:none}
+    .l1 .set > .bintang{display:none}
+    .mesej{white-space:normal;text-align:center}
+    .cip{font-size:clamp(14px,1.6vw,18px);padding:3px 12px;margin:0 4px}
+    .label{display:none}
+  }
+  @media (max-width:520px){
+    .pita{border-radius:18px;padding:10px 0 12px}
+    .cip{padding:4px 14px;margin:0 6px}
+  }
+</style>
+</head>
+<body>
+<div class="pita" role="region" aria-label="Selamat datang, angkasawan cilik! Misi Angkasa: Ekspedisi Kata Arah">
+
+  <!-- Baris 1: mesej (set kedua ialah salinan untuk gelung lancar) -->
+  <div class="lorong l1" aria-hidden="false">
+    <div class="jalur">
+      <div class="set">
+        <span class="mesej">🚀 SELAMAT DATANG, <span class="y">ANGKASAWAN CILIK!</span></span><span class="bintang">✦</span>
+        <span class="mesej">🌟 SELAMAT DATANG, <span class="p">ANGKASAWAN CILIK!</span></span><span class="bintang">✦</span>
+        <span class="mesej">🪐 SELAMAT DATANG, <span class="c">ANGKASAWAN CILIK!</span></span><span class="bintang">✦</span>
+      </div>
+      <div class="set" aria-hidden="true">
+        <span class="mesej">🚀 SELAMAT DATANG, <span class="y">ANGKASAWAN CILIK!</span></span><span class="bintang">✦</span>
+        <span class="mesej">🌟 SELAMAT DATANG, <span class="p">ANGKASAWAN CILIK!</span></span><span class="bintang">✦</span>
+        <span class="mesej">🪐 SELAMAT DATANG, <span class="c">ANGKASAWAN CILIK!</span></span><span class="bintang">✦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Baris 2: 12 kata arah -->
+  <div class="lorong l2">
+    <div class="jalur">
+      <div class="set" id="setKata"></div>
+      <div class="set" id="setKata2" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <svg class="roket" viewBox="0 0 300 140" aria-hidden="true">
+    <path d="M30 70 L0 52 Q14 70 0 88 Z" fill="#FFB648"/>
+    <path d="M40 70 L14 60 Q22 70 14 80 Z" fill="#FFE07A"/>
+    <path d="M60 30 Q170 18 250 50 Q300 70 250 90 Q170 122 60 110 Z" fill="#F4EFEA" stroke="#1A1442" stroke-width="8"/>
+    <path d="M250 50 Q300 70 250 90 Q262 70 250 50 Z" fill="#FE585F"/>
+    <circle cx="175" cy="70" r="24" fill="#3EBFD2" stroke="#1A1442" stroke-width="7"/>
+    <path d="M80 30 L60 4 L120 26 Z M80 110 L60 136 L120 114 Z" fill="#FE585F" stroke="#1A1442" stroke-width="6" stroke-linejoin="round"/>
+  </svg>
+</div>
+
+<script>
+  /* 12 kata arah (DSKP BM Tahun 3, SP 5.1.4 (iii)); warna ikut label Peta Misi */
+  (function(){
+    var warna=["--c-ilmu","--c-stesen","--c-zon","--c-semakan","--c-maklum","--c-misi"];
+    var kata=[["atas","⬆"],["bawah","⬇"],["dalam","⊙"],["luar","↗"],["hadapan","⏩"],["belakang","⏪"],
+              ["kiri","⬅"],["kanan","➡"],["tepi","⇥"],["tengah","◎"],["antara","↔"],["sisi","⇄"]];
+    function isi(el){
+      var lab=document.createElement("span");lab.className="label";lab.textContent="12 KATA ARAH:";el.appendChild(lab);
+      kata.forEach(function(k,i){
+        var c=document.createElement("span");c.className="cip";
+        var v=getComputedStyle(document.documentElement).getPropertyValue(warna[i%warna.length]).trim();
+        c.style.background=v;c.style.setProperty("--glow",v+"66");
+        var a=document.createElement("span");a.className="ar";a.setAttribute("aria-hidden","true");a.textContent=k[1];
+        c.appendChild(a);c.appendChild(document.createTextNode(k[0]));el.appendChild(c);
+      });
+    }
+    isi(document.getElementById("setKata"));
+    isi(document.getElementById("setKata2"));
+  })();
+</script>
+</body>
+</html>
