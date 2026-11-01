@@ -1,0 +1,32 @@
+<template>
+  <style>
+    @font-face { font-family: "Luckiest Guy"; src: url("assets/fonts/LuckiestGuy.woff2") format("woff2"); font-display: block; }
+    @font-face { font-family: "Emoji"; src: local("Noto Color Emoji"); }
+    #root { position: absolute; inset: 0; pointer-events: none; }
+    #root .band { position: absolute; left: 0; right: 0; top: 250px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    #root .line { font-family: "Luckiest Guy", sans-serif; line-height: 1; letter-spacing: 1px; white-space: nowrap; color: #fff;
+      -webkit-text-stroke: 13px #000; paint-order: stroke fill; text-shadow: 0 7px 0 rgba(0, 0, 0, 0.35); padding-top: 0.08em; }
+    #root .big { font-size: 96px; }
+    #root .small { font-size: 52px; text-transform: uppercase; }
+    #root .gold { color: #ffd60a; }
+    #root .emo { font-family: "Emoji", sans-serif; -webkit-text-stroke: 0; text-shadow: none; display: inline-block; margin-left: 10px; }
+  </style>
+  <div id="root" data-composition-id="hook" data-width="1080" data-height="1920"
+    data-composition-variables='[{"id":"hook-1","type":"string","label":"Hook baris 1","default":"ORANG"},{"id":"hook-2","type":"string","label":"Hook perkataan kuning","default":"PERAK"},{"id":"hook-3","type":"string","label":"Hook baris 2","default":"JE FAHAM"},{"id":"hook-4","type":"string","label":"Hook baris kecil","default":"6 perkataan loghat Perak"}]'>
+    <div class="band" id="hook-band">
+      <div class="line big" id="hook-l1"><span data-var-text="hook-1">ORANG</span> <span class="gold" data-var-text="hook-2">PERAK</span></div>
+      <div class="line big" id="hook-l2"><span data-var-text="hook-3">JE FAHAM</span><span class="emo" id="hook-emo" data-layout-ignore>🤫</span></div>
+      <div class="line small" id="hook-l3" data-var-text="hook-4">6 perkataan loghat Perak</div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // line 1 is already readable on frame 0 (the thumbnail) and lands from slightly large
+    tl.fromTo("#hook-l1", { opacity: 1, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.8)" }, 0);
+    tl.fromTo("#hook-l2", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(1.8)" }, 0.12);
+    tl.fromTo("#hook-emo", { opacity: 0, scale: 2.2, rotation: -25 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.18, ease: "power2.out" }, 0.32);
+    tl.fromTo("#hook-l3", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, 0.55);
+    tl.to("#hook-band", { y: -110, opacity: 0, filter: "blur(10px)", duration: 0.15, ease: "power3.in" }, 3.2);
+    window.__timelines["hook"] = tl;
+  </script>
+</template>

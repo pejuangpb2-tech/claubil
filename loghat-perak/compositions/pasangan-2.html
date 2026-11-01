@@ -1,0 +1,49 @@
+<template>
+  <style>
+    @font-face { font-family: "Luckiest Guy"; src: url("assets/fonts/LuckiestGuy.woff2") format("woff2"); font-display: block; }
+    #root { position: absolute; inset: 0; pointer-events: none; }
+    #root .band { position: absolute; left: 0; right: 0; top: 250px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+    #root .line { display: flex; align-items: center; gap: 14px; font-family: "Luckiest Guy", sans-serif; line-height: 1;
+      letter-spacing: 1px; white-space: nowrap; -webkit-text-stroke: 12px #000; paint-order: stroke fill;
+      text-shadow: 0 6px 0 rgba(0, 0, 0, 0.35); opacity: 0; }
+    #root .w1 { font-size: 66px; color: #fff; }
+    #root .w2 { font-size: 84px; color: #ffd60a; }
+    #root .word { position: relative; padding-top: 0.08em; }
+    #root .strike { position: absolute; left: -4%; right: -4%; top: 44%; height: 12px; background: #e3242b;
+      border: 3px solid #000; border-radius: 8px; transform-origin: left center; opacity: 0; }
+    #root .icon { width: 0.86em; height: 0.86em; display: block; flex: none; }
+  </style>
+  <div id="root" data-composition-id="pasangan-2" data-width="1080" data-height="1920" data-composition-variables='[{"id": "biasa", "type": "string", "label": "Perkataan biasa", "default": "MENYAMPAH"}, {"id": "perak", "type": "string", "label": "Perkataan Perak", "default": "GETIK"}]'>
+    <div class="band" id="pasangan-2-band">
+      <div class="line w1" id="pasangan-2-w1">
+        <span class="word"><span data-var-text="biasa">MENYAMPAH</span><span class="strike" id="pasangan-2-strike" data-layout-allow-occlusion></span></span>
+        <svg class="icon icon-x" id="pasangan-2-x" viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M24 24 L76 76 M76 24 L24 76" stroke="#000" stroke-width="36" stroke-linecap="round" fill="none" />
+          <path d="M24 24 L76 76 M76 24 L24 76" stroke="#ff2d2d" stroke-width="20" stroke-linecap="round" fill="none" />
+        </svg>
+      </div>
+      <div class="line w2" id="pasangan-2-w2">
+        <span class="word" data-var-text="perak">GETIK</span>
+        <svg class="icon icon-ok" id="pasangan-2-ok" viewBox="0 0 100 100" aria-hidden="true">
+          <rect x="6" y="6" width="88" height="88" rx="22" fill="#2fbf4f" stroke="#000" stroke-width="8" />
+          <path d="M27 52 L44 69 L75 33" fill="none" stroke="#fff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const P = 2.5, E = 7.0;
+    // ❌ biasa: spring pop, then the cross stamps in
+    tl.fromTo("#pasangan-2-w1", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, 0);
+    tl.fromTo("#pasangan-2-x", { scale: 2.2, rotation: -25, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.18, ease: "power2.out" }, 0.08);
+    // ✅ Perak: strike the standard word, slam the Perak word in, stamp the tick
+    tl.fromTo("#pasangan-2-strike", { scaleX: 0, opacity: 1 }, { scaleX: 1, opacity: 1, duration: 0.18, ease: "power2.out" }, P - 0.1);
+    tl.to("#pasangan-2-w1", { opacity: 0.78, duration: 0.18, ease: "power1.out" }, P - 0.1);
+    tl.fromTo("#pasangan-2-w2", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(1.8)" }, P);
+    tl.fromTo("#pasangan-2-ok", { scale: 2.2, rotation: -25, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.18, ease: "power2.out" }, P + 0.1);
+    // exit with the camera whip: up and blurred
+    tl.to("#pasangan-2-band", { y: -110, opacity: 0, filter: "blur(10px)", duration: 0.15, ease: "power3.in" }, E);
+    window.__timelines["pasangan-2"] = tl;
+  </script>
+</template>

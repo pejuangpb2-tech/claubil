@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ms" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #cam { position: absolute; inset: 0; transform-origin: 50% 40%; }
+    </style>
+  </head>
+  <body>
+    <!-- Orang Perak Je Faham: video loghat Perak (AWAK -> AWOK sudah dibetulkan dalam fail video) -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="58.27" data-width="1080" data-height="1920">
+      <div id="cam">
+        <video id="a-roll" class="clip" src="assets/loghat-perak.mp4" playsinline data-has-audio="true"
+          data-start="0" data-duration="58.27" data-track-index="0"
+          style="position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover"></video>
+      </div>
+
+      <div id="hook" data-composition-id="hook" data-composition-src="compositions/hook.html" data-start="0" data-duration="3.4" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index: 3"></div>
+      <div id="pasangan-1" data-composition-id="pasangan-1" data-composition-src="compositions/pasangan-1.html" data-start="3.7" data-duration="4.9" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index: 3"></div>
+      <div id="pasangan-2" data-composition-id="pasangan-2" data-composition-src="compositions/pasangan-2.html" data-start="11.6" data-duration="7.2" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index: 3"></div>
+      <div id="pasangan-3" data-composition-id="pasangan-3" data-composition-src="compositions/pasangan-3.html" data-start="22.867" data-duration="7.983" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index: 3"></div>
+      <div id="pasangan-4" data-composition-id="pasangan-4" data-composition-src="compositions/pasangan-4.html" data-start="34.2" data-duration="5.98" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index: 3"></div>
+      <div id="pasangan-5" data-composition-id="pasangan-5" data-composition-src="compositions/pasangan-5.html" data-start="43.533" data-duration="3.817" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index: 3"></div>
+      <div id="pasangan-6" data-composition-id="pasangan-6" data-composition-src="compositions/pasangan-6.html" data-start="51.167" data-duration="4.283" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index: 3"></div>
+      <div id="penutup" data-composition-id="penutup" data-composition-src="compositions/penutup.html" data-start="55.35" data-duration="2.3" data-track-index="3" data-track-kind="graphics" data-width="1080" data-height="1920" style="z-index: 3"></div>
+
+      <audio id="sfx-boom-hook" class="clip" src="assets/sfx/boom.mp3" data-start="0" data-duration="2.12" data-track-index="4" data-volume="0.45"></audio>
+      <audio id="sfx-pop-1" class="clip" src="assets/sfx/pop.mp3" data-start="3.7" data-duration="0.72" data-track-index="5" data-volume="0.35"></audio>
+      <audio id="sfx-buzz-1" class="clip" src="assets/sfx/buzzer.mp3" data-start="3.75" data-media-start="0.6" data-duration="0.35" data-track-index="6" data-volume="0.15" data-fade-out="0.2"></audio>
+      <audio id="sfx-ding-1" class="clip" src="assets/sfx/ding.mp3" data-start="6.5" data-media-start="0.3" data-duration="1.0" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-pop-2" class="clip" src="assets/sfx/pop.mp3" data-start="11.6" data-duration="0.72" data-track-index="5" data-volume="0.35"></audio>
+      <audio id="sfx-buzz-2" class="clip" src="assets/sfx/buzzer.mp3" data-start="11.65" data-media-start="0.6" data-duration="0.35" data-track-index="6" data-volume="0.15" data-fade-out="0.2"></audio>
+      <audio id="sfx-ding-2" class="clip" src="assets/sfx/ding.mp3" data-start="14.1" data-media-start="0.3" data-duration="1.0" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-pop-3" class="clip" src="assets/sfx/pop.mp3" data-start="22.867" data-duration="0.72" data-track-index="5" data-volume="0.35"></audio>
+      <audio id="sfx-buzz-3" class="clip" src="assets/sfx/buzzer.mp3" data-start="22.917" data-media-start="0.6" data-duration="0.35" data-track-index="6" data-volume="0.15" data-fade-out="0.2"></audio>
+      <audio id="sfx-ding-3" class="clip" src="assets/sfx/ding.mp3" data-start="28.233" data-media-start="0.3" data-duration="1.0" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-pop-4" class="clip" src="assets/sfx/pop.mp3" data-start="34.2" data-duration="0.72" data-track-index="5" data-volume="0.35"></audio>
+      <audio id="sfx-buzz-4" class="clip" src="assets/sfx/buzzer.mp3" data-start="34.25" data-media-start="0.6" data-duration="0.35" data-track-index="6" data-volume="0.15" data-fade-out="0.2"></audio>
+      <audio id="sfx-ding-4" class="clip" src="assets/sfx/ding.mp3" data-start="37.3" data-media-start="0.3" data-duration="1.0" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-pop-5" class="clip" src="assets/sfx/pop.mp3" data-start="43.533" data-duration="0.72" data-track-index="5" data-volume="0.35"></audio>
+      <audio id="sfx-buzz-5" class="clip" src="assets/sfx/buzzer.mp3" data-start="43.583" data-media-start="0.6" data-duration="0.35" data-track-index="6" data-volume="0.15" data-fade-out="0.2"></audio>
+      <audio id="sfx-ding-5" class="clip" src="assets/sfx/ding.mp3" data-start="45.7" data-media-start="0.3" data-duration="1.0" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-pop-6" class="clip" src="assets/sfx/pop.mp3" data-start="51.167" data-duration="0.72" data-track-index="5" data-volume="0.35"></audio>
+      <audio id="sfx-buzz-6" class="clip" src="assets/sfx/buzzer.mp3" data-start="51.217" data-media-start="0.6" data-duration="0.35" data-track-index="6" data-volume="0.15" data-fade-out="0.2"></audio>
+      <audio id="sfx-ding-6" class="clip" src="assets/sfx/ding.mp3" data-start="52.733" data-media-start="0.3" data-duration="1.0" data-track-index="7" data-volume="0.3"></audio>
+      <audio id="sfx-whoosh-1" class="clip" src="assets/sfx/whoosh.mp3" data-start="8.4" data-duration="0.57" data-track-index="8" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-2" class="clip" src="assets/sfx/whoosh.mp3" data-start="18.6" data-duration="0.57" data-track-index="8" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-3" class="clip" src="assets/sfx/whoosh.mp3" data-start="30.65" data-duration="0.57" data-track-index="8" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-4" class="clip" src="assets/sfx/whoosh.mp3" data-start="39.98" data-duration="0.57" data-track-index="8" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-5" class="clip" src="assets/sfx/whoosh.mp3" data-start="47.15" data-duration="0.57" data-track-index="8" data-volume="0.35"></audio>
+      <audio id="sfx-whoosh-6" class="clip" src="assets/sfx/whoosh.mp3" data-start="57.45" data-duration="0.57" data-track-index="8" data-volume="0.35"></audio>
+      <audio id="sfx-boom-penutup" class="clip" src="assets/sfx/boom.mp3" data-start="55.35" data-duration="2.12" data-track-index="4" data-volume="0.45"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      // punch-in on each Perak word, released at the next cut (like the reference's jump cuts)
+      tl.to("#cam", { scale: 1.08, duration: 0.25, ease: "power3.out" }, 6.5);
+      tl.to("#cam", { scale: 1.08, duration: 0.25, ease: "power3.out" }, 14.1);
+      tl.to("#cam", { scale: 1.08, duration: 0.25, ease: "power3.out" }, 28.233);
+      tl.to("#cam", { scale: 1.08, duration: 0.25, ease: "power3.out" }, 37.3);
+      tl.to("#cam", { scale: 1.08, duration: 0.25, ease: "power3.out" }, 45.7);
+      tl.to("#cam", { scale: 1.08, duration: 0.25, ease: "power3.out" }, 52.733);
+      tl.set("#cam", { scale: 1 }, 9.2);
+      tl.set("#cam", { scale: 1 }, 18.767);
+      tl.set("#cam", { scale: 1 }, 31.433);
+      tl.set("#cam", { scale: 1 }, 40.133);
+      tl.set("#cam", { scale: 1 }, 48.433);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
