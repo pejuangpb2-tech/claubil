@@ -20,13 +20,13 @@ naratif Bahasa Melayu, muzik, kesan bunyi dan bunyi suasana.
 
 ```bash
 pip install kokoro-onnx soundfile scipy
-python3 tools/bina.py                      # suara lalai: ef_dora, laju 1.05
+python3 tools/bina.py                      # suara lalai: if_sara, laju 1.05
 python3 tools/bina.py --voice af_heart --speed 1.1
 npm run check
 npm run render
 ```
 
-Suara wanita lain untuk dicuba: `if_sara`, `pf_dora`, `af_heart`, `bf_emma`,
+Suara wanita lain untuk dicuba: `ef_dora`, `pf_dora`, `af_heart`, `bf_emma`,
 `hf_alpha`. Kokoro tiada suara asli Bahasa Melayu, jadi sebutannya berloghat. Untuk
 suara Melayu asli, rakam sendiri atau guna HeyGen/ElevenLabs, letak klip di
 `assets/audio/narasi/n01.mp3` … `n16.mp3`, dan kemas kini `data-duration` dalam `index.html`.
