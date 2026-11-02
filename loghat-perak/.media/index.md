@@ -1,4 +1,4 @@
-# .media · 5 assets
+# .media · 8 assets
 
 id       type   dur   dims   path                          description
 sfx_001  sfx    0.7s  —      .media/audio/sfx/sfx_001.mp3  Quick pop — element appear/spawn, chip/tag/badge in. Small precise accent, sync to the pop-in.
@@ -6,3 +6,6 @@ sfx_002  sfx    1.6s  —      .media/audio/sfx/sfx_002.mp3  Negative / error to
 sfx_003  sfx    1.3s  —      .media/audio/sfx/sfx_003.mp3  Sharp electronic ping — punchy accent on a key reveal or data point. Sync to the beat.
 sfx_004  sfx    0.6s  —      .media/audio/sfx/sfx_004.mp3  Short whoosh — quick swipe/slide accent, fast element move, snappy transition. Sync to the motion.
 sfx_005  sfx    2.1s  —      .media/audio/sfx/sfx_005.mp3  Bass impact hit — logo/hero snap, headline slam. Trigger on the visual landing; decay carries into the next shot (J-cut).
+sfx_006  sfx    0.4s  —      .media/audio/sfx/sfx_006.mp3  Crisp UI click — button press, toggle, selection. Short accent, sync exactly to the on-screen action.
+sfx_007  sfx    2.6s  —      .media/audio/sfx/sfx_007.mp3  Punchy digital glitch — hard-cut accent or sudden reveal. Trigger on the hit; let the decay bleed into the next shot (J-cut).
+sfx_008  sfx    3.1s  —      .media/audio/sfx/sfx_008.mp3  Low-key glitch texture — subtle digital shift, minimal transition that sits under other audio.

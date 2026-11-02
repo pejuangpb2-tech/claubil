@@ -14,6 +14,11 @@
       "name": "editorial-flash-overlay",
       "type": "hyperframes:block",
       "target": "compositions/editorial-flash-overlay.html"
+    },
+    {
+      "name": "freeze-frame-dressing",
+      "type": "hyperframes:block",
+      "target": "compositions/freeze-frame-dressing.html"
     }
   ]
 }
