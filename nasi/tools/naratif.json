@@ -1,21 +1,85 @@
 {
-  "_nota": "Skrip suara naratif, satu baris per babak (indeks babak = S[i] dalam index.html). 'at' = saat dari awal babak. Nombor dieja supaya enjin suara sebut betul.",
+  "_nota": "Skrip suara naratif dalam Bahasa Melayu baku, satu baris per babak (indeks babak = S[i] dalam index.html). 'at' = saat dari awal babak. Nombor dieja penuh supaya enjin suara menyebutnya betul.",
   "lines": [
-    { "scene": 0, "at": 0.25, "text": "Kalau rakyat Malaysia tak makan nasi, apa jadi? Ini kisah Kak Ros, penjual nasi lemak." },
-    { "scene": 1, "at": 0.35, "text": "Ni Kak Ros. Dah dua puluh tahun jual nasi lemak tepi jalan. Sehari, lapan puluh bungkus licin." },
-    { "scene": 2, "at": 0.35, "text": "Tapi pagi ni, tiga puluh empat juta rakyat Malaysia berhenti makan nasi. Serentak." },
-    { "scene": 3, "at": 0.35, "text": "Pukul sebelas. Satu bungkus pun tak laku. Gerai roti canai sebelah? Beratur panjang." },
-    { "scene": 4, "at": 0.35, "text": "Rupanya, suku tenaga harian kita datang dari nasi. Semua orang tengah cari pengganti." },
-    { "scene": 5, "at": 0.35, "text": "Kak Ros cuba jual roti jala. Tapi tepung gandum? Semua import. Gandum tak tumbuh kat sini." },
-    { "scene": 6, "at": 1.6, "text": "Abang dia, Pak Mat, pesawah kat Kedah. Padi dah kuning, Ros. Siapa nak beli?" },
-    { "scene": 7, "at": 0.35, "text": "Gudang kilang beras penuh. Setiap hari, lebih kurang tujuh ribu tan beras tak berusik." },
-    { "scene": 8, "at": 0.35, "text": "Dulu, hampir separuh beras kita import. Sekarang terbalik. Beras kita pula dihantar keluar." },
-    { "scene": 9, "at": 0.35, "text": "Tapi pasaran dunia dah dikuasai Thailand dan Vietnam. Sawah diorang jauh lebih luas." },
-    { "scene": 10, "at": 0.35, "text": "Harga padi jatuh. Sebahagian sawah Pak Mat mula terbiar." },
-    { "scene": 11, "at": 0.35, "text": "Kak Ros cek gula. Doktor geleng kepala. Sarapan dia sekarang, roti putih dan teh tarik." },
-    { "scene": 12, "at": 0.35, "text": "Raya balik kampung. Takde ketupat, takde lemang. Mak diam je." },
-    { "scene": 13, "at": 0.35, "text": "Setahun. Malam tu, Kak Ros masak nasi. Sikit je." },
-    { "scene": 13, "at": "split", "text": "Badan boleh hidup tanpa nasi. Tapi hati?" },
-    { "scene": 14, "at": 0.3, "text": "Korang boleh tahan berapa lama tanpa nasi? Komen kat bawah." }
+    {
+      "scene": 0,
+      "at": 0.25,
+      "text": "Bagaimana jika rakyat Malaysia berhenti makan nasi? Inilah kisah Kak Ros, penjual nasi lemak."
+    },
+    {
+      "scene": 1,
+      "at": 0.35,
+      "text": "Inilah Kak Ros. Sudah dua puluh tahun dia menjual nasi lemak di tepi jalan. Setiap hari, lapan puluh bungkus habis dijual."
+    },
+    {
+      "scene": 2,
+      "at": 0.35,
+      "text": "Tetapi pagi ini, tiga puluh empat juta rakyat Malaysia berhenti makan nasi. Serentak."
+    },
+    {
+      "scene": 3,
+      "at": 0.35,
+      "text": "Pukul sebelas pagi. Sebungkus pun tidak terjual. Gerai roti canai di sebelah? Barisannya panjang."
+    },
+    {
+      "scene": 4,
+      "at": 0.35,
+      "text": "Rupa-rupanya, suku daripada tenaga harian kita datang daripada nasi. Semua orang sedang mencari pengganti."
+    },
+    {
+      "scene": 5,
+      "at": 0.35,
+      "text": "Kak Ros cuba menjual roti jala. Tetapi tepung gandum? Semuanya diimport. Gandum tidak tumbuh di negara kita."
+    },
+    {
+      "scene": 6,
+      "at": 1.6,
+      "text": "Abangnya, Pak Mat, pesawah di Kedah. Padi sudah menguning, Ros. Siapa yang mahu beli?"
+    },
+    {
+      "scene": 7,
+      "at": 0.35,
+      "text": "Gudang kilang beras penuh. Setiap hari, kira-kira tujuh ribu tan beras tidak terusik."
+    },
+    {
+      "scene": 8,
+      "at": 0.35,
+      "text": "Dahulu, hampir separuh beras kita diimport. Kini keadaan terbalik. Beras kita pula dieksport."
+    },
+    {
+      "scene": 9,
+      "at": 0.35,
+      "text": "Tetapi pasaran dunia sudah dikuasai Thailand dan Vietnam. Sawah mereka jauh lebih luas."
+    },
+    {
+      "scene": 10,
+      "at": 0.35,
+      "text": "Harga padi jatuh. Sebahagian sawah Pak Mat mula terbiar."
+    },
+    {
+      "scene": 11,
+      "at": 0.35,
+      "text": "Kak Ros memeriksa paras gula. Doktor menggeleng kepala. Sarapannya kini, roti putih dan teh tarik."
+    },
+    {
+      "scene": 12,
+      "at": 0.35,
+      "text": "Pulang ke kampung pada Hari Raya. Tiada ketupat, tiada lemang. Ibu hanya diam."
+    },
+    {
+      "scene": 13,
+      "at": 0.35,
+      "text": "Setahun berlalu. Malam itu, Kak Ros menanak nasi. Sedikit sahaja."
+    },
+    {
+      "scene": 13,
+      "at": "split",
+      "text": "Badan boleh hidup tanpa nasi. Tetapi hati?"
+    },
+    {
+      "scene": 14,
+      "at": 0.3,
+      "text": "Berapa lama anda mampu bertahan tanpa nasi? Kongsikan di ruangan komen."
+    }
   ]
 }
