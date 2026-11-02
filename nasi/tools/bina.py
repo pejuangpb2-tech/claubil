@@ -1,6 +1,6 @@
 """Bina suara naratif + runut latar untuk video Kak Ros, dan selaraskan tempoh babak.
 
-    python3 tools/bina.py [--voice ef_dora] [--speed 1.05]
+    python3 tools/bina.py [--voice if_sara] [--speed 1.05]
 
 1. Jana setiap baris dalam tools/naratif.json dengan Kokoro (sebutan Bahasa Melayu
    dari espeak-ng 'ms').
@@ -26,7 +26,7 @@ TAIL = 0.7          # saat senyap selepas suara sebelum babak bertukar
 SPLIT_GAP = 0.45    # jeda antara dua baris dalam babak yang sama
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--voice", default="ef_dora")
+ap.add_argument("--voice", default="if_sara")
 ap.add_argument("--speed", type=float, default=1.05)
 args = ap.parse_args()
 
