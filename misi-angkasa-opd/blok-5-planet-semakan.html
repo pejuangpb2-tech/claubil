@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planet Semakan – Misi Angkasa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1D0851; --card:#241A6B; --card-line:#4B3FA0; --screen:#130536;
+    --navy:#2D2B64; --purple:#634790; --pink:#D6337F; --pink-soft:#FF8FC0;
+    --teal:#3BFEC1; --ice:#9FF0FF; --coral:#F0A27A; --gold:#FFD447;
+    --text-2:#DCD5FF; --ok:#7CF5B4; --no:#FF8FC0; --radius:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  body{
+    font-family:"Nunito",system-ui,sans-serif;font-size:19px;line-height:1.5;color:#fff;
+    background-color:var(--bg);
+    background-image:
+      radial-gradient(ellipse 55% 35% at 8% 12%, rgba(43,34,144,.55), transparent 70%),
+      radial-gradient(ellipse 45% 35% at 95% 70%, rgba(30,26,119,.85), transparent 70%);
+    position:relative;min-height:100vh;
+  }
+  body::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      radial-gradient(1.6px 1.6px at 20px 30px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 120px 80px,#C9BCFF,transparent),
+      radial-gradient(1.8px 1.8px at 210px 160px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 60px 200px,#FF9CCB,transparent),
+      radial-gradient(1.4px 1.4px at 260px 40px,#9FF0FF,transparent);
+    background-size:290px 260px;opacity:.75;animation:twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{from{opacity:.35}to{opacity:.9}}
+  .wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:16px 16px 26px}
+  h1,h2,h3{font-family:"Fredoka","Nunito",sans-serif;font-weight:600;line-height:1.2}
+
+  .dash{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-radius:var(--radius);margin-bottom:16px;
+    background:linear-gradient(180deg,#34307A 0%,var(--navy) 100%);
+    border:3px solid rgba(255,255,255,.9);box-shadow:0 8px 0 #120638,0 14px 30px rgba(5,0,25,.55);
+  }
+  .dash-lights{display:flex;gap:8px}
+  .dash-lights i{width:14px;height:14px;border-radius:50%;display:block;box-shadow:0 0 10px currentColor;animation:blink 2.4s infinite}
+  .dash-lights i:nth-child(1){background:var(--teal);color:var(--teal)}
+  .dash-lights i:nth-child(2){background:var(--pink-soft);color:var(--pink-soft);animation-delay:.8s}
+  .dash-lights i:nth-child(3){background:var(--gold);color:var(--gold);animation-delay:1.6s}
+  @keyframes blink{0%,70%,100%{opacity:1}80%{opacity:.35}}
+  .pill{display:inline-block;background:#fff;color:var(--purple);font:600 28px "Fredoka",sans-serif;padding:6px 18px;border-radius:999px;box-shadow:0 4px 0 #B9A8F0}
+  .sound-toggle{margin-left:auto;min-height:48px;min-width:48px;border-radius:999px;cursor:pointer;background:var(--screen);color:#fff;border:2px solid var(--card-line);font:700 18px "Nunito",sans-serif;padding:0 16px;display:inline-flex;align-items:center;gap:8px}
+  .sound-toggle:focus-visible,.btn:focus-visible,.opt:focus-visible{outline:4px solid var(--teal);outline-offset:3px}
+
+  .card{position:relative;background:var(--card);border:2px solid var(--card-line);border-radius:var(--radius);padding:22px;box-shadow:0 10px 0 rgba(10,2,40,.55),0 18px 34px rgba(5,0,25,.45)}
+  .view{display:none}
+  .view.show{display:block;animation:rise .4s ease-out}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* Skrin mula */
+  .start{text-align:center;padding:10px 0}
+  .start .planet{width:150px;height:auto;margin:0 auto 8px;display:block;animation:spin 16s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .start h2{font-size:36px;margin-bottom:10px}
+  .start .rules{list-style:none;display:inline-grid;gap:8px;text-align:left;margin:6px auto 22px;font-size:21px;font-weight:700}
+  .start .rules li{background:var(--screen);border:2px solid var(--card-line);border-radius:16px;padding:8px 16px}
+
+  /* Tolok bahan api */
+  .fuel{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .fuel .lbl{font:600 19px "Fredoka",sans-serif;color:var(--gold);white-space:nowrap}
+  .tank{flex:1;display:grid;grid-template-columns:repeat(10,1fr);gap:4px;padding:5px;background:var(--screen);border:3px solid #fff;border-radius:14px;position:relative}
+  .tank i{height:20px;border-radius:5px;background:rgba(255,255,255,.12);transition:background .4s}
+  .tank i.on{background:linear-gradient(180deg,#FFE48A,#FF9F45)}
+  .fuel svg{width:40px;height:40px;flex:0 0 auto;transform:rotate(90deg)}
+  .count-txt{font:600 20px "Fredoka",sans-serif;color:var(--teal);margin-bottom:8px}
+
+  .q-row{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .q-text{flex:1 1 300px;font:600 27px/1.35 "Fredoka",sans-serif}
+  .blank{display:inline-block;min-width:80px;border-bottom:4px solid var(--gold);margin:0 4px}
+  .fig{display:flex;justify-content:center;margin-bottom:14px}
+  .fig svg{width:100%;max-width:300px;height:auto;background:radial-gradient(ellipse at 50% 0%,#2B2290,#130536 75%);border-radius:18px;border:3px solid rgba(255,255,255,.8)}
+  .opts{display:grid;gap:12px}
+  .opt{
+    display:flex;align-items:center;gap:14px;width:100%;text-align:left;min-height:60px;padding:10px 16px;border-radius:18px;
+    border:3px solid #fff;background:#fff;color:var(--navy);font:600 22px/1.3 "Fredoka",sans-serif;cursor:pointer;box-shadow:0 5px 0 #B9A8F0;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .opt .key{flex:0 0 40px;height:40px;border-radius:50%;background:var(--purple);color:#fff;display:grid;place-items:center;font-size:20px}
+  .opt:active{transform:translateY(3px);box-shadow:0 2px 0 #B9A8F0}
+  .opt.right{background:var(--ok);border-color:var(--ok);box-shadow:0 5px 0 #2FA36B}
+  .opt.right .key{background:#1E7A50}
+  .opt.wrong{background:#FFD3E3;border-color:var(--no);box-shadow:0 5px 0 #D46A93}
+  .opt.wrong .key{background:#B8306F}
+  .opt[disabled]{cursor:default}
+  .fb{margin-top:16px;border-radius:18px;padding:14px 16px;display:none;font-size:20px;font-weight:700}
+  .fb.show{display:block;animation:rise .35s ease-out}
+  .fb.ok{background:#14523F;border:3px solid var(--ok)}
+  .fb.no{background:#5A1940;border:3px solid var(--no)}
+  .fb .big{display:block;font:600 24px "Fredoka",sans-serif;margin-bottom:4px}
+  .fb.ok .big{color:var(--ok)} .fb.no .big{color:var(--no)}
+  .fb b{color:var(--gold)}
+
+  .btn{-webkit-appearance:none;appearance:none;border:0;cursor:pointer;min-height:56px;padding:0 26px;border-radius:999px;font:600 22px "Fredoka",sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;-webkit-tap-highlight-color:transparent}
+  .btn:active{transform:translateY(3px)}
+  .btn-primary{background:var(--pink);color:#fff;box-shadow:0 6px 0 #8A1550}
+  .btn-big{min-height:64px;font-size:26px;padding:0 36px}
+  .btn-light{background:#fff;color:var(--purple);box-shadow:0 5px 0 #B9A8F0}
+  .btn-sm{min-height:48px;font-size:19px;padding:0 16px}
+  .next{margin-top:16px;display:none}
+  .next.show{display:inline-flex}
+  .speak{display:none}
+  .has-voice .speak{display:inline-flex}
+
+  /* Keputusan */
+  .result{text-align:center}
+  .result h2{font-size:30px;margin-bottom:4px}
+  .score{font:700 72px/1 "Fredoka",sans-serif;color:var(--gold);margin:10px 0 6px;text-shadow:0 5px 0 #8A1550}
+  .tier{display:inline-block;background:#fff;color:var(--navy);border-radius:20px;padding:10px 22px;font:600 26px "Fredoka",sans-serif;box-shadow:0 5px 0 #B9A8F0;margin:8px 0 6px}
+  .tier-note{font-size:20px;color:var(--text-2);margin-bottom:16px}
+  .review{text-align:left;background:var(--screen);border:2px solid var(--card-line);border-radius:20px;padding:14px 16px;margin:6px 0 18px}
+  .review h3{font-size:22px;margin-bottom:10px;color:var(--pink-soft)}
+  .review ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .review li{background:rgba(255,255,255,.06);border-radius:14px;padding:8px 12px;font-size:18px;line-height:1.35}
+  .review li .qn{font:600 18px "Fredoka",sans-serif;color:var(--gold)}
+  .review li .yours{color:var(--no)}
+  .review li .ans{color:var(--ok);font-weight:800}
+  .review.perfect h3{color:var(--ok)}
+  .goto{display:inline-block;background:var(--gold);color:var(--navy);border-radius:20px;padding:14px 22px;font:600 26px "Fredoka",sans-serif;box-shadow:0 6px 0 #B98E10;margin:4px 0 18px}
+  .confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5;border-radius:var(--radius)}
+  .confetti span{position:absolute;top:-30px;animation:fall 2.8s ease-in forwards}
+  @keyframes fall{to{transform:translateY(700px) rotate(320deg);opacity:0}}
+
+  @media (max-width:640px){
+    .review ul{grid-template-columns:1fr}
+  }
+  @media (max-width:420px){
+    .card{padding:16px}
+    .pill{font-size:22px}
+    .q-text{font-size:23px}
+    .opt{font-size:20px}
+    .fuel .lbl{font-size:18px}
+    .fuel svg{display:none}
+    .start h2{font-size:30px}
+    .start .rules{font-size:19px}
+    .score{font-size:60px}
+    .tier,.goto{font-size:22px}
+    .btn{width:100%}
+    .sound-label{display:none}
+    .sound-toggle{padding:0 12px}
+  }
+  @media (prefers-reduced-motion: reduce){ *,*::before,*::after{animation:none!important;transition:none!important} }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gVisor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D27BF0"/><stop offset="1" stop-color="#4A1580"/></linearGradient>
+  </defs>
+  <symbol id="s-rocket" viewBox="0 0 60 100">
+    <g stroke="#3A1F6E" stroke-width="3" stroke-linejoin="round">
+      <path d="M14 58 L3 80 L3 88 L17 80Z" fill="#EC4C9A"/>
+      <path d="M46 58 L57 80 L57 88 L43 80Z" fill="#EC4C9A"/>
+      <rect x="21" y="81" width="18" height="9" rx="2" fill="#634790"/>
+      <path d="M30 4 C46 20 48 50 45 82 L15 82 C12 50 14 20 30 4Z" fill="#fff"/>
+      <path d="M30 4 C37 11 41 19 44 28 L16 28 C19 19 23 11 30 4Z" fill="#EC4C9A"/>
+      <circle cx="30" cy="44" r="9" fill="#3BFEC1"/>
+    </g>
+    <circle cx="27" cy="41" r="2.5" fill="#fff"/>
+  </symbol>
+  <symbol id="s-star" viewBox="0 0 40 40">
+    <path d="M20 2 L25.3 13.6 L38 15.2 L28.6 24 L31.2 36.6 L20 30.4 L8.8 36.6 L11.4 24 L2 15.2 L14.7 13.6Z" fill="#FFD447" stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round"/>
+    <circle cx="16" cy="17" r="2.5" fill="#fff" opacity=".8"/>
+  </symbol>
+  <symbol id="s-rock" viewBox="0 0 80 50">
+    <path d="M6 46 C1 32 11 15 27 13 C35 4 54 5 60 16 C74 18 80 34 75 46 Z" fill="#8C85B8" stroke="#3A1F6E" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="30" cy="30" rx="7" ry="4" fill="#6E6699"/><ellipse cx="54" cy="25" rx="5" ry="3" fill="#6E6699"/><ellipse cx="60" cy="38" rx="4" ry="2.5" fill="#6E6699"/>
+  </symbol>
+  <symbol id="s-ship" viewBox="0 0 140 90">
+    <g stroke="#3A1F6E" stroke-width="3" stroke-linejoin="round">
+      <path d="M22 34 L6 16 L14 44Z" fill="#EC4C9A"/>
+      <path d="M22 62 L6 80 L14 52Z" fill="#EC4C9A"/>
+      <path d="M12 48 C12 26 42 14 80 14 C112 14 132 32 134 48 C132 64 112 78 80 78 C42 78 12 68 12 48Z" fill="#fff"/>
+      <path d="M118 30 C126 36 131 42 134 48 C131 54 126 60 118 66Z" fill="#EC4C9A"/>
+      <circle cx="78" cy="46" r="21" fill="#9B8CE0"/>
+      <circle cx="78" cy="46" r="16" fill="#130536"/>
+    </g>
+    <circle cx="36" cy="46" r="4" fill="#3BFEC1" stroke="#3A1F6E" stroke-width="2"/>
+  </symbol>
+  <symbol id="s-astro-head" viewBox="0 0 40 40">
+    <g stroke="#3A1F6E" stroke-width="2.5">
+      <circle cx="20" cy="22" r="15" fill="#fff"/>
+      <rect x="10" y="14" width="20" height="14" rx="7" fill="url(#gVisor)"/>
+    </g>
+    <ellipse cx="15" cy="18" rx="3" ry="2" fill="#fff" opacity=".8"/>
+  </symbol>
+  <symbol id="s-astro" viewBox="0 0 50 72">
+    <g stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M16 37 L8 49" stroke-width="9"/><path d="M16 37 L8 49" stroke="#fff" stroke-width="4.5"/>
+      <path d="M34 37 L42 49" stroke-width="9"/><path d="M34 37 L42 49" stroke="#fff" stroke-width="4.5"/>
+      <circle cx="7.5" cy="50" r="3.5" fill="#EC4C9A"/><circle cx="42.5" cy="50" r="3.5" fill="#EC4C9A"/>
+      <rect x="16" y="50" width="7" height="14" rx="3" fill="#fff"/><rect x="27" y="50" width="7" height="14" rx="3" fill="#fff"/>
+      <rect x="14.5" y="62" width="10" height="7" rx="2.5" fill="#EC4C9A"/><rect x="25.5" y="62" width="10" height="7" rx="2.5" fill="#EC4C9A"/>
+      <rect x="14" y="31" width="22" height="23" rx="8" fill="#fff"/>
+      <path d="M14 44 h22 v4 h-22z" fill="#EC4C9A" stroke-width="1.5"/>
+      <circle cx="10" cy="18" r="3.5" fill="#EC4C9A"/><circle cx="40" cy="18" r="3.5" fill="#EC4C9A"/>
+      <circle cx="25" cy="17" r="14" fill="#fff"/>
+      <rect x="15" y="10" width="20" height="14" rx="7" fill="url(#gVisor)"/>
+    </g>
+    <ellipse cx="20" cy="14" rx="3" ry="2" fill="#fff" opacity=".8"/>
+  </symbol>
+  <symbol id="s-robot" viewBox="0 0 40 64">
+    <g stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round">
+      <path d="M20 4 V10"/><circle cx="20" cy="4" r="3" fill="#EC4C9A"/>
+      <rect x="1" y="32" width="6" height="15" rx="3" fill="#B8C4E8"/><rect x="33" y="32" width="6" height="15" rx="3" fill="#B8C4E8"/>
+      <rect x="11" y="49" width="7" height="12" rx="2" fill="#B8C4E8"/><rect x="22" y="49" width="7" height="12" rx="2" fill="#B8C4E8"/>
+      <rect x="6" y="29" width="28" height="22" rx="6" fill="#9B8CE0"/>
+      <rect x="8" y="10" width="24" height="18" rx="6" fill="#E9E3FF"/>
+      <circle cx="15" cy="19" r="3.5" fill="#3BFEC1"/><circle cx="25" cy="19" r="3.5" fill="#3BFEC1"/>
+      <circle cx="20" cy="40" r="4" fill="#FFD447"/>
+    </g>
+  </symbol>
+  <symbol id="s-alien" viewBox="0 0 50 50">
+    <g stroke="#3A1F6E" stroke-width="2.5" stroke-linecap="round">
+      <path d="M17 14 L12 4 M33 14 L38 4"/>
+      <circle cx="12" cy="4" r="3" fill="#FFD447"/><circle cx="38" cy="4" r="3" fill="#FFD447"/>
+      <ellipse cx="25" cy="29" rx="19" ry="17" fill="#7CF5B4"/>
+      <ellipse cx="18" cy="26" rx="5" ry="6" fill="#fff"/><ellipse cx="32" cy="26" rx="5" ry="6" fill="#fff"/>
+    </g>
+    <circle cx="19" cy="27" r="2.6" fill="#2D2B64"/><circle cx="33" cy="27" r="2.6" fill="#2D2B64"/>
+    <path d="M19 37 Q25 42 31 37" fill="none" stroke="#3A1F6E" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="12" cy="35" r="2.5" fill="#FF8FC0"/><circle cx="38" cy="35" r="2.5" fill="#FF8FC0"/>
+  </symbol>
+  <symbol id="s-moon" viewBox="0 0 40 40">
+    <path d="M25 3 A18 18 0 1 0 37 29 A14 14 0 1 1 25 3Z" fill="#F4EEFF" stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round"/>
+  </symbol>
+</svg>
+
+<main class="wrap">
+  <header class="dash">
+    <div class="dash-lights" aria-hidden="true"><i></i><i></i><i></i></div>
+    <h1 class="pill">Planet Semakan ✅</h1>
+    <button class="sound-toggle" id="soundBtn" type="button" aria-pressed="true" aria-label="Kesan bunyi hidup. Tekan untuk senyap.">
+      <span aria-hidden="true" id="soundIcon">🔊</span><span class="sound-label">Bunyi</span>
+    </button>
+  </header>
+
+  <section class="card">
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+    <!-- Skrin mula -->
+    <div class="view show start" id="startView">
+      <svg class="planet" viewBox="0 0 120 120" aria-hidden="true">
+        <ellipse cx="60" cy="62" rx="56" ry="15" fill="none" stroke="#9FF0FF" stroke-width="6" opacity=".7"/>
+        <circle cx="60" cy="58" r="36" fill="#7CF5B4" stroke="#3A1F6E" stroke-width="4"/>
+        <path d="M28 46 Q60 36 92 46 M26 64 Q60 56 94 66" fill="none" stroke="#2FA36B" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="46" cy="40" r="6" fill="#fff" opacity=".55"/>
+        <path d="M4 62 A56 15 0 0 0 116 62" fill="none" stroke="#9FF0FF" stroke-width="6"/>
+      </svg>
+      <h2>Ujian Akhir Misi</h2>
+      <ul class="rules">
+        <li>📝 10 soalan.</li>
+        <li>💪 Jawab sebaik mungkin.</li>
+        <li>🕊️ Tiada had masa.</li>
+      </ul>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-primary btn-big" id="startBtn" type="button">🚀 Mula Ujian</button>
+        <button class="btn btn-light btn-sm speak" type="button" data-say="Ujian Akhir Misi. Sepuluh soalan. Jawab sebaik mungkin. Tiada had masa. Tekan Mula Ujian."><span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span></button>
+      </div>
+    </div>
+
+    <!-- Soalan -->
+    <div class="view" id="quizView">
+      <div class="fuel">
+        <span class="lbl">⛽ Bahan api</span>
+        <div class="tank" id="tank" role="progressbar" aria-label="Kemajuan ujian" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <svg viewBox="0 0 60 100" aria-hidden="true"><use href="#s-rocket" x="0" y="0" width="60" height="100"/></svg>
+      </div>
+      <p class="count-txt" id="countTxt">Soalan 1 daripada 10</p>
+      <div class="q-row">
+        <h2 class="q-text" id="qText" tabindex="-1"></h2>
+        <button class="btn btn-light btn-sm speak" id="qSpeak" type="button" data-say=""><span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span></button>
+      </div>
+      <div class="fig" id="fig"></div>
+      <div class="opts" id="opts" role="group" aria-labelledby="qText"></div>
+      <div class="fb" id="fb" role="status"></div>
+      <button class="btn btn-primary next" id="nextBtn" type="button">Seterusnya ➡️</button>
+    </div>
+
+    <!-- Keputusan -->
+    <div class="view result" id="resultView" role="status">
+      <h2>🏁 Ujian selesai!</h2>
+      <p class="score" id="score" aria-live="off">0/10</p>
+      <div class="tier" id="tier"></div>
+      <p class="tier-note" id="tierNote"></p>
+      <div class="review" id="review"></div>
+      <div class="goto">Pergi ke MISI BERJAYA 🏆</div><br>
+      <button class="btn btn-light" id="retryBtn" type="button">🔁 Cuba Semula</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Bunyi ---------- */
+  var soundOn = true, ctx = null;
+  function audio(){
+    if(!soundOn) return null;
+    try{
+      if(!ctx){ var AC = window.AudioContext || window.webkitAudioContext; if(!AC) return null; ctx = new AC(); }
+      if(ctx.state === "suspended") ctx.resume();
+      return ctx;
+    }catch(e){ return null; }
+  }
+  function beep(freq, dur, type, vol, delay){
+    var a = audio(); if(!a) return;
+    try{
+      var o = a.createOscillator(), g = a.createGain(), t = a.currentTime + (delay || 0);
+      o.type = type || "sine"; o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol || 0.15, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.05);
+    }catch(e){}
+  }
+  function sRight(){ beep(784, .16, "triangle", .15); beep(1047, .25, "triangle", .15, .12); }
+  function sWrong(){ beep(330, .22, "sine", .12); }
+  function sWin(){ [523,659,784,1047,1319].forEach(function(n,i){ beep(n, .3, "triangle", .14, i*.12); }); }
+  var soundBtn = document.getElementById("soundBtn");
+  soundBtn.addEventListener("click", function(){
+    soundOn = !soundOn;
+    document.getElementById("soundIcon").textContent = soundOn ? "🔊" : "🔇";
+    soundBtn.setAttribute("aria-pressed", soundOn ? "true" : "false");
+    soundBtn.setAttribute("aria-label", soundOn ? "Kesan bunyi hidup. Tekan untuk senyap." : "Kesan bunyi senyap. Tekan untuk hidupkan.");
+    if(soundOn) beep(880, .15);
+  });
+
+  /* ---------- Dengar ---------- */
+  var synth = ("speechSynthesis" in window) ? window.speechSynthesis : null;
+  var voice = null, activeBtn = null;
+  function pickVoice(){
+    if(!synth) return;
+    var vs = [];
+    try{ vs = synth.getVoices() || []; }catch(e){}
+    function find(re){ for(var i=0;i<vs.length;i++){ if(re.test(vs[i].lang)) return vs[i]; } return null; }
+    voice = find(/^ms[-_]MY/i) || find(/^ms\b/i) || find(/^id[-_]ID/i) || find(/^id\b/i) || find(/^in[-_]ID/i);
+    root.classList.toggle("has-voice", !!voice);
+  }
+  if(synth){
+    pickVoice();
+    try{ synth.addEventListener ? synth.addEventListener("voiceschanged", pickVoice) : (synth.onvoiceschanged = pickVoice); }catch(e){}
+    [300, 1000, 2500].forEach(function(ms){ setTimeout(pickVoice, ms); });
+  }
+  function resetSpeakBtn(){
+    if(activeBtn){ activeBtn.querySelector(".lbl").textContent = "Dengar"; activeBtn.querySelector("[aria-hidden]").textContent = "🔊"; activeBtn = null; }
+  }
+  function stopSpeech(){ try{ if(synth) synth.cancel(); }catch(e){} resetSpeakBtn(); }
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest ? e.target.closest(".speak") : null;
+    if(!btn || !synth || !voice) return;
+    var wasActive = (btn === activeBtn);
+    stopSpeech();
+    if(wasActive) return;
+    activeBtn = btn;
+    btn.querySelector(".lbl").textContent = "Berhenti";
+    btn.querySelector("[aria-hidden]").textContent = "⏹";
+    try{
+      var u = new SpeechSynthesisUtterance(btn.getAttribute("data-say"));
+      u.lang = voice.lang; u.rate = 0.9; u.pitch = 1.05;
+      try{ u.voice = voice; }catch(vErr){}
+      u.onend = u.onerror = function(){ if(activeBtn === btn) resetSpeakBtn(); };
+      synth.speak(u);
+    }catch(err){ resetSpeakBtn(); }
+  });
+
+  /* ---------- Gambar soalan ---------- */
+  function U(id, x, y, w, h){ return '<use href="#' + id + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '"/>'; }
+  function svg(label, inner){ return '<svg viewBox="0 0 160 120" role="img" aria-label="' + label + '">' + inner + '</svg>'; }
+  var ground = '<path d="M0 112 H160" stroke="#5A4BB0" stroke-width="4"/>';
+  var door = '<rect x="73.8" y="76.6" width="17.3" height="23.8" rx="3" fill="#9B8CE0" stroke="#3A1F6E" stroke-width="2.5"/><circle cx="87.5" cy="89" r="1.8" fill="#3A1F6E"/>';
+  var F = {
+    starAbove: svg("Bintang di atas roket", U("s-rocket",56,38,48,80) + U("s-star",62,2,36,36)),
+    astroIn:   svg("Angkasawan kelihatan melalui tingkap kapal angkasa",
+                 '<clipPath id="cW"><circle cx="88.2" cy="62.3" r="16.4"/></clipPath>' + U("s-ship",8,15,144,92.6) +
+                 '<g clip-path="url(#cW)">' + U("s-astro-head",70,46,36,36) + '</g>'),
+    alienBehind: svg("Alien separuh tersorok di belakang batu", U("s-alien",58,30,46,46) + U("s-rock",28,56,104,65)),
+    walkOut:   svg("Angkasawan berjalan keluar dari pintu kapal angkasa menuju ke arah bintang",
+                 U("s-ship",-6,30,112,72) +
+                 '<rect x="26" y="50" width="12" height="24" rx="3" fill="#130536" stroke="#3A1F6E" stroke-width="2.5"/>' +
+                 '<path d="M40 86 Q78 108 108 92" fill="none" stroke="#FFD447" stroke-width="4" stroke-dasharray="7 6" stroke-linecap="round"/>' +
+                 '<path d="M100 86 L110 91 L103 100" fill="none" stroke="#FFD447" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>' +
+                 U("s-astro",112,44,36,52) + U("s-star",128,4,24,24) + U("s-star",104,14,16,16)),
+    moonBetween: svg("Bulan di antara dua bintang", U("s-star",8,42,38,38) + U("s-star",114,42,38,38) + U("s-moon",56,34,48,48)),
+    robotFront:  svg("Robot berdiri di hadapan pintu roket", ground + U("s-rocket",50,14,64.8,108) + door + U("s-robot",67,68,30,48)),
+    lampSide:    svg("Lampu di tepi roket", ground + U("s-rocket",34,14,64.8,108) +
+                 '<circle cx="128" cy="34" r="18" fill="#FFD447" opacity=".25"/>' +
+                 '<rect x="125" y="40" width="6" height="72" rx="3" fill="#B8C4E8" stroke="#3A1F6E" stroke-width="2.5"/>' +
+                 '<circle cx="128" cy="34" r="10" fill="#FFD447" stroke="#3A1F6E" stroke-width="3"/>' +
+                 '<rect x="118" y="108" width="20" height="6" rx="2" fill="#9B8CE0" stroke="#3A1F6E" stroke-width="2"/>')
+  };
+  var B = '<span class="blank" aria-label="tempat kosong">&nbsp;</span>';
+
+  /* ---------- 10 soalan (jawapan betul = opts[0]; susunan dirawak semasa dipaparkan) ---------- */
+  var Q = [
+    { q:"Bintang berada " + B + " roket.", say:"Lihat gambar. Bintang berada, di mana, roket?", fig:"starAbove",
+      opts:["di atas","di bawah","di dalam"], short:"Bintang berada ___ roket.",
+      why:"Dalam gambar, bintang berada di atas roket." },
+    { q:"Angkasawan berada " + B + " kapal angkasa.", say:"Lihat gambar. Angkasawan berada, di mana, kapal angkasa?", fig:"astroIn",
+      opts:["di dalam","di luar","di atas"], short:"Angkasawan berada ___ kapal angkasa.",
+      why:"Angkasawan kelihatan melalui tingkap. Dia berada di dalam kapal angkasa." },
+    { q:"Alien bersembunyi " + B + " batu.", say:"Lihat gambar. Alien bersembunyi, di mana, batu?", fig:"alienBehind",
+      opts:["di belakang","di hadapan","di atas"], short:"Alien bersembunyi ___ batu.",
+      why:"Alien bersembunyi di belakang batu. Kita hanya nampak sebahagian kepalanya." },
+    { q:"Ayat manakah yang betul ejaannya?",
+      opts:["Roket itu terbang di atas awan.","Roket itu terbang diatas awan.","Roket itu terbang di-atas awan."], short:"Ayat manakah yang betul ejaannya?",
+      why:"\"di\" ditulis terpisah daripada \"atas\", tanpa sempang." },
+    { q:"Lihat arah anak panah. Angkasawan berjalan " + B + " kapal angkasa untuk melihat bintang.",
+      say:"Lihat arah anak panah. Angkasawan berjalan, apa, kapal angkasa untuk melihat bintang?", fig:"walkOut",
+      opts:["ke luar","di luar","dari luar"], short:"Angkasawan berjalan ___ kapal angkasa untuk melihat bintang.",
+      why:"\"ke\" menunjukkan hala tuju. Angkasawan bergerak dari dalam kapal menuju ke luar." },
+    { q:"Bulan berada " + B + " dua bintang.", say:"Lihat gambar. Bulan berada, di mana, dua bintang?", fig:"moonBetween",
+      opts:["di antara","di atas","di dalam"], short:"Bulan berada ___ dua bintang.",
+      why:"Bulan berada di tengah-tengah, di antara dua bintang." },
+    { q:"Robot berdiri " + B + " pintu roket.", say:"Lihat gambar. Robot berdiri, di mana, pintu roket?", fig:"robotFront",
+      opts:["di hadapan","di belakang","di bawah"], short:"Robot berdiri ___ pintu roket.",
+      why:"Robot berdiri di hadapan pintu roket, jadi pintu itu terlindung di belakangnya." },
+    { q:"Apakah kata arah dalam ayat ini: \"Topi keledar diletakkan di bawah kerusi.\"?",
+      opts:["bawah","diletakkan","kerusi"], short:"Kata arah dalam ayat \"Topi keledar diletakkan di bawah kerusi.\"",
+      why:"\"bawah\" menunjukkan kedudukan. \"diletakkan\" ialah perbuatan dan \"kerusi\" ialah nama benda." },
+    { q:"Lampu terletak " + B + " roket itu.", say:"Lihat gambar. Lampu terletak, di mana, roket itu?", fig:"lampSide",
+      opts:["di tepi","di dalam","di atas"], short:"Lampu terletak ___ roket itu.",
+      why:"Dalam gambar, lampu berdiri di tepi roket." },
+    { q:"Susunan ayat manakah yang betul?",
+      opts:["Kucing tidur di bawah meja.","Tidur kucing meja di bawah.","Di bawah kucing tidur meja."], short:"Susunan ayat manakah yang betul?",
+      why:"Susunan yang betul: siapa (kucing), buat apa (tidur), di mana (di bawah meja)." }
+  ];
+  var keys = ["A","B","C"];
+  var order = [], idx = 0, score = 0, wrongs = [];
+  var el = function(id){ return document.getElementById(id); };
+
+  function shuffle(a){
+    var b = a.slice();
+    for(var i = b.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = b[i]; b[i] = b[j]; b[j] = t; }
+    return b;
+  }
+  function plain(html){ var d = document.createElement("div"); d.innerHTML = html.replace(/<span class="blank"[^>]*>&nbsp;<\/span>/g, "___"); return d.textContent; }
+  function show(id){ ["startView","quizView","resultView"].forEach(function(v){ el(v).classList.toggle("show", v === id); }); }
+  function fuel(n){
+    el("tank").querySelectorAll("i").forEach(function(c, i){ c.classList.toggle("on", i < n); });
+    el("tank").setAttribute("aria-valuenow", n);
+  }
+
+  function start(){
+    idx = 0; score = 0; wrongs = [];
+    order = Q.map(function(item){ return shuffle([0,1,2]); });   /* rawak susunan pilihan setiap kali */
+    el("confetti").innerHTML = "";
+    show("quizView"); render(); el("qText").focus({preventScroll:true});
+  }
+  function render(){
+    var item = Q[idx], ord = order[idx];
+    stopSpeech();
+    el("countTxt").textContent = "Soalan " + (idx + 1) + " daripada " + Q.length;
+    el("qText").innerHTML = item.q;
+    el("fig").innerHTML = item.fig ? F[item.fig] : "";
+    el("fig").style.display = item.fig ? "flex" : "none";
+    var h = "", sayOpts = [];
+    ord.forEach(function(oi, pos){
+      h += '<button class="opt" type="button" data-o="' + oi + '"><span class="key" aria-hidden="true">' + keys[pos] + '</span><span>' + item.opts[oi] + '</span></button>';
+      sayOpts.push(keys[pos] + ", " + item.opts[oi]);
+    });
+    el("opts").innerHTML = h;
+    el("qSpeak").setAttribute("data-say", (item.say || plain(item.q)) + " Pilihan: " + sayOpts.join(". ") + ".");
+    el("fb").className = "fb"; el("fb").innerHTML = "";
+    el("nextBtn").classList.remove("show");
+    el("nextBtn").textContent = idx === Q.length - 1 ? "Lihat Keputusan 🏁" : "Seterusnya ➡️";
+    fuel(idx);
+  }
+  el("opts").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var item = Q[idx], oi = +b.getAttribute("data-o"), fb = el("fb");
+    el("opts").querySelectorAll(".opt").forEach(function(x){
+      x.disabled = true;
+      if(+x.getAttribute("data-o") === 0) x.classList.add("right");
+    });
+    if(oi === 0){
+      score++;
+      fb.className = "fb ok show";
+      fb.innerHTML = '<span class="big">Hebat, angkasawan! ⭐</span>' + item.why;
+      sRight();
+    } else {
+      b.classList.add("wrong");
+      wrongs.push({ n: idx + 1, q: item.short, yours: item.opts[oi], ans: item.opts[0] });
+      fb.className = "fb no show";
+      fb.innerHTML = '<span class="big">Hampir! 🚀</span>Jawapan yang betul ialah <b>' + item.opts[0] + '</b>. ' + item.why;
+      sWrong();
+    }
+    fuel(idx + 1);
+    el("nextBtn").classList.add("show"); el("nextBtn").focus({preventScroll:true});
+  });
+  el("nextBtn").addEventListener("click", function(){
+    if(idx < Q.length - 1){ idx++; render(); el("qText").focus({preventScroll:true}); }
+    else results();
+  });
+
+  function results(){
+    stopSpeech();
+    show("resultView");
+    var tier, note;
+    if(score >= 9){ tier = "Angkasawan Bintang ⭐⭐⭐"; note = "Luar biasa! Kamu sangat faham tentang kata arah."; }
+    else if(score >= 6){ tier = "Angkasawan Hebat ⭐⭐"; note = "Bagus! Kamu faham kata arah dengan baik."; }
+    else { tier = "Angkasawan Pelatih ⭐"; note = "Ulang kaji di Planet Ilmu ya! Kamu pasti boleh."; }
+    el("tier").textContent = tier;
+    el("tierNote").textContent = note;
+    var rv = el("review");
+    if(wrongs.length === 0){
+      rv.className = "review perfect";
+      rv.innerHTML = "<h3>🌟 Tiada kesilapan! Hebat!</h3>";
+    } else {
+      rv.className = "review";
+      var h = "<h3>🔍 Mari semak semula: jawapan yang betul</h3><ul>";
+      wrongs.forEach(function(w){
+        h += '<li><span class="qn">S' + w.n + '</span> ' + w.q + '<br>' +
+             '✅ <span class="ans">' + w.ans + '</span></li>';
+      });
+      rv.innerHTML = h + "</ul>";
+    }
+    countUp(score);
+    sWin();
+    if(score >= 6) burst();
+  }
+  function countUp(target){
+    var out = el("score");
+    if(reduceMotion || target === 0){ out.textContent = target + "/" + Q.length; return; }
+    var t0 = null, dur = 1200;
+    function step(ts){
+      if(t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      out.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + "/" + Q.length;
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  function burst(){
+    if(reduceMotion) return;
+    var box = el("confetti"); box.innerHTML = "";
+    var icons = ["⭐","✨","🌟","🎉","🚀","⭐"];
+    for(var i=0;i<30;i++){
+      var s = document.createElement("span");
+      s.textContent = icons[i % icons.length];
+      s.style.left = ((i * 37) % 94 + 3) + "%";
+      s.style.animationDelay = ((i % 8) * 0.12) + "s";
+      s.style.fontSize = (18 + (i % 4) * 6) + "px";
+      box.appendChild(s);
+    }
+  }
+
+  el("startBtn").addEventListener("click", start);
+  el("retryBtn").addEventListener("click", start);
+})();
+</script>
+</body>
+</html>

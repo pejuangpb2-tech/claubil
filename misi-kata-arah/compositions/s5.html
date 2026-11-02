@@ -1,0 +1,163 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #s5-all { position: absolute; inset: 0; }
+    #s5-head { opacity: 0; }
+    #s5-train { position: absolute; left: 80px; top: 330px; width: 1760px; height: 330px; }
+    #s5-flame { position: absolute; left: 0; top: 70px; width: 130px; height: 160px; }
+    #s5-nose { position: absolute; left: 1610px; top: 20px; width: 150px; height: 260px; }
+    .s5-m { position: absolute; top: 0; width: 262px; height: 300px; border-radius: 30px; border: 6px solid var(--ink); color: var(--ink); text-align: center; opacity: 0; overflow: hidden; }
+    .s5-m .lb { font: 900 32px var(--font); border-bottom: 5px solid var(--ink); padding: 18px 0 14px; }
+    .s5-m .wd { position: absolute; left: 0; right: 0; top: 118px; font: 900 72px var(--font); white-space: nowrap; opacity: 0; }
+    #s5-m1 { left: 110px; background: var(--cyan); } #s5-m2 { left: 384px; background: var(--lilac); } #s5-m3 { left: 658px; background: var(--pink); }
+    #s5-m4 { left: 932px; background: var(--yellow); } #s5-m5 { left: 1206px; background: var(--cream); }
+    #s5-m6 { position: absolute; left: 1480px; top: 90px; width: 110px; height: 130px; border-radius: 26px; border: 6px solid var(--ink); background: var(--cream); font: 900 120px/90px var(--font); color: var(--ink); text-align: center; opacity: 0; }
+    #s5-pic { position: absolute; left: 140px; top: 280px; width: 720px; height: 520px; opacity: 0; }
+    #s5-pmoon { position: absolute; left: 230px; top: 140px; width: 260px; height: 260px; }
+    #s5-psatw { position: absolute; left: 430px; top: 90px; width: 260px; height: 130px; }
+    .s5-qa { position: absolute; left: 950px; width: 860px; opacity: 0; }
+    .s5-qa .q { font: 900 52px var(--font); color: var(--cream); }
+    .s5-qa .a { display: inline-block; margin-top: 8px; font: 900 64px var(--font); color: var(--ink); background: var(--yellow); border: 5px solid var(--ink); border-radius: 22px; padding: 4px 28px; opacity: 0; }
+    .s5-tip { position: absolute; top: 330px; width: 460px; text-align: center; opacity: 0; }
+    .s5-tip .ic { display: inline-grid; place-items: center; width: 200px; height: 200px; border-radius: 50%; border: 8px solid var(--ink); font: 900 100px var(--font); color: var(--ink); }
+    .s5-tip .tx { font: 900 50px/1.15 var(--font); color: #fff; margin-top: 22px; }
+    #s5-g { position: absolute; inset: 0; opacity: 0; }
+    #s5-ground { position: absolute; left: -120px; top: 760px; width: 2160px; height: 620px; }
+    #s5-ggogo { position: absolute; left: 1280px; top: 380px; width: 220px; height: 232px; }
+    #s5-grock { position: absolute; left: 1080px; top: 520px; width: 560px; height: 350px; }
+    #s5-gtrain { position: absolute; left: 160px; top: 160px; width: 1600px; display: flex; gap: 12px; justify-content: center; }
+    .s5-gm { font: 900 54px var(--font); color: var(--ink); border: 5px solid var(--ink); border-radius: 20px; padding: 8px 22px; opacity: 0; }
+    #s5-wrkt { position: absolute; left: 380px; top: 420px; width: 440px; height: 205px; opacity: 0; }
+    #s5-wafiy { position: absolute; left: 860px; top: 470px; width: 220px; height: 297px; opacity: 0; }
+    #s5-hearts { position: absolute; left: 980px; top: 330px; font-size: 90px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="s5" data-width="1920" data-height="1080">
+    <div id="s5-all">
+      <div class="warp" id="s5-warp"></div>
+      <div class="stn" id="s5-card">
+        <div class="stn-planet pc5" id="s5-cp">5</div>
+        <div class="stn-kicker" id="s5-ck">STESEN 5</div>
+        <div class="stn-title" id="s5-ct">Cara Membina Ayat</div>
+      </div>
+      <div class="head" id="s5-head">🛠️ Formula ayat</div>
+      <div id="s5-train">
+        <svg id="s5-flame" viewBox="0 0 130 160"><path d="M130 10 Q40 30 4 80 Q40 130 130 150Z" fill="#FE8B42" stroke="#1A1442" stroke-width="6" stroke-linejoin="round" /><path d="M130 40 Q70 52 46 80 Q70 108 130 120Z" fill="#FDD13F" /></svg>
+        <div class="s5-m" id="s5-m1"><div class="lb">Siapa/Apa?</div><div class="wd" id="s5-w1a">Wafiy</div><div class="wd" id="s5-w1b">Gogo</div><div class="wd" id="s5-w1c">Komet</div><div class="wd" id="s5-w1d" style="font-size:62px;top:122px">Satelit</div></div>
+        <div class="s5-m" id="s5-m2"><div class="lb">Buat apa?</div><div class="wd" id="s5-w2a">duduk</div><div class="wd" id="s5-w2b" style="font-size:46px;top:128px">melompat</div><div class="wd" id="s5-w2c">datang</div><div class="wd" id="s5-w2d" style="font-size:48px;top:128px">berputar</div></div>
+        <div class="s5-m" id="s5-m3"><div class="lb">di/ke/dari</div><div class="wd" id="s5-w3a">di</div><div class="wd" id="s5-w3b">ke</div><div class="wd" id="s5-w3c">dari</div><div class="wd" id="s5-w3d">di</div></div>
+        <div class="s5-m" id="s5-m4"><div class="lb">kata arah</div><div class="wd" id="s5-w4a">dalam</div><div class="wd" id="s5-w4b">atas</div><div class="wd" id="s5-w4c" style="font-size:46px;top:128px">belakang</div><div class="wd" id="s5-w4d">sisi</div></div>
+        <div class="s5-m" id="s5-m5"><div class="lb">benda/tempat</div><div class="wd" id="s5-w5a">roket</div><div class="wd" id="s5-w5b">batu</div><div class="wd" id="s5-w5c">planet</div><div class="wd" id="s5-w5d">bulan</div></div>
+        <div id="s5-m6">.</div>
+        <svg id="s5-nose" viewBox="0 0 150 260"><path d="M4 10 Q100 40 146 130 Q100 220 4 250Z" fill="#FE585F" stroke="#1A1442" stroke-width="6" stroke-linejoin="round" /></svg>
+      </div>
+
+      <div class="panel" id="s5-pic">
+        <svg id="s5-pmoon" viewBox="0 0 120 120"><use href="#a-moon" width="120" height="120" /></svg>
+        <svg id="s5-psatw" viewBox="0 0 220 110"><use href="#a-sat" width="220" height="110" /></svg>
+      </div>
+      <div class="s5-qa" id="s5-q1" style="top:280px"><div class="q">Apa dalam gambar?</div><div class="a" id="s5-a1">Satelit</div></div>
+      <div class="s5-qa" id="s5-q2" style="top:480px"><div class="q">Apa yang ia buat?</div><div class="a" id="s5-a2">Berputar</div></div>
+      <div class="s5-qa" id="s5-q3" style="top:680px"><div class="q">Di mana?</div><div class="a" id="s5-a3"><span class="c-di" style="color:#B8306F">Di</span> <span>sisi</span> bulan</div></div>
+
+      <div class="s5-tip" id="s5-t1" style="left:150px"><div class="ic pc2">Aa</div><div class="tx">Mulakan dengan<br>huruf besar</div></div>
+      <div class="s5-tip" id="s5-t2" style="left:730px"><div class="ic pc3">🎯</div><div class="tx">Pilih kata arah<br>yang tepat</div></div>
+      <div class="s5-tip" id="s5-t3" style="left:1310px"><div class="ic pc1">.</div><div class="tx">Akhiri dengan<br>noktah</div></div>
+
+      <div id="s5-g">
+        <svg id="s5-ground" viewBox="0 0 2160 620"><ellipse cx="1080" cy="420" rx="1300" ry="300" fill="#493F8F" stroke="#3C3579" stroke-width="8" /><ellipse cx="380" cy="240" rx="80" ry="20" fill="#3C3579" /></svg>
+        <div id="s5-ggogo"><div id="s5-ggogo-in" style="width:100%;height:100%"></div></div>
+        <svg id="s5-grock" viewBox="0 0 240 150"><use href="#a-rock" width="240" height="150" /></svg>
+        <div id="s5-gtrain">
+          <div class="s5-gm" id="s5-gm1" style="background:var(--cyan)">Saya</div>
+          <div class="s5-gm" id="s5-gm2" style="background:var(--lilac)">bersembunyi</div>
+          <div class="s5-gm" id="s5-gm3" style="background:var(--pink)">di</div>
+          <div class="s5-gm" id="s5-gm4" style="background:var(--yellow)">belakang</div>
+          <div class="s5-gm" id="s5-gm5" style="background:var(--cream)">batu besar</div>
+          <div class="s5-gm" id="s5-gm6" style="background:var(--cream)">.</div>
+        </div>
+        <div id="s5-wrkt"><div id="s5-wrkt-in" style="width:100%;height:100%"></div></div>
+        <div id="s5-wafiy"><div id="s5-wafiy-in" style="width:100%;height:100%"></div></div>
+        <div id="s5-hearts">💛⭐💚</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const KA = window.KA;
+      KA.put("#s5-warp", KA.svgWarp(65));
+      KA.put("#s5-ggogo-in", KA.svgGogo("s5g"));
+      KA.put("#s5-wrkt-in", KA.svgRocket("s5r", { face: true }));
+      KA.put("#s5-wafiy-in", KA.svgWafiy("s5w"));
+      const tl = gsap.timeline({ paused: true });
+      const D = KA.secDur("s5"), T = (id) => KA.t(id), W = (id, i) => KA.w(id, i);
+      KA.warp(tl, "#s5-warp", 0);
+      KA.card(tl, "s5", T("51_s5_tajuk") - 0.5, T("52_formula") - 0.7);
+      /* formula: modul terbang masuk dan "klik" bercantum */
+      const t52 = T("52_formula");
+      KA.blurIn(tl, "#s5-head", t52 - 0.1);
+      tl.fromTo("#s5-flame", { opacity: 0, x: -200 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, t52);
+      tl.fromTo("#s5-nose", { opacity: 0, x: 200 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, t52);
+      KA.flicker(tl, "#s5-flame", t52 + 0.5, 40);
+      [[1, 4], [2, 7], [3, 9], [4, 13], [5, 16]].forEach(([n, wi]) => tl.fromTo(`#s5-m${n}`, { opacity: 0, y: -320 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.6)" }, W("52_formula", wi) - 0.35));
+      KA.pop(tl, "#s5-m6", W("52_formula", 19), 0.45);
+      /* tiga contoh: perkataan masuk ke dalam modul, kemudian dibaca */
+      const COL3 = { a: "#F48FB1", b: "#FE8B42", c: "#35D0BA", d: "#F48FB1" };
+      function fill(letter, id, prev) {
+        const t = T(id);
+        for (let n = 1; n <= 5; n++) {
+          if (prev) tl.to(`#s5-w${n}${prev}`, { opacity: 0, y: 40, duration: 0.15 }, t - 1.55 + (n - 1) * 0.3);
+          tl.fromTo(`#s5-w${n}${letter}`, { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 0.25, ease: "back.out(2)" }, t - 1.45 + (n - 1) * 0.3);
+        }
+        tl.to("#s5-m3", { backgroundColor: COL3[letter], duration: 0.3 }, t - 0.9);
+        for (let n = 1; n <= 5; n++) tl.fromTo(`#s5-m${n}`, { scale: 1 }, { scale: 1.07, duration: 0.15, yoyo: true, repeat: 1, ease: "sine.inOut" }, W(id, n - 1) - 0.05);
+      }
+      fill("a", "53_contoh1", null);
+      fill("b", "54_contoh2", "a");
+      fill("c", "55_contoh3", "b");
+      /* lihat cara saya: gambar satelit di sisi bulan */
+      const t56 = T("56_lihat_cara");
+      tl.to(["#s5-train", "#s5-head"], { opacity: 0, y: -60, duration: 0.4, ease: "power2.in" }, t56 - 0.3);
+      KA.fadeIn(tl, "#s5-pic", t56 + 0.2, 0.4);
+      tl.fromTo("#s5-psatw", { rotation: -12 }, { rotation: 12, duration: 1.2, repeat: 12, yoyo: true, ease: "sine.inOut", transformOrigin: "50% 50%" }, t56);
+      /* think-aloud: soalan dan jawapan guru (demonstrasi) */
+      const w57 = (i) => W("57_think_aloud", i);
+      [[1, 0, 3], [2, 4, 8], [3, 9, 11]].forEach(([n, q, a]) => { KA.blurIn(tl, `#s5-q${n}`, w57(q) - 0.1); KA.pop(tl, `#s5-a${n}`, w57(a) - 0.1, 0.45); });
+      /* ayat lengkap dalam modul */
+      const t58 = T("58_ayat_lengkap");
+      KA.out(tl, ["#s5-pic", "#s5-q1", "#s5-q2", "#s5-q3"], t58 - 0.5, 0.3);
+      tl.set(["#s5-w1c", "#s5-w2c", "#s5-w3c", "#s5-w4c", "#s5-w5c"], { opacity: 0 }, t58 - 0.6);
+      tl.set(["#s5-w1d", "#s5-w2d", "#s5-w3d", "#s5-w4d", "#s5-w5d"], { opacity: 1, y: 0 }, t58 - 0.6);
+      tl.set("#s5-m3", { backgroundColor: COL3.d }, t58 - 0.6);
+      tl.to(["#s5-train"], { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, t58 - 0.4);
+      for (let n = 1; n <= 5; n++) tl.fromTo(`#s5-m${n}`, { scale: 1 }, { scale: 1.07, duration: 0.15, yoyo: true, repeat: 1, ease: "sine.inOut" }, W("58_ayat_lengkap", n + 1) - 0.05);
+      /* tip ayat hebat */
+      const t59 = T("59_tip_ayat");
+      KA.out(tl, "#s5-train", t59 - 0.4, 0.3);
+      [[1, 3], [2, 7], [3, 12]].forEach(([n, wi]) => KA.pop(tl, `#s5-t${n}`, W("59_tip_ayat", wi) - 0.1, 0.5));
+      /* penyelesaian: Gogo memberitahu kedudukannya */
+      const t60 = T("60_gogo_tahu");
+      KA.out(tl, ["#s5-t1", "#s5-t2", "#s5-t3"], t60 - 1.3, 0.3);
+      KA.fadeIn(tl, "#s5-g", t60 - 1.0, 0.5);
+      KA.blink(tl, "#s5g-eye", t60, 16, "90 92");
+      tl.fromTo("#s5-ggogo", { y: 70 }, { y: 0, duration: 0.4, ease: "back.out(2)" }, t60);
+      for (let n = 1; n <= 5; n++) KA.pop(tl, `#s5-gm${n}`, W("60_gogo_tahu", n + 3) - 0.1, 0.4);
+      KA.pop(tl, "#s5-gm6", W("60_gogo_tahu", 9) + 0.4, 0.4);
+      /* Wafiy datang dengan roket */
+      const t61 = T("61_wafiy_datang"), go = W("61_wafiy_datang", 4);
+      tl.fromTo("#s5-wrkt", { opacity: 1, x: -900 }, { opacity: 1, x: -260, duration: 0.8, ease: "power2.out" }, t61 - 0.4);
+      KA.flicker(tl, "#s5r-flame", t61 - 0.4, 6);
+      tl.to("#s5-wrkt", { x: 0, duration: 0.8, ease: "power2.inOut" }, go - 0.3);
+      /* bertemu: Wafiy keluar, Gogo keluar dari belakang batu, berpelukan */
+      const t62 = T("62_gogo_terima_kasih");
+      tl.fromTo("#s5-wafiy", { opacity: 0, x: -120 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, t62 - 1.4);
+      tl.to("#s5-ggogo", { x: -230, y: 70, duration: 0.6, ease: "power2.inOut" }, t62 - 1.2);
+      tl.to("#s5-wafiy", { x: 40, duration: 0.5, ease: "power2.inOut" }, t62 - 0.7);
+      KA.wave(tl, "#s5w-arm", t62 - 0.6, 3, "136 158");
+      KA.wave(tl, "#s5g-arm", t62 - 0.6, 3, "38 112");
+      tl.fromTo(["#s5-wafiy-in", "#s5-ggogo-in"], { y: 0 }, { y: -26, duration: 0.2, repeat: 5, yoyo: true, ease: "sine.out" }, t62 - 0.4);
+      KA.pop(tl, "#s5-hearts", t62 - 0.5, 0.6);
+      tl.to("#s5-all", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.45);
+      window.__timelines["s5"] = tl;
+    })();
+  </script>
+</template>

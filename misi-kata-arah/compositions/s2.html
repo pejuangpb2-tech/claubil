@@ -1,0 +1,291 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #s2-all { position: absolute; inset: 0; }
+    #s2-sub { display: inline-block; margin-top: 24px; font: 900 48px var(--font); color: var(--ink); background: var(--cyan); border: 5px solid var(--ink); border-radius: 999px; padding: 8px 30px; opacity: 0; }
+    #s2-stage { position: absolute; inset: 0; }
+    #s2-rkt { position: absolute; left: 690px; top: 360px; width: 540px; height: 252px; opacity: 0; }
+    #s2-star { position: absolute; left: 890px; top: 190px; width: 140px; height: 140px; opacity: 0; }
+    #s2-earthclip { position: absolute; left: 0; top: 0; width: 1920px; height: 800px; overflow: hidden; }
+    #s2-earth { position: absolute; left: 700px; top: 860px; width: 520px; height: 520px; }
+    #s2-gogo { position: absolute; left: 1290px; top: 240px; width: 190px; height: 200px; opacity: 0; }
+    #s2-moon { position: absolute; left: 1290px; top: 410px; width: 160px; height: 160px; opacity: 0; }
+    #s2-comet { position: absolute; left: 330px; top: 440px; width: 300px; height: 104px; opacity: 0; }
+    #s2-wb { position: absolute; left: 810px; top: 300px; width: 300px; height: 405px; opacity: 0; }
+    .s2-ring { position: absolute; width: 100px; height: 100px; opacity: 0; }
+    #s2-red { position: absolute; left: 150px; top: 330px; width: 330px; height: 330px; opacity: 0; }
+    #s2-blue { position: absolute; left: 1440px; top: 330px; width: 330px; height: 330px; opacity: 0; }
+    #s2-tipk { position: absolute; left: 0; right: 0; top: 222px; text-align: center; opacity: 0; }
+    #s2-tipk span { display: inline-block; font: 800 42px var(--font); color: var(--ink); background: var(--cyan); border-radius: 999px; padding: 8px 32px; }
+    .s2-mini { position: absolute; font: 900 46px var(--font); color: var(--cream); opacity: 0; }
+    #s2-ground { position: absolute; left: -120px; top: 760px; width: 2160px; height: 620px; }
+    #s2-crater { position: absolute; left: 560px; top: 610px; width: 800px; height: 225px; opacity: 0; }
+    #s2-flagw { position: absolute; left: 1700px; top: 470px; width: 90px; height: 160px; opacity: 0; }
+    #s2-gogo2 { position: absolute; left: 1760px; top: 520px; width: 170px; height: 180px; opacity: 0; }
+    #s2-sun { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; opacity: 0; }
+    #s2-bonus { position: absolute; left: 0; right: 0; top: 330px; text-align: center; opacity: 0; }
+    #s2-bonus .b1 { font: 900 190px/1 var(--font); color: var(--yellow); text-shadow: 0 10px 0 #0F0B2E; }
+    #s2-bonus .b2 { font: 900 64px var(--font); color: #fff; margin-top: 20px; }
+    #s2-moon2 { position: absolute; left: 880px; top: 380px; width: 160px; height: 160px; opacity: 0; }
+    #s2-st1 { position: absolute; left: 690px; top: 400px; width: 130px; height: 130px; opacity: 0; }
+    #s2-st2 { position: absolute; left: 1100px; top: 400px; width: 130px; height: 130px; opacity: 0; }
+    #s2-rkv { position: absolute; left: 760px; top: 438px; width: 400px; height: 187px; opacity: 0; }
+    #s2-ladder { position: absolute; left: 1010px; top: 440px; width: 80px; height: 300px; opacity: 0; }
+    #s2-compass { position: absolute; left: 810px; top: 360px; width: 300px; height: 300px; opacity: 0; }
+    .s2-cd { position: absolute; width: 260px; text-align: center; font: 900 50px var(--font); color: var(--yellow); opacity: 0; }
+    .s2-cd b { color: #fff; font-size: 40px; display: block; }
+    #s2-grid { position: absolute; left: 230px; top: 320px; width: 1460px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 26px; }
+    .s2-bd { font: 900 46px var(--font); color: var(--ink); background: var(--yellow); border: 6px solid var(--ink); border-radius: 26px; padding: 18px 0; text-align: center; opacity: 0; box-shadow: 0 7px 0 rgba(10,7,32,.55); }
+    .s2-lb { position: absolute; display: flex; align-items: center; gap: 18px; opacity: 0; }
+    .s2-arrw { display: inline-block; width: 110px; height: 70px; }
+    .s2-arrw svg { width: 110px; height: 70px; overflow: visible; }
+    .s2-sent { top: 862px; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="s2" data-width="1920" data-height="1080">
+    <div id="s2-all">
+      <div class="warp" id="s2-warp"></div>
+      <div class="stn" id="s2-card">
+        <div class="stn-planet pc2" id="s2-cp">2</div>
+        <div class="stn-kicker" id="s2-ck">STESEN 2</div>
+        <div class="stn-title" id="s2-ct">Kenali Kata Arah</div>
+        <div id="s2-sub">↔ pasangan berlawanan</div>
+      </div>
+      <div class="tag" id="s2-t1" style="opacity:0">Pasangan 1: <b>atas</b> ↔ <b>bawah</b></div>
+      <div class="tag" id="s2-t2" style="opacity:0">Pasangan 2: <b>dalam</b> ↔ <b>luar</b></div>
+      <div class="tag" id="s2-t3" style="opacity:0">Pasangan 3: <b>hadapan</b> ↔ <b>belakang</b></div>
+      <div class="tag" id="s2-t4" style="opacity:0">Pasangan 4: <b>kiri</b> ↔ <b>kanan</b></div>
+      <div class="tag" id="s2-t5" style="opacity:0">Pasangan 5: <b>tepi</b> ↔ <b>tengah</b></div>
+      <div class="tag" id="s2-t6" style="opacity:0">Bonus: <b>antara</b> · <b>sisi</b></div>
+
+      <div id="s2-stage">
+        <div id="s2-earthclip"><svg id="s2-earth" viewBox="0 0 200 200"><use href="#a-earth" width="200" height="200" /></svg></div>
+        <div id="s2-rkt"><div id="s2-rkt-in" style="width:100%;height:100%"></div></div>
+        <svg id="s2-star" viewBox="0 0 100 100"><use href="#a-star" width="100" height="100" /></svg>
+        <div id="s2-gogo"><div id="s2-gogo-in" style="width:100%;height:100%"></div></div>
+        <svg id="s2-moon" viewBox="0 0 120 120"><use href="#a-moon" width="120" height="120" /></svg>
+        <svg id="s2-comet" viewBox="0 0 260 90"><use href="#a-comet" width="260" height="90" /></svg>
+      </div>
+
+      <svg id="s2-red" viewBox="0 0 200 200"><use href="#a-planet-red" width="200" height="200" /></svg>
+      <svg id="s2-blue" viewBox="0 0 200 200"><use href="#a-planet-blue" width="200" height="200" /></svg>
+      <div id="s2-wb"><div id="s2-wb-in" style="width:100%;height:100%"></div></div>
+      <svg class="s2-ring" id="s2-rl" style="left:812px;top:597px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#FDD13F" stroke-width="7" /><circle cx="50" cy="50" r="46" fill="none" stroke="#FDD13F" stroke-width="4" stroke-dasharray="8 8" opacity=".7" /></svg>
+      <svg class="s2-ring" id="s2-rr" style="left:1008px;top:597px" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#FDD13F" stroke-width="7" /><circle cx="50" cy="50" r="46" fill="none" stroke="#FDD13F" stroke-width="4" stroke-dasharray="8 8" opacity=".7" /></svg>
+      <div class="s2-mini" id="s2-mk" style="left:700px;top:700px">kiri</div>
+      <div class="s2-mini" id="s2-mn" style="left:1120px;top:700px">kanan</div>
+      <div id="s2-tipk"><span>👀 Kiri Wafiy = kiri kamu · kanan Wafiy = kanan kamu</span></div>
+
+      <svg id="s2-ground" viewBox="0 0 2160 620"><ellipse cx="1080" cy="420" rx="1300" ry="300" fill="#493F8F" stroke="#3C3579" stroke-width="8" /><ellipse cx="300" cy="240" rx="80" ry="20" fill="#3C3579" /><ellipse cx="1840" cy="260" rx="100" ry="22" fill="#3C3579" /></svg>
+      <svg id="s2-crater" viewBox="0 0 640 180"><use href="#a-crater" width="640" height="180" /></svg>
+      <svg id="s2-flagw" viewBox="0 0 90 160"><use href="#a-flag" width="90" height="160" /></svg>
+      <div id="s2-gogo2"><div id="s2-gogo2-in" style="width:100%;height:100%"></div></div>
+      <div id="s2-rkv"><div id="s2-rkv-in" style="width:100%;height:100%"></div></div>
+      <svg id="s2-ladder" viewBox="0 0 80 300"><use href="#a-ladder" width="80" height="300" /></svg>
+
+      <svg id="s2-sun" viewBox="0 0 1920 1080">
+        <ellipse cx="960" cy="470" rx="420" ry="190" fill="none" stroke="rgba(159,231,240,.55)" stroke-width="4" stroke-dasharray="12 12" />
+        <g id="s2-orbit">
+          <use href="#a-planet-red" x="510" y="430" width="80" height="80" />
+          <use href="#a-planet-blue" x="1330" y="430" width="80" height="80" />
+          <use href="#a-earth" x="920" y="250" width="80" height="80" />
+          <use href="#a-planet-ring" x="900" y="610" width="120" height="84" />
+        </g>
+        <use href="#a-sun" x="840" y="350" width="240" height="240" />
+      </svg>
+      <div id="s2-bonus"><div class="b1">BONUS!</div><div class="b2">2 lagi kata arah</div></div>
+      <svg id="s2-moon2" viewBox="0 0 120 120"><use href="#a-moon" width="120" height="120" /></svg>
+      <svg id="s2-st1" viewBox="0 0 100 100"><use href="#a-star" width="100" height="100" /></svg>
+      <svg id="s2-st2" viewBox="0 0 100 100"><use href="#a-star" width="100" height="100" /></svg>
+
+      <div class="head" id="s2-thk" style="opacity:0">Tahukah kamu? 🧭</div>
+      <svg id="s2-compass" viewBox="0 0 300 300"><use href="#a-compass" width="300" height="300" /></svg>
+      <div class="s2-cd" id="s2-cu" style="left:830px;top:244px">U<b>Utara</b></div>
+      <div class="s2-cd" id="s2-cs" style="left:830px;top:668px">S<b>Selatan</b></div>
+      <div class="s2-cd" id="s2-ct2" style="left:1120px;top:462px">T<b>Timur</b></div>
+      <div class="s2-cd" id="s2-cb" style="left:540px;top:462px">B<b>Barat</b></div>
+      <div class="head" id="s2-12h" style="opacity:0">12 kata arah</div>
+      <div id="s2-grid"></div>
+
+      <!-- label kata arah: [anak panah] TEKS atau TEKS [anak panah] -->
+      <div class="s2-lb" id="s2-l-atas" style="left:1060px;top:210px"><span class="s2-arrw" style="transform:rotate(180deg)"><svg id="s2-a-atas"></svg></span><span class="label-ka" style="position:static">ATAS</span></div>
+      <div class="s2-lb" id="s2-l-bawah" style="left:1200px;top:560px"><span class="s2-arrw" style="transform:rotate(150deg)"><svg id="s2-a-bawah"></svg></span><span class="label-ka" style="position:static">BAWAH</span></div>
+      <div class="s2-lb" id="s2-l-dalam" style="left:1180px;top:200px"><span class="s2-arrw" style="transform:rotate(140deg)"><svg id="s2-a-dalam"></svg></span><span class="label-ka" style="position:static">DALAM</span></div>
+      <div class="s2-lb" id="s2-l-luar" style="left:1230px;top:470px"><span class="s2-arrw" style="transform:rotate(-90deg)"><svg id="s2-a-luar"></svg></span><span class="label-ka" style="position:static">LUAR</span></div>
+      <div class="s2-lb" id="s2-l-hadapan" style="left:1000px;top:220px"><span class="label-ka" style="position:static">HADAPAN</span><span class="s2-arrw" style="transform:rotate(30deg)"><svg id="s2-a-hadapan"></svg></span></div>
+      <div class="s2-lb" id="s2-l-belakang" style="left:150px;top:240px"><span class="s2-arrw" style="transform:rotate(150deg)"><svg id="s2-a-belakang"></svg></span><span class="label-ka" style="position:static">BELAKANG</span></div>
+      <div class="s2-lb" id="s2-l-kiri" style="left:150px;top:180px"><span class="label-ka" style="position:static">KIRI</span><span class="s2-arrw" style="transform:rotate(120deg)"><svg id="s2-a-kiri"></svg></span></div>
+      <div class="s2-lb" id="s2-l-kanan" style="left:1300px;top:180px"><span class="s2-arrw" style="transform:rotate(60deg)"><svg id="s2-a-kanan"></svg></span><span class="label-ka" style="position:static">KANAN</span></div>
+      <div class="s2-lb" id="s2-l-tepi" style="left:1290px;top:250px"><span class="s2-arrw" style="transform:rotate(110deg)"><svg id="s2-a-tepi"></svg></span><span class="label-ka" style="position:static">TEPI</span></div>
+      <div class="s2-lb" id="s2-l-tengah" style="left:1180px;top:170px"><span class="s2-arrw" style="transform:rotate(140deg)"><svg id="s2-a-tengah"></svg></span><span class="label-ka" style="position:static">TENGAH</span></div>
+      <div class="s2-lb" id="s2-l-antara" style="left:770px;top:190px"><span class="label-ka" style="position:static">ANTARA</span><span class="s2-arrw" style="transform:rotate(100deg)"><svg id="s2-a-antara"></svg></span></div>
+      <div class="s2-lb" id="s2-l-sisi" style="left:1140px;top:300px"><span class="s2-arrw" style="transform:rotate(160deg)"><svg id="s2-a-sisi"></svg></span><span class="label-ka" style="position:static">SISI</span></div>
+
+      <div class="sentence s2-sent" id="s2-s-atas"></div><div class="sentence s2-sent" id="s2-s-bawah"></div>
+      <div class="sentence s2-sent" id="s2-s-dalam"></div><div class="sentence s2-sent" id="s2-s-luar"></div>
+      <div class="sentence s2-sent" id="s2-s-hadapan"></div><div class="sentence s2-sent" id="s2-s-belakang"></div>
+      <div class="sentence s2-sent" id="s2-s-kiri"></div><div class="sentence s2-sent" id="s2-s-kanan"></div>
+      <div class="sentence s2-sent" id="s2-s-tepi"></div><div class="sentence s2-sent" id="s2-s-tengah"></div>
+      <div class="sentence s2-sent" id="s2-s-antara"></div><div class="sentence s2-sent" id="s2-s-sisi"></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const KA = window.KA;
+      KA.put("#s2-warp", KA.svgWarp(32));
+      KA.put("#s2-rkt-in", KA.svgRocket("s2r", { face: true }));
+      KA.put("#s2-rkv-in", KA.svgRocket("s2v"));
+      KA.put("#s2-gogo-in", KA.svgGogo("s2g"));
+      KA.put("#s2-gogo2-in", KA.svgGogo("s2h"));
+      KA.put("#s2-wb-in", KA.svgWafiyBack("s2b"));
+      const ARR = '<path d="M6 35 H90" stroke="#FDD13F" stroke-width="13" stroke-linecap="round"/><path d="M66 10 L94 35 L66 60" fill="none" stroke="#FDD13F" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>';
+      document.querySelectorAll('[id^="s2-a-"]').forEach((e) => { e.setAttribute("viewBox", "0 0 110 70"); e.innerHTML = ARR; });
+      const grid = document.getElementById("s2-grid");
+      ["atas", "bawah", "dalam", "luar", "hadapan", "belakang", "kiri", "kanan", "tepi", "tengah", "antara", "sisi"].forEach((w, i) => { const d = document.createElement("div"); d.className = "s2-bd"; d.id = "s2-bd" + i; d.textContent = w; grid.appendChild(d); });
+
+      const tl = gsap.timeline({ paused: true });
+      const D = KA.secDur("s2");
+      const T = (id) => KA.t(id);
+      KA.warp(tl, "#s2-warp", 0);
+      KA.card(tl, "s2", T("11_s2_tajuk") - 0.5, T("12_atas") - 1.6);
+      KA.pop(tl, "#s2-sub", KA.w("11_s2_tajuk", 5) - 0.1, 0.5);
+      tl.to("#s2-sub", { opacity: 0, duration: 0.3 }, T("12_atas") - 1.6);
+      tl.set("#s2-ground", { y: 500 }, 0);
+
+      /* corak setiap kata arah: objek masuk -> label "pop" + anak panah berdenyut -> ayat karaoke */
+      function item(key, id, nextT) {
+        const t = T(id);
+        KA.pop(tl, `#s2-l-${key}`, t - 0.05, 0.5);
+        tl.fromTo(`#s2-a-${key}`, { x: 0 }, { x: 16, duration: 0.35, repeat: 5, yoyo: true, ease: "sine.inOut" }, t + 0.4);
+        const spans = KA.sentence(document.getElementById(`s2-s-${key}`), id, 1);
+        KA.fadeIn(tl, `#s2-s-${key}`, KA.w(id, 1) - 0.3, 0.25);
+        KA.karaoke(tl, spans, id, 1);
+        KA.out(tl, [`#s2-l-${key}`, `#s2-s-${key}`], nextT - 1.3, 0.3);
+      }
+      const tags = [["#s2-t1", "12_atas", "14_dalam"], ["#s2-t2", "14_dalam", "16_hadapan"], ["#s2-t3", "16_hadapan", "18_tip_kiri_kanan"], ["#s2-t4", "18_tip_kiri_kanan", "21_tepi"], ["#s2-t5", "21_tepi", "23_bonus"], ["#s2-t6", "23_bonus", "26_tahukah_kamu"]];
+      tags.forEach(([sel, a, b]) => { KA.blurIn(tl, sel, T(a) - 1.3); KA.out(tl, sel, T(b) - 1.35, 0.25); });
+
+      /* roket rujukan masuk */
+      const t12 = T("12_atas");
+      tl.fromTo("#s2-rkt", { opacity: 0, x: -900 }, { opacity: 1, x: 0, duration: 1.0, ease: "power3.out" }, t12 - 1.4);
+      KA.flicker(tl, "#s2r-flame", t12 - 1.4, T("18_tip_kiri_kanan") - t12 + 1.4);
+      KA.float(tl, "#s2-rkt-in", t12 - 0.4, T("18_tip_kiri_kanan") - t12, 6, 3.2);
+      tl.set("#s2r-face", { opacity: 0 }, 0);
+      /* 1 atas: bintang turun ke atas roket */
+      tl.fromTo("#s2-star", { opacity: 0, y: -380 }, { opacity: 1, y: 0, duration: 0.9, ease: "back.out(1.4)" }, t12 - 1.1);
+      item("atas", "12_atas", T("13_bawah"));
+      KA.out(tl, "#s2-star", T("13_bawah") - 1.3, 0.3);
+      /* 2 bawah: Bumi naik dari bawah skrin */
+      const t13 = T("13_bawah");
+      tl.fromTo("#s2-earth", { y: 0 }, { y: -230, duration: 1.0, ease: "power3.out" }, t13 - 1.2);
+      item("bawah", "13_bawah", T("14_dalam"));
+      tl.to("#s2-earth", { y: 0, duration: 0.6, ease: "power2.in" }, T("14_dalam") - 1.3);
+      /* 3 dalam: zum ke tingkap, Wafiy di dalam */
+      const t14 = T("14_dalam");
+      tl.to("#s2-stage", { scale: 1.75, transformOrigin: "978px 486px", duration: 0.9, ease: "power2.inOut" }, t14 - 1.2);
+      tl.to("#s2r-face", { opacity: 1, duration: 0.3 }, t14 - 0.6);
+      tl.fromTo("#s2r-face", { y: 3 }, { y: -3, duration: 0.3, repeat: 7, yoyo: true, ease: "sine.inOut" }, t14);
+      item("dalam", "14_dalam", T("15_luar"));
+      tl.to("#s2-stage", { scale: 1, x: 0, y: 0, duration: 0.9, ease: "power2.inOut" }, T("15_luar") - 1.3);
+      /* 4 luar: Gogo terapung di luar roket */
+      const t15 = T("15_luar");
+      tl.fromTo("#s2-gogo", { opacity: 0, x: 400 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, t15 - 1.0);
+      KA.float(tl, "#s2-gogo-in", t15 - 1, 6, 10, 2.4);
+      KA.wave(tl, "#s2g-arm", t15, 4, "38 112");
+      item("luar", "15_luar", T("16_hadapan"));
+      tl.to("#s2-gogo", { opacity: 0, x: 400, duration: 0.5, ease: "power2.in" }, T("16_hadapan") - 1.3);
+      /* 5 hadapan: bulan di arah hidung roket */
+      const t16 = T("16_hadapan");
+      tl.fromTo("#s2-moon", { opacity: 0, x: 500 }, { opacity: 1, x: 0, duration: 1.0, ease: "power3.out" }, t16 - 1.1);
+      item("hadapan", "16_hadapan", T("17_belakang"));
+      tl.to("#s2-moon", { opacity: 0, x: 500, duration: 0.5, ease: "power2.in" }, T("17_belakang") - 1.3);
+      /* 6 belakang: komet meluncur di belakang roket */
+      const t17 = T("17_belakang");
+      tl.fromTo("#s2-comet", { opacity: 0, x: -700, y: -260 }, { opacity: 1, x: 0, y: 0, duration: 1.0, ease: "power3.out" }, t17 - 1.1);
+      item("belakang", "17_belakang", T("18_tip_kiri_kanan"));
+      tl.to("#s2-comet", { opacity: 0, x: -500, duration: 0.5, ease: "power2.in" }, T("18_tip_kiri_kanan") - 1.3);
+      tl.to("#s2-rkt", { x: 1500, duration: 1.0, ease: "power3.in" }, T("18_tip_kiri_kanan") - 1.2);
+
+      /* tip kiri/kanan: Wafiy dari belakang */
+      const t18 = T("18_tip_kiri_kanan"), w18 = (i) => KA.w("18_tip_kiri_kanan", i);
+      KA.pop(tl, "#s2-wb", t18 - 0.3, 0.6);
+      KA.float(tl, "#s2-wb-in", t18, T("21_tepi") - t18, 5, 3);
+      [["#s2-rl", "#s2-mk", 1], ["#s2-rr", "#s2-mn", 3]].forEach(([r, m, wi]) => {
+        KA.pop(tl, r, w18(wi) - 0.05, 0.4);
+        KA.blurIn(tl, m, w18(wi));
+        tl.to([r, m], { opacity: 0, duration: 0.25 }, w18(wi) + 1.2);
+      });
+      KA.pop(tl, "#s2-tipk", w18(5) - 0.1, 0.5);
+      KA.out(tl, "#s2-tipk", T("19_kiri") - 1.1, 0.3);
+      [["#s2-rl", "#s2-mk", 10], ["#s2-rr", "#s2-mn", 12]].forEach(([r, m, wi]) => {
+        tl.to([r, m], { opacity: 1, duration: 0.2 }, w18(wi) - 0.05);
+        tl.to([r, m], { opacity: 0, duration: 0.25 }, w18(wi) + 0.9);
+      });
+      /* 7 kiri */
+      const t19 = T("19_kiri");
+      tl.fromTo("#s2-red", { opacity: 0, x: -600 }, { opacity: 1, x: 0, duration: 1.0, ease: "power3.out" }, t19 - 1.0);
+      tl.to("#s2-rl", { opacity: 1, duration: 0.2 }, t19);
+      tl.fromTo("#s2-rl", { scale: 1 }, { scale: 1.2, duration: 0.3, repeat: 5, yoyo: true, ease: "sine.inOut" }, t19);
+      item("kiri", "19_kiri", T("20_kanan"));
+      tl.to("#s2-rl", { opacity: 0, duration: 0.25 }, T("20_kanan") - 1.3);
+      tl.to("#s2-red", { opacity: 0.3, duration: 0.4 }, T("20_kanan") - 1.3);
+      /* 8 kanan */
+      const t20 = T("20_kanan");
+      tl.fromTo("#s2-blue", { opacity: 0, x: 600 }, { opacity: 1, x: 0, duration: 1.0, ease: "power3.out" }, t20 - 1.2);
+      tl.to("#s2-rr", { opacity: 1, duration: 0.2 }, t20);
+      tl.fromTo("#s2-rr", { scale: 1 }, { scale: 1.2, duration: 0.3, repeat: 5, yoyo: true, ease: "sine.inOut" }, t20);
+      item("kanan", "20_kanan", T("21_tepi"));
+      KA.out(tl, ["#s2-rr", "#s2-red", "#s2-blue", "#s2-wb"], T("21_tepi") - 1.35, 0.3);
+
+      /* 9 tepi: Gogo memacak bendera di tepi kawah */
+      const t21 = T("21_tepi");
+      tl.to("#s2-ground", { y: 0, duration: 0.8, ease: "power3.out" }, t21 - 1.3);
+      KA.fadeIn(tl, "#s2-crater", t21 - 1.2, 0.4);
+      tl.set(["#s2-flagw", "#s2-gogo2"], { opacity: 1 }, t21 - 1.3);
+      tl.fromTo(["#s2-gogo2", "#s2-flagw"], { x: 400 }, { x: -440, duration: 0.9, ease: "power2.out" }, t21 - 1.3);
+      tl.fromTo("#s2-gogo2-in", { y: 0 }, { y: -18, duration: 0.15, repeat: 5, yoyo: true, ease: "sine.inOut" }, t21 - 1.3);
+      tl.fromTo("#s2-flagw", { y: -40 }, { y: 0, duration: 0.25, ease: "power3.in" }, t21 - 0.45);
+      item("tepi", "21_tepi", T("22_tengah"));
+      tl.to(["#s2-ground", "#s2-crater", "#s2-flagw", "#s2-gogo2"], { y: "+=500", opacity: 0, duration: 0.7, ease: "power2.in" }, T("22_tengah") - 1.35);
+      /* 10 tengah: matahari di tengah sistem suria */
+      const t22 = T("22_tengah");
+      KA.pop(tl, "#s2-sun", t22 - 1.1, 0.7);
+      tl.fromTo("#s2-orbit", { rotation: 0 }, { rotation: 40, duration: T("23_bonus") - t22 + 1.2, ease: "none", svgOrigin: "960 470" }, t22 - 1.1);
+      item("tengah", "22_tengah", T("23_bonus"));
+      KA.out(tl, "#s2-sun", T("23_bonus") - 1.0, 0.3);
+      /* bonus */
+      const t23 = T("23_bonus");
+      KA.pop(tl, "#s2-bonus", t23 - 0.1, 0.6);
+      KA.out(tl, "#s2-bonus", T("24_antara") - 1.3, 0.3);
+      /* 11 antara: dua bintang bergerak ke kiri dan kanan bulan */
+      const t24 = T("24_antara");
+      KA.pop(tl, "#s2-moon2", t24 - 1.2, 0.5);
+      tl.fromTo("#s2-st1", { opacity: 0, x: -700 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, t24 - 1.0);
+      tl.fromTo("#s2-st2", { opacity: 0, x: 700 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" }, t24 - 1.0);
+      item("antara", "24_antara", T("25_sisi"));
+      KA.out(tl, ["#s2-moon2", "#s2-st1", "#s2-st2"], T("25_sisi") - 1.35, 0.3);
+      /* 12 sisi: tangga bersandar di sisi roket */
+      const t25 = T("25_sisi");
+      tl.set("#s2-rkv", { rotation: -90, transformOrigin: "50% 50%" }, 0);
+      tl.to("#s2-ground", { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, t25 - 1.3);
+      KA.fadeIn(tl, "#s2-rkv", t25 - 1.1, 0.4);
+      tl.fromTo("#s2-ladder", { opacity: 0, x: 500, rotation: 0 }, { opacity: 1, x: 0, rotation: 14, duration: 0.8, ease: "power3.out", transformOrigin: "50% 100%" }, t25 - 1.1);
+      item("sisi", "25_sisi", T("26_tahukah_kamu"));
+      KA.out(tl, ["#s2-rkv", "#s2-ladder"], T("26_tahukah_kamu") - 1.0, 0.3);
+      tl.to("#s2-ground", { y: 500, duration: 0.6, ease: "power2.in" }, T("26_tahukah_kamu") - 1.0);
+
+      /* tahukah kamu: kompas */
+      const t26 = T("26_tahukah_kamu"), w26 = (i) => KA.w("26_tahukah_kamu", i);
+      KA.blurIn(tl, "#s2-thk", t26);
+      KA.pop(tl, "#s2-compass", t26 + 0.3, 0.6);
+      tl.fromTo("#s2-compass", { rotation: -25 }, { rotation: 0, duration: 1.2, ease: "elastic.out(1, 0.5)" }, t26 + 0.3);
+      [["#s2-cu", 2], ["#s2-cs", 3], ["#s2-ct2", 4], ["#s2-cb", 6]].forEach(([s, i]) => KA.pop(tl, s, w26(i) - 0.05, 0.45));
+      KA.out(tl, ["#s2-thk", "#s2-compass", "#s2-cu", "#s2-cs", "#s2-ct2", "#s2-cb"], T("27_dua_belas") - 0.6, 0.3);
+      /* grid 12 lencana */
+      const t27 = T("27_dua_belas");
+      KA.blurIn(tl, "#s2-12h", t27);
+      for (let i = 0; i < 12; i++) KA.pop(tl, "#s2-bd" + i, KA.w("27_dua_belas", 1) + i * 0.1, 0.45);
+      tl.to("#s2-all", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.45);
+      window.__timelines["s2"] = tl;
+    })();
+  </script>
+</template>

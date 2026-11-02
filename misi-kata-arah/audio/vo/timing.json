@@ -1,0 +1,3976 @@
+{
+ "01_berlepas": {
+  "spk": "W",
+  "text": "Tiga, dua, satu… berlepas!",
+  "words": [
+   {
+    "w": "Tiga",
+    "t": 0.103,
+    "d": 0.395
+   },
+   {
+    "w": "dua",
+    "t": 0.708,
+    "d": 0.395
+   },
+   {
+    "w": "satu",
+    "t": 1.326,
+    "d": 0.421
+   },
+   {
+    "w": "berlepas",
+    "t": 1.905,
+    "d": 0.645
+   }
+  ]
+ },
+ "02_tajuk": {
+  "spk": "N",
+  "text": "Selamat datang ke Misi Angkasa: Ekspedisi Kata Arah!",
+  "words": [
+   {
+    "w": "Selamat",
+    "t": 0.106,
+    "d": 0.431
+   },
+   {
+    "w": "datang",
+    "t": 0.536,
+    "d": 0.347
+   },
+   {
+    "w": "ke",
+    "t": 0.925,
+    "d": 0.097
+   },
+   {
+    "w": "Misi",
+    "t": 1.05,
+    "d": 0.347
+   },
+   {
+    "w": "Angkasa",
+    "t": 1.397,
+    "d": 0.625
+   },
+   {
+    "w": "Ekspedisi",
+    "t": 2.217,
+    "d": 0.681
+   },
+   {
+    "w": "Kata",
+    "t": 2.939,
+    "d": 0.25
+   },
+   {
+    "w": "Arah",
+    "t": 3.189,
+    "d": 0.444
+   }
+  ]
+ },
+ "03_hari_ini": {
+  "spk": "N",
+  "text": "Hari ini, kita akan belajar apa itu kata arah, kegunaannya, cara menggunakannya, dan cara membina ayat. Jom!",
+  "words": [
+   {
+    "w": "Hari",
+    "t": 0.106,
+    "d": 0.292
+   },
+   {
+    "w": "ini",
+    "t": 0.397,
+    "d": 0.472
+   },
+   {
+    "w": "kita",
+    "t": 1.189,
+    "d": 0.278
+   },
+   {
+    "w": "akan",
+    "t": 1.467,
+    "d": 0.264
+   },
+   {
+    "w": "belajar",
+    "t": 1.786,
+    "d": 0.444
+   },
+   {
+    "w": "apa",
+    "t": 2.244,
+    "d": 0.278
+   },
+   {
+    "w": "itu",
+    "t": 2.536,
+    "d": 0.236
+   },
+   {
+    "w": "kata",
+    "t": 2.8,
+    "d": 0.264
+   },
+   {
+    "w": "arah",
+    "t": 3.064,
+    "d": 0.458
+   },
+   {
+    "w": "kegunaannya",
+    "t": 3.717,
+    "d": 0.861
+   },
+   {
+    "w": "cara",
+    "t": 4.939,
+    "d": 0.306
+   },
+   {
+    "w": "menggunakannya",
+    "t": 5.258,
+    "d": 0.889
+   },
+   {
+    "w": "dan",
+    "t": 6.383,
+    "d": 0.25
+   },
+   {
+    "w": "cara",
+    "t": 6.689,
+    "d": 0.306
+   },
+   {
+    "w": "membina",
+    "t": 7.008,
+    "d": 0.444
+   },
+   {
+    "w": "ayat",
+    "t": 7.453,
+    "d": 0.542
+   },
+   {
+    "w": "Jom",
+    "t": 8.986,
+    "d": 0.431
+   }
+  ]
+ },
+ "04_gogo_tolong": {
+  "spk": "G",
+  "text": "Wafiy! Tolong! Saya ada di… di… alamak, saya tidak tahu cara hendak memberitahu!",
+  "words": [
+   {
+    "w": "Wafiy",
+    "t": 0.097,
+    "d": 0.546
+   },
+   {
+    "w": "Tolong",
+    "t": 1.576,
+    "d": 0.385
+   },
+   {
+    "w": "Saya",
+    "t": 2.905,
+    "d": 0.335
+   },
+   {
+    "w": "ada",
+    "t": 3.24,
+    "d": 0.26
+   },
+   {
+    "w": "di",
+    "t": 3.525,
+    "d": 0.137
+   },
+   {
+    "w": "di",
+    "t": 3.836,
+    "d": 0.149
+   },
+   {
+    "w": "alamak",
+    "t": 4.146,
+    "d": 0.522
+   },
+   {
+    "w": "saya",
+    "t": 4.878,
+    "d": 0.248
+   },
+   {
+    "w": "tidak",
+    "t": 5.139,
+    "d": 0.211
+   },
+   {
+    "w": "tahu",
+    "t": 5.362,
+    "d": 0.236
+   },
+   {
+    "w": "cara",
+    "t": 5.648,
+    "d": 0.224
+   },
+   {
+    "w": "hendak",
+    "t": 5.872,
+    "d": 0.323
+   },
+   {
+    "w": "memberitahu",
+    "t": 6.207,
+    "d": 0.645
+   }
+  ]
+ },
+ "05_wafiy_jangan_risau": {
+  "spk": "W",
+  "text": "Jangan risau, Gogo! Kita belajar kata arah dahulu. Selepas itu, kamu boleh beritahu saya di mana kamu berada!",
+  "words": [
+   {
+    "w": "Jangan",
+    "t": 0.103,
+    "d": 0.368
+   },
+   {
+    "w": "risau",
+    "t": 0.484,
+    "d": 0.474
+   },
+   {
+    "w": "Gogo",
+    "t": 1.182,
+    "d": 0.447
+   },
+   {
+    "w": "Kita",
+    "t": 2.618,
+    "d": 0.276
+   },
+   {
+    "w": "belajar",
+    "t": 2.921,
+    "d": 0.408
+   },
+   {
+    "w": "kata",
+    "t": 3.382,
+    "d": 0.25
+   },
+   {
+    "w": "arah",
+    "t": 3.632,
+    "d": 0.316
+   },
+   {
+    "w": "dahulu",
+    "t": 3.961,
+    "d": 0.461
+   },
+   {
+    "w": "Selepas",
+    "t": 5.447,
+    "d": 0.474
+   },
+   {
+    "w": "itu",
+    "t": 5.921,
+    "d": 0.342
+   },
+   {
+    "w": "kamu",
+    "t": 6.5,
+    "d": 0.289
+   },
+   {
+    "w": "boleh",
+    "t": 6.803,
+    "d": 0.25
+   },
+   {
+    "w": "beritahu",
+    "t": 7.092,
+    "d": 0.447
+   },
+   {
+    "w": "saya",
+    "t": 7.566,
+    "d": 0.303
+   },
+   {
+    "w": "di",
+    "t": 7.895,
+    "d": 0.105
+   },
+   {
+    "w": "mana",
+    "t": 8.013,
+    "d": 0.211
+   },
+   {
+    "w": "kamu",
+    "t": 8.263,
+    "d": 0.303
+   },
+   {
+    "w": "berada",
+    "t": 8.579,
+    "d": 0.461
+   }
+  ]
+ },
+ "06_s1_tajuk": {
+  "spk": "N",
+  "text": "Stesen satu. Apa itu kata arah?",
+  "words": [
+   {
+    "w": "Stesen",
+    "t": 0.106,
+    "d": 0.514
+   },
+   {
+    "w": "satu",
+    "t": 0.633,
+    "d": 0.417
+   },
+   {
+    "w": "Apa",
+    "t": 2.139,
+    "d": 0.278
+   },
+   {
+    "w": "itu",
+    "t": 2.417,
+    "d": 0.264
+   },
+   {
+    "w": "kata",
+    "t": 2.708,
+    "d": 0.278
+   },
+   {
+    "w": "arah",
+    "t": 2.986,
+    "d": 0.472
+   }
+  ]
+ },
+ "07_definisi": {
+  "spk": "N",
+  "text": "Kata arah ialah perkataan yang menunjukkan arah atau kedudukan sesuatu benda.",
+  "words": [
+   {
+    "w": "Kata",
+    "t": 0.106,
+    "d": 0.333
+   },
+   {
+    "w": "arah",
+    "t": 0.439,
+    "d": 0.431
+   },
+   {
+    "w": "ialah",
+    "t": 0.883,
+    "d": 0.389
+   },
+   {
+    "w": "perkataan",
+    "t": 1.286,
+    "d": 0.597
+   },
+   {
+    "w": "yang",
+    "t": 1.883,
+    "d": 0.125
+   },
+   {
+    "w": "menunjukkan",
+    "t": 2.036,
+    "d": 0.556
+   },
+   {
+    "w": "arah",
+    "t": 2.592,
+    "d": 0.417
+   },
+   {
+    "w": "atau",
+    "t": 3.064,
+    "d": 0.333
+   },
+   {
+    "w": "kedudukan",
+    "t": 3.453,
+    "d": 0.569
+   },
+   {
+    "w": "sesuatu",
+    "t": 4.036,
+    "d": 0.472
+   },
+   {
+    "w": "benda",
+    "t": 4.508,
+    "d": 0.431
+   }
+  ]
+ },
+ "08_kedudukan": {
+  "spk": "N",
+  "text": "Di mana kata arah dalam ayat? Kata arah datang selepas di, ke atau dari, dan sebelum nama benda atau tempat.",
+  "words": [
+   {
+    "w": "Di",
+    "t": 0.106,
+    "d": 0.153
+   },
+   {
+    "w": "mana",
+    "t": 0.286,
+    "d": 0.208
+   },
+   {
+    "w": "kata",
+    "t": 0.522,
+    "d": 0.278
+   },
+   {
+    "w": "arah",
+    "t": 0.8,
+    "d": 0.347
+   },
+   {
+    "w": "dalam",
+    "t": 1.175,
+    "d": 0.264
+   },
+   {
+    "w": "ayat",
+    "t": 1.439,
+    "d": 0.514
+   },
+   {
+    "w": "Kata",
+    "t": 2.972,
+    "d": 0.347
+   },
+   {
+    "w": "arah",
+    "t": 3.319,
+    "d": 0.361
+   },
+   {
+    "w": "datang",
+    "t": 3.694,
+    "d": 0.375
+   },
+   {
+    "w": "selepas",
+    "t": 4.097,
+    "d": 0.514
+   },
+   {
+    "w": "di",
+    "t": 4.625,
+    "d": 0.278
+   },
+   {
+    "w": "ke",
+    "t": 5.181,
+    "d": 0.125
+   },
+   {
+    "w": "atau",
+    "t": 5.306,
+    "d": 0.278
+   },
+   {
+    "w": "dari",
+    "t": 5.639,
+    "d": 0.375
+   },
+   {
+    "w": "dan",
+    "t": 6.25,
+    "d": 0.222
+   },
+   {
+    "w": "sebelum",
+    "t": 6.486,
+    "d": 0.389
+   },
+   {
+    "w": "nama",
+    "t": 6.903,
+    "d": 0.264
+   },
+   {
+    "w": "benda",
+    "t": 7.181,
+    "d": 0.403
+   },
+   {
+    "w": "atau",
+    "t": 7.597,
+    "d": 0.319
+   },
+   {
+    "w": "tempat",
+    "t": 7.958,
+    "d": 0.486
+   }
+  ]
+ },
+ "09_di_atas_meja": {
+  "spk": "N",
+  "text": "Contohnya, di atas meja. Di ialah kata sendi nama, atas ialah kata arah, dan meja ialah nama benda.",
+  "words": [
+   {
+    "w": "Contohnya",
+    "t": 0.106,
+    "d": 0.722
+   },
+   {
+    "w": "di",
+    "t": 1.008,
+    "d": 0.139
+   },
+   {
+    "w": "atas",
+    "t": 1.147,
+    "d": 0.375
+   },
+   {
+    "w": "meja",
+    "t": 1.536,
+    "d": 0.431
+   },
+   {
+    "w": "Di",
+    "t": 3.069,
+    "d": 0.25
+   },
+   {
+    "w": "ialah",
+    "t": 3.333,
+    "d": 0.403
+   },
+   {
+    "w": "kata",
+    "t": 3.736,
+    "d": 0.292
+   },
+   {
+    "w": "sendi",
+    "t": 4.056,
+    "d": 0.306
+   },
+   {
+    "w": "nama",
+    "t": 4.417,
+    "d": 0.389
+   },
+   {
+    "w": "atas",
+    "t": 5.069,
+    "d": 0.458
+   },
+   {
+    "w": "ialah",
+    "t": 5.528,
+    "d": 0.361
+   },
+   {
+    "w": "kata",
+    "t": 5.903,
+    "d": 0.25
+   },
+   {
+    "w": "arah",
+    "t": 6.153,
+    "d": 0.444
+   },
+   {
+    "w": "dan",
+    "t": 6.792,
+    "d": 0.222
+   },
+   {
+    "w": "meja",
+    "t": 7.014,
+    "d": 0.403
+   },
+   {
+    "w": "ialah",
+    "t": 7.472,
+    "d": 0.417
+   },
+   {
+    "w": "nama",
+    "t": 7.903,
+    "d": 0.306
+   },
+   {
+    "w": "benda",
+    "t": 8.208,
+    "d": 0.444
+   }
+  ]
+ },
+ "10_kata_tugas": {
+  "spk": "N",
+  "text": "Kata arah ialah sejenis kata tugas.",
+  "words": [
+   {
+    "w": "Kata",
+    "t": 0.106,
+    "d": 0.306
+   },
+   {
+    "w": "arah",
+    "t": 0.411,
+    "d": 0.431
+   },
+   {
+    "w": "ialah",
+    "t": 0.856,
+    "d": 0.389
+   },
+   {
+    "w": "sejenis",
+    "t": 1.244,
+    "d": 0.514
+   },
+   {
+    "w": "kata",
+    "t": 1.8,
+    "d": 0.236
+   },
+   {
+    "w": "tugas",
+    "t": 2.05,
+    "d": 0.611
+   }
+  ]
+ },
+ "11_s2_tajuk": {
+  "spk": "N",
+  "text": "Stesen dua. Kenali kata arah. Kita mulakan dengan pasangan berlawanan.",
+  "words": [
+   {
+    "w": "Stesen",
+    "t": 0.106,
+    "d": 0.514
+   },
+   {
+    "w": "dua",
+    "t": 0.647,
+    "d": 0.319
+   },
+   {
+    "w": "Kenali",
+    "t": 2.069,
+    "d": 0.347
+   },
+   {
+    "w": "kata",
+    "t": 2.458,
+    "d": 0.25
+   },
+   {
+    "w": "arah",
+    "t": 2.708,
+    "d": 0.472
+   },
+   {
+    "w": "Kita",
+    "t": 4.194,
+    "d": 0.292
+   },
+   {
+    "w": "mulakan",
+    "t": 4.514,
+    "d": 0.417
+   },
+   {
+    "w": "dengan",
+    "t": 4.944,
+    "d": 0.208
+   },
+   {
+    "w": "pasangan",
+    "t": 5.181,
+    "d": 0.458
+   },
+   {
+    "w": "berlawanan",
+    "t": 5.667,
+    "d": 0.778
+   }
+  ]
+ },
+ "12_atas": {
+  "spk": "N",
+  "text": "Atas. Bintang berkelip di atas roket.",
+  "words": [
+   {
+    "w": "Atas",
+    "t": 0.106,
+    "d": 0.597
+   },
+   {
+    "w": "Bintang",
+    "t": 1.736,
+    "d": 0.486
+   },
+   {
+    "w": "berkelip",
+    "t": 2.25,
+    "d": 0.514
+   },
+   {
+    "w": "di",
+    "t": 2.778,
+    "d": 0.125
+   },
+   {
+    "w": "atas",
+    "t": 2.903,
+    "d": 0.389
+   },
+   {
+    "w": "roket",
+    "t": 3.306,
+    "d": 0.528
+   }
+  ]
+ },
+ "13_bawah": {
+  "spk": "N",
+  "text": "Bawah. Bumi kelihatan di bawah roket.",
+  "words": [
+   {
+    "w": "Bawah",
+    "t": 0.106,
+    "d": 0.583
+   },
+   {
+    "w": "Bumi",
+    "t": 1.722,
+    "d": 0.347
+   },
+   {
+    "w": "kelihatan",
+    "t": 2.111,
+    "d": 0.597
+   },
+   {
+    "w": "di",
+    "t": 2.722,
+    "d": 0.125
+   },
+   {
+    "w": "bawah",
+    "t": 2.861,
+    "d": 0.319
+   },
+   {
+    "w": "roket",
+    "t": 3.181,
+    "d": 0.5
+   }
+  ]
+ },
+ "14_dalam": {
+  "spk": "N",
+  "text": "Dalam. Wafiy duduk di dalam roket.",
+  "words": [
+   {
+    "w": "Dalam",
+    "t": 0.106,
+    "d": 0.472
+   },
+   {
+    "w": "Wafiy",
+    "t": 1.556,
+    "d": 0.514
+   },
+   {
+    "w": "duduk",
+    "t": 2.097,
+    "d": 0.375
+   },
+   {
+    "w": "di",
+    "t": 2.514,
+    "d": 0.125
+   },
+   {
+    "w": "dalam",
+    "t": 2.667,
+    "d": 0.278
+   },
+   {
+    "w": "roket",
+    "t": 2.972,
+    "d": 0.486
+   }
+  ]
+ },
+ "15_luar": {
+  "spk": "N",
+  "text": "Luar. Gogo melambai di luar roket.",
+  "words": [
+   {
+    "w": "Luar",
+    "t": 0.106,
+    "d": 0.472
+   },
+   {
+    "w": "Gogo",
+    "t": 1.569,
+    "d": 0.444
+   },
+   {
+    "w": "melambai",
+    "t": 2.042,
+    "d": 0.486
+   },
+   {
+    "w": "di",
+    "t": 2.569,
+    "d": 0.111
+   },
+   {
+    "w": "luar",
+    "t": 2.736,
+    "d": 0.236
+   },
+   {
+    "w": "roket",
+    "t": 3.0,
+    "d": 0.472
+   }
+  ]
+ },
+ "16_hadapan": {
+  "spk": "N",
+  "text": "Hadapan. Bulan bersinar di hadapan roket.",
+  "words": [
+   {
+    "w": "Hadapan",
+    "t": 0.106,
+    "d": 0.611
+   },
+   {
+    "w": "Bulan",
+    "t": 1.736,
+    "d": 0.347
+   },
+   {
+    "w": "bersinar",
+    "t": 2.097,
+    "d": 0.556
+   },
+   {
+    "w": "di",
+    "t": 2.722,
+    "d": 0.139
+   },
+   {
+    "w": "hadapan",
+    "t": 2.889,
+    "d": 0.444
+   },
+   {
+    "w": "roket",
+    "t": 3.361,
+    "d": 0.528
+   }
+  ]
+ },
+ "17_belakang": {
+  "spk": "N",
+  "text": "Belakang. Komet meluncur di belakang roket.",
+  "words": [
+   {
+    "w": "Belakang",
+    "t": 0.106,
+    "d": 0.597
+   },
+   {
+    "w": "Komet",
+    "t": 1.75,
+    "d": 0.375
+   },
+   {
+    "w": "meluncur",
+    "t": 2.139,
+    "d": 0.528
+   },
+   {
+    "w": "di",
+    "t": 2.708,
+    "d": 0.111
+   },
+   {
+    "w": "belakang",
+    "t": 2.847,
+    "d": 0.431
+   },
+   {
+    "w": "roket",
+    "t": 3.306,
+    "d": 0.458
+   }
+  ]
+ },
+ "18_tip_kiri_kanan": {
+  "spk": "N",
+  "text": "Untuk kiri dan kanan, kita lihat dari belakang Wafiy. Jadi, kiri dan kanan Wafiy sama dengan kiri dan kanan kamu.",
+  "words": [
+   {
+    "w": "Untuk",
+    "t": 0.106,
+    "d": 0.347
+   },
+   {
+    "w": "kiri",
+    "t": 0.494,
+    "d": 0.278
+   },
+   {
+    "w": "dan",
+    "t": 0.8,
+    "d": 0.167
+   },
+   {
+    "w": "kanan",
+    "t": 1.022,
+    "d": 0.486
+   },
+   {
+    "w": "kita",
+    "t": 1.758,
+    "d": 0.264
+   },
+   {
+    "w": "lihat",
+    "t": 2.064,
+    "d": 0.361
+   },
+   {
+    "w": "dari",
+    "t": 2.439,
+    "d": 0.236
+   },
+   {
+    "w": "belakang",
+    "t": 2.703,
+    "d": 0.417
+   },
+   {
+    "w": "Wafiy",
+    "t": 3.147,
+    "d": 0.597
+   },
+   {
+    "w": "Jadi",
+    "t": 4.806,
+    "d": 0.486
+   },
+   {
+    "w": "kiri",
+    "t": 5.556,
+    "d": 0.292
+   },
+   {
+    "w": "dan",
+    "t": 5.875,
+    "d": 0.181
+   },
+   {
+    "w": "kanan",
+    "t": 6.111,
+    "d": 0.278
+   },
+   {
+    "w": "Wafiy",
+    "t": 6.403,
+    "d": 0.403
+   },
+   {
+    "w": "sama",
+    "t": 6.833,
+    "d": 0.361
+   },
+   {
+    "w": "dengan",
+    "t": 7.222,
+    "d": 0.222
+   },
+   {
+    "w": "kiri",
+    "t": 7.5,
+    "d": 0.347
+   },
+   {
+    "w": "dan",
+    "t": 7.861,
+    "d": 0.208
+   },
+   {
+    "w": "kanan",
+    "t": 8.111,
+    "d": 0.278
+   },
+   {
+    "w": "kamu",
+    "t": 8.444,
+    "d": 0.417
+   }
+  ]
+ },
+ "19_kiri": {
+  "spk": "N",
+  "text": "Kiri. Planet merah berada di sebelah kiri Wafiy.",
+  "words": [
+   {
+    "w": "Kiri",
+    "t": 0.106,
+    "d": 0.361
+   },
+   {
+    "w": "Planet",
+    "t": 1.556,
+    "d": 0.389
+   },
+   {
+    "w": "merah",
+    "t": 1.944,
+    "d": 0.361
+   },
+   {
+    "w": "berada",
+    "t": 2.319,
+    "d": 0.431
+   },
+   {
+    "w": "di",
+    "t": 2.778,
+    "d": 0.111
+   },
+   {
+    "w": "sebelah",
+    "t": 2.917,
+    "d": 0.403
+   },
+   {
+    "w": "kiri",
+    "t": 3.347,
+    "d": 0.25
+   },
+   {
+    "w": "Wafiy",
+    "t": 3.639,
+    "d": 0.583
+   }
+  ]
+ },
+ "20_kanan": {
+  "spk": "N",
+  "text": "Kanan. Planet biru berada di sebelah kanan Wafiy.",
+  "words": [
+   {
+    "w": "Kanan",
+    "t": 0.106,
+    "d": 0.472
+   },
+   {
+    "w": "Planet",
+    "t": 1.583,
+    "d": 0.389
+   },
+   {
+    "w": "biru",
+    "t": 1.972,
+    "d": 0.292
+   },
+   {
+    "w": "berada",
+    "t": 2.278,
+    "d": 0.444
+   },
+   {
+    "w": "di",
+    "t": 2.764,
+    "d": 0.111
+   },
+   {
+    "w": "sebelah",
+    "t": 2.903,
+    "d": 0.417
+   },
+   {
+    "w": "kanan",
+    "t": 3.333,
+    "d": 0.278
+   },
+   {
+    "w": "Wafiy",
+    "t": 3.611,
+    "d": 0.583
+   }
+  ]
+ },
+ "21_tepi": {
+  "spk": "N",
+  "text": "Tepi. Bendera dipacak di tepi kawah.",
+  "words": [
+   {
+    "w": "Tepi",
+    "t": 0.106,
+    "d": 0.361
+   },
+   {
+    "w": "Bendera",
+    "t": 1.556,
+    "d": 0.5
+   },
+   {
+    "w": "dipacak",
+    "t": 2.083,
+    "d": 0.5
+   },
+   {
+    "w": "di",
+    "t": 2.611,
+    "d": 0.125
+   },
+   {
+    "w": "tepi",
+    "t": 2.75,
+    "d": 0.264
+   },
+   {
+    "w": "kawah",
+    "t": 3.069,
+    "d": 0.486
+   }
+  ]
+ },
+ "22_tengah": {
+  "spk": "N",
+  "text": "Tengah. Matahari berada di tengah sistem suria.",
+  "words": [
+   {
+    "w": "Tengah",
+    "t": 0.106,
+    "d": 0.403
+   },
+   {
+    "w": "Matahari",
+    "t": 1.528,
+    "d": 0.556
+   },
+   {
+    "w": "berada",
+    "t": 2.111,
+    "d": 0.417
+   },
+   {
+    "w": "di",
+    "t": 2.569,
+    "d": 0.097
+   },
+   {
+    "w": "tengah",
+    "t": 2.694,
+    "d": 0.333
+   },
+   {
+    "w": "sistem",
+    "t": 3.028,
+    "d": 0.417
+   },
+   {
+    "w": "suria",
+    "t": 3.458,
+    "d": 0.472
+   }
+  ]
+ },
+ "23_bonus": {
+  "spk": "N",
+  "text": "Bonus! Dua lagi kata arah.",
+  "words": [
+   {
+    "w": "Bonus",
+    "t": 0.106,
+    "d": 0.597
+   },
+   {
+    "w": "Dua",
+    "t": 1.736,
+    "d": 0.264
+   },
+   {
+    "w": "lagi",
+    "t": 2.042,
+    "d": 0.236
+   },
+   {
+    "w": "kata",
+    "t": 2.306,
+    "d": 0.264
+   },
+   {
+    "w": "arah",
+    "t": 2.569,
+    "d": 0.486
+   }
+  ]
+ },
+ "24_antara": {
+  "spk": "N",
+  "text": "Antara. Bulan berada di antara dua bintang.",
+  "words": [
+   {
+    "w": "Antara",
+    "t": 0.106,
+    "d": 0.5
+   },
+   {
+    "w": "Bulan",
+    "t": 1.667,
+    "d": 0.361
+   },
+   {
+    "w": "berada",
+    "t": 2.042,
+    "d": 0.431
+   },
+   {
+    "w": "di",
+    "t": 2.5,
+    "d": 0.111
+   },
+   {
+    "w": "antara",
+    "t": 2.611,
+    "d": 0.389
+   },
+   {
+    "w": "dua",
+    "t": 3.056,
+    "d": 0.222
+   },
+   {
+    "w": "bintang",
+    "t": 3.306,
+    "d": 0.569
+   }
+  ]
+ },
+ "25_sisi": {
+  "spk": "N",
+  "text": "Sisi. Tangga diletakkan di sisi roket.",
+  "words": [
+   {
+    "w": "Sisi",
+    "t": 0.106,
+    "d": 0.458
+   },
+   {
+    "w": "Tangga",
+    "t": 1.625,
+    "d": 0.375
+   },
+   {
+    "w": "diletakkan",
+    "t": 2.042,
+    "d": 0.611
+   },
+   {
+    "w": "di",
+    "t": 2.667,
+    "d": 0.125
+   },
+   {
+    "w": "sisi",
+    "t": 2.819,
+    "d": 0.347
+   },
+   {
+    "w": "roket",
+    "t": 3.208,
+    "d": 0.472
+   }
+  ]
+ },
+ "26_tahukah_kamu": {
+  "spk": "N",
+  "text": "Tahukah kamu? Utara, selatan, timur dan barat juga kata arah!",
+  "words": [
+   {
+    "w": "Tahukah",
+    "t": 0.106,
+    "d": 0.5
+   },
+   {
+    "w": "kamu",
+    "t": 0.619,
+    "d": 0.389
+   },
+   {
+    "w": "Utara",
+    "t": 2.083,
+    "d": 0.556
+   },
+   {
+    "w": "selatan",
+    "t": 2.875,
+    "d": 0.639
+   },
+   {
+    "w": "timur",
+    "t": 3.722,
+    "d": 0.347
+   },
+   {
+    "w": "dan",
+    "t": 4.097,
+    "d": 0.167
+   },
+   {
+    "w": "barat",
+    "t": 4.306,
+    "d": 0.292
+   },
+   {
+    "w": "juga",
+    "t": 4.639,
+    "d": 0.292
+   },
+   {
+    "w": "kata",
+    "t": 4.972,
+    "d": 0.25
+   },
+   {
+    "w": "arah",
+    "t": 5.222,
+    "d": 0.486
+   }
+  ]
+ },
+ "27_dua_belas": {
+  "spk": "N",
+  "text": "Hebat! Inilah dua belas kata arah yang kita kenali hari ini.",
+  "words": [
+   {
+    "w": "Hebat",
+    "t": 0.106,
+    "d": 0.5
+   },
+   {
+    "w": "Inilah",
+    "t": 1.597,
+    "d": 0.431
+   },
+   {
+    "w": "dua",
+    "t": 2.056,
+    "d": 0.208
+   },
+   {
+    "w": "belas",
+    "t": 2.278,
+    "d": 0.319
+   },
+   {
+    "w": "kata",
+    "t": 2.653,
+    "d": 0.236
+   },
+   {
+    "w": "arah",
+    "t": 2.889,
+    "d": 0.389
+   },
+   {
+    "w": "yang",
+    "t": 3.292,
+    "d": 0.181
+   },
+   {
+    "w": "kita",
+    "t": 3.528,
+    "d": 0.278
+   },
+   {
+    "w": "kenali",
+    "t": 3.833,
+    "d": 0.389
+   },
+   {
+    "w": "hari",
+    "t": 4.25,
+    "d": 0.292
+   },
+   {
+    "w": "ini",
+    "t": 4.542,
+    "d": 0.472
+   }
+  ]
+ },
+ "28_s3_tajuk": {
+  "spk": "N",
+  "text": "Stesen tiga. Kegunaan kata arah.",
+  "words": [
+   {
+    "w": "Stesen",
+    "t": 0.106,
+    "d": 0.5
+   },
+   {
+    "w": "tiga",
+    "t": 0.633,
+    "d": 0.389
+   },
+   {
+    "w": "Kegunaan",
+    "t": 2.111,
+    "d": 0.528
+   },
+   {
+    "w": "kata",
+    "t": 2.681,
+    "d": 0.222
+   },
+   {
+    "w": "arah",
+    "t": 2.903,
+    "d": 0.486
+   }
+  ]
+ },
+ "29_guna_kedudukan": {
+  "spk": "N",
+  "text": "Pertama, kata arah memberitahu kedudukan benda. Di mana? Satelit berada di sebelah kanan bulan.",
+  "words": [
+   {
+    "w": "Pertama",
+    "t": 0.106,
+    "d": 0.556
+   },
+   {
+    "w": "kata",
+    "t": 0.869,
+    "d": 0.319
+   },
+   {
+    "w": "arah",
+    "t": 1.189,
+    "d": 0.319
+   },
+   {
+    "w": "memberitahu",
+    "t": 1.522,
+    "d": 0.667
+   },
+   {
+    "w": "kedudukan",
+    "t": 2.231,
+    "d": 0.528
+   },
+   {
+    "w": "benda",
+    "t": 2.786,
+    "d": 0.431
+   },
+   {
+    "w": "Di",
+    "t": 4.292,
+    "d": 0.153
+   },
+   {
+    "w": "mana",
+    "t": 4.472,
+    "d": 0.403
+   },
+   {
+    "w": "Satelit",
+    "t": 5.931,
+    "d": 0.514
+   },
+   {
+    "w": "berada",
+    "t": 6.458,
+    "d": 0.444
+   },
+   {
+    "w": "di",
+    "t": 6.944,
+    "d": 0.097
+   },
+   {
+    "w": "sebelah",
+    "t": 7.069,
+    "d": 0.389
+   },
+   {
+    "w": "kanan",
+    "t": 7.472,
+    "d": 0.278
+   },
+   {
+    "w": "bulan",
+    "t": 7.764,
+    "d": 0.528
+   }
+  ]
+ },
+ "30_guna_hala_tuju": {
+  "spk": "N",
+  "text": "Kedua, kata arah menunjukkan hala tuju. Ke mana? Roket terbang ke atas.",
+  "words": [
+   {
+    "w": "Kedua",
+    "t": 0.106,
+    "d": 0.444
+   },
+   {
+    "w": "kata",
+    "t": 0.772,
+    "d": 0.319
+   },
+   {
+    "w": "arah",
+    "t": 1.092,
+    "d": 0.319
+   },
+   {
+    "w": "menunjukkan",
+    "t": 1.425,
+    "d": 0.653
+   },
+   {
+    "w": "hala",
+    "t": 2.078,
+    "d": 0.292
+   },
+   {
+    "w": "tuju",
+    "t": 2.397,
+    "d": 0.444
+   },
+   {
+    "w": "Ke",
+    "t": 3.931,
+    "d": 0.111
+   },
+   {
+    "w": "mana",
+    "t": 4.069,
+    "d": 0.375
+   },
+   {
+    "w": "Roket",
+    "t": 5.5,
+    "d": 0.403
+   },
+   {
+    "w": "terbang",
+    "t": 5.917,
+    "d": 0.361
+   },
+   {
+    "w": "ke",
+    "t": 6.319,
+    "d": 0.056
+   },
+   {
+    "w": "atas",
+    "t": 6.375,
+    "d": 0.583
+   }
+  ]
+ },
+ "31_guna_asal": {
+  "spk": "N",
+  "text": "Ketiga, kata arah memberitahu tempat asal. Dari mana? Gogo keluar dari dalam roket.",
+  "words": [
+   {
+    "w": "Ketiga",
+    "t": 0.106,
+    "d": 0.542
+   },
+   {
+    "w": "kata",
+    "t": 0.856,
+    "d": 0.333
+   },
+   {
+    "w": "arah",
+    "t": 1.189,
+    "d": 0.333
+   },
+   {
+    "w": "memberitahu",
+    "t": 1.536,
+    "d": 0.653
+   },
+   {
+    "w": "tempat",
+    "t": 2.244,
+    "d": 0.319
+   },
+   {
+    "w": "asal",
+    "t": 2.578,
+    "d": 0.556
+   },
+   {
+    "w": "Dari",
+    "t": 4.208,
+    "d": 0.264
+   },
+   {
+    "w": "mana",
+    "t": 4.5,
+    "d": 0.403
+   },
+   {
+    "w": "Gogo",
+    "t": 5.958,
+    "d": 0.444
+   },
+   {
+    "w": "keluar",
+    "t": 6.444,
+    "d": 0.403
+   },
+   {
+    "w": "dari",
+    "t": 6.903,
+    "d": 0.292
+   },
+   {
+    "w": "dalam",
+    "t": 7.208,
+    "d": 0.278
+   },
+   {
+    "w": "roket",
+    "t": 7.5,
+    "d": 0.472
+   }
+  ]
+ },
+ "32_harian": {
+  "spk": "N",
+  "text": "Kata arah juga kita gunakan setiap hari.",
+  "words": [
+   {
+    "w": "Kata",
+    "t": 0.106,
+    "d": 0.319
+   },
+   {
+    "w": "arah",
+    "t": 0.425,
+    "d": 0.333
+   },
+   {
+    "w": "juga",
+    "t": 0.786,
+    "d": 0.264
+   },
+   {
+    "w": "kita",
+    "t": 1.092,
+    "d": 0.25
+   },
+   {
+    "w": "gunakan",
+    "t": 1.369,
+    "d": 0.5
+   },
+   {
+    "w": "setiap",
+    "t": 1.883,
+    "d": 0.347
+   },
+   {
+    "w": "hari",
+    "t": 2.231,
+    "d": 0.417
+   }
+  ]
+ },
+ "33_kasut": {
+  "spk": "N",
+  "text": "Kasut disusun di atas rak kasut.",
+  "words": [
+   {
+    "w": "Kasut",
+    "t": 0.106,
+    "d": 0.431
+   },
+   {
+    "w": "disusun",
+    "t": 0.536,
+    "d": 0.542
+   },
+   {
+    "w": "di",
+    "t": 1.092,
+    "d": 0.097
+   },
+   {
+    "w": "atas",
+    "t": 1.189,
+    "d": 0.403
+   },
+   {
+    "w": "rak",
+    "t": 1.619,
+    "d": 0.208
+   },
+   {
+    "w": "kasut",
+    "t": 1.856,
+    "d": 0.5
+   }
+  ]
+ },
+ "34_pisau": {
+  "spk": "N",
+  "text": "Pisau disimpan di dalam laci.",
+  "words": [
+   {
+    "w": "Pisau",
+    "t": 0.106,
+    "d": 0.389
+   },
+   {
+    "w": "disimpan",
+    "t": 0.55,
+    "d": 0.556
+   },
+   {
+    "w": "di",
+    "t": 1.119,
+    "d": 0.125
+   },
+   {
+    "w": "dalam",
+    "t": 1.272,
+    "d": 0.264
+   },
+   {
+    "w": "laci",
+    "t": 1.536,
+    "d": 0.431
+   }
+  ]
+ },
+ "35_sekolah": {
+  "spk": "N",
+  "text": "Sekolah saya terletak di sebelah kiri masjid.",
+  "words": [
+   {
+    "w": "Sekolah",
+    "t": 0.106,
+    "d": 0.5
+   },
+   {
+    "w": "saya",
+    "t": 0.606,
+    "d": 0.278
+   },
+   {
+    "w": "terletak",
+    "t": 0.897,
+    "d": 0.458
+   },
+   {
+    "w": "di",
+    "t": 1.383,
+    "d": 0.097
+   },
+   {
+    "w": "sebelah",
+    "t": 1.508,
+    "d": 0.389
+   },
+   {
+    "w": "kiri",
+    "t": 1.925,
+    "d": 0.264
+   },
+   {
+    "w": "masjid",
+    "t": 2.217,
+    "d": 0.528
+   }
+  ]
+ },
+ "36_membantu": {
+  "spk": "N",
+  "text": "Kata arah membantu kita mencari barang, memberi arah jalan dan menyimpan barang dengan selamat.",
+  "words": [
+   {
+    "w": "Kata",
+    "t": 0.106,
+    "d": 0.347
+   },
+   {
+    "w": "arah",
+    "t": 0.453,
+    "d": 0.361
+   },
+   {
+    "w": "membantu",
+    "t": 0.828,
+    "d": 0.5
+   },
+   {
+    "w": "kita",
+    "t": 1.369,
+    "d": 0.222
+   },
+   {
+    "w": "mencari",
+    "t": 1.619,
+    "d": 0.403
+   },
+   {
+    "w": "barang",
+    "t": 2.036,
+    "d": 0.403
+   },
+   {
+    "w": "memberi",
+    "t": 2.717,
+    "d": 0.333
+   },
+   {
+    "w": "arah",
+    "t": 3.05,
+    "d": 0.306
+   },
+   {
+    "w": "jalan",
+    "t": 3.383,
+    "d": 0.444
+   },
+   {
+    "w": "dan",
+    "t": 3.842,
+    "d": 0.208
+   },
+   {
+    "w": "menyimpan",
+    "t": 4.064,
+    "d": 0.514
+   },
+   {
+    "w": "barang",
+    "t": 4.592,
+    "d": 0.361
+   },
+   {
+    "w": "dengan",
+    "t": 5.008,
+    "d": 0.25
+   },
+   {
+    "w": "selamat",
+    "t": 5.272,
+    "d": 0.528
+   }
+  ]
+ },
+ "37_s4_tajuk": {
+  "spk": "N",
+  "text": "Stesen empat. Cara menggunakan kata arah.",
+  "words": [
+   {
+    "w": "Stesen",
+    "t": 0.106,
+    "d": 0.528
+   },
+   {
+    "w": "empat",
+    "t": 0.633,
+    "d": 0.569
+   },
+   {
+    "w": "Cara",
+    "t": 2.181,
+    "d": 0.306
+   },
+   {
+    "w": "menggunakan",
+    "t": 2.5,
+    "d": 0.597
+   },
+   {
+    "w": "kata",
+    "t": 3.153,
+    "d": 0.236
+   },
+   {
+    "w": "arah",
+    "t": 3.389,
+    "d": 0.472
+   }
+  ]
+ },
+ "38_peraturan1": {
+  "spk": "N",
+  "text": "Peraturan pertama. Kata arah yang sama membawa makna berbeza apabila digunakan dengan di, ke dan dari.",
+  "words": [
+   {
+    "w": "Peraturan",
+    "t": 0.106,
+    "d": 0.528
+   },
+   {
+    "w": "pertama",
+    "t": 0.661,
+    "d": 0.528
+   },
+   {
+    "w": "Kata",
+    "t": 2.264,
+    "d": 0.333
+   },
+   {
+    "w": "arah",
+    "t": 2.597,
+    "d": 0.403
+   },
+   {
+    "w": "yang",
+    "t": 3.0,
+    "d": 0.222
+   },
+   {
+    "w": "sama",
+    "t": 3.25,
+    "d": 0.375
+   },
+   {
+    "w": "membawa",
+    "t": 3.625,
+    "d": 0.403
+   },
+   {
+    "w": "makna",
+    "t": 4.028,
+    "d": 0.403
+   },
+   {
+    "w": "berbeza",
+    "t": 4.444,
+    "d": 0.5
+   },
+   {
+    "w": "apabila",
+    "t": 4.944,
+    "d": 0.542
+   },
+   {
+    "w": "digunakan",
+    "t": 5.528,
+    "d": 0.556
+   },
+   {
+    "w": "dengan",
+    "t": 6.111,
+    "d": 0.25
+   },
+   {
+    "w": "di",
+    "t": 6.389,
+    "d": 0.25
+   },
+   {
+    "w": "ke",
+    "t": 6.875,
+    "d": 0.208
+   },
+   {
+    "w": "dan",
+    "t": 7.111,
+    "d": 0.208
+   },
+   {
+    "w": "dari",
+    "t": 7.361,
+    "d": 0.361
+   }
+  ]
+ },
+ "39_di": {
+  "spk": "N",
+  "text": "Di menunjukkan kedudukan. Gogo berdiri di atas batu.",
+  "words": [
+   {
+    "w": "Di",
+    "t": 0.106,
+    "d": 0.153
+   },
+   {
+    "w": "menunjukkan",
+    "t": 0.3,
+    "d": 0.667
+   },
+   {
+    "w": "kedudukan",
+    "t": 1.008,
+    "d": 0.75
+   },
+   {
+    "w": "Gogo",
+    "t": 2.778,
+    "d": 0.458
+   },
+   {
+    "w": "berdiri",
+    "t": 3.25,
+    "d": 0.514
+   },
+   {
+    "w": "di",
+    "t": 3.778,
+    "d": 0.097
+   },
+   {
+    "w": "atas",
+    "t": 3.875,
+    "d": 0.403
+   },
+   {
+    "w": "batu",
+    "t": 4.292,
+    "d": 0.431
+   }
+  ]
+ },
+ "40_ke": {
+  "spk": "N",
+  "text": "Ke menunjukkan hala tuju. Gogo melompat ke atas batu.",
+  "words": [
+   {
+    "w": "Ke",
+    "t": 0.106,
+    "d": 0.139
+   },
+   {
+    "w": "menunjukkan",
+    "t": 0.286,
+    "d": 0.639
+   },
+   {
+    "w": "hala",
+    "t": 0.925,
+    "d": 0.292
+   },
+   {
+    "w": "tuju",
+    "t": 1.244,
+    "d": 0.431
+   },
+   {
+    "w": "Gogo",
+    "t": 2.778,
+    "d": 0.431
+   },
+   {
+    "w": "melompat",
+    "t": 3.236,
+    "d": 0.472
+   },
+   {
+    "w": "ke",
+    "t": 3.75,
+    "d": 0.083
+   },
+   {
+    "w": "atas",
+    "t": 3.833,
+    "d": 0.375
+   },
+   {
+    "w": "batu",
+    "t": 4.222,
+    "d": 0.417
+   }
+  ]
+ },
+ "41_dari": {
+  "spk": "N",
+  "text": "Dari menunjukkan tempat asal. Gogo turun dari atas batu.",
+  "words": [
+   {
+    "w": "Dari",
+    "t": 0.106,
+    "d": 0.306
+   },
+   {
+    "w": "menunjukkan",
+    "t": 0.439,
+    "d": 0.597
+   },
+   {
+    "w": "tempat",
+    "t": 1.078,
+    "d": 0.333
+   },
+   {
+    "w": "asal",
+    "t": 1.425,
+    "d": 0.556
+   },
+   {
+    "w": "Gogo",
+    "t": 3.042,
+    "d": 0.472
+   },
+   {
+    "w": "turun",
+    "t": 3.569,
+    "d": 0.292
+   },
+   {
+    "w": "dari",
+    "t": 3.889,
+    "d": 0.222
+   },
+   {
+    "w": "atas",
+    "t": 4.111,
+    "d": 0.403
+   },
+   {
+    "w": "batu",
+    "t": 4.528,
+    "d": 0.431
+   }
+  ]
+ },
+ "42_daripada": {
+  "spk": "N",
+  "text": "Ingat, gunakan dari untuk tempat. Jangan gunakan daripada bersama kata arah.",
+  "words": [
+   {
+    "w": "Ingat",
+    "t": 0.106,
+    "d": 0.472
+   },
+   {
+    "w": "gunakan",
+    "t": 0.772,
+    "d": 0.5
+   },
+   {
+    "w": "dari",
+    "t": 1.286,
+    "d": 0.264
+   },
+   {
+    "w": "untuk",
+    "t": 1.55,
+    "d": 0.319
+   },
+   {
+    "w": "tempat",
+    "t": 1.911,
+    "d": 0.486
+   },
+   {
+    "w": "Jangan",
+    "t": 3.375,
+    "d": 0.417
+   },
+   {
+    "w": "gunakan",
+    "t": 3.833,
+    "d": 0.486
+   },
+   {
+    "w": "daripada",
+    "t": 4.333,
+    "d": 0.375
+   },
+   {
+    "w": "bersama",
+    "t": 4.736,
+    "d": 0.403
+   },
+   {
+    "w": "kata",
+    "t": 5.181,
+    "d": 0.25
+   },
+   {
+    "w": "arah",
+    "t": 5.431,
+    "d": 0.472
+   }
+  ]
+ },
+ "43_peraturan2": {
+  "spk": "N",
+  "text": "Peraturan kedua. Di, ke dan dari ditulis terpisah daripada kata arah.",
+  "words": [
+   {
+    "w": "Peraturan",
+    "t": 0.106,
+    "d": 0.556
+   },
+   {
+    "w": "kedua",
+    "t": 0.703,
+    "d": 0.444
+   },
+   {
+    "w": "Di",
+    "t": 2.236,
+    "d": 0.292
+   },
+   {
+    "w": "ke",
+    "t": 2.778,
+    "d": 0.194
+   },
+   {
+    "w": "dan",
+    "t": 3.0,
+    "d": 0.208
+   },
+   {
+    "w": "dari",
+    "t": 3.236,
+    "d": 0.25
+   },
+   {
+    "w": "ditulis",
+    "t": 3.5,
+    "d": 0.458
+   },
+   {
+    "w": "terpisah",
+    "t": 3.958,
+    "d": 0.597
+   },
+   {
+    "w": "daripada",
+    "t": 4.569,
+    "d": 0.389
+   },
+   {
+    "w": "kata",
+    "t": 5.0,
+    "d": 0.264
+   },
+   {
+    "w": "arah",
+    "t": 5.264,
+    "d": 0.486
+   }
+  ]
+ },
+ "44_ejaan_betul": {
+  "spk": "N",
+  "text": "Lihat ejaan yang betul: di atas, ke dalam, dan dari luar. Ada jarak di antara perkataan itu.",
+  "words": [
+   {
+    "w": "Lihat",
+    "t": 0.106,
+    "d": 0.431
+   },
+   {
+    "w": "ejaan",
+    "t": 0.536,
+    "d": 0.5
+   },
+   {
+    "w": "yang",
+    "t": 1.036,
+    "d": 0.111
+   },
+   {
+    "w": "betul",
+    "t": 1.203,
+    "d": 0.5
+   },
+   {
+    "w": "di",
+    "t": 1.925,
+    "d": 0.139
+   },
+   {
+    "w": "atas",
+    "t": 2.064,
+    "d": 0.597
+   },
+   {
+    "w": "ke",
+    "t": 2.842,
+    "d": 0.111
+   },
+   {
+    "w": "dalam",
+    "t": 2.967,
+    "d": 0.486
+   },
+   {
+    "w": "dan",
+    "t": 3.592,
+    "d": 0.222
+   },
+   {
+    "w": "dari",
+    "t": 3.856,
+    "d": 0.25
+   },
+   {
+    "w": "luar",
+    "t": 4.147,
+    "d": 0.458
+   },
+   {
+    "w": "Ada",
+    "t": 5.583,
+    "d": 0.278
+   },
+   {
+    "w": "jarak",
+    "t": 5.903,
+    "d": 0.375
+   },
+   {
+    "w": "di",
+    "t": 6.292,
+    "d": 0.139
+   },
+   {
+    "w": "antara",
+    "t": 6.431,
+    "d": 0.375
+   },
+   {
+    "w": "perkataan",
+    "t": 6.833,
+    "d": 0.569
+   },
+   {
+    "w": "itu",
+    "t": 7.403,
+    "d": 0.417
+   }
+  ]
+ },
+ "45_tip_rapat": {
+  "spk": "N",
+  "text": "Tetapi, di yang melekat pada perbuatan ditulis rapat, seperti diletakkan dan dimakan.",
+  "words": [
+   {
+    "w": "Tetapi",
+    "t": 0.106,
+    "d": 0.542
+   },
+   {
+    "w": "di",
+    "t": 0.869,
+    "d": 0.167
+   },
+   {
+    "w": "yang",
+    "t": 1.036,
+    "d": 0.111
+   },
+   {
+    "w": "melekat",
+    "t": 1.175,
+    "d": 0.417
+   },
+   {
+    "w": "pada",
+    "t": 1.619,
+    "d": 0.222
+   },
+   {
+    "w": "perbuatan",
+    "t": 1.869,
+    "d": 0.569
+   },
+   {
+    "w": "ditulis",
+    "t": 2.453,
+    "d": 0.444
+   },
+   {
+    "w": "rapat",
+    "t": 2.897,
+    "d": 0.486
+   },
+   {
+    "w": "seperti",
+    "t": 3.675,
+    "d": 0.458
+   },
+   {
+    "w": "diletakkan",
+    "t": 4.175,
+    "d": 0.694
+   },
+   {
+    "w": "dan",
+    "t": 4.897,
+    "d": 0.181
+   },
+   {
+    "w": "dimakan",
+    "t": 5.106,
+    "d": 0.611
+   }
+  ]
+ },
+ "46_peraturan3": {
+  "spk": "N",
+  "text": "Peraturan ketiga. Letakkan nama benda atau tempat selepas kata arah.",
+  "words": [
+   {
+    "w": "Peraturan",
+    "t": 0.106,
+    "d": 0.569
+   },
+   {
+    "w": "ketiga",
+    "t": 0.717,
+    "d": 0.486
+   },
+   {
+    "w": "Letakkan",
+    "t": 2.306,
+    "d": 0.569
+   },
+   {
+    "w": "nama",
+    "t": 2.875,
+    "d": 0.292
+   },
+   {
+    "w": "benda",
+    "t": 3.181,
+    "d": 0.389
+   },
+   {
+    "w": "atau",
+    "t": 3.569,
+    "d": 0.306
+   },
+   {
+    "w": "tempat",
+    "t": 3.931,
+    "d": 0.347
+   },
+   {
+    "w": "selepas",
+    "t": 4.292,
+    "d": 0.458
+   },
+   {
+    "w": "kata",
+    "t": 4.806,
+    "d": 0.236
+   },
+   {
+    "w": "arah",
+    "t": 5.042,
+    "d": 0.444
+   }
+  ]
+ },
+ "47_gogo_bola": {
+  "spk": "G",
+  "text": "Bola itu berada di bawah… di bawah apa?",
+  "words": [
+   {
+    "w": "Bola",
+    "t": 0.097,
+    "d": 0.31
+   },
+   {
+    "w": "itu",
+    "t": 0.42,
+    "d": 0.236
+   },
+   {
+    "w": "berada",
+    "t": 0.668,
+    "d": 0.385
+   },
+   {
+    "w": "di",
+    "t": 1.077,
+    "d": 0.111
+   },
+   {
+    "w": "bawah",
+    "t": 1.202,
+    "d": 0.373
+   },
+   {
+    "w": "di",
+    "t": 1.698,
+    "d": 0.125
+   },
+   {
+    "w": "bawah",
+    "t": 1.835,
+    "d": 0.347
+   },
+   {
+    "w": "apa",
+    "t": 2.182,
+    "d": 0.385
+   }
+  ]
+ },
+ "48_bola_meja": {
+  "spk": "N",
+  "text": "Bola itu berada di bawah meja. Barulah ayat itu jelas dan lengkap.",
+  "words": [
+   {
+    "w": "Bola",
+    "t": 0.106,
+    "d": 0.361
+   },
+   {
+    "w": "itu",
+    "t": 0.481,
+    "d": 0.264
+   },
+   {
+    "w": "berada",
+    "t": 0.758,
+    "d": 0.444
+   },
+   {
+    "w": "di",
+    "t": 1.231,
+    "d": 0.125
+   },
+   {
+    "w": "bawah",
+    "t": 1.369,
+    "d": 0.319
+   },
+   {
+    "w": "meja",
+    "t": 1.689,
+    "d": 0.444
+   },
+   {
+    "w": "Barulah",
+    "t": 3.25,
+    "d": 0.583
+   },
+   {
+    "w": "ayat",
+    "t": 3.847,
+    "d": 0.347
+   },
+   {
+    "w": "itu",
+    "t": 4.194,
+    "d": 0.236
+   },
+   {
+    "w": "jelas",
+    "t": 4.458,
+    "d": 0.5
+   },
+   {
+    "w": "dan",
+    "t": 4.986,
+    "d": 0.194
+   },
+   {
+    "w": "lengkap",
+    "t": 5.181,
+    "d": 0.542
+   }
+  ]
+ },
+ "49_peraturan4": {
+  "spk": "N",
+  "text": "Peraturan keempat. Apabila menyebut dua benda, gunakan antara bersama perkataan dengan.",
+  "words": [
+   {
+    "w": "Peraturan",
+    "t": 0.106,
+    "d": 0.556
+   },
+   {
+    "w": "keempat",
+    "t": 0.703,
+    "d": 0.597
+   },
+   {
+    "w": "Apabila",
+    "t": 2.278,
+    "d": 0.486
+   },
+   {
+    "w": "menyebut",
+    "t": 2.792,
+    "d": 0.472
+   },
+   {
+    "w": "dua",
+    "t": 3.264,
+    "d": 0.236
+   },
+   {
+    "w": "benda",
+    "t": 3.514,
+    "d": 0.417
+   },
+   {
+    "w": "gunakan",
+    "t": 4.194,
+    "d": 0.528
+   },
+   {
+    "w": "antara",
+    "t": 4.736,
+    "d": 0.347
+   },
+   {
+    "w": "bersama",
+    "t": 5.111,
+    "d": 0.472
+   },
+   {
+    "w": "perkataan",
+    "t": 5.597,
+    "d": 0.611
+   },
+   {
+    "w": "dengan",
+    "t": 6.236,
+    "d": 0.444
+   }
+  ]
+ },
+ "50_antara_dengan": {
+  "spk": "N",
+  "text": "Bulan berada di antara roket dengan planet. Guna dengan, bukan dan.",
+  "words": [
+   {
+    "w": "Bulan",
+    "t": 0.106,
+    "d": 0.375
+   },
+   {
+    "w": "berada",
+    "t": 0.494,
+    "d": 0.431
+   },
+   {
+    "w": "di",
+    "t": 0.953,
+    "d": 0.125
+   },
+   {
+    "w": "antara",
+    "t": 1.078,
+    "d": 0.361
+   },
+   {
+    "w": "roket",
+    "t": 1.481,
+    "d": 0.417
+   },
+   {
+    "w": "dengan",
+    "t": 1.897,
+    "d": 0.236
+   },
+   {
+    "w": "planet",
+    "t": 2.175,
+    "d": 0.5
+   },
+   {
+    "w": "Guna",
+    "t": 3.681,
+    "d": 0.375
+   },
+   {
+    "w": "dengan",
+    "t": 4.083,
+    "d": 0.417
+   },
+   {
+    "w": "bukan",
+    "t": 4.694,
+    "d": 0.403
+   },
+   {
+    "w": "dan",
+    "t": 5.139,
+    "d": 0.361
+   }
+  ]
+ },
+ "51_s5_tajuk": {
+  "spk": "N",
+  "text": "Stesen lima. Cara membina ayat.",
+  "words": [
+   {
+    "w": "Stesen",
+    "t": 0.106,
+    "d": 0.514
+   },
+   {
+    "w": "lima",
+    "t": 0.633,
+    "d": 0.431
+   },
+   {
+    "w": "Cara",
+    "t": 2.153,
+    "d": 0.306
+   },
+   {
+    "w": "membina",
+    "t": 2.486,
+    "d": 0.417
+   },
+   {
+    "w": "ayat",
+    "t": 2.903,
+    "d": 0.542
+   }
+  ]
+ },
+ "52_formula": {
+  "spk": "N",
+  "text": "Inilah formula ayat kita. Siapa atau apa, buat apa, di, ke atau dari, kata arah, dan nama benda atau tempat.",
+  "words": [
+   {
+    "w": "Inilah",
+    "t": 0.106,
+    "d": 0.431
+   },
+   {
+    "w": "formula",
+    "t": 0.536,
+    "d": 0.486
+   },
+   {
+    "w": "ayat",
+    "t": 1.022,
+    "d": 0.361
+   },
+   {
+    "w": "kita",
+    "t": 1.439,
+    "d": 0.389
+   },
+   {
+    "w": "Siapa",
+    "t": 2.917,
+    "d": 0.472
+   },
+   {
+    "w": "atau",
+    "t": 3.389,
+    "d": 0.319
+   },
+   {
+    "w": "apa",
+    "t": 3.736,
+    "d": 0.431
+   },
+   {
+    "w": "buat",
+    "t": 4.431,
+    "d": 0.222
+   },
+   {
+    "w": "apa",
+    "t": 4.667,
+    "d": 0.444
+   },
+   {
+    "w": "di",
+    "t": 5.347,
+    "d": 0.306
+   },
+   {
+    "w": "ke",
+    "t": 5.917,
+    "d": 0.125
+   },
+   {
+    "w": "atau",
+    "t": 6.042,
+    "d": 0.292
+   },
+   {
+    "w": "dari",
+    "t": 6.389,
+    "d": 0.403
+   },
+   {
+    "w": "kata",
+    "t": 7.0,
+    "d": 0.333
+   },
+   {
+    "w": "arah",
+    "t": 7.333,
+    "d": 0.458
+   },
+   {
+    "w": "dan",
+    "t": 8.014,
+    "d": 0.222
+   },
+   {
+    "w": "nama",
+    "t": 8.236,
+    "d": 0.306
+   },
+   {
+    "w": "benda",
+    "t": 8.556,
+    "d": 0.417
+   },
+   {
+    "w": "atau",
+    "t": 8.986,
+    "d": 0.333
+   },
+   {
+    "w": "tempat",
+    "t": 9.375,
+    "d": 0.472
+   }
+  ]
+ },
+ "53_contoh1": {
+  "spk": "N",
+  "text": "Wafiy duduk di dalam roket.",
+  "words": [
+   {
+    "w": "Wafiy",
+    "t": 0.106,
+    "d": 0.514
+   },
+   {
+    "w": "duduk",
+    "t": 0.647,
+    "d": 0.375
+   },
+   {
+    "w": "di",
+    "t": 1.064,
+    "d": 0.125
+   },
+   {
+    "w": "dalam",
+    "t": 1.217,
+    "d": 0.278
+   },
+   {
+    "w": "roket",
+    "t": 1.522,
+    "d": 0.486
+   }
+  ]
+ },
+ "54_contoh2": {
+  "spk": "N",
+  "text": "Gogo melompat ke atas batu.",
+  "words": [
+   {
+    "w": "Gogo",
+    "t": 0.106,
+    "d": 0.431
+   },
+   {
+    "w": "melompat",
+    "t": 0.564,
+    "d": 0.472
+   },
+   {
+    "w": "ke",
+    "t": 1.078,
+    "d": 0.083
+   },
+   {
+    "w": "atas",
+    "t": 1.161,
+    "d": 0.375
+   },
+   {
+    "w": "batu",
+    "t": 1.55,
+    "d": 0.417
+   }
+  ]
+ },
+ "55_contoh3": {
+  "spk": "N",
+  "text": "Komet datang dari belakang planet.",
+  "words": [
+   {
+    "w": "Komet",
+    "t": 0.106,
+    "d": 0.375
+   },
+   {
+    "w": "datang",
+    "t": 0.481,
+    "d": 0.375
+   },
+   {
+    "w": "dari",
+    "t": 0.897,
+    "d": 0.194
+   },
+   {
+    "w": "belakang",
+    "t": 1.119,
+    "d": 0.389
+   },
+   {
+    "w": "planet",
+    "t": 1.55,
+    "d": 0.5
+   }
+  ]
+ },
+ "56_lihat_cara": {
+  "spk": "N",
+  "text": "Sekarang, lihat cara saya membina ayat berdasarkan gambar.",
+  "words": [
+   {
+    "w": "Sekarang",
+    "t": 0.106,
+    "d": 0.556
+   },
+   {
+    "w": "lihat",
+    "t": 0.925,
+    "d": 0.306
+   },
+   {
+    "w": "cara",
+    "t": 1.272,
+    "d": 0.25
+   },
+   {
+    "w": "saya",
+    "t": 1.55,
+    "d": 0.292
+   },
+   {
+    "w": "membina",
+    "t": 1.869,
+    "d": 0.444
+   },
+   {
+    "w": "ayat",
+    "t": 2.314,
+    "d": 0.403
+   },
+   {
+    "w": "berdasarkan",
+    "t": 2.744,
+    "d": 0.708
+   },
+   {
+    "w": "gambar",
+    "t": 3.494,
+    "d": 0.528
+   }
+  ]
+ },
+ "57_think_aloud": {
+  "spk": "N",
+  "text": "Apa dalam gambar? Satelit. Apa yang ia buat? Berputar. Di mana? Di sisi bulan.",
+  "words": [
+   {
+    "w": "Apa",
+    "t": 0.106,
+    "d": 0.333
+   },
+   {
+    "w": "dalam",
+    "t": 0.467,
+    "d": 0.25
+   },
+   {
+    "w": "gambar",
+    "t": 0.758,
+    "d": 0.514
+   },
+   {
+    "w": "Satelit",
+    "t": 2.292,
+    "d": 0.597
+   },
+   {
+    "w": "Apa",
+    "t": 3.875,
+    "d": 0.333
+   },
+   {
+    "w": "yang",
+    "t": 4.25,
+    "d": 0.194
+   },
+   {
+    "w": "ia",
+    "t": 4.458,
+    "d": 0.264
+   },
+   {
+    "w": "buat",
+    "t": 4.75,
+    "d": 0.375
+   },
+   {
+    "w": "Berputar",
+    "t": 6.125,
+    "d": 0.736
+   },
+   {
+    "w": "Di",
+    "t": 7.861,
+    "d": 0.153
+   },
+   {
+    "w": "mana",
+    "t": 8.042,
+    "d": 0.403
+   },
+   {
+    "w": "Di",
+    "t": 9.5,
+    "d": 0.181
+   },
+   {
+    "w": "sisi",
+    "t": 9.722,
+    "d": 0.361
+   },
+   {
+    "w": "bulan",
+    "t": 10.111,
+    "d": 0.5
+   }
+  ]
+ },
+ "58_ayat_lengkap": {
+  "spk": "N",
+  "text": "Ayat lengkapnya: Satelit berputar di sisi bulan.",
+  "words": [
+   {
+    "w": "Ayat",
+    "t": 0.106,
+    "d": 0.361
+   },
+   {
+    "w": "lengkapnya",
+    "t": 0.467,
+    "d": 0.667
+   },
+   {
+    "w": "Satelit",
+    "t": 1.397,
+    "d": 0.458
+   },
+   {
+    "w": "berputar",
+    "t": 1.869,
+    "d": 0.542
+   },
+   {
+    "w": "di",
+    "t": 2.467,
+    "d": 0.153
+   },
+   {
+    "w": "sisi",
+    "t": 2.647,
+    "d": 0.333
+   },
+   {
+    "w": "bulan",
+    "t": 3.008,
+    "d": 0.5
+   }
+  ]
+ },
+ "59_tip_ayat": {
+  "spk": "N",
+  "text": "Tip ayat hebat! Mulakan dengan huruf besar. Pilih kata arah yang tepat. Akhiri dengan noktah.",
+  "words": [
+   {
+    "w": "Tip",
+    "t": 0.106,
+    "d": 0.222
+   },
+   {
+    "w": "ayat",
+    "t": 0.356,
+    "d": 0.347
+   },
+   {
+    "w": "hebat",
+    "t": 0.703,
+    "d": 0.542
+   },
+   {
+    "w": "Mulakan",
+    "t": 2.236,
+    "d": 0.514
+   },
+   {
+    "w": "dengan",
+    "t": 2.764,
+    "d": 0.264
+   },
+   {
+    "w": "huruf",
+    "t": 3.042,
+    "d": 0.347
+   },
+   {
+    "w": "besar",
+    "t": 3.389,
+    "d": 0.486
+   },
+   {
+    "w": "Pilih",
+    "t": 4.889,
+    "d": 0.278
+   },
+   {
+    "w": "kata",
+    "t": 5.208,
+    "d": 0.25
+   },
+   {
+    "w": "arah",
+    "t": 5.458,
+    "d": 0.361
+   },
+   {
+    "w": "yang",
+    "t": 5.819,
+    "d": 0.208
+   },
+   {
+    "w": "tepat",
+    "t": 6.056,
+    "d": 0.444
+   },
+   {
+    "w": "Akhiri",
+    "t": 7.472,
+    "d": 0.431
+   },
+   {
+    "w": "dengan",
+    "t": 7.931,
+    "d": 0.236
+   },
+   {
+    "w": "noktah",
+    "t": 8.181,
+    "d": 0.556
+   }
+  ]
+ },
+ "60_gogo_tahu": {
+  "spk": "G",
+  "text": "Wafiy! Sekarang saya tahu! Saya bersembunyi di belakang batu besar!",
+  "words": [
+   {
+    "w": "Wafiy",
+    "t": 0.097,
+    "d": 0.546
+   },
+   {
+    "w": "Sekarang",
+    "t": 1.576,
+    "d": 0.385
+   },
+   {
+    "w": "saya",
+    "t": 1.974,
+    "d": 0.211
+   },
+   {
+    "w": "tahu",
+    "t": 2.197,
+    "d": 0.335
+   },
+   {
+    "w": "Saya",
+    "t": 3.475,
+    "d": 0.323
+   },
+   {
+    "w": "bersembunyi",
+    "t": 3.824,
+    "d": 0.546
+   },
+   {
+    "w": "di",
+    "t": 4.382,
+    "d": 0.087
+   },
+   {
+    "w": "belakang",
+    "t": 4.493,
+    "d": 0.335
+   },
+   {
+    "w": "batu",
+    "t": 4.866,
+    "d": 0.236
+   },
+   {
+    "w": "besar",
+    "t": 5.102,
+    "d": 0.409
+   }
+  ]
+ },
+ "61_wafiy_datang": {
+  "spk": "W",
+  "text": "Saya nampak kamu, Gogo! Saya datang!",
+  "words": [
+   {
+    "w": "Saya",
+    "t": 0.103,
+    "d": 0.368
+   },
+   {
+    "w": "nampak",
+    "t": 0.511,
+    "d": 0.316
+   },
+   {
+    "w": "kamu",
+    "t": 0.866,
+    "d": 0.382
+   },
+   {
+    "w": "Gogo",
+    "t": 1.418,
+    "d": 0.447
+   },
+   {
+    "w": "Saya",
+    "t": 2.855,
+    "d": 0.329
+   },
+   {
+    "w": "datang",
+    "t": 3.197,
+    "d": 0.421
+   }
+  ]
+ },
+ "62_gogo_terima_kasih": {
+  "spk": "G",
+  "text": "Terima kasih, Wafiy!",
+  "words": [
+   {
+    "w": "Terima",
+    "t": 0.097,
+    "d": 0.286
+   },
+   {
+    "w": "kasih",
+    "t": 0.42,
+    "d": 0.409
+   },
+   {
+    "w": "Wafiy",
+    "t": 1.027,
+    "d": 0.546
+   }
+  ]
+ },
+ "63_rumusan": {
+  "spk": "N",
+  "text": "Mari kita rumuskan.",
+  "words": [
+   {
+    "w": "Mari",
+    "t": 0.106,
+    "d": 0.347
+   },
+   {
+    "w": "kita",
+    "t": 0.481,
+    "d": 0.236
+   },
+   {
+    "w": "rumuskan",
+    "t": 0.758,
+    "d": 0.694
+   }
+  ]
+ },
+ "64_poin1": {
+  "spk": "N",
+  "text": "Satu. Kata arah menunjukkan arah atau kedudukan.",
+  "words": [
+   {
+    "w": "Satu",
+    "t": 0.106,
+    "d": 0.458
+   },
+   {
+    "w": "Kata",
+    "t": 1.639,
+    "d": 0.333
+   },
+   {
+    "w": "arah",
+    "t": 1.972,
+    "d": 0.319
+   },
+   {
+    "w": "menunjukkan",
+    "t": 2.306,
+    "d": 0.583
+   },
+   {
+    "w": "arah",
+    "t": 2.903,
+    "d": 0.431
+   },
+   {
+    "w": "atau",
+    "t": 3.361,
+    "d": 0.333
+   },
+   {
+    "w": "kedudukan",
+    "t": 3.75,
+    "d": 0.736
+   }
+  ]
+ },
+ "65_poin2": {
+  "spk": "N",
+  "text": "Dua. Kata arah datang selepas di, ke atau dari, dan sebelum nama benda atau tempat.",
+  "words": [
+   {
+    "w": "Dua",
+    "t": 0.106,
+    "d": 0.389
+   },
+   {
+    "w": "Kata",
+    "t": 1.611,
+    "d": 0.347
+   },
+   {
+    "w": "arah",
+    "t": 1.958,
+    "d": 0.361
+   },
+   {
+    "w": "datang",
+    "t": 2.333,
+    "d": 0.375
+   },
+   {
+    "w": "selepas",
+    "t": 2.736,
+    "d": 0.514
+   },
+   {
+    "w": "di",
+    "t": 3.264,
+    "d": 0.278
+   },
+   {
+    "w": "ke",
+    "t": 3.819,
+    "d": 0.125
+   },
+   {
+    "w": "atau",
+    "t": 3.944,
+    "d": 0.278
+   },
+   {
+    "w": "dari",
+    "t": 4.278,
+    "d": 0.375
+   },
+   {
+    "w": "dan",
+    "t": 4.889,
+    "d": 0.222
+   },
+   {
+    "w": "sebelum",
+    "t": 5.125,
+    "d": 0.389
+   },
+   {
+    "w": "nama",
+    "t": 5.542,
+    "d": 0.264
+   },
+   {
+    "w": "benda",
+    "t": 5.819,
+    "d": 0.403
+   },
+   {
+    "w": "atau",
+    "t": 6.236,
+    "d": 0.319
+   },
+   {
+    "w": "tempat",
+    "t": 6.597,
+    "d": 0.486
+   }
+  ]
+ },
+ "66_poin3": {
+  "spk": "N",
+  "text": "Tiga. Di untuk kedudukan, ke untuk hala tuju, dan dari untuk tempat asal.",
+  "words": [
+   {
+    "w": "Tiga",
+    "t": 0.106,
+    "d": 0.389
+   },
+   {
+    "w": "Di",
+    "t": 1.583,
+    "d": 0.222
+   },
+   {
+    "w": "untuk",
+    "t": 1.833,
+    "d": 0.389
+   },
+   {
+    "w": "kedudukan",
+    "t": 2.25,
+    "d": 0.736
+   },
+   {
+    "w": "ke",
+    "t": 3.208,
+    "d": 0.194
+   },
+   {
+    "w": "untuk",
+    "t": 3.417,
+    "d": 0.333
+   },
+   {
+    "w": "hala",
+    "t": 3.778,
+    "d": 0.278
+   },
+   {
+    "w": "tuju",
+    "t": 4.097,
+    "d": 0.444
+   },
+   {
+    "w": "dan",
+    "t": 4.792,
+    "d": 0.222
+   },
+   {
+    "w": "dari",
+    "t": 5.056,
+    "d": 0.292
+   },
+   {
+    "w": "untuk",
+    "t": 5.347,
+    "d": 0.333
+   },
+   {
+    "w": "tempat",
+    "t": 5.722,
+    "d": 0.306
+   },
+   {
+    "w": "asal",
+    "t": 6.042,
+    "d": 0.597
+   }
+  ]
+ },
+ "67_poin4": {
+  "spk": "N",
+  "text": "Empat. Di, ke dan dari ditulis terpisah.",
+  "words": [
+   {
+    "w": "Empat",
+    "t": 0.106,
+    "d": 0.514
+   },
+   {
+    "w": "Di",
+    "t": 1.597,
+    "d": 0.278
+   },
+   {
+    "w": "ke",
+    "t": 2.125,
+    "d": 0.194
+   },
+   {
+    "w": "dan",
+    "t": 2.347,
+    "d": 0.208
+   },
+   {
+    "w": "dari",
+    "t": 2.583,
+    "d": 0.264
+   },
+   {
+    "w": "ditulis",
+    "t": 2.875,
+    "d": 0.444
+   },
+   {
+    "w": "terpisah",
+    "t": 3.319,
+    "d": 0.694
+   }
+  ]
+ },
+ "68_chant_ajak": {
+  "spk": "N",
+  "text": "Jom sebut bersama!",
+  "words": [
+   {
+    "w": "Jom",
+    "t": 0.106,
+    "d": 0.333
+   },
+   {
+    "w": "sebut",
+    "t": 0.467,
+    "d": 0.361
+   },
+   {
+    "w": "bersama",
+    "t": 0.828,
+    "d": 0.597
+   }
+  ]
+ },
+ "80_syabas": {
+  "spk": "N",
+  "text": "Syabas! Sekarang kamu sudah tahu tentang kata arah. Teruskan misi kamu di Zon Cabaran. Jumpa lagi!",
+  "words": [
+   {
+    "w": "Syabas",
+    "t": 0.106,
+    "d": 0.653
+   },
+   {
+    "w": "Sekarang",
+    "t": 1.792,
+    "d": 0.444
+   },
+   {
+    "w": "kamu",
+    "t": 2.278,
+    "d": 0.306
+   },
+   {
+    "w": "sudah",
+    "t": 2.611,
+    "d": 0.278
+   },
+   {
+    "w": "tahu",
+    "t": 2.889,
+    "d": 0.319
+   },
+   {
+    "w": "tentang",
+    "t": 3.25,
+    "d": 0.319
+   },
+   {
+    "w": "kata",
+    "t": 3.611,
+    "d": 0.236
+   },
+   {
+    "w": "arah",
+    "t": 3.847,
+    "d": 0.472
+   },
+   {
+    "w": "Teruskan",
+    "t": 5.347,
+    "d": 0.472
+   },
+   {
+    "w": "misi",
+    "t": 5.833,
+    "d": 0.319
+   },
+   {
+    "w": "kamu",
+    "t": 6.194,
+    "d": 0.361
+   },
+   {
+    "w": "di",
+    "t": 6.597,
+    "d": 0.125
+   },
+   {
+    "w": "Zon",
+    "t": 6.778,
+    "d": 0.25
+   },
+   {
+    "w": "Cabaran",
+    "t": 7.083,
+    "d": 0.583
+   },
+   {
+    "w": "Jumpa",
+    "t": 8.667,
+    "d": 0.389
+   },
+   {
+    "w": "lagi",
+    "t": 9.097,
+    "d": 0.375
+   }
+  ]
+ },
+ "81_jumpa_lagi": {
+  "spk": "W",
+  "text": "Jumpa lagi!",
+  "words": [
+   {
+    "w": "Jumpa",
+    "t": 0.103,
+    "d": 0.368
+   },
+   {
+    "w": "lagi",
+    "t": 0.511,
+    "d": 0.355
+   }
+  ]
+ },
+ "chant_N_atas": {
+  "spk": "N",
+  "text": "Atas!",
+  "words": [
+   {
+    "w": "Atas",
+    "t": 0.09,
+    "d": 0.42
+   }
+  ]
+ },
+ "chant_W_atas": {
+  "spk": "W",
+  "text": "Atas!",
+  "words": [
+   {
+    "w": "Atas",
+    "t": 0.09,
+    "d": 0.42
+   }
+  ]
+ },
+ "chant_N_bawah": {
+  "spk": "N",
+  "text": "bawah!",
+  "words": [
+   {
+    "w": "bawah",
+    "t": 0.09,
+    "d": 0.39
+   }
+  ]
+ },
+ "chant_W_bawah": {
+  "spk": "W",
+  "text": "bawah!",
+  "words": [
+   {
+    "w": "bawah",
+    "t": 0.09,
+    "d": 0.39
+   }
+  ]
+ },
+ "chant_N_dalam": {
+  "spk": "N",
+  "text": "dalam!",
+  "words": [
+   {
+    "w": "dalam",
+    "t": 0.09,
+    "d": 0.32
+   }
+  ]
+ },
+ "chant_W_dalam": {
+  "spk": "W",
+  "text": "dalam!",
+  "words": [
+   {
+    "w": "dalam",
+    "t": 0.09,
+    "d": 0.32
+   }
+  ]
+ },
+ "chant_N_luar": {
+  "spk": "N",
+  "text": "luar!",
+  "words": [
+   {
+    "w": "luar",
+    "t": 0.09,
+    "d": 0.32
+   }
+  ]
+ },
+ "chant_W_luar": {
+  "spk": "W",
+  "text": "luar!",
+  "words": [
+   {
+    "w": "luar",
+    "t": 0.09,
+    "d": 0.32
+   }
+  ]
+ },
+ "chant_N_hadapan": {
+  "spk": "N",
+  "text": "hadapan!",
+  "words": [
+   {
+    "w": "hadapan",
+    "t": 0.09,
+    "d": 0.45
+   }
+  ]
+ },
+ "chant_W_hadapan": {
+  "spk": "W",
+  "text": "hadapan!",
+  "words": [
+   {
+    "w": "hadapan",
+    "t": 0.09,
+    "d": 0.45
+   }
+  ]
+ },
+ "chant_N_belakang": {
+  "spk": "N",
+  "text": "belakang!",
+  "words": [
+   {
+    "w": "belakang",
+    "t": 0.09,
+    "d": 0.41
+   }
+  ]
+ },
+ "chant_W_belakang": {
+  "spk": "W",
+  "text": "belakang!",
+  "words": [
+   {
+    "w": "belakang",
+    "t": 0.09,
+    "d": 0.41
+   }
+  ]
+ },
+ "chant_N_kiri": {
+  "spk": "N",
+  "text": "Kiri!",
+  "words": [
+   {
+    "w": "Kiri",
+    "t": 0.09,
+    "d": 0.26
+   }
+  ]
+ },
+ "chant_W_kiri": {
+  "spk": "W",
+  "text": "Kiri!",
+  "words": [
+   {
+    "w": "Kiri",
+    "t": 0.09,
+    "d": 0.26
+   }
+  ]
+ },
+ "chant_N_kanan": {
+  "spk": "N",
+  "text": "kanan!",
+  "words": [
+   {
+    "w": "kanan",
+    "t": 0.09,
+    "d": 0.35
+   }
+  ]
+ },
+ "chant_W_kanan": {
+  "spk": "W",
+  "text": "kanan!",
+  "words": [
+   {
+    "w": "kanan",
+    "t": 0.09,
+    "d": 0.35
+   }
+  ]
+ },
+ "chant_N_tepi": {
+  "spk": "N",
+  "text": "tepi!",
+  "words": [
+   {
+    "w": "tepi",
+    "t": 0.09,
+    "d": 0.25
+   }
+  ]
+ },
+ "chant_W_tepi": {
+  "spk": "W",
+  "text": "tepi!",
+  "words": [
+   {
+    "w": "tepi",
+    "t": 0.09,
+    "d": 0.25
+   }
+  ]
+ },
+ "chant_N_tengah": {
+  "spk": "N",
+  "text": "tengah!",
+  "words": [
+   {
+    "w": "tengah",
+    "t": 0.09,
+    "d": 0.3
+   }
+  ]
+ },
+ "chant_W_tengah": {
+  "spk": "W",
+  "text": "tengah!",
+  "words": [
+   {
+    "w": "tengah",
+    "t": 0.09,
+    "d": 0.3
+   }
+  ]
+ },
+ "chant_N_antara": {
+  "spk": "N",
+  "text": "antara!",
+  "words": [
+   {
+    "w": "antara",
+    "t": 0.09,
+    "d": 0.36
+   }
+  ]
+ },
+ "chant_W_antara": {
+  "spk": "W",
+  "text": "antara!",
+  "words": [
+   {
+    "w": "antara",
+    "t": 0.09,
+    "d": 0.36
+   }
+  ]
+ },
+ "chant_N_sisi": {
+  "spk": "N",
+  "text": "sisi!",
+  "words": [
+   {
+    "w": "sisi",
+    "t": 0.09,
+    "d": 0.34
+   }
+  ]
+ },
+ "chant_W_sisi": {
+  "spk": "W",
+  "text": "sisi!",
+  "words": [
+   {
+    "w": "sisi",
+    "t": 0.09,
+    "d": 0.34
+   }
+  ]
+ }
+}

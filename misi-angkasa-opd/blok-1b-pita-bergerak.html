@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selamat Datang – Misi Angkasa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap" rel="stylesheet">
+<style>
+  /* ===== Palet Misi Angkasa (sama dengan Blok 1 dan Peta Misi) ===== */
+  :root{
+    --bg:#1D0851; --bg-deep:#120438; --line:#4B3FA0;
+    --gold:#FFD447; --pink:#F68CB6; --cyan:#56D8F0; --lilac:#A98BEF; --white:#FFFFFF;
+    --speed:26s;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;background:transparent}
+  body{display:flex;align-items:center}
+
+  .pita{
+    position:relative;width:100%;height:clamp(96px,16vw,150px);overflow:hidden;
+    border-radius:28px;border:3px solid var(--line);
+    background:
+      radial-gradient(ellipse 30% 120% at 6% 50%, rgba(43,34,144,.85), transparent 70%),
+      radial-gradient(ellipse 30% 120% at 94% 50%, rgba(147,42,225,.45), transparent 70%),
+      radial-gradient(ellipse 50% 90% at 50% 120%, rgba(214,51,127,.22), transparent 70%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+    box-shadow:0 0 0 1px rgba(255,255,255,.05) inset, 0 10px 30px rgba(10,4,40,.45);
+    display:flex;align-items:center;
+  }
+  /* medan bintang halus */
+  .pita::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.85;
+    background-image:
+      radial-gradient(1.6px 1.6px at 20px 24px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 130px 70px,#C9BCFF,transparent),
+      radial-gradient(1.8px 1.8px at 220px 18px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 70px 118px,#FF9CCB,transparent),
+      radial-gradient(1.4px 1.4px at 280px 96px,#9FF0FF,transparent);
+    background-size:310px 140px;
+    animation:kelip 4s ease-in-out infinite alternate;
+  }
+
+  /* ---- hiasan ---- */
+  .hias{position:absolute;pointer-events:none;z-index:0}
+  .planet-cincin{left:1.5%;top:50%;width:clamp(56px,9vw,110px);margin-top:calc(clamp(56px,9vw,110px) / -2.4);animation:apung 5s ease-in-out infinite}
+  .planet-jambu{right:2%;top:50%;width:clamp(44px,7vw,86px);margin-top:calc(clamp(44px,7vw,86px) / -2);animation:apung 6s ease-in-out -2s infinite}
+  .bulan{right:9%;top:10%;width:clamp(16px,2.4vw,28px);animation:apung 4.5s ease-in-out -1s infinite}
+  .kerlip{width:clamp(12px,1.8vw,22px);animation:kerlip 2.4s ease-in-out infinite}
+  .k1{left:12%;top:12%}.k2{left:27%;bottom:10%;animation-delay:-.6s}.k3{left:46%;top:8%;animation-delay:-1.2s}
+  .k4{left:63%;bottom:12%;animation-delay:-1.8s}.k5{left:80%;top:14%;animation-delay:-.3s}.k6{left:90%;bottom:16%;animation-delay:-1.5s}
+  .tahi{top:16%;left:-20%;width:clamp(80px,12vw,150px);animation:tahi 9s linear infinite;opacity:0}
+  .roket{top:62%;left:0;width:clamp(44px,5vw,64px);animation:terbang 16s ease-in-out infinite;opacity:0}
+
+  /* ---- tulisan bergerak ---- */
+  .lorong{
+    position:relative;z-index:1;flex:1;min-width:0;overflow:hidden;margin:0 clamp(62px,10.5vw,128px);
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+            mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+  }
+  .jalur{display:flex;width:max-content;animation:kiri var(--speed) linear infinite;will-change:transform}
+  .set{display:flex;align-items:center;flex-shrink:0}
+  .mesej{
+    font-family:"Fredoka","Nunito",system-ui,sans-serif;font-weight:700;
+    font-size:clamp(30px,5.6vw,66px);line-height:1;color:var(--white);
+    white-space:nowrap;padding:0 .45em;letter-spacing:1px;
+    text-shadow:0 4px 0 rgba(10,4,40,.65), 0 0 22px rgba(147,42,225,.55);
+  }
+  .mesej .y{color:var(--gold);text-shadow:0 4px 0 rgba(10,4,40,.65),0 0 22px rgba(255,212,71,.45)}
+  .mesej .p{color:var(--pink);text-shadow:0 4px 0 rgba(10,4,40,.65),0 0 22px rgba(246,140,182,.5)}
+  .mesej .c{color:var(--cyan);text-shadow:0 4px 0 rgba(10,4,40,.65),0 0 22px rgba(86,216,240,.5)}
+  .pemisah{width:clamp(22px,3vw,38px);flex-shrink:0;animation:pusing 6s linear infinite}
+
+  .pita:hover .jalur{animation-play-state:paused}
+
+  @keyframes kiri{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes kelip{from{opacity:.55}to{opacity:.95}}
+  @keyframes apung{0%,100%{transform:translateY(-5px)}50%{transform:translateY(5px)}}
+  @keyframes kerlip{0%,100%{transform:scale(.55) rotate(0deg);opacity:.35}50%{transform:scale(1.1) rotate(25deg);opacity:1}}
+  @keyframes pusing{to{transform:rotate(360deg)}}
+  @keyframes tahi{
+    0%,70%{transform:translate(0,0);opacity:0}
+    74%{opacity:1}
+    100%{transform:translate(140vw,30px);opacity:0}
+  }
+  @keyframes terbang{
+    0%,58%{transform:translateX(-90px) rotate(-6deg);opacity:0}
+    60%{opacity:1}
+    78%{transform:translateX(50vw) translateY(-8px) rotate(-10deg)}
+    96%{opacity:1}
+    100%{transform:translateX(calc(100vw + 30px)) translateY(2px) rotate(-4deg);opacity:0}
+  }
+
+  /* Pengguna yang memilih kurang gerakan: ucapan pegun di tengah */
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important}
+    .tahi,.roket{display:none}
+    .lorong{-webkit-mask-image:none;mask-image:none}
+    .jalur{width:100%;justify-content:center}
+    .set + .set{display:none}
+    .set > :not(:first-child){display:none}
+    .mesej{white-space:normal;text-align:center;font-size:clamp(20px,3.9vw,46px);line-height:1.1}
+  }
+  @media (max-width:520px){
+    .pita{border-radius:20px}
+    .bulan,.k3,.k5{display:none}
+    .planet-cincin{width:46px;margin-top:-19px;left:1%}
+    .planet-jambu{width:36px;margin-top:-18px;right:1.5%}
+    .lorong{margin:0 48px}
+    .mesej{font-size:26px}
+  }
+</style>
+</head>
+<body>
+<div class="pita" role="img" aria-label="Selamat datang, angkasawan cilik!">
+
+  <!-- hiasan latar -->
+  <svg class="hias planet-cincin" viewBox="0 0 120 84" aria-hidden="true">
+    <ellipse cx="60" cy="46" rx="56" ry="13" fill="none" stroke="#FFB648" stroke-width="6" opacity=".55"/>
+    <circle cx="60" cy="42" r="30" fill="#FE8B42"/><circle cx="60" cy="42" r="30" fill="url(#gp1)"/>
+    <path d="M38 34 q22 -8 44 0" stroke="#FFC68A" stroke-width="4" fill="none" opacity=".7"/>
+    <path d="M4 46 q56 26 112 0" stroke="#FFD27A" stroke-width="6" fill="none"/>
+    <defs><radialGradient id="gp1" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#7A2A10" stop-opacity=".35"/></radialGradient></defs>
+  </svg>
+  <svg class="hias planet-jambu" viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="50" r="44" fill="#F68CB6"/><circle cx="50" cy="50" r="44" fill="url(#gp2)"/>
+    <circle cx="36" cy="40" r="8" fill="#D6337F" opacity=".45"/><circle cx="62" cy="62" r="11" fill="#D6337F" opacity=".4"/><circle cx="64" cy="32" r="5" fill="#D6337F" opacity=".4"/>
+    <defs><radialGradient id="gp2" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-color="#5A0F3A" stop-opacity=".35"/></radialGradient></defs>
+  </svg>
+  <svg class="hias bulan" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#A98BEF"/><circle cx="14" cy="15" r="4" fill="#7E63D0"/><circle cx="25" cy="25" r="5" fill="#7E63D0"/></svg>
+  <svg class="hias kerlip k1" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0 C22 14 26 18 40 20 C26 22 22 26 20 40 C18 26 14 22 0 20 C14 18 18 14 20 0Z" fill="#FFD447"/></svg>
+  <svg class="hias kerlip k2" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0 C22 14 26 18 40 20 C26 22 22 26 20 40 C18 26 14 22 0 20 C14 18 18 14 20 0Z" fill="#9FF0FF"/></svg>
+  <svg class="hias kerlip k3" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0 C22 14 26 18 40 20 C26 22 22 26 20 40 C18 26 14 22 0 20 C14 18 18 14 20 0Z" fill="#FF9CCB"/></svg>
+  <svg class="hias kerlip k4" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0 C22 14 26 18 40 20 C26 22 22 26 20 40 C18 26 14 22 0 20 C14 18 18 14 20 0Z" fill="#FFD447"/></svg>
+  <svg class="hias kerlip k5" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0 C22 14 26 18 40 20 C26 22 22 26 20 40 C18 26 14 22 0 20 C14 18 18 14 20 0Z" fill="#C9BCFF"/></svg>
+  <svg class="hias kerlip k6" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0 C22 14 26 18 40 20 C26 22 22 26 20 40 C18 26 14 22 0 20 C14 18 18 14 20 0Z" fill="#FFD447"/></svg>
+  <svg class="hias tahi" viewBox="0 0 150 20" aria-hidden="true">
+    <defs><linearGradient id="gt" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff"/></linearGradient></defs>
+    <path d="M0 10 L140 8 L140 12 Z" fill="url(#gt)"/><circle cx="141" cy="10" r="4" fill="#fff"/>
+  </svg>
+  <svg class="hias roket" viewBox="0 0 300 140" aria-hidden="true">
+    <path d="M30 70 L0 52 Q14 70 0 88 Z" fill="#FFB648"/>
+    <path d="M40 70 L14 60 Q22 70 14 80 Z" fill="#FFE07A"/>
+    <path d="M60 30 Q170 18 250 50 Q300 70 250 90 Q170 122 60 110 Z" fill="#F4EFEA" stroke="#1A1442" stroke-width="8"/>
+    <path d="M250 50 Q300 70 250 90 Q262 70 250 50 Z" fill="#FE585F"/>
+    <circle cx="175" cy="70" r="24" fill="#3EBFD2" stroke="#1A1442" stroke-width="7"/>
+    <path d="M80 30 L60 4 L120 26 Z M80 110 L60 136 L120 114 Z" fill="#FE585F" stroke="#1A1442" stroke-width="6" stroke-linejoin="round"/>
+  </svg>
+
+  <!-- ucapan bergerak (set kedua ialah salinan untuk gelung lancar) -->
+  <div class="lorong" aria-hidden="true">
+    <div class="jalur">
+      <div class="set">
+        <span class="mesej">SELAMAT DATANG, <span class="y">ANGKASAWAN CILIK!</span></span>
+        <svg class="pemisah" viewBox="0 0 40 40"><path d="M20 0 C22 14 26 18 40 20 C26 22 22 26 20 40 C18 26 14 22 0 20 C14 18 18 14 20 0Z" fill="#FFD447"/></svg>
+        <span class="mesej">SELAMAT DATANG, <span class="p">ANGKASAWAN CILIK!</span></span>
+        <svg class="pemisah" viewBox="0 0 40 40"><path d="M20 0 C22 14 26 18 40 20 C26 22 22 26 20 40 C18 26 14 22 0 20 C14 18 18 14 20 0Z" fill="#F68CB6"/></svg>
+        <span class="mesej">SELAMAT DATANG, <span class="c">ANGKASAWAN CILIK!</span></span>
+        <svg class="pemisah" viewBox="0 0 40 40"><path d="M20 0 C22 14 26 18 40 20 C26 22 22 26 20 40 C18 26 14 22 0 20 C14 18 18 14 20 0Z" fill="#56D8F0"/></svg>
+      </div>
+      <div class="set">
+        <span class="mesej">SELAMAT DATANG, <span class="y">ANGKASAWAN CILIK!</span></span>
+        <svg class="pemisah" viewBox="0 0 40 40"><path d="M20 0 C22 14 26 18 40 20 C26 22 22 26 20 40 C18 26 14 22 0 20 C14 18 18 14 20 0Z" fill="#FFD447"/></svg>
+        <span class="mesej">SELAMAT DATANG, <span class="p">ANGKASAWAN CILIK!</span></span>
+        <svg class="pemisah" viewBox="0 0 40 40"><path d="M20 0 C22 14 26 18 40 20 C26 22 22 26 20 40 C18 26 14 22 0 20 C14 18 18 14 20 0Z" fill="#F68CB6"/></svg>
+        <span class="mesej">SELAMAT DATANG, <span class="c">ANGKASAWAN CILIK!</span></span>
+        <svg class="pemisah" viewBox="0 0 40 40"><path d="M20 0 C22 14 26 18 40 20 C26 22 22 26 20 40 C18 26 14 22 0 20 C14 18 18 14 20 0Z" fill="#56D8F0"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

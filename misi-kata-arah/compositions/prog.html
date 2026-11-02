@@ -1,0 +1,45 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; pointer-events: none; }
+  </style>
+  <div id="root" data-composition-id="prog" data-width="1920" data-height="1080">
+    <div class="prog" id="pg">
+      <div class="line"></div>
+      <div class="line-done" id="pg-done"></div>
+      <div class="ring" id="pg-ring" style="left:30px"></div>
+      <div class="pl pc1" id="pg-1" style="left:30px">1</div>
+      <div class="pl pc2" id="pg-2" style="left:215px">2</div>
+      <div class="pl pc3" id="pg-3" style="left:400px">3</div>
+      <div class="pl pc4" id="pg-4" style="left:585px">4</div>
+      <div class="pl pc5" id="pg-5" style="left:770px">5</div>
+      <svg class="rkt" id="pg-rkt" viewBox="0 0 300 140"><use href="#a-rocket" width="300" height="140" /></svg>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const KA = window.KA, base = KA.sec("s1");
+      const X = [30, 215, 400, 585, 770];
+      const st = ["s1", "s2", "s3", "s4", "s5"].map((s) => KA.sec(s) - base);
+      st.push(KA.sec("rumusan") - base);
+      KA.fadeIn(tl, "#pg", 0.4, 0.5);
+      tl.set(["#pg-2", "#pg-3", "#pg-4", "#pg-5"], { opacity: 0.35 }, 0);
+      tl.set("#pg-done", { scaleX: 0 }, 0);
+      for (let i = 1; i < 6; i++) {
+        const t = st[i];
+        /* stesen sebelumnya selesai: garisan menyala, roket bergerak ke planet seterusnya */
+        tl.to("#pg-done", { scaleX: Math.min(1, (X[Math.min(i, 4)] - 30) / 740), duration: 0.9, ease: "power2.inOut" }, t + 0.2);
+        if (i < 5) {
+          tl.to("#pg-rkt", { x: X[i] - 30, duration: 0.9, ease: "power2.inOut" }, t + 0.2);
+          tl.to("#pg-ring", { x: X[i] - 30, duration: 0.9, ease: "power2.inOut" }, t + 0.2);
+          tl.to(`#pg-${i + 1}`, { opacity: 1, duration: 0.3 }, t + 0.9);
+          tl.fromTo(`#pg-${i}`, { scale: 1.45 }, { scale: 1, duration: 0.5, ease: "back.out(2)" }, t + 0.2);
+        } else {
+          tl.to("#pg-ring", { opacity: 0, duration: 0.3 }, t + 0.2);
+          tl.fromTo("#pg-5", { scale: 1.45 }, { scale: 1, duration: 0.5, ease: "back.out(2)" }, t + 0.2);
+        }
+      }
+      window.__timelines["prog"] = tl;
+    })();
+  </script>
+</template>

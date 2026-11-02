@@ -1,0 +1,62 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; pointer-events: none; }
+    #root .cap { opacity: 0; }
+    #root .cap .w { padding: 0 .08em; border-radius: 10px; }
+  </style>
+  <div id="root" data-composition-id="kapsyen" data-width="1920" data-height="1080" data-layout-allow-overlap>
+    <div id="kap-groups"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      const C = window.CUES, KA = window.KA;
+      /* Baris tanpa kapsyen: ayat yang sama sudah dipaparkan besar di skrin (diserlahkan di sana). */
+      const NONE = new Set(["01_berlepas", "02_tajuk", "06_s1_tajuk", "07_definisi", "10_kata_tugas", "12_atas", "13_bawah", "14_dalam", "15_luar", "16_hadapan", "17_belakang", "19_kiri", "20_kanan", "21_tepi", "22_tengah", "23_bonus", "24_antara", "25_sisi", "28_s3_tajuk", "29_guna_kedudukan", "30_guna_hala_tuju", "31_guna_asal", "32_harian", "33_kasut", "34_pisau", "35_sekolah", "37_s4_tajuk", "39_di", "40_ke", "41_dari", "47_gogo_bola", "50_antara_dengan", "51_s5_tajuk", "53_contoh1", "54_contoh2", "55_contoh3", "57_think_aloud", "58_ayat_lengkap", "63_rumusan", "64_poin1", "65_poin2", "66_poin3", "67_poin4", "68_chant_ajak", "81_jumpa_lagi"]);
+      const RANGE = { "11_s2_tajuk": [5, 99], "48_bola_meja": [6, 99], "60_gogo_tahu": [0, 4] };
+      const host = document.getElementById("kap-groups");
+      let gi = 0;
+      C.lines.forEach((l) => {
+        if (NONE.has(l.id)) return;
+        const tk = KA.tokens(l.id), cl = KA.classes(l.id);
+        const [a, b] = RANGE[l.id] || [0, 99];
+        const idx = [];
+        for (let i = a; i < Math.min(b, tk.length); i++) idx.push(i);
+        /* kumpulan 4–6 perkataan; pecah pada tanda baca atau jeda >= 0.15 s */
+        const groups = []; let cur = [];
+        idx.forEach((i, k) => {
+          cur.push(i);
+          const next = idx[k + 1];
+          const endPunct = /[.!?…]$/.test(tk[i]);
+          const pause = next != null ? l.words[next].t - (l.words[i].t + l.words[i].d) : 0;
+          if (next == null || cur.length >= 6 || (endPunct && cur.length >= 2) || (pause >= 0.15 && cur.length >= 4)) { groups.push(cur); cur = []; }
+        });
+        groups.forEach((g, gk) => {
+          const div = document.createElement("div");
+          div.className = "cap"; div.id = "kap-g" + gi++;
+          const box = document.createElement("span"); box.className = "box"; div.appendChild(box);
+          const spans = g.map((i) => { const s = document.createElement("span"); s.className = "w " + cl[i]; s.textContent = tk[i]; box.appendChild(s); box.appendChild(document.createTextNode(" ")); return s; });
+          host.appendChild(div);
+          const t0 = l.words[g[0]].t - 0.12;
+          const lastW = l.words[g[g.length - 1]];
+          const nextG = groups[gk + 1];
+          let t1 = lastW.t + lastW.d + 0.35;
+          if (nextG) t1 = Math.min(t1, l.words[nextG[0]].t - 0.14);
+          tl.set(div, { opacity: 0, visibility: "hidden" }, 0);
+          tl.set(div, { visibility: "visible" }, t0);
+          tl.to(div, { opacity: 1, duration: 0.12, ease: "power1.out" }, t0);
+          spans.forEach((s, j) => {
+            const w = l.words[g[j]];
+            tl.set(s, { opacity: 0.55 }, 0);
+            tl.set(s, { opacity: 1, backgroundColor: "rgba(62,191,210,0.42)" }, w.t);
+            const nx = j + 1 < g.length ? l.words[g[j + 1]].t : w.t + w.d + 0.15;
+            tl.set(s, { backgroundColor: "rgba(62,191,210,0)" }, nx);
+          });
+          tl.to(div, { opacity: 0, duration: 0.12, ease: "power2.in" }, t1 - 0.12);
+          tl.set(div, { opacity: 0, visibility: "hidden" }, t1);
+        });
+      });
+      window.__timelines["kapsyen"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,112 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #s1-all { position: absolute; inset: 0; }
+    #s1-def { position: absolute; left: 140px; right: 140px; top: 150px; font-size: 66px; }
+    #s1-burst { position: absolute; left: 560px; top: 380px; width: 800px; height: 460px; }
+    #s1-head { top: 150px; opacity: 0; }
+    #s1-train { position: absolute; left: 150px; top: 300px; width: 1640px; height: 420px; }
+    #s1-rail { position: absolute; left: 0; top: 0; width: 1640px; height: 420px; }
+    .s1-car { position: absolute; top: 90px; width: 400px; height: 230px; border-radius: 34px; border: 6px solid var(--ink); display: grid; place-items: center; text-align: center; color: var(--ink); }
+    #s1-c1 { left: 80px; background: var(--pink); } #s1-c2 { left: 540px; background: var(--yellow); } #s1-c3 { left: 1000px; background: var(--cream); }
+    .s1-ph { grid-area: 1 / 1; font: 900 46px/1.15 var(--font); opacity: .75; }
+    .s1-big { grid-area: 1 / 1; font: 900 132px/1 var(--font); opacity: 0; }
+    .s1-lbl { position: absolute; top: 728px; width: 460px; text-align: center; font: 900 44px var(--font); opacity: 0; }
+    #s1-l1 { left: 200px; color: var(--pink); } #s1-l2 { left: 660px; color: var(--yellow); } #s1-l3 { left: 1120px; color: var(--cream); }
+    #s1-tugas { position: absolute; left: 0; right: 0; top: 420px; text-align: center; opacity: 0; }
+    #s1-tugas .sentence { position: static; display: inline-block; background: rgba(21,15,58,.85); border: 5px solid var(--yellow); border-radius: 40px; padding: 30px 60px; font-size: 76px; }
+  </style>
+  <div id="root" data-composition-id="s1" data-width="1920" data-height="1080">
+    <div id="s1-all">
+      <div class="warp" id="s1-warp"></div>
+      <div class="stn" id="s1-card">
+        <div class="stn-planet pc1" id="s1-cp">1</div>
+        <div class="stn-kicker" id="s1-ck">STESEN 1</div>
+        <div class="stn-title" id="s1-ct">Apa itu Kata Arah?</div>
+      </div>
+      <div class="sentence" id="s1-def"></div>
+      <svg id="s1-burst" viewBox="0 0 800 460" overflow="visible">
+        <g id="s1-arrows" stroke="#F4EFEA" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <g id="s1-au"><path d="M400 150 V40" /><path d="M370 70 L400 40 L430 70" /></g>
+          <g id="s1-ad"><path d="M400 310 V420" /><path d="M370 390 L400 420 L430 390" /></g>
+          <g id="s1-al"><path d="M300 230 H150" /><path d="M180 200 L150 230 L180 260" /></g>
+          <g id="s1-ar"><path d="M500 230 H650" /><path d="M620 200 L650 230 L620 260" /></g>
+        </g>
+        <use id="s1-star" href="#a-star" x="330" y="160" width="140" height="140" />
+        <use id="s1-pa" href="#a-planet-red" x="80" y="190" width="70" height="70" />
+        <use id="s1-pb" href="#a-planet-blue" x="650" y="190" width="70" height="70" />
+        <use id="s1-pc" href="#a-moon" x="440" y="10" width="60" height="60" />
+        <use id="s1-pd" href="#a-earth" x="300" y="390" width="70" height="70" />
+      </svg>
+      <div class="head" id="s1-head">Di mana kata arah dalam ayat?</div>
+      <div id="s1-train">
+        <svg id="s1-rail" viewBox="0 0 1640 420">
+          <path d="M0 380 H1640" stroke="#493F8F" stroke-width="14" stroke-linecap="round" />
+          <path d="M40 396 H1600" stroke="#3C3579" stroke-width="8" stroke-dasharray="26 34" />
+          <g stroke="#1A1442" stroke-width="6"><rect x="476" y="200" width="70" height="24" rx="8" fill="#9B8CE0" /><rect x="936" y="200" width="70" height="24" rx="8" fill="#9B8CE0" /><rect x="1396" y="200" width="60" height="24" rx="8" fill="#9B8CE0" />
+          <circle cx="170" cy="340" r="34" fill="#493F8F" /><circle cx="390" cy="340" r="34" fill="#493F8F" /><circle cx="630" cy="340" r="34" fill="#493F8F" /><circle cx="850" cy="340" r="34" fill="#493F8F" /><circle cx="1090" cy="340" r="34" fill="#493F8F" /><circle cx="1310" cy="340" r="34" fill="#493F8F" /></g>
+          <use href="#a-rocket" x="1400" y="120" width="250" height="117" />
+        </svg>
+        <div class="s1-car" id="s1-c1"><span class="s1-ph" id="s1-p1">di / ke / dari</span><span class="s1-big" id="s1-b1">di</span></div>
+        <div class="s1-car" id="s1-c2"><span class="s1-ph" id="s1-p2">kata arah</span><span class="s1-big" id="s1-b2">atas</span></div>
+        <div class="s1-car" id="s1-c3"><span class="s1-ph" id="s1-p3">nama benda / tempat</span><span class="s1-big" id="s1-b3">meja</span></div>
+      </div>
+      <div class="s1-lbl" id="s1-l1">kata sendi nama</div>
+      <div class="s1-lbl" id="s1-l2">KATA ARAH</div>
+      <div class="s1-lbl" id="s1-l3">nama benda/tempat</div>
+      <div id="s1-tugas"><div class="sentence" id="s1-tugas-s"></div></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const KA = window.KA;
+      KA.put("#s1-warp", KA.svgWarp(21));
+      const tl = gsap.timeline({ paused: true });
+      const D = KA.secDur("s1");
+      KA.warp(tl, "#s1-warp", 0);
+      KA.card(tl, "s1", KA.t("06_s1_tajuk") - 0.5, KA.t("07_definisi") - 0.7);
+      /* definisi: bintang dengan anak panah empat hala */
+      const t7 = KA.t("07_definisi");
+      const def = KA.sentence(document.getElementById("s1-def"), "07_definisi");
+      def[6].classList.add("ka"); def[8].classList.add("ka");
+      KA.fadeIn(tl, "#s1-def", t7 - 0.3, 0.3);
+      KA.karaoke(tl, def, "07_definisi");
+      tl.set("#s1-burst", { opacity: 1 }, 0);
+      KA.pop(tl, "#s1-star", t7 - 0.4, 0.6);
+      ["#s1-au", "#s1-ar", "#s1-ad", "#s1-al"].forEach((s, i) => tl.fromTo(s, { opacity: 0, scale: 0.3, svgOrigin: "400 230" }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)", svgOrigin: "400 230" }, KA.w("07_definisi", 6) + i * 0.1));
+      ["#s1-pc", "#s1-pb", "#s1-pd", "#s1-pa"].forEach((s, i) => KA.pop(tl, s, KA.w("07_definisi", 8) + i * 0.1, 0.45));
+      tl.fromTo("#s1-star", { rotation: -8 }, { rotation: 8, duration: 0.8, repeat: 5, yoyo: true, ease: "sine.inOut", svgOrigin: "400 230" }, t7 + 0.4);
+      const t8 = KA.t("08_kedudukan"), w8 = (i) => KA.w("08_kedudukan", i);
+      KA.out(tl, ["#s1-def", "#s1-burst"], t8 - 0.45, 0.3);
+      /* kereta api ayat */
+      KA.blurIn(tl, "#s1-head", w8(0) - 0.1);
+      tl.fromTo("#s1-train", { x: 1900 }, { x: 0, duration: 1.1, ease: "power3.out" }, w8(6) - 0.9);
+      tl.fromTo("#s1-c2", { scale: 1 }, { scale: 1.08, duration: 0.2, yoyo: true, repeat: 1, ease: "sine.inOut" }, w8(6));
+      KA.blurIn(tl, "#s1-l2", w8(6));
+      tl.fromTo("#s1-c1", { scale: 1 }, { scale: 1.08, duration: 0.2, yoyo: true, repeat: 1, ease: "sine.inOut" }, w8(9));
+      KA.blurIn(tl, "#s1-l1", w8(9));
+      tl.fromTo("#s1-c3", { scale: 1 }, { scale: 1.08, duration: 0.2, yoyo: true, repeat: 1, ease: "sine.inOut" }, w8(15));
+      KA.blurIn(tl, "#s1-l3", w8(16));
+      /* contoh: di + atas + meja jatuh ke dalam gerabak */
+      const w9 = (i) => KA.w("09_di_atas_meja", i);
+      [[1, 1, 0], [2, 2, 0.15], [3, 3, 0.2]].forEach(([n, wi, d]) => {
+        tl.to(`#s1-p${n}`, { opacity: 0, duration: 0.15 }, w9(wi) + d - 0.15);
+        tl.fromTo(`#s1-b${n}`, { opacity: 0, y: -260 }, { opacity: 1, y: 0, duration: 0.45, ease: "bounce.out" }, w9(wi) + d - 0.3);
+      });
+      [[1, 4], [2, 9], [3, 14]].forEach(([n, wi]) => {
+        tl.fromTo(`#s1-c${n}`, { scale: 1 }, { scale: 1.1, duration: 0.22, yoyo: true, repeat: 1, ease: "sine.inOut" }, w9(wi));
+        tl.fromTo(`#s1-l${n}`, { scale: 1 }, { scale: 1.2, duration: 0.22, yoyo: true, repeat: 1, ease: "sine.inOut" }, w9(wi));
+      });
+      /* sejenis kata tugas */
+      const t10 = KA.t("10_kata_tugas");
+      tl.to("#s1-train", { x: -2000, duration: 0.8, ease: "power3.in" }, t10 - 0.9);
+      KA.out(tl, ["#s1-head", "#s1-l1", "#s1-l2", "#s1-l3"], t10 - 0.9, 0.3);
+      const tug = KA.sentence(document.getElementById("s1-tugas-s"), "10_kata_tugas");
+      tug[4].classList.add("ka"); tug[5].classList.add("ka");
+      KA.pop(tl, "#s1-tugas", t10 - 0.2, 0.5);
+      KA.karaoke(tl, tug, "10_kata_tugas");
+      tl.to("#s1-all", { opacity: 0, duration: 0.4, ease: "power2.in" }, D - 0.45);
+      window.__timelines["s1"] = tl;
+    })();
+  </script>
+</template>

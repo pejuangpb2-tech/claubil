@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semak Faham – Misi Angkasa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1D0851; --card:#241A6B; --card-line:#4B3FA0; --screen:#130536;
+    --navy:#2D2B64; --purple:#634790; --pink:#D6337F; --pink-soft:#FF8FC0;
+    --teal:#3BFEC1; --ice:#9FF0FF; --coral:#F0A27A; --gold:#FFD447;
+    --text-2:#DCD5FF; --ok:#7CF5B4; --no:#FF8FC0; --radius:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  body{
+    font-family:"Nunito",system-ui,sans-serif;font-size:19px;line-height:1.5;color:#fff;
+    background-color:var(--bg);
+    background-image:
+      radial-gradient(ellipse 55% 40% at 8% 15%, rgba(43,34,144,.55), transparent 70%),
+      radial-gradient(ellipse 45% 40% at 95% 75%, rgba(30,26,119,.85), transparent 70%);
+    position:relative;min-height:100vh;
+  }
+  body::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      radial-gradient(1.6px 1.6px at 20px 30px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 120px 80px,#C9BCFF,transparent),
+      radial-gradient(1.8px 1.8px at 210px 160px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 60px 200px,#FF9CCB,transparent),
+      radial-gradient(1.4px 1.4px at 260px 40px,#9FF0FF,transparent);
+    background-size:290px 260px;opacity:.75;animation:twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{from{opacity:.35}to{opacity:.9}}
+  .wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:16px 16px 26px}
+  h1,h2,h3{font-family:"Fredoka","Nunito",sans-serif;font-weight:600;line-height:1.2}
+
+  .dash{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-radius:var(--radius);margin-bottom:18px;
+    background:linear-gradient(180deg,#34307A 0%,var(--navy) 100%);
+    border:3px solid rgba(255,255,255,.9);box-shadow:0 8px 0 #120638,0 14px 30px rgba(5,0,25,.55);
+  }
+  .dash-lights{display:flex;gap:8px}
+  .dash-lights i{width:14px;height:14px;border-radius:50%;display:block;box-shadow:0 0 10px currentColor;animation:blink 2.4s infinite}
+  .dash-lights i:nth-child(1){background:var(--teal);color:var(--teal)}
+  .dash-lights i:nth-child(2){background:var(--pink-soft);color:var(--pink-soft);animation-delay:.8s}
+  .dash-lights i:nth-child(3){background:var(--gold);color:var(--gold);animation-delay:1.6s}
+  @keyframes blink{0%,70%,100%{opacity:1}80%{opacity:.35}}
+  .pill{display:inline-block;background:#fff;color:var(--purple);font:600 26px "Fredoka",sans-serif;padding:6px 18px;border-radius:999px;box-shadow:0 4px 0 #B9A8F0}
+  .sound-toggle{margin-left:auto;min-height:48px;min-width:48px;border-radius:999px;cursor:pointer;background:var(--screen);color:#fff;border:2px solid var(--card-line);font:700 18px "Nunito",sans-serif;padding:0 16px;display:inline-flex;align-items:center;gap:8px}
+  .sound-toggle:focus-visible,.btn:focus-visible,.opt:focus-visible{outline:4px solid var(--teal);outline-offset:3px}
+
+  .card{position:relative;background:var(--card);border:2px solid var(--card-line);border-radius:var(--radius);padding:22px;box-shadow:0 10px 0 rgba(10,2,40,.55),0 18px 34px rgba(5,0,25,.45);min-height:560px}
+
+  /* Bar kemajuan: roket ke planet */
+  .track{position:relative;height:64px;margin:0 6px 18px}
+  .track .line{position:absolute;left:24px;right:44px;top:30px;border-top:4px dashed rgba(255,255,255,.45)}
+  .track .done{position:absolute;left:24px;top:28px;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--teal),var(--gold));width:0;transition:width .7s ease}
+  .track .dot{position:absolute;top:22px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:var(--screen);border:3px solid rgba(255,255,255,.6)}
+  .track .dot.on{background:var(--gold);border-color:#fff}
+  .track .goal{position:absolute;right:0;top:6px;width:52px;height:52px}
+  .track .rkt{position:absolute;top:8px;left:0;width:48px;height:48px;margin-left:0;transition:left .7s cubic-bezier(.4,1.4,.5,1);transform:rotate(90deg)}
+  .count-txt{font:600 20px "Fredoka",sans-serif;color:var(--teal);margin-bottom:8px}
+
+  .q-row{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .q-text{flex:1 1 300px;font:600 28px/1.3 "Fredoka",sans-serif}
+  .blank{display:inline-block;min-width:90px;border-bottom:4px solid var(--gold);margin:0 4px}
+  .fig{display:flex;justify-content:center;margin-bottom:14px}
+  .fig svg{width:100%;max-width:300px;height:auto;background:radial-gradient(ellipse at 50% 0%,#2B2290,#130536 75%);border-radius:18px;border:3px solid rgba(255,255,255,.8)}
+  .opts{display:grid;gap:12px}
+  .opt{
+    display:flex;align-items:center;gap:14px;width:100%;text-align:left;min-height:60px;padding:10px 16px;border-radius:18px;
+    border:3px solid #fff;background:#fff;color:var(--navy);font:600 22px/1.3 "Fredoka",sans-serif;cursor:pointer;box-shadow:0 5px 0 #B9A8F0;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .opt .key{flex:0 0 40px;height:40px;border-radius:50%;background:var(--purple);color:#fff;display:grid;place-items:center;font-size:20px}
+  .opt:active{transform:translateY(3px);box-shadow:0 2px 0 #B9A8F0}
+  .opt.right{background:var(--ok);border-color:var(--ok);box-shadow:0 5px 0 #2FA36B}
+  .opt.right .key{background:#1E7A50}
+  .opt.wrong{background:#FFD3E3;border-color:var(--no);box-shadow:0 5px 0 #D46A93;opacity:.85}
+  .opt.wrong .key{background:#B8306F}
+  .opt[disabled]{cursor:default}
+  .fb{margin-top:16px;border-radius:18px;padding:14px 16px;display:none;font-size:20px;font-weight:700}
+  .fb.show{display:block;animation:rise .35s ease-out}
+  .fb.ok{background:#14523F;border:3px solid var(--ok)}
+  .fb.no{background:#5A1940;border:3px solid var(--no)}
+  .fb .big{display:block;font:600 24px "Fredoka",sans-serif;margin-bottom:4px}
+  .fb.ok .big{color:var(--ok)} .fb.no .big{color:var(--no)}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .btn{-webkit-appearance:none;appearance:none;border:0;cursor:pointer;min-height:56px;padding:0 26px;border-radius:999px;font:600 22px "Fredoka",sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;-webkit-tap-highlight-color:transparent}
+  .btn:active{transform:translateY(3px)}
+  .btn-primary{background:var(--pink);color:#fff;box-shadow:0 6px 0 #8A1550}
+  .btn-light{background:#fff;color:var(--purple);box-shadow:0 5px 0 #B9A8F0}
+  .btn-sm{min-height:48px;font-size:19px;padding:0 16px}
+  .next{margin-top:16px;display:none}
+  .next.show{display:inline-flex}
+  .speak{display:none}
+  .has-voice .speak{display:inline-flex}
+
+  /* Skrin akhir */
+  .end{display:none;text-align:center;padding-top:10px}
+  .end.show{display:block;animation:rise .5s ease-out}
+  .end .score{font:700 54px "Fredoka",sans-serif;color:var(--gold);margin:8px 0}
+  .stars{font-size:44px;letter-spacing:6px;margin-bottom:8px}
+  .stars .off{filter:grayscale(1);opacity:.35}
+  .end .msg{font-size:21px;color:var(--text-2);margin-bottom:6px}
+  .end .note{font-size:18px;color:var(--text-2);margin-bottom:18px}
+  .goto{display:inline-block;background:var(--gold);color:var(--navy);border-radius:20px;padding:14px 22px;font:600 26px "Fredoka",sans-serif;box-shadow:0 6px 0 #B98E10;margin-bottom:20px}
+  .confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5;border-radius:var(--radius)}
+  .confetti span{position:absolute;top:-30px;animation:fall 2.6s ease-in forwards}
+  @keyframes fall{to{transform:translateY(560px) rotate(300deg);opacity:0}}
+
+  @media (max-width:420px){
+    .card{padding:16px;min-height:600px}
+    .pill{font-size:22px}
+    .q-text{font-size:24px}
+    .opt{font-size:20px}
+    .end .score{font-size:44px}
+    .goto{font-size:22px}
+    .btn{width:100%}
+    .sound-label{display:none}
+    .sound-toggle{padding:0 12px}
+  }
+  @media (prefers-reduced-motion: reduce){ *,*::before,*::after{animation:none!important;transition:none!important} }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="dash">
+    <div class="dash-lights" aria-hidden="true"><i></i><i></i><i></i></div>
+    <h1 class="pill">🧠 Semak Faham</h1>
+    <button class="sound-toggle" id="soundBtn" type="button" aria-pressed="true" aria-label="Kesan bunyi hidup. Tekan untuk senyap.">
+      <span aria-hidden="true" id="soundIcon">🔊</span><span class="sound-label">Bunyi</span>
+    </button>
+  </header>
+
+  <section class="card" aria-live="off">
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+    <div class="track" aria-hidden="true">
+      <div class="line"></div>
+      <div class="done" id="trackDone"></div>
+      <span class="dot" style="left:calc(24px + (100% - 68px) * .25)"></span>
+      <span class="dot" style="left:calc(24px + (100% - 68px) * .5)"></span>
+      <span class="dot" style="left:calc(24px + (100% - 68px) * .75)"></span>
+      <svg class="goal" viewBox="0 0 52 52">
+        <ellipse cx="26" cy="28" rx="25" ry="7" fill="none" stroke="#9FF0FF" stroke-width="3" opacity=".7"/>
+        <circle cx="26" cy="26" r="16" fill="#F0A27A" stroke="#3A1F6E" stroke-width="3"/>
+        <path d="M13 22 Q26 17 39 22" fill="none" stroke="#C9677A" stroke-width="3"/>
+        <path d="M1 28 A25 7 0 0 0 51 28" fill="none" stroke="#9FF0FF" stroke-width="3"/>
+      </svg>
+      <svg class="rkt" id="rkt" viewBox="0 0 60 100">
+        <g stroke="#3A1F6E" stroke-width="4" stroke-linejoin="round">
+          <path d="M22 88 Q30 104 38 88Z" fill="#FFD447" stroke-width="2"/>
+          <path d="M14 58 L3 80 L3 88 L17 80Z" fill="#EC4C9A"/>
+          <path d="M46 58 L57 80 L57 88 L43 80Z" fill="#EC4C9A"/>
+          <path d="M30 4 C46 20 48 50 45 82 L15 82 C12 50 14 20 30 4Z" fill="#fff"/>
+          <path d="M30 4 C37 11 41 19 44 28 L16 28 C19 19 23 11 30 4Z" fill="#EC4C9A"/>
+          <circle cx="30" cy="46" r="9" fill="#3BFEC1"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Paparan soalan -->
+    <div id="quizView">
+      <p class="count-txt" id="countTxt">Soalan 1 daripada 4</p>
+      <div class="q-row">
+        <h2 class="q-text" id="qText" tabindex="-1"></h2>
+        <button class="btn btn-light btn-sm speak" id="qSpeak" type="button" data-say=""><span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span></button>
+      </div>
+      <div class="fig" id="fig"></div>
+      <div class="opts" id="opts" role="group" aria-labelledby="qText"></div>
+      <div class="fb" id="fb" role="status"></div>
+      <button class="btn btn-primary next" id="nextBtn" type="button">Seterusnya ➡️</button>
+    </div>
+
+    <!-- Skrin akhir -->
+    <div class="end" id="endView" role="status">
+      <h2 style="font-size:30px">🎉 Semak Faham selesai!</h2>
+      <p class="score" id="scoreTxt">Kamu dapat 0/4!</p>
+      <div class="stars" id="stars" aria-hidden="true"></div>
+      <p class="msg" id="endMsg"></p>
+      <p class="note">Markah dikira daripada jawapan pertama kamu.</p>
+      <div class="goto">Teruskan ke ZON CABARAN 🎮</div><br>
+      <button class="btn btn-light" id="retryBtn" type="button">🔁 Cuba Semula</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Kesan bunyi ---------- */
+  var soundOn = true, ctx = null;
+  function audio(){
+    if(!soundOn) return null;
+    try{
+      if(!ctx){ var AC = window.AudioContext || window.webkitAudioContext; if(!AC) return null; ctx = new AC(); }
+      if(ctx.state === "suspended") ctx.resume();
+      return ctx;
+    }catch(e){ return null; }
+  }
+  function beep(freq, dur, type, vol, delay){
+    var a = audio(); if(!a) return;
+    try{
+      var o = a.createOscillator(), g = a.createGain(), t = a.currentTime + (delay || 0);
+      o.type = type || "sine"; o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol || 0.15, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.05);
+    }catch(e){}
+  }
+  function sRight(){ beep(784, .16, "triangle", .15); beep(1047, .25, "triangle", .15, .12); }
+  function sWrong(){ beep(330, .22, "sine", .12); }
+  function sWin(){ [523,659,784,1047].forEach(function(n,i){ beep(n, .3, "triangle", .14, i*.12); }); }
+  var soundBtn = document.getElementById("soundBtn");
+  soundBtn.addEventListener("click", function(){
+    soundOn = !soundOn;
+    document.getElementById("soundIcon").textContent = soundOn ? "🔊" : "🔇";
+    soundBtn.setAttribute("aria-pressed", soundOn ? "true" : "false");
+    soundBtn.setAttribute("aria-label", soundOn ? "Kesan bunyi hidup. Tekan untuk senyap." : "Kesan bunyi senyap. Tekan untuk hidupkan.");
+    if(soundOn) beep(880, .15);
+  });
+
+  /* ---------- Dengar ---------- */
+  var synth = ("speechSynthesis" in window) ? window.speechSynthesis : null;
+  var voice = null, activeBtn = null;
+  function pickVoice(){
+    if(!synth) return;
+    var vs = [];
+    try{ vs = synth.getVoices() || []; }catch(e){}
+    function find(re){ for(var i=0;i<vs.length;i++){ if(re.test(vs[i].lang)) return vs[i]; } return null; }
+    voice = find(/^ms[-_]MY/i) || find(/^ms\b/i) || find(/^id[-_]ID/i) || find(/^id\b/i) || find(/^in[-_]ID/i);
+    root.classList.toggle("has-voice", !!voice);
+  }
+  if(synth){
+    pickVoice();
+    try{ synth.addEventListener ? synth.addEventListener("voiceschanged", pickVoice) : (synth.onvoiceschanged = pickVoice); }catch(e){}
+    [300, 1000, 2500].forEach(function(ms){ setTimeout(pickVoice, ms); });
+  }
+  function stopSpeech(){ try{ if(synth) synth.cancel(); }catch(e){} resetSpeakBtn(); }
+  function resetSpeakBtn(){
+    if(activeBtn){ activeBtn.querySelector(".lbl").textContent = "Dengar"; activeBtn.querySelector("[aria-hidden]").textContent = "🔊"; activeBtn = null; }
+  }
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest ? e.target.closest(".speak") : null;
+    if(!btn || !synth || !voice) return;
+    var wasActive = (btn === activeBtn);
+    stopSpeech();
+    if(wasActive) return;
+    activeBtn = btn;
+    btn.querySelector(".lbl").textContent = "Berhenti";
+    btn.querySelector("[aria-hidden]").textContent = "⏹";
+    try{
+      var u = new SpeechSynthesisUtterance(btn.getAttribute("data-say"));
+      u.lang = voice.lang; u.rate = 0.9; u.pitch = 1.05;
+      try{ u.voice = voice; }catch(vErr){}
+      u.onend = u.onerror = function(){ if(activeBtn === btn) resetSpeakBtn(); };
+      synth.speak(u);
+    }catch(err){ resetSpeakBtn(); }
+  });
+
+  /* ---------- Soalan (susunan pilihan ditetapkan, jawapan betul tidak selalu di tempat yang sama) ---------- */
+  var catSVG =
+    '<svg viewBox="0 0 300 190" role="img" aria-label="Seekor kucing sedang tidur di bawah meja">' +
+      '<path d="M0 172 H300" stroke="#5A4BB0" stroke-width="5"/>' +
+      '<g stroke="#3A1F6E" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">' +
+        '<rect x="40" y="52" width="220" height="20" rx="6" fill="#F0A27A"/>' +
+        '<rect x="56" y="72" width="16" height="100" rx="4" fill="#C9677A"/>' +
+        '<rect x="228" y="72" width="16" height="100" rx="4" fill="#C9677A"/>' +
+        '<path d="M190 160 C218 160 222 136 204 132" fill="none" stroke-width="9"/>' +
+        '<path d="M190 160 C218 160 222 136 204 132" fill="none" stroke="#FFC46B" stroke-width="4"/>' +
+        '<ellipse cx="152" cy="150" rx="46" ry="22" fill="#FFC46B"/>' +
+        '<path d="M98 122 L102 104 L114 116Z M126 116 L136 104 L138 122Z" fill="#FFC46B"/>' +
+        '<circle cx="118" cy="136" r="22" fill="#FFC46B"/>' +
+        '<path d="M106 136 q5 4 10 0 M122 136 q5 4 10 0" fill="none" stroke-width="3"/>' +
+      '</g>' +
+      '<path d="M140 146 q8 -6 16 0 M162 142 q8 -6 16 0" fill="none" stroke="#E08A2E" stroke-width="4" stroke-linecap="round"/>' +
+      '<circle cx="112" cy="146" r="3" fill="#FF8FC0"/><circle cx="128" cy="146" r="3" fill="#FF8FC0"/>' +
+      '<text x="150" y="112" fill="#FFD447" font-family="Fredoka, sans-serif" font-weight="700" font-size="20">z z z</text>' +
+      '<path d="M120 20 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z M250 28 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" fill="#F4EEFF"/>' +
+    '</svg>';
+
+  var Q = [
+    { q:"Apakah maksud kata arah?",
+      opts:["perkataan yang menunjukkan perbuatan","perkataan yang menunjukkan kedudukan atau arah","perkataan yang menunjukkan nama benda"], ans:1,
+      why:"Kata arah ialah perkataan yang menunjukkan kedudukan atau arah sesuatu benda, contohnya atas dan bawah.",
+      hint:"Ingat definisi di Planet Ilmu: kedudukan atau ..." },
+    { q:"Antara berikut, yang manakah kata arah?",
+      opts:["roket","terbang","bawah"], ans:2,
+      why:"\"bawah\" menunjukkan kedudukan. \"roket\" ialah nama benda dan \"terbang\" ialah perbuatan.",
+      hint:"Cari perkataan yang menunjukkan kedudukan." },
+    { q:"Pilih ejaan yang betul.",
+      opts:["di dalam","didalam","di-dalam"], ans:0,
+      why:"\"di\" ditulis terpisah daripada kata arah, tanpa sempang: di dalam.",
+      hint:"Ingat Rahsia Ejaan: ada ruang kosong selepas \"di\"." },
+    { q:'Kucing itu tidur <span class="blank" aria-label="tempat kosong">&nbsp;</span> meja.', say:"Lihat gambar. Kucing itu tidur, di mana, meja?",
+      fig:catSVG, opts:["di atas","di bawah","di dalam"], ans:1,
+      why:"Dalam gambar, kucing berada di bawah meja. Jadi ayatnya: Kucing itu tidur di bawah meja.",
+      hint:"Lihat gambar. Di manakah kucing itu?" }
+  ];
+  var keys = ["A","B","C"];
+  var idx = 0, score = 0, firstTry = true;
+  var el = function(id){ return document.getElementById(id); };
+
+  function moveRocket(step){
+    var track = document.querySelector(".track");
+    var w = track.clientWidth - 68;           /* jarak dari titik mula ke planet */
+    el("rkt").style.left = (w * step / Q.length) + "px";
+    el("trackDone").style.width = (w * step / Q.length) + "px";
+    document.querySelectorAll(".track .dot").forEach(function(d, i){ d.classList.toggle("on", step > i); });
+  }
+  function plain(html){ var d = document.createElement("div"); d.innerHTML = html; return d.textContent; }
+
+  function render(){
+    var item = Q[idx];
+    firstTry = true;
+    stopSpeech();
+    el("countTxt").textContent = "Soalan " + (idx + 1) + " daripada " + Q.length;
+    el("qText").innerHTML = item.q;
+    el("qSpeak").setAttribute("data-say", (item.say || plain(item.q)) + " Pilihan: " + item.opts.join(", ") + ".");
+    el("fig").innerHTML = item.fig || "";
+    el("fig").style.display = item.fig ? "flex" : "none";
+    var h = "";
+    item.opts.forEach(function(o, i){
+      h += '<button class="opt" type="button" data-i="' + i + '"><span class="key" aria-hidden="true">' + keys[i] + '</span><span>' + o + '</span></button>';
+    });
+    el("opts").innerHTML = h;
+    el("fb").className = "fb"; el("fb").innerHTML = "";
+    el("nextBtn").classList.remove("show");
+    el("nextBtn").textContent = (idx === Q.length - 1) ? "Lihat Keputusan 🏁" : "Seterusnya ➡️";
+    moveRocket(idx);
+  }
+
+  el("opts").addEventListener("click", function(e){
+    var b = e.target.closest(".opt"); if(!b || b.disabled) return;
+    var item = Q[idx], i = +b.getAttribute("data-i"), fb = el("fb");
+    if(i === item.ans){
+      b.classList.add("right");
+      el("opts").querySelectorAll(".opt").forEach(function(x){ x.disabled = true; });
+      if(firstTry) score++;
+      fb.className = "fb ok show";
+      fb.innerHTML = '<span class="big">Hebat, angkasawan! ⭐</span>' + item.why;
+      el("nextBtn").classList.add("show");
+      moveRocket(idx + 1);
+      sRight();
+      el("nextBtn").focus({preventScroll:true});
+    } else {
+      firstTry = false;
+      b.classList.add("wrong"); b.disabled = true;
+      fb.className = "fb no show";
+      fb.innerHTML = '<span class="big">Hampir! Cuba lagi 🚀</span>💡 ' + item.hint;
+      sWrong();
+    }
+  });
+
+  el("nextBtn").addEventListener("click", function(){
+    if(idx < Q.length - 1){ idx++; render(); el("qText").focus({preventScroll:true}); }
+    else finish();
+  });
+
+  function finish(){
+    stopSpeech();
+    el("quizView").style.display = "none";
+    el("scoreTxt").textContent = "Kamu dapat " + score + "/" + Q.length + "!";
+    var s = "";
+    for(var i=0;i<Q.length;i++){ s += i < score ? "⭐" : '<span class="off">⭐</span>'; }
+    el("stars").innerHTML = s;
+    el("endMsg").textContent = score === Q.length ? "Hebat! Semua betul pada cubaan pertama!"
+      : score >= 2 ? "Bagus! Kamu semakin faham tentang kata arah."
+      : "Tidak mengapa! Kamu tetap berjaya menjawab semua soalan. Boleh tonton video sekali lagi.";
+    el("endView").classList.add("show");
+    moveRocket(Q.length);
+    sWin(); burst();
+  }
+
+  el("retryBtn").addEventListener("click", function(){
+    idx = 0; score = 0;
+    el("endView").classList.remove("show");
+    el("quizView").style.display = "";
+    el("confetti").innerHTML = "";
+    render();
+    el("qText").focus({preventScroll:true});
+  });
+
+  function burst(){
+    if(reduceMotion) return;
+    var box = el("confetti"); box.innerHTML = "";
+    var icons = ["⭐","✨","🌟","🚀","⭐"];
+    for(var i=0;i<22;i++){
+      var s = document.createElement("span");
+      s.textContent = icons[i % icons.length];
+      s.style.left = ((i * 37) % 94 + 3) + "%";
+      s.style.animationDelay = ((i % 6) * 0.12) + "s";
+      s.style.fontSize = (18 + (i % 4) * 6) + "px";
+      box.appendChild(s);
+    }
+  }
+
+  window.addEventListener("resize", function(){
+    moveRocket(el("endView").classList.contains("show") ? Q.length : idx + (el("nextBtn").classList.contains("show") ? 1 : 0));
+  });
+  render();
+})();
+</script>
+</body>
+</html>

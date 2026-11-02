@@ -1,0 +1,63 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #pt-moon { position: absolute; left: -120px; top: 790px; width: 2160px; height: 620px; }
+    #pt-title { position: absolute; left: 0; right: 0; top: 150px; text-align: center; opacity: 0; }
+    #pt-title .a { font: 900 170px/1 var(--font); color: #fff; text-shadow: 0 10px 0 #0F0B2E; }
+    #pt-title .b { font: 900 92px/1.2 var(--font); color: var(--yellow); text-shadow: 0 8px 0 #0F0B2E; }
+    #pt-wafiy { position: absolute; left: 520px; top: 560px; width: 240px; height: 324px; }
+    #pt-gogo { position: absolute; left: 1160px; top: 670px; width: 220px; height: 232px; }
+    #pt-rkt { position: absolute; left: 820px; top: 540px; width: 300px; height: 140px; opacity: 0; }
+    #pt-conf { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    #pt-bye { position: absolute; left: 0; right: 0; top: 440px; text-align: center; font: 900 110px var(--font); color: var(--cyan); text-shadow: 0 8px 0 #0F0B2E; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="penutup" data-width="1920" data-height="1080">
+    <svg id="pt-conf" viewBox="0 0 1920 1080"></svg>
+    <svg id="pt-moon" viewBox="0 0 2160 620"><ellipse cx="1080" cy="420" rx="1300" ry="300" fill="#493F8F" stroke="#3C3579" stroke-width="8" /><ellipse cx="420" cy="230" rx="90" ry="22" fill="#3C3579" /><ellipse cx="1660" cy="250" rx="120" ry="26" fill="#3C3579" /></svg>
+    <div id="pt-title"><div class="a">Syabas!</div><div class="b">angkasawan cilik ⭐</div></div>
+    <div id="pt-bye">Jumpa lagi! 👋</div>
+    <div id="pt-wafiy"><div id="pt-wafiy-in" style="width:100%;height:100%"></div></div>
+    <div id="pt-gogo"><div id="pt-gogo-in" style="width:100%;height:100%"></div></div>
+    <div id="pt-rkt"><div id="pt-rkt-in" style="width:100%;height:100%"></div></div>
+  </div>
+  <script>
+    (function () {
+      const KA = window.KA;
+      KA.put("#pt-wafiy-in", KA.svgWafiy("ptw"));
+      KA.put("#pt-gogo-in", KA.svgGogo("ptg"));
+      KA.put("#pt-rkt-in", KA.svgRocket("ptr"));
+      /* konfeti berbenih (sama setiap render) */
+      const r = KA.rng(2026), cols = ["#FDD13F", "#FE585F", "#3EBFD2", "#FE8B42", "#9B8CFF", "#35D0BA", "#F4EFEA"];
+      let s = "";
+      for (let i = 0; i < 90; i++) {
+        const x = Math.round(r() * 1920), w = 12 + Math.round(r() * 14), h = 8 + Math.round(r() * 10);
+        s += `<rect class="pt-c" id="pt-c${i}" x="${x}" y="-40" width="${w}" height="${h}" rx="3" fill="${cols[i % cols.length]}"/>`;
+      }
+      document.getElementById("pt-conf").innerHTML = s;
+      const tl = gsap.timeline({ paused: true });
+      const T = (id) => KA.t(id), W = (id, i) => KA.w(id, i);
+      const t80 = T("80_syabas"), D = 14.5;
+      for (let i = 0; i < 90; i++) {
+        const st = 0.2 + r() * 2.5, dur = 3.5 + r() * 3;
+        tl.fromTo(`#pt-c${i}`, { y: 0, rotation: 0 }, { y: 1180, rotation: (r() * 2 - 1) * 540, duration: dur, ease: "none", svgOrigin: "0 0" }, st);
+        tl.fromTo(`#pt-c${i}`, { x: 0 }, { x: (r() * 2 - 1) * 80, duration: dur / 2, ease: "sine.inOut", repeat: 1, yoyo: true }, st);
+      }
+      tl.fromTo("#pt-title", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.8)" }, W("80_syabas", 0) - 0.1);
+      KA.blink(tl, "#ptw-eyes", 0, D, "100 102");
+      KA.blink(tl, "#ptg-eye", 0.6, D, "90 92");
+      KA.wave(tl, "#ptw-arm", 0.3, 4, "136 158");
+      KA.wave(tl, "#ptg-arm", 0.3, 4, "38 112");
+      tl.fromTo(["#pt-wafiy-in", "#pt-gogo-in"], { y: 0 }, { y: -40, duration: 0.28, repeat: 7, yoyo: true, ease: "sine.out" }, 0.4);
+      /* jumpa lagi: kedua-duanya melambai, roket terbang keluar skrin */
+      const t81 = T("81_jumpa_lagi");
+      tl.to("#pt-title", { y: -40, duration: 0.5, ease: "power2.inOut" }, t81 - 0.6);
+      KA.pop(tl, "#pt-bye", t81 - 0.05, 0.5);
+      KA.wave(tl, "#ptw-arm", t81 - 0.2, 3, "136 158");
+      KA.wave(tl, "#ptg-arm", t81 - 0.2, 3, "38 112");
+      tl.set("#pt-rkt", { opacity: 1 }, t81 + 0.9);
+      tl.fromTo("#pt-rkt", { x: -1100, y: 120, rotation: -12 }, { x: 1300, y: -520, rotation: -18, duration: 1.6, ease: "power2.in" }, t81 + 0.9);
+      KA.flicker(tl, "#ptr-flame", t81 + 0.9, 1.7);
+      window.__timelines["penutup"] = tl;
+    })();
+  </script>
+</template>

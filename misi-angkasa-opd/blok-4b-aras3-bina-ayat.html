@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aras 3: Bina Ayat – Misi Angkasa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1D0851; --card:#241A6B; --card-line:#4B3FA0; --screen:#130536;
+    --navy:#2D2B64; --purple:#634790; --pink:#D6337F; --pink-soft:#FF8FC0;
+    --teal:#3BFEC1; --ice:#9FF0FF; --coral:#F0A27A; --gold:#FFD447;
+    --text-2:#DCD5FF; --ok:#7CF5B4; --no:#FF8FC0; --radius:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  body{
+    font-family:"Nunito",system-ui,sans-serif;font-size:19px;line-height:1.5;color:#fff;
+    background-color:var(--bg);
+    background-image:
+      radial-gradient(ellipse 55% 35% at 8% 12%, rgba(43,34,144,.55), transparent 70%),
+      radial-gradient(ellipse 45% 35% at 95% 70%, rgba(30,26,119,.85), transparent 70%);
+    position:relative;min-height:100vh;
+  }
+  body::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      radial-gradient(1.6px 1.6px at 20px 30px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 120px 80px,#C9BCFF,transparent),
+      radial-gradient(1.8px 1.8px at 210px 160px,#fff,transparent),
+      radial-gradient(1.2px 1.2px at 60px 200px,#FF9CCB,transparent),
+      radial-gradient(1.4px 1.4px at 260px 40px,#9FF0FF,transparent);
+    background-size:290px 260px;opacity:.75;animation:twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{from{opacity:.35}to{opacity:.9}}
+  .wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:16px 16px 26px}
+  h1,h2,h3{font-family:"Fredoka","Nunito",sans-serif;font-weight:600;line-height:1.2}
+
+  .dash{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-radius:var(--radius);margin-bottom:16px;
+    background:linear-gradient(180deg,#34307A 0%,var(--navy) 100%);
+    border:3px solid rgba(255,255,255,.9);box-shadow:0 8px 0 #120638,0 14px 30px rgba(5,0,25,.55);
+  }
+  .dash-lights{display:flex;gap:8px}
+  .dash-lights i{width:14px;height:14px;border-radius:50%;display:block;box-shadow:0 0 10px currentColor;animation:blink 2.4s infinite}
+  .dash-lights i:nth-child(1){background:var(--teal);color:var(--teal)}
+  .dash-lights i:nth-child(2){background:var(--pink-soft);color:var(--pink-soft);animation-delay:.8s}
+  .dash-lights i:nth-child(3){background:var(--gold);color:var(--gold);animation-delay:1.6s}
+  @keyframes blink{0%,70%,100%{opacity:1}80%{opacity:.35}}
+  .pill{display:inline-block;background:#fff;color:var(--purple);font:600 28px "Fredoka",sans-serif;padding:6px 18px;border-radius:999px;box-shadow:0 4px 0 #B9A8F0}
+  .sound-toggle{margin-left:auto;min-height:48px;min-width:48px;border-radius:999px;cursor:pointer;background:var(--screen);color:#fff;border:2px solid var(--card-line);font:700 18px "Nunito",sans-serif;padding:0 16px;display:inline-flex;align-items:center;gap:8px}
+  .sound-toggle:focus-visible,.btn:focus-visible,.tile:focus-visible{outline:4px solid var(--teal);outline-offset:3px}
+
+  .levels{list-style:none;display:flex;align-items:stretch;gap:8px;margin-bottom:16px}
+  .lvl{flex:1;background:var(--screen);border:2px solid var(--card-line);border-radius:18px;padding:10px 12px;display:flex;align-items:center;gap:10px;opacity:.8}
+  .lvl .ln{flex:0 0 42px;height:42px;border-radius:50%;background:var(--card-line);display:grid;place-items:center;font:700 22px "Fredoka",sans-serif}
+  .lvl b{display:block;font:600 20px "Fredoka",sans-serif}
+  .lvl span.d{display:block;font-size:18px;color:var(--text-2);line-height:1.25}
+  .lvl.on{opacity:1;background:var(--gold);border-color:#fff;color:var(--navy);box-shadow:0 5px 0 #B98E10}
+  .lvl.on .ln{background:var(--navy);color:var(--gold)}
+  .lvl.on span.d{color:var(--navy)}
+  .arrow{align-self:center;font-size:22px;color:var(--text-2)}
+
+  .card{position:relative;background:var(--card);border:2px solid var(--card-line);border-radius:var(--radius);padding:22px;box-shadow:0 10px 0 rgba(10,2,40,.55),0 18px 34px rgba(5,0,25,.45)}
+  .topline{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+  .count-txt{font:600 20px "Fredoka",sans-serif;color:var(--teal)}
+  .dots{display:flex;gap:8px}
+  .dots i{width:18px;height:18px;border-radius:50%;background:var(--screen);border:3px solid rgba(255,255,255,.55)}
+  .dots i.on{background:var(--gold);border-color:#fff}
+  .intro{display:grid;grid-template-columns:240px 1fr;gap:18px;align-items:center;margin-bottom:16px}
+  .hint-pic svg{display:block;width:100%;height:auto;background:radial-gradient(ellipse at 50% 0%,#2B2290,#130536 75%);border-radius:18px;border:3px solid rgba(255,255,255,.85)}
+  .ins{font-size:20px;color:var(--text-2);margin-bottom:10px}
+  .ins b{color:#fff}
+
+  .label{font:600 19px "Fredoka",sans-serif;color:var(--gold);margin-bottom:6px;display:block}
+  .track{
+    min-height:84px;border:3px dashed rgba(255,212,71,.75);border-radius:20px;background:var(--screen);
+    padding:10px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px;position:relative;
+  }
+  .track .empty{color:var(--text-2);font-size:19px;padding-left:6px}
+  .dotend{font:700 34px/1 "Fredoka",sans-serif;color:#fff;margin-left:-4px}
+  .pool{min-height:72px;display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+  .tile{
+    min-height:56px;padding:0 18px;border-radius:16px;border:3px solid #fff;background:#fff;color:var(--navy);
+    font:600 24px "Fredoka",sans-serif;cursor:pointer;box-shadow:0 5px 0 #B9A8F0;-webkit-tap-highlight-color:transparent;
+    transition:transform .12s;
+  }
+  .tile:active{transform:translateY(3px);box-shadow:0 2px 0 #B9A8F0}
+  .track .tile{background:var(--ice);border-color:var(--ice);box-shadow:0 5px 0 #3AB7D8}
+  .track .tile.good{background:var(--ok);border-color:var(--ok);box-shadow:0 5px 0 #2FA36B}
+  .tile.glow{border-color:var(--gold);box-shadow:0 0 0 5px rgba(255,212,71,.6),0 5px 0 #B98E10;animation:pulse 1s ease-in-out 3}
+  @keyframes pulse{50%{transform:scale(1.08)}}
+  .tile[disabled]{cursor:default}
+  .controls{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{-webkit-appearance:none;appearance:none;border:0;cursor:pointer;min-height:56px;padding:0 24px;border-radius:999px;font:600 22px "Fredoka",sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;-webkit-tap-highlight-color:transparent}
+  .btn:active{transform:translateY(3px)}
+  .btn[disabled]{opacity:.5;cursor:default}
+  .btn-primary{background:var(--pink);color:#fff;box-shadow:0 6px 0 #8A1550}
+  .btn-light{background:#fff;color:var(--purple);box-shadow:0 5px 0 #B9A8F0}
+  .btn-gold{background:var(--gold);color:var(--navy);box-shadow:0 5px 0 #B98E10}
+  .btn-sm{min-height:48px;font-size:19px;padding:0 16px}
+  .speak{display:none}
+  .has-voice .speak{display:inline-flex}
+  .fb{margin-top:16px;border-radius:18px;padding:14px 16px;display:none;font-size:20px;font-weight:700}
+  .fb.show{display:block;animation:rise .35s ease-out}
+  .fb.ok{background:#14523F;border:3px solid var(--ok)}
+  .fb.no{background:#5A1940;border:3px solid var(--no)}
+  .fb.info{background:#3A2F86;border:3px solid var(--gold)}
+  .fb .big{display:block;font:600 24px "Fredoka",sans-serif;margin-bottom:4px}
+  .fb.ok .big{color:var(--ok)} .fb.no .big{color:var(--no)} .fb.info .big{color:var(--gold)}
+  .fb .speak{margin-top:10px}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .next{margin-top:16px;display:none}
+  .next.show{display:inline-flex}
+
+  .end{display:none;text-align:center;padding:16px 0}
+  .end.show{display:block;animation:rise .5s ease-out}
+  .end h2{font-size:34px;margin-bottom:10px}
+  .end .big-ico{font-size:64px;line-height:1;margin-bottom:6px}
+  .end .msg{font-size:21px;color:var(--text-2);margin-bottom:18px}
+  .goto{display:inline-block;background:var(--gold);color:var(--navy);border-radius:20px;padding:14px 22px;font:600 26px "Fredoka",sans-serif;box-shadow:0 6px 0 #B98E10;margin-bottom:20px}
+  .confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5;border-radius:var(--radius)}
+  .confetti span{position:absolute;top:-30px;animation:fall 2.8s ease-in forwards}
+  @keyframes fall{to{transform:translateY(600px) rotate(320deg);opacity:0}}
+
+  @media (max-width:700px){
+    .levels{flex-direction:column;gap:6px}
+    .arrow{transform:rotate(90deg);line-height:1}
+    .lvl{padding:8px 12px}
+    .intro{grid-template-columns:1fr}
+    .hint-pic{max-width:280px;margin:0 auto;width:100%}
+  }
+  @media (max-width:420px){
+    .card{padding:16px}
+    .pill{font-size:22px}
+    .tile{font-size:22px;padding:0 14px}
+    .controls .btn{flex:1 1 auto;padding:0 14px;font-size:20px}
+    .goto{font-size:22px}
+    .end .btn,.next{width:100%}
+    .sound-label{display:none}
+    .sound-toggle{padding:0 12px}
+  }
+  @media (prefers-reduced-motion: reduce){ *,*::before,*::after{animation:none!important;transition:none!important} }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gVisor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D27BF0"/><stop offset="1" stop-color="#4A1580"/></linearGradient>
+  </defs>
+  <symbol id="s-rocket" viewBox="0 0 60 100">
+    <g stroke="#3A1F6E" stroke-width="3" stroke-linejoin="round">
+      <path d="M14 58 L3 80 L3 88 L17 80Z" fill="#EC4C9A"/>
+      <path d="M46 58 L57 80 L57 88 L43 80Z" fill="#EC4C9A"/>
+      <rect x="21" y="81" width="18" height="9" rx="2" fill="#634790"/>
+      <path d="M30 4 C46 20 48 50 45 82 L15 82 C12 50 14 20 30 4Z" fill="#fff"/>
+      <path d="M30 4 C37 11 41 19 44 28 L16 28 C19 19 23 11 30 4Z" fill="#EC4C9A"/>
+    </g>
+  </symbol>
+  <symbol id="s-astro-head" viewBox="0 0 40 40">
+    <g stroke="#3A1F6E" stroke-width="2.5">
+      <circle cx="20" cy="22" r="15" fill="#fff"/>
+      <rect x="10" y="14" width="20" height="14" rx="7" fill="url(#gVisor)"/>
+    </g>
+    <ellipse cx="15" cy="18" rx="3" ry="2" fill="#fff" opacity=".8"/>
+  </symbol>
+  <symbol id="s-rock" viewBox="0 0 80 50">
+    <path d="M6 46 C1 32 11 15 27 13 C35 4 54 5 60 16 C74 18 80 34 75 46 Z" fill="#8C85B8" stroke="#3A1F6E" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="30" cy="30" rx="7" ry="4" fill="#6E6699"/><ellipse cx="54" cy="25" rx="5" ry="3" fill="#6E6699"/>
+  </symbol>
+  <symbol id="s-robot" viewBox="0 0 40 64">
+    <g stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round">
+      <path d="M20 4 V10"/><circle cx="20" cy="4" r="3" fill="#EC4C9A"/>
+      <rect x="1" y="32" width="6" height="15" rx="3" fill="#B8C4E8"/><rect x="33" y="32" width="6" height="15" rx="3" fill="#B8C4E8"/>
+      <rect x="11" y="49" width="7" height="12" rx="2" fill="#B8C4E8"/><rect x="22" y="49" width="7" height="12" rx="2" fill="#B8C4E8"/>
+      <rect x="6" y="29" width="28" height="22" rx="6" fill="#9B8CE0"/>
+      <rect x="8" y="10" width="24" height="18" rx="6" fill="#E9E3FF"/>
+      <circle cx="15" cy="19" r="3.5" fill="#3BFEC1"/><circle cx="25" cy="19" r="3.5" fill="#3BFEC1"/>
+      <circle cx="20" cy="40" r="4" fill="#FFD447"/>
+    </g>
+  </symbol>
+  <symbol id="s-flag" viewBox="0 0 30 50">
+    <path d="M4 3 L27 10 L4 19Z" fill="#EC4C9A" stroke="#3A1F6E" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M4 2 V48" stroke="#3A1F6E" stroke-width="5" stroke-linecap="round"/>
+    <path d="M4 2 V48" stroke="#E9E3FF" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<main class="wrap">
+  <header class="dash">
+    <div class="dash-lights" aria-hidden="true"><i></i><i></i><i></i></div>
+    <h1 class="pill">Zon Cabaran 🎮</h1>
+    <button class="sound-toggle" id="soundBtn" type="button" aria-pressed="true" aria-label="Kesan bunyi hidup. Tekan untuk senyap.">
+      <span aria-hidden="true" id="soundIcon">🔊</span><span class="sound-label">Bunyi</span>
+    </button>
+  </header>
+
+  <ol class="levels" aria-label="Papan aras">
+    <li class="lvl"><span class="ln">1</span><span><b>Aras 1</b><span class="d">Pilih Gambar</span></span></li>
+    <li class="arrow" aria-hidden="true">➜</li>
+    <li class="lvl"><span class="ln">2</span><span><b>Aras 2</b><span class="d">Isi Tempat Kosong</span></span></li>
+    <li class="arrow" aria-hidden="true">➜</li>
+    <li class="lvl on" aria-current="step"><span class="ln">3</span><span><b>Aras 3</b><span class="d">Bina Ayat</span></span></li>
+  </ol>
+
+  <section class="card">
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+    <div id="gameView">
+      <div class="topline">
+        <span class="count-txt" id="countTxt">Ayat 1 daripada 4</span>
+        <span class="dots" id="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      </div>
+      <div class="intro">
+        <div class="hint-pic" id="hintPic"></div>
+        <div>
+          <p class="ins">Lihat gambar. <b>Tekan perkataan</b> untuk menyusun ayat di landasan. Tekan sekali lagi untuk memulangkannya.</p>
+          <button class="btn btn-light btn-sm speak" type="button"
+            data-say="Lihat gambar. Tekan perkataan untuk menyusun ayat di landasan. Tekan sekali lagi untuk memulangkannya.">
+            <span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span></button>
+        </div>
+      </div>
+
+      <span class="label" id="trackLbl">🛤️ Landasan ayat</span>
+      <div class="track" id="track" role="group" aria-labelledby="trackLbl" aria-live="polite"></div>
+      <span class="label" id="poolLbl">🧩 Perkataan</span>
+      <div class="pool" id="pool" role="group" aria-labelledby="poolLbl"></div>
+
+      <div class="controls">
+        <button class="btn btn-primary" id="checkBtn" type="button">✔️ Semak</button>
+        <button class="btn btn-light" id="clearBtn" type="button">🧹 Padam</button>
+        <button class="btn btn-gold" id="hintBtn" type="button">💡 Petunjuk</button>
+      </div>
+      <div class="fb" id="fb" role="status"></div>
+      <button class="btn btn-primary next" id="nextBtn" type="button">Ayat seterusnya ➡️</button>
+    </div>
+
+    <div class="end" id="endView" role="status">
+      <div class="big-ico" aria-hidden="true">🏆</div>
+      <h2>Zon Cabaran selesai!</h2>
+      <p class="msg">Hebat, angkasawan! Kamu berjaya membina 4 ayat dengan kata arah.</p>
+      <div class="goto">Pergi ke PLANET SEMAKAN ✅</div><br>
+      <button class="btn btn-light" id="retryBtn" type="button">🔁 Cuba Semula</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Bunyi ---------- */
+  var soundOn = true, ctx = null;
+  function audio(){
+    if(!soundOn) return null;
+    try{
+      if(!ctx){ var AC = window.AudioContext || window.webkitAudioContext; if(!AC) return null; ctx = new AC(); }
+      if(ctx.state === "suspended") ctx.resume();
+      return ctx;
+    }catch(e){ return null; }
+  }
+  function beep(freq, dur, type, vol, delay){
+    var a = audio(); if(!a) return;
+    try{
+      var o = a.createOscillator(), g = a.createGain(), t = a.currentTime + (delay || 0);
+      o.type = type || "sine"; o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol || 0.15, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + dur + 0.05);
+    }catch(e){}
+  }
+  function sTap(){ beep(600, .08, "triangle", .1); }
+  function sRight(){ beep(784, .16, "triangle", .15); beep(1047, .25, "triangle", .15, .12); }
+  function sWrong(){ beep(330, .22, "sine", .12); }
+  function sWin(){ [523,659,784,1047,1319].forEach(function(n,i){ beep(n, .3, "triangle", .14, i*.12); }); }
+  var soundBtn = document.getElementById("soundBtn");
+  soundBtn.addEventListener("click", function(){
+    soundOn = !soundOn;
+    document.getElementById("soundIcon").textContent = soundOn ? "🔊" : "🔇";
+    soundBtn.setAttribute("aria-pressed", soundOn ? "true" : "false");
+    soundBtn.setAttribute("aria-label", soundOn ? "Kesan bunyi hidup. Tekan untuk senyap." : "Kesan bunyi senyap. Tekan untuk hidupkan.");
+    if(soundOn) beep(880, .15);
+  });
+
+  /* ---------- Dengar ---------- */
+  var synth = ("speechSynthesis" in window) ? window.speechSynthesis : null;
+  var voice = null, activeBtn = null;
+  function pickVoice(){
+    if(!synth) return;
+    var vs = [];
+    try{ vs = synth.getVoices() || []; }catch(e){}
+    function find(re){ for(var i=0;i<vs.length;i++){ if(re.test(vs[i].lang)) return vs[i]; } return null; }
+    voice = find(/^ms[-_]MY/i) || find(/^ms\b/i) || find(/^id[-_]ID/i) || find(/^id\b/i) || find(/^in[-_]ID/i);
+    root.classList.toggle("has-voice", !!voice);
+  }
+  if(synth){
+    pickVoice();
+    try{ synth.addEventListener ? synth.addEventListener("voiceschanged", pickVoice) : (synth.onvoiceschanged = pickVoice); }catch(e){}
+    [300, 1000, 2500].forEach(function(ms){ setTimeout(pickVoice, ms); });
+  }
+  function resetSpeakBtn(){
+    if(activeBtn){ activeBtn.querySelector(".lbl").textContent = "Dengar"; activeBtn.querySelector("[aria-hidden]").textContent = "🔊"; activeBtn = null; }
+  }
+  function stopSpeech(){ try{ if(synth) synth.cancel(); }catch(e){} resetSpeakBtn(); }
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest ? e.target.closest(".speak") : null;
+    if(!btn || !synth || !voice) return;
+    var wasActive = (btn === activeBtn);
+    stopSpeech();
+    if(wasActive) return;
+    activeBtn = btn;
+    btn.querySelector(".lbl").textContent = "Berhenti";
+    btn.querySelector("[aria-hidden]").textContent = "⏹";
+    try{
+      var u = new SpeechSynthesisUtterance(btn.getAttribute("data-say"));
+      u.lang = voice.lang; u.rate = 0.9; u.pitch = 1.05;
+      try{ u.voice = voice; }catch(vErr){}
+      u.onend = u.onerror = function(){ if(activeBtn === btn) resetSpeakBtn(); };
+      synth.speak(u);
+    }catch(err){ resetSpeakBtn(); }
+  });
+
+  /* ---------- Gambar petunjuk ---------- */
+  function U(id, x, y, w, h){ return '<use href="#' + id + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '"/>'; }
+  var P = {
+    rocket: '<svg viewBox="0 0 160 120" role="img" aria-label="Gambar petunjuk: angkasawan di dalam roket">' +
+      '<clipPath id="cR"><circle cx="80" cy="56" r="14"/></clipPath>' +
+      U("s-rocket",46,2,68,113) +
+      '<circle cx="80" cy="56" r="17" fill="#9B8CE0" stroke="#3A1F6E" stroke-width="3"/><circle cx="80" cy="56" r="14" fill="#130536"/>' +
+      '<g clip-path="url(#cR)">' + U("s-astro-head",63,40,34,34) + '</g>' +
+      '<path d="M20 20 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z M138 34 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" fill="#F4EEFF"/></svg>',
+    cat: '<svg viewBox="0 0 300 190" role="img" aria-label="Gambar petunjuk: kucing tidur di bawah meja">' +
+      '<path d="M0 172 H300" stroke="#5A4BB0" stroke-width="5"/>' +
+      '<g stroke="#3A1F6E" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">' +
+        '<rect x="40" y="52" width="220" height="20" rx="6" fill="#F0A27A"/>' +
+        '<rect x="56" y="72" width="16" height="100" rx="4" fill="#C9677A"/><rect x="228" y="72" width="16" height="100" rx="4" fill="#C9677A"/>' +
+        '<path d="M190 160 C218 160 222 136 204 132" fill="none" stroke-width="9"/>' +
+        '<path d="M190 160 C218 160 222 136 204 132" fill="none" stroke="#FFC46B" stroke-width="4"/>' +
+        '<ellipse cx="152" cy="150" rx="46" ry="22" fill="#FFC46B"/>' +
+        '<path d="M98 122 L102 104 L114 116Z M126 116 L136 104 L138 122Z" fill="#FFC46B"/>' +
+        '<circle cx="118" cy="136" r="22" fill="#FFC46B"/>' +
+        '<path d="M106 136 q5 4 10 0 M122 136 q5 4 10 0" fill="none" stroke-width="3"/>' +
+      '</g>' +
+      '<path d="M140 146 q8 -6 16 0 M162 142 q8 -6 16 0" fill="none" stroke="#E08A2E" stroke-width="4" stroke-linecap="round"/>' +
+      '<text x="150" y="112" fill="#FFD447" font-family="Fredoka, sans-serif" font-weight="700" font-size="20">z z z</text></svg>',
+    jump: '<svg viewBox="0 0 160 120" role="img" aria-label="Gambar petunjuk: robot melompat ke atas batu">' +
+      '<path d="M0 112 H160" stroke="#5A4BB0" stroke-width="4"/>' +
+      U("s-rock",72,62,84,52) + U("s-robot",8,56,32,51) +
+      '<path d="M34 50 Q72 0 110 54" fill="none" stroke="#FFD447" stroke-width="4" stroke-dasharray="7 6" stroke-linecap="round"/>' +
+      '<path d="M102 52 L111 58 L113 47" fill="none" stroke="#FFD447" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    flag: '<svg viewBox="0 0 160 120" role="img" aria-label="Gambar petunjuk: bendera di tepi kawah">' +
+      '<rect x="0" y="80" width="160" height="40" fill="#3E3082"/>' +
+      '<ellipse cx="72" cy="90" rx="58" ry="20" fill="#2F2470" stroke="#5A4BB0" stroke-width="4"/>' +
+      '<ellipse cx="72" cy="94" rx="42" ry="11" fill="#1E1550"/>' + U("s-flag",126,40,30,50) +
+      '<path d="M30 24 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" fill="#F4EEFF"/></svg>'
+  };
+
+  /* ---------- Data ayat (jubin ditulis huruf kecil; huruf besar & noktah ditambah automatik) ---------- */
+  var Q = [
+    { tiles:["angkasawan","di","roket","dalam","duduk"], ans:["angkasawan","duduk","di","dalam","roket"], pic:"rocket" },
+    { tiles:["di","kucing","meja","tidur","bawah"],       ans:["kucing","tidur","di","bawah","meja"],        pic:"cat" },
+    { tiles:["melompat","robot","ke","batu","atas"],      ans:["robot","melompat","ke","atas","batu"],       pic:"jump" },
+    { tiles:["kawah","bendera","tepi","di","dipacak"],    ans:["bendera","dipacak","di","tepi","kawah"],     pic:"flag" }
+  ];
+  var idx = 0, placed = [], solved = false;
+  var el = function(id){ return document.getElementById(id); };
+  function cap(w){ return w.charAt(0).toUpperCase() + w.slice(1); }
+  function sentence(words){ return cap(words.join(" ")) + "."; }
+
+  function render(){
+    var item = Q[idx], t = "", p = "";
+    if(placed.length === 0){ t = '<span class="empty">Susun ayat di sini…</span>'; }
+    placed.forEach(function(ti, pos){
+      var w = item.tiles[ti];
+      t += '<button class="tile" type="button" data-t="' + ti + '" aria-label="' + w + ', tekan untuk pulangkan"' + (solved ? ' disabled' : '') + '>' + (pos === 0 ? cap(w) : w) + '</button>';
+    });
+    if(placed.length){ t += '<span class="dotend" aria-hidden="true">.</span>'; }
+    el("track").innerHTML = t;
+    item.tiles.forEach(function(w, ti){
+      if(placed.indexOf(ti) === -1){ p += '<button class="tile" type="button" data-t="' + ti + '"' + (solved ? ' disabled' : '') + '>' + w + '</button>'; }
+    });
+    el("pool").innerHTML = p;
+  }
+  function load(){
+    placed = []; solved = false; stopSpeech();
+    el("countTxt").textContent = "Ayat " + (idx + 1) + " daripada " + Q.length;
+    el("dots").querySelectorAll("i").forEach(function(d, i){ d.classList.toggle("on", i < idx); });
+    el("hintPic").innerHTML = P[Q[idx].pic];
+    el("fb").className = "fb"; el("fb").innerHTML = "";
+    el("nextBtn").classList.remove("show");
+    el("nextBtn").textContent = idx === Q.length - 1 ? "Selesai 🏁" : "Ayat seterusnya ➡️";
+    ["checkBtn","clearBtn","hintBtn"].forEach(function(id){ el(id).disabled = false; });
+    render();
+  }
+  function hideFb(){ if(!solved){ el("fb").className = "fb"; } }
+
+  el("pool").addEventListener("click", function(e){
+    var b = e.target.closest(".tile"); if(!b || solved) return;
+    placed.push(+b.getAttribute("data-t")); sTap(); hideFb(); render();
+    var first = el("pool").querySelector(".tile"); if(first) first.focus({preventScroll:true});
+  });
+  el("track").addEventListener("click", function(e){
+    var b = e.target.closest(".tile"); if(!b || solved) return;
+    var ti = +b.getAttribute("data-t");
+    placed.splice(placed.indexOf(ti), 1); sTap(); hideFb(); render();
+  });
+  el("clearBtn").addEventListener("click", function(){ if(solved) return; placed = []; hideFb(); render(); });
+  el("hintBtn").addEventListener("click", function(){
+    if(solved) return;
+    var item = Q[idx], firstTi = item.tiles.indexOf(item.ans[0]);
+    render();
+    var t = document.querySelector('.tile[data-t="' + firstTi + '"]');
+    if(t){ t.classList.add("glow"); }
+    var fb = el("fb");
+    fb.className = "fb info show";
+    fb.innerHTML = '<span class="big">💡 Petunjuk</span>Perkataan yang bercahaya ialah perkataan pertama ayat.';
+  });
+  el("checkBtn").addEventListener("click", function(){
+    if(solved) return;
+    var item = Q[idx], fb = el("fb");
+    if(placed.length < item.tiles.length){
+      fb.className = "fb info show";
+      fb.innerHTML = '<span class="big">Hampir siap! 🙂</span>Gunakan semua perkataan dahulu, ya.';
+      return;
+    }
+    var words = placed.map(function(ti){ return item.tiles[ti]; });
+    if(words.join(" ") === item.ans.join(" ")){
+      solved = true; render();
+      el("track").querySelectorAll(".tile").forEach(function(x){ x.classList.add("good"); });
+      ["checkBtn","clearBtn","hintBtn"].forEach(function(id){ el(id).disabled = true; });
+      fb.className = "fb ok show";
+      fb.innerHTML = '<span class="big">Hebat, angkasawan! ⭐</span>"' + sentence(item.ans) + '"<br>' +
+        '<button class="btn btn-light btn-sm speak" type="button" data-say="' + sentence(item.ans) + '"><span aria-hidden="true">🔊</span> <span class="lbl">Dengar</span></button>';
+      el("nextBtn").classList.add("show"); el("nextBtn").focus({preventScroll:true});
+      el("dots").querySelectorAll("i")[idx].classList.add("on");
+      sRight();
+    } else {
+      var good = 0;
+      while(good < words.length && words[good] === item.ans[good]) good++;
+      el("track").querySelectorAll(".tile").forEach(function(x, i){ if(i < good) x.classList.add("good"); });
+      fb.className = "fb no show";
+      fb.innerHTML = '<span class="big">Hampir! Cuba lagi 🚀</span>' +
+        (good > 0 ? "Perkataan berwarna hijau sudah betul. Susun semula yang lain." : "Ingat: siapa dahulu, kemudian buat apa, kemudian di mana.");
+      sWrong();
+    }
+  });
+  el("nextBtn").addEventListener("click", function(){
+    if(idx < Q.length - 1){ idx++; load(); el("pool").querySelector(".tile").focus({preventScroll:true}); }
+    else finish();
+  });
+  function finish(){
+    stopSpeech();
+    el("gameView").style.display = "none";
+    el("endView").classList.add("show");
+    sWin(); burst();
+  }
+  el("retryBtn").addEventListener("click", function(){
+    idx = 0; el("endView").classList.remove("show"); el("gameView").style.display = "";
+    el("confetti").innerHTML = ""; load();
+  });
+  function burst(){
+    if(reduceMotion) return;
+    var box = el("confetti"); box.innerHTML = "";
+    var icons = ["⭐","✨","🌟","🎉","🚀","⭐"];
+    for(var i=0;i<30;i++){
+      var s = document.createElement("span");
+      s.textContent = icons[i % icons.length];
+      s.style.left = ((i * 37) % 94 + 3) + "%";
+      s.style.animationDelay = ((i % 8) * 0.12) + "s";
+      s.style.fontSize = (18 + (i % 4) * 6) + "px";
+      box.appendChild(s);
+    }
+  }
+  load();
+})();
+</script>
+</body>
+</html>
